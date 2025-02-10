@@ -46,9 +46,9 @@
             justify-content: center;
             height: 70vh;
             text-align: justify;
-            max-width: 90%;
+            max-width: 95%;
             margin: auto;
-            padding: 20px;
+            padding: 30px;
         }
         .hero-content {
             max-width: 1000px;
@@ -62,25 +62,69 @@
         }
         .hero p {
             font-family: 'Roboto', sans-serif;
-            font-size: 20px;
+            font-size: 24px;
             color: #ffffff;
             text-align: justify;
             max-width: 90%;
             margin: 0 auto 20px auto;
-            line-height: 1.6;
+            line-height: 1.8;
         }
         .black-section {
             background-color: #000;
-            padding: 60px;
+            padding: 80px;
             color: #fff;
             text-align: center;
-            max-width: 90%;
-            margin: 40px auto;
-            font-size: 24px;
+            max-width: 95%;
+            margin: 50px auto;
+            font-size: 28px;
             border-radius: 8px;
         }
         .black-section h2 {
-            font-size: 32px;
+            font-size: 36px;
+        }
+        .services-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 50px auto;
+            max-width: 95%;
+        }
+        .service-box {
+            background-color: rgba(255,255,255,0.1);
+            border: 3px solid #fff;
+            padding: 30px;
+            width: 30%;
+            min-width: 280px;
+            text-align: center;
+            border-radius: 10px;
+            position: relative;
+        }
+        .service-box img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .service-box h3 {
+            color: #fff;
+            font-size: 22px;
+        }
+        .service-box button {
+            background-color: #d4ff00;
+            border: none;
+            padding: 15px;
+            margin-top: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+        @media (max-width: 768px) {
+            .services-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .service-box {
+                width: 90%;
+                margin-bottom: 30px;
+            }
         }
     </style>
 </head>
@@ -112,5 +156,23 @@
             </p>
         </div>
     </section>
+    
+    <div class="services-container">
+        <div class="service-box">
+            <img src="iot-security.jpg" alt="Evaluación de Vulnerabilidades IoT">
+            <h3>Evaluación de Vulnerabilidades IoT</h3>
+            <button>Elegir Producto</button>
+        </div>
+        <div class="service-box">
+            <img src="iot-implementation.jpg" alt="Implementación de Sistemas de Seguridad IoT">
+            <h3>Implementación de Sistemas de Seguridad IoT</h3>
+            <button>Elegir Producto</button>
+        </div>
+        <div class="service-box">
+            <img src="iot-monitoring.jpg" alt="Monitoreo y Respuesta en Tiempo Real">
+            <h3>Monitoreo y Respuesta en Tiempo Real</h3>
+            <button>Elegir Producto</button>
+        </div>
+    </div>
 </body>
 </html>
