@@ -26,6 +26,8 @@
             margin: 0;
             padding: 0;
             display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 15px;
         }
         nav ul li a {
@@ -43,29 +45,79 @@
             justify-content: center;
             height: 100vh;
             text-align: justify;
-            max-width: 80%;
+            max-width: 90%;
             margin: auto;
+            padding: 20px;
         }
         .hero-content {
             max-width: 1000px;
         }
         .hero h1 {
-            font-size: 36px;
+            font-size: 40px;
             color: #d4ff00;
             text-align: center;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
         }
-        .hero p {
-            font-size: 18px;
-            line-height: 1.6;
-        }
-        .yellow-section {
-            background-color: #d4ff00;
+        .black-section {
+            background-color: #000;
             padding: 50px;
-            color: #000;
-            text-align: justify;
-            max-width: 80%;
+            color: #fff;
+            text-align: center;
+            max-width: 90%;
             margin: 40px auto;
-            font-size: 18px;
+            font-size: 20px;
+            border-radius: 8px;
+        }
+        .services-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 40px auto;
+            max-width: 90%;
+        }
+        .service-box {
+            background-color: rgba(255,255,255,0.1);
+            border: 2px solid #fff;
+            padding: 20px;
+            width: 30%;
+            min-width: 280px;
+            text-align: center;
+            border-radius: 8px;
+            position: relative;
+        }
+        .service-box img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        .service-box button {
+            background-color: #d4ff00;
+            border: none;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            .hero, .black-section {
+                max-width: 95%;
+                padding: 20px;
+            }
+            .hero h1 {
+                font-size: 32px;
+            }
+            .services-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .service-box {
+                width: 90%;
+                margin-bottom: 20px;
+            }
         }
     </style>
 </head>
@@ -88,19 +140,10 @@
     <section class="hero">
         <div class="hero-content">
             <h1>LÍDERES EN CIBERSEGURIDAD CON IA <br> AVANZADA Y DISEÑO WEB.</h1>
-            <p>
-                En un mundo cada vez más conectado, garantizar la seguridad digital y tecnológica es crucial. 
-                Nuestro conjunto integral de servicios, que abarca desde auditorías de seguridad y monitoreo 
-                de redes hasta consultoría especializada en ciberseguridad, está diseñado para proteger tus 
-                activos más valiosos. Con experiencia en ingeniería informática y soluciones innovadoras en 
-                IoT e inteligencia artificial, ofrecemos herramientas y estrategias personalizadas que fortalecen 
-                la protección de tu infraestructura digital, reducen riesgos y aseguran el cumplimiento de los 
-                estándares más exigentes. Tu seguridad es nuestra prioridad.
-            </p>
         </div>
     </section>
     
-    <section class="yellow-section">
+    <section class="black-section">
         <h2>Servicios de Seguridad IoT</h2>
         <p>
             Los dispositivos IoT conectan el mundo físico y digital, pero también abren nuevas puertas para los atacantes. 
@@ -109,34 +152,22 @@
         </p>
     </section>
 
-    <section class="yellow-section">
-        <h2>Evaluación de Vulnerabilidades IoT</h2>
-        <p>
-            Identificación de posibles brechas en dispositivos, firmware y protocolos de comunicación. 
-            Pruebas de penetración específicas para dispositivos IoT.
-            <b>Beneficios:</b> Identificación proactiva de riesgos antes de que sean explotados. 
-            Informes detallados con soluciones recomendadas.
-        </p>
-    </section>
-
-    <section class="yellow-section">
-        <h2>Implementación de Sistemas de Seguridad IoT</h2>
-        <p>
-            Configuración de firewalls, cifrado de datos y herramientas de autenticación para dispositivos conectados. 
-            Segmentación de redes para aislar dispositivos IoT vulnerables. 
-            <b>Beneficios:</b> Reducción de superficies de ataque en la red IoT. 
-            Protección robusta contra accesos no autorizados y ataques DDoS.
-        </p>
-    </section>
-
-    <section class="yellow-section">
-        <h2>Monitoreo y Respuesta en Tiempo Real</h2>
-        <p>
-            Supervisión constante del tráfico y comportamiento de los dispositivos IoT. 
-            Detección y mitigación de amenazas en tiempo real. 
-            <b>Beneficios:</b> Minimización de interrupciones en el funcionamiento de dispositivos críticos. 
-            Respuesta inmediata a intentos de explotación de vulnerabilidades.
-        </p>
-    </section>
+    <div class="services-container">
+        <div class="service-box">
+            <img src="iot-security.jpg" alt="Evaluación de Vulnerabilidades IoT">
+            <h3>Evaluación de Vulnerabilidades IoT</h3>
+            <button>Elegir Producto</button>
+        </div>
+        <div class="service-box">
+            <img src="iot-implementation.jpg" alt="Implementación de Sistemas de Seguridad IoT">
+            <h3>Implementación de Sistemas de Seguridad IoT</h3>
+            <button>Elegir Producto</button>
+        </div>
+        <div class="service-box">
+            <img src="iot-monitoring.jpg" alt="Monitoreo y Respuesta en Tiempo Real">
+            <h3>Monitoreo y Respuesta en Tiempo Real</h3>
+            <button>Elegir Producto</button>
+        </div>
+    </div>
 </body>
 </html>
