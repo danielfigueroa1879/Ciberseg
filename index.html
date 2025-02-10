@@ -9,10 +9,11 @@
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', Arial, sans-serif;
             background-color: #0f0f0f;
             color: #fff;
             text-align: center;
+            line-height: 1.6;
         }
         header {
             background-color: #1a1a1a;
@@ -32,36 +33,68 @@
             gap: 15px;
         }
         nav ul li a {
-            color: #fff;
+            color: #d4ff00;
             text-decoration: none;
             font-size: 16px;
+            transition: color 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: #fff;
+        }
+        .search-bar {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .search-bar input {
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            width: 200px;
+        }
+        .search-bar button {
+            background-color: #d4ff00;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 5px;
         }
         .hero {
-            padding-top: 40px;
+            padding: 40px 20px;
         }
         .hero h1 {
-            font-size: 60px;
+            font-size: 48px;
             color: #d4ff00;
             font-weight: bold;
+            margin-bottom: 20px;
         }
         .hero p {
-            font-size: 30px;
+            font-size: 18px;
             max-width: 80%;
             margin: auto;
             text-align: justify;
         }
-        .yellow-section2 {
-            background-color: #d4ff00;
-            padding: 100px;
+        .yellow-section2, .black-section {
+            padding: 60px 20px;
             color: #000;
             text-align: center;
             width: 100%;
-            font-size: 28px;
+            font-size: 18px;
             border-radius: 8px;
             margin-top: 50px;
         }
-        .yellow-section2 h2 {
-            font-size: 36px;
+        .yellow-section2 {
+            background-color: #d4ff00;
+            color: #000;
+        }
+        .black-section {
+            background-color: #000;
+            color: #fff;
+        }
+        .yellow-section2 h2, .black-section h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
         }
         .services-container {
             display: flex;
@@ -73,51 +106,51 @@
         .service-box {
             background-color: rgba(255,255,255,0.1);
             border: 3px solid #fff;
-            padding: 30px;
+            padding: 20px;
             width: 30%;
             min-width: 280px;
             text-align: center;
             border-radius: 10px;
-            position: relative;
+            margin-bottom: 30px;
         }
         .service-box img {
             width: 100%;
             border-radius: 10px;
+            margin-bottom: 15px;
         }
         .service-box h3 {
             color: #fff;
-            font-size: 22px;
+            font-size: 20px;
+            margin-bottom: 10px;
         }
         .service-box button {
             background-color: #d4ff00;
             border: none;
-            padding: 15px;
-            margin-top: 10px;
-            font-size: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
             cursor: pointer;
             border-radius: 8px;
+            transition: background-color 0.3s ease;
         }
-        .black-section {
-            background-color: #000;
-            padding: 80px;
-            color: #fff;
-            text-align: center;
-            max-width: 95%;
-            margin: 50px auto;
-            font-size: 28px;
-            border-radius: 8px;
-        }
-        .black-section h2 {
-            font-size: 36px;
+        .service-box button:hover {
+            background-color: #b3cc00;
         }
         @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+            .hero p {
+                font-size: 16px;
+            }
             .services-container {
                 flex-direction: column;
                 align-items: center;
             }
             .service-box {
                 width: 90%;
-                margin-bottom: 30px;
+            }
+            .yellow-section2, .black-section {
+                padding: 40px 20px;
             }
         }
     </style>
@@ -132,7 +165,7 @@
                 <li><a href="#">Blog</a></li>
             </ul>
             <div class="search-bar">
-                <input type="text" placeholder="Search...">
+                <input type="text" placeholder="Buscar...">
                 <button>🔍</button>
             </div>
         </nav>
@@ -141,8 +174,7 @@
     <section class="hero">
         <h1>LÍDERES EN CIBERSEGURIDAD CON IA <br> AVANZADA Y DISEÑO WEB.</h1>
         <p>En un mundo cada vez más conectado, garantizar la seguridad digital y tecnológica es crucial. Nuestro conjunto integral de servicios, que abarca desde auditorías de seguridad y monitoreo de redes hasta consultoría especializada en ciberseguridad, está diseñado para proteger tus activos más valiosos. Con experiencia en ingeniería informática y soluciones innovadoras en IoT e inteligencia artificial, ofrecemos herramientas y estrategias personalizadas que fortalecen la protección de infraestructura digital, reducen riesgos y aseguran el cumplimiento de los estándares más exigentes. Tu seguridad es nuestra prioridad.</p>
-    </section><br>
-
+    </section>
     <section class="black-section">
         <h2>Soluciones de Seguridad</h2>
         <p>Implementamos estrategias robustas para mitigar riesgos cibernéticos, protegiendo datos y redes contra amenazas avanzadas.</p>
@@ -151,7 +183,6 @@
         <h2>SECCIÓN 2</h2>
         <p>Ofrecemos soluciones de ciberseguridad adaptadas a las necesidades específicas de cada cliente, garantizando la máxima protección.</p>
     </section>
-
     <div class="services-container">
         <div class="service-box">
             <img src="iot-security.jpg" alt="Evaluación de Vulnerabilidades IoT">
@@ -169,7 +200,5 @@
             <button>Elegir Producto</button>
         </div>
     </div>
-    
-    
 </body>
 </html>
