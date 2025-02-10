@@ -6,6 +6,7 @@
     <title>Ciberseguridad y Diseño Web</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -43,7 +44,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            height: 80vh;
             text-align: justify;
             max-width: 90%;
             margin: auto;
@@ -57,6 +58,16 @@
             color: #d4ff00;
             text-align: center;
             text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            margin-bottom: 10px;
+        }
+        .hero p {
+            font-family: 'Roboto', sans-serif;
+            font-size: 20px;
+            color: #ffffff;
+            text-align: justify;
+            max-width: 90%;
+            margin: 0 auto;
+            line-height: 1.6;
         }
         .black-section {
             background-color: #000;
@@ -71,36 +82,6 @@
         .black-section h2 {
             font-size: 32px;
         }
-        .services-container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin: 40px auto;
-            max-width: 90%;
-        }
-        .service-box {
-            background-color: rgba(255,255,255,0.1);
-            border: 2px solid #fff;
-            padding: 20px;
-            width: 30%;
-            min-width: 280px;
-            text-align: center;
-            border-radius: 8px;
-            position: relative;
-        }
-        .service-box img {
-            width: 100%;
-            border-radius: 8px;
-        }
-        .service-box button {
-            background-color: #d4ff00;
-            border: none;
-            padding: 12px;
-            margin-top: 10px;
-            font-size: 18px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
         @media (max-width: 768px) {
             nav ul {
                 flex-direction: column;
@@ -113,16 +94,11 @@
             .hero h1 {
                 font-size: 36px;
             }
+            .hero p {
+                font-size: 18px;
+            }
             .black-section h2 {
                 font-size: 28px;
-            }
-            .services-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            .service-box {
-                width: 90%;
-                margin-bottom: 20px;
             }
         }
     </style>
@@ -146,34 +122,14 @@
     <section class="hero">
         <div class="hero-content">
             <h1>LÍDERES EN CIBERSEGURIDAD CON IA <br> AVANZADA Y DISEÑO WEB.</h1>
+            <p>
+                En un mundo cada vez más conectado, garantizar la seguridad digital y tecnológica es crucial. 
+                Nuestro conjunto integral de servicios, que abarca desde auditorías de seguridad y monitoreo de redes hasta consultoría especializada en ciberseguridad. 
+                Está diseñado para proteger tus activos más valiosos. Con experiencia en ingeniería informática y soluciones innovadoras en IoT e inteligencia artificial, 
+                ofrecemos herramientas y estrategias personalizadas que fortalecen la protección de infraestructura digital, 
+                reducen riesgos y aseguran el cumplimiento de los estándares más exigentes. Tu seguridad es nuestra prioridad.
+            </p>
         </div>
     </section>
-    
-    <section class="black-section">
-        <h2>Servicios de Seguridad IoT</h2>
-        <p>
-            Los dispositivos IoT conectan el mundo físico y digital, pero también abren nuevas puertas para los atacantes. 
-            Este servicio asegura la protección de dispositivos inteligentes, redes y datos asociados a través de soluciones 
-            personalizadas para entornos IoT. Esto incluye dispositivos industriales, domésticos, de salud, transporte y más.
-        </p>
-    </section>
-
-    <div class="services-container">
-        <div class="service-box">
-            <img src="iot-security.jpg" alt="Evaluación de Vulnerabilidades IoT">
-            <h3>Evaluación de Vulnerabilidades IoT</h3>
-            <button>Elegir Producto</button>
-        </div>
-        <div class="service-box">
-            <img src="iot-implementation.jpg" alt="Implementación de Sistemas de Seguridad IoT">
-            <h3>Implementación de Sistemas de Seguridad IoT</h3>
-            <button>Elegir Producto</button>
-        </div>
-        <div class="service-box">
-            <img src="iot-monitoring.jpg" alt="Monitoreo y Respuesta en Tiempo Real">
-            <h3>Monitoreo y Respuesta en Tiempo Real</h3>
-            <button>Elegir Producto</button>
-        </div>
-    </div>
 </body>
 </html>
