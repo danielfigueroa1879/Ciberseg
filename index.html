@@ -129,6 +129,8 @@
             width: 100%;
             border-radius: 10px;
             margin-bottom: 15px;
+            height: 150px; /* Altura fija para las imágenes */
+            object-fit: cover; /* Mantener proporción */
         }
         .service-box h3 {
             color: #fff;
@@ -166,17 +168,18 @@
                 align-items: center;
             }
             .service-box {
-                width: 100%; /* Ocupar todo el ancho en móviles */
+                width: 90%; /* Ancho reducido en móviles */
                 min-width: auto; /* Eliminar ancho mínimo */
                 padding: 15px; /* Reducir relleno interno */
                 margin-bottom: 20px; /* Espaciado entre cuadros */
             }
             .service-box img {
-                width: 100%; /* Imagenes responsivas */
-                height: auto; /* Mantener proporción */
+                width: 100%; /* Imágenes responsivas */
+                height: 120px; /* Altura reducida en móviles */
+                object-fit: cover; /* Mantener proporción */
             }
             .service-box h3 {
-                font-size: 18px; /* Tamaño de fuente más pequeño */
+                font-size: 16px; /* Tamaño de fuente más pequeño */
             }
             .service-box button {
                 font-size: 14px; /* Tamaño de fuente más pequeño */
