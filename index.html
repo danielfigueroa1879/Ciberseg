@@ -120,6 +120,10 @@
             text-align: center;
             border-radius: 10px;
             margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        .service-box:hover {
+            transform: scale(1.05); /* Efecto hover */
         }
         .service-box img {
             width: 100%;
@@ -162,13 +166,22 @@
                 align-items: center;
             }
             .service-box {
-                width: 100%;
+                width: 100%; /* Ocupar todo el ancho en móviles */
+                min-width: auto; /* Eliminar ancho mínimo */
+                padding: 15px; /* Reducir relleno interno */
+                margin-bottom: 20px; /* Espaciado entre cuadros */
             }
-        }
-
-        /* Agregar sombra al párrafo específico */
-        .shadow-text {
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Sombra para el texto */
+            .service-box img {
+                width: 100%; /* Imagenes responsivas */
+                height: auto; /* Mantener proporción */
+            }
+            .service-box h3 {
+                font-size: 18px; /* Tamaño de fuente más pequeño */
+            }
+            .service-box button {
+                font-size: 14px; /* Tamaño de fuente más pequeño */
+                padding: 8px 16px; /* Reducir tamaño del botón */
+            }
         }
     </style>
 </head>
