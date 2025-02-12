@@ -74,11 +74,11 @@
         p {
             font-family: 'Poppins', Arial, sans-serif;
             font-weight: 200; /* Extra Light */
-            font-size: 20px; /* Un poco más grande */
+            font-size: 20px; /* Tamaño en PC */
             max-width: 800px; /* Máximo ancho para PC */
-            margin: auto;
+            margin: 20px auto; /* Margen consistente hacia abajo */
             text-align: justify;
-            padding: 0 20px; /* Añadir relleno lateral */
+            padding: 0 20px; /* Relleno lateral en PC */
         }
         .yellow-section2, .black-section {
             padding: 60px 20px;
@@ -145,9 +145,10 @@
                 font-size: 36px;
             }
             p {
-                font-size: 18px; /* Ajuste para pantallas pequeñas */
-                padding: 0 10px; /* Reducir relleno en móviles */
+                font-size: 14px; /* Tamaño más pequeño en móviles */
+                padding: 0 5px; /* Menos margen lateral en móviles */
                 max-width: 100%; /* Ocupar todo el ancho en móviles */
+                margin: 10px auto; /* Menor margen hacia abajo */
             }
             .services-container {
                 flex-direction: column;
@@ -157,7 +158,7 @@
                 width: 90%;
             }
             .yellow-section2, .black-section {
-                padding: 40px 10px; /* Reducir relleno en móviles */
+                padding: 30px 5px; /* Reducir relleno en móviles */
             }
         }
     </style>
