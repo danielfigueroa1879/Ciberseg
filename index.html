@@ -74,11 +74,11 @@
         p {
             font-family: 'Poppins', Arial, sans-serif;
             font-weight: 200; /* Extra Light */
-            font-size: 20px; /* Un poco más grande */
-            max-width: 100%; /* Ajustar al ancho completo en móviles */
-            margin: auto;
+            font-size: 20px; /* Tamaño en PC */
+            max-width: 800px; /* Máximo ancho para PC */
+            margin: 20px auto; /* Margen consistente hacia abajo */
             text-align: justify;
-            padding: 0 20px; /* Añadir relleno lateral */
+            padding: 0 20px; /* Relleno lateral en PC */
         }
         .yellow-section2, .black-section {
             padding: 60px 20px;
@@ -145,8 +145,13 @@
                 font-size: 36px;
             }
             p {
-                font-size: 15px; /* Ajuste para pantallas pequeñas */
-                padding: 0 04px; /* Reducir relleno en móviles */
+                font-size: 15px; /* Texto más pequeño en móviles */
+                padding: 0 5px; /* Casi sin margen lateral */
+                margin: 10px auto; /* Menor margen vertical */
+                max-width: 100%; /* Ocupar todo el ancho */
+            }
+            .yellow-section2, .black-section {
+                padding: 20px 5px; /* Reducir relleno en móviles */
             }
             .services-container {
                 flex-direction: column;
@@ -154,9 +159,6 @@
             }
             .service-box {
                 width: 100%;
-            }
-            .yellow-section2, .black-section {
-                padding: 10px 19px; /* Reducir relleno en móviles */
             }
         }
     </style>
