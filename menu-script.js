@@ -1,171 +1,141 @@
-// Reinicializar menú después de un breve delay para asegurar que el DOM esté listo
-    setTimeout(function() {
-        const mobileMenuCheck = document.getElementById('mobile-menu');
-        const navMenuCheck = document.getElementById('nav-menu');
-        
-        console.log('Delayed check - Mobile menu exists:', !!mobileMenuCheck);
-        console.log('Delayed check - Nav menu exists:', !!navMenuCheck);
-        
-        if (!mobileMenuCheck) {
-            console.error('CRITICAL: Mobile menu button with ID "mobile-menu" not found in DOM!');
-        }
-        if (!navMenuCheck) {
-            console.error('CRITICAL: Navigation menu with ID "nav-menu" not found in DOM!');
-        }
-    }, 500);    // Funcionalidad del botón scroll to top
-    if (scrollToTopBtn) {
-        scrollToTopBtn.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    }// Menu hamburguesa y funcionalidades
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded, initializing menu...');
+// MENÚ HAMBURGUESA SIMPLIFICADO
+console.log('🍔 Iniciando menú hamburguesa...');
+
+// Variables globales
+let menuButton;
+let mobileMenu;
+let isMenuOpen = false;
+
+// Función para inicializar el menú
+function initMenu() {
+    console.log('📱 Inicializando menú móvil...');
     
-    // Elementos del DOM
-    const mobileMenu = document.getElementById('mobile-menu');
-    const navMenu = document.getElementById('nav-menu');
+    // Obtener elementos
+    menuButton = document.getElementById('mobile-menu');
+    mobileMenu = document.getElementById('nav-menu');
+    
+    console.log('🔍 Elementos encontrados:');
+    console.log('- Botón:', menuButton ? '✅' : '❌');
+    console.log('- Menú:', mobileMenu ? '✅' : '❌');
+    
+    if (!menuButton || !mobileMenu) {
+        console.error('🚨 ERROR: Elementos del menú no encontrados');
+        return;
+    }
+    
+    // Agregar evento click al botón
+    menuButton.addEventListener('click', toggleMenu);
+    menuButton.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        toggleMenu();
+    });
+    
+    // Cerrar menú al hacer click en enlaces
     const navLinks = document.querySelectorAll('.nav-link');
-    const header = document.querySelector('.header');
-    const contactForm = document.querySelector('.contact-form form');
-    const newsletterForm = document.querySelector('.newsletter-form');
-    const scrollToTopBtn = document.getElementById('scrollToTop');
+    navLinks.forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+    
+    // Cerrar menú al hacer click fuera
+    document.addEventListener('click', function(e) {
+        if (isMenuOpen && !menuButton.contains(e.target) && !mobileMenu.contains(e.target)) {
+            closeMenu();
+        }
+    });
+    
+    console.log('✅ Menú inicializado correctamente');
+}
 
-    // Debug detallado
-    console.log('Elements found:');
-    console.log('- Mobile menu button:', mobileMenu);
-    console.log('- Navigation menu:', navMenu);
-    console.log('- Nav links count:', navLinks.length);
+// Función para abrir/cerrar menú
+function toggleMenu() {
+    console.log('🔄 Toggle menú - Estado actual:', isMenuOpen ? 'Abierto' : 'Cerrado');
     
-    // Función para toggle del menú
-    function toggleMenu() {
-        console.log('Toggling menu...');
-        
-        if (!mobileMenu || !navMenu) {
-            console.error('Menu elements missing!');
-            return;
-        }
-        
-        const isActive = navMenu.classList.contains('active');
-        console.log('Menu currently active:', isActive);
-        
-        if (isActive) {
-            // Cerrar menú
-            mobileMenu.classList.remove('active');
-            navMenu.classList.remove('active');
-            document.body.classList.remove('menu-open');
-            console.log('Menu closed');
-        } else {
-            // Abrir menú
-            mobileMenu.classList.add('active');
-            navMenu.classList.add('active');
-            document.body.classList.add('menu-open');
-            console.log('Menu opened');
-        }
-    }
-    
-    // Event listener para el botón hamburguesa
-    if (mobileMenu) {
-        // Remover listeners previos si existen
-        mobileMenu.removeEventListener('click', toggleMenu);
-        
-        // Agregar nuevo listener
-        mobileMenu.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            console.log('Hamburger button clicked');
-            toggleMenu();
-        });
-        
-        // También agregar listener táctil para móviles
-        mobileMenu.addEventListener('touchstart', function(e) {
-            e.preventDefault();
-            console.log('Hamburger button touched');
-            toggleMenu();
-        });
-        
-        console.log('Menu button listeners attached');
+    if (isMenuOpen) {
+        closeMenu();
     } else {
-        console.error('Mobile menu button not found! Check if ID "mobile-menu" exists');
+        openMenu();
     }
+}
 
-    // Función para cerrar menú
-    function closeMenu() {
-        if (mobileMenu && navMenu) {
-            mobileMenu.classList.remove('active');
-            navMenu.classList.remove('active');
-            document.body.classList.remove('menu-open');
-            console.log('Menu closed by function');
-        }
-    }
+// Función para abrir menú
+function openMenu() {
+    console.log('📂 Abriendo menú...');
+    
+    menuButton.classList.add('active');
+    mobileMenu.classList.add('active');
+    document.body.classList.add('menu-open');
+    isMenuOpen = true;
+    
+    console.log('✅ Menú abierto');
+}
 
-    // Cerrar menú al hacer click en un enlace
-    navLinks.forEach((link, index) => {
-        link.addEventListener('click', function(e) {
-            console.log(`Nav link ${index} clicked`);
-            closeMenu();
+// Función para cerrar menú
+function closeMenu() {
+    console.log('📁 Cerrando menú...');
+    
+    menuButton.classList.remove('active');
+    mobileMenu.classList.remove('active');
+    document.body.classList.remove('menu-open');
+    isMenuOpen = false;
+    
+    console.log('✅ Menú cerrado');
+}
+
+// SCROLL TO TOP BUTTON
+function initScrollButton() {
+    const scrollBtn = document.getElementById('scrollToTop');
+    if (!scrollBtn) return;
+    
+    scrollBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
         });
     });
+}
 
-    // Cerrar menú al hacer click fuera de él
-    document.addEventListener('click', function(event) {
-        if (!navMenu || !mobileMenu) return;
-        
-        const isClickInsideNav = navMenu.contains(event.target);
-        const isClickOnToggle = mobileMenu.contains(event.target);
-        
-        if (!isClickInsideNav && !isClickOnToggle && navMenu.classList.contains('active')) {
-            console.log('Closing menu - clicked outside');
-            closeMenu();
-        }
-    });
-
-    // Cerrar menú con tecla Escape
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && navMenu && navMenu.classList.contains('active')) {
-            console.log('Closing menu - Escape key');
-            closeMenu();
-        }
-    });
-
-    // Header con efecto scroll y botón scroll to top
+// HEADER SCROLL EFFECTS
+function initScrollEffects() {
+    const header = document.querySelector('.header');
+    const scrollBtn = document.getElementById('scrollToTop');
     let lastScrollTop = 0;
+    
     window.addEventListener('scroll', function() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        if (scrollTop > 100) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
+        // Header effects
+        if (header) {
+            if (scrollTop > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            // Auto-hide en móviles
+            if (window.innerWidth <= 768) {
+                if (scrollTop > lastScrollTop && scrollTop > 200) {
+                    header.style.transform = 'translateY(-100%)';
+                } else {
+                    header.style.transform = 'translateY(0)';
+                }
+            }
         }
         
-        // Mostrar/ocultar botón scroll to top (solo móviles)
-        if (scrollToTopBtn && window.innerWidth <= 768) {
+        // Scroll to top button
+        if (scrollBtn && window.innerWidth <= 768) {
             if (scrollTop > 300) {
-                scrollToTopBtn.classList.add('show');
+                scrollBtn.classList.add('show');
             } else {
-                scrollToTopBtn.classList.remove('show');
+                scrollBtn.classList.remove('show');
             }
-        }
-        
-        // Auto-hide header en scroll down, show en scroll up (solo en móviles)
-        if (window.innerWidth <= 768) {
-            if (scrollTop > lastScrollTop && scrollTop > 200) {
-                header.style.transform = 'translateY(-100%)';
-            } else {
-                header.style.transform = 'translateY(0)';
-            }
-        } else {
-            // En PC siempre visible
-            header.style.transform = 'translateY(0)';
         }
         
         lastScrollTop = scrollTop;
     });
+}
 
-    // Smooth scrolling para navegación interna
+// SMOOTH SCROLLING
+function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -173,7 +143,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetSection = document.querySelector(targetId);
             
             if (targetSection) {
-                const headerHeight = header.offsetHeight;
+                const header = document.querySelector('.header');
+                const headerHeight = header ? header.offsetHeight : 0;
                 const targetPosition = targetSection.offsetTop - headerHeight - 20;
                 
                 window.scrollTo({
@@ -183,446 +154,106 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+}
 
-    // Funcionalidad de búsqueda
-    if (searchBtn && searchInput) {
-        searchBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            const searchTerm = searchInput.value.trim();
-            
-            if (searchTerm) {
-                performSearch(searchTerm);
-            } else {
-                showMessage('Por favor, ingresa un término de búsqueda', 'warning');
-            }
-        });
-
-        // Búsqueda con Enter
-        searchInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                searchBtn.click();
-            }
-        });
-    }
-
-    // Función de búsqueda simple
-    function performSearch(term) {
-        const searchableElements = document.querySelectorAll('h1, h2, h3, p, li');
-        const results = [];
-        const searchRegex = new RegExp(term, 'gi');
-
-        searchableElements.forEach(element => {
-            if (searchRegex.test(element.textContent)) {
-                results.push({
-                    element: element,
-                    section: findParentSection(element)
-                });
-            }
-        });
-
-        if (results.length > 0) {
-            // Scroll al primer resultado
-            const firstResult = results[0];
-            const headerHeight = header.offsetHeight;
-            const targetPosition = firstResult.element.offsetTop - headerHeight - 20;
-            
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-            });
-
-            // Resaltar temporalmente el resultado
-            highlightElement(firstResult.element);
-            
-            showMessage(`Se encontraron ${results.length} resultado(s) para "${term}"`, 'success');
-        } else {
-            showMessage(`No se encontraron resultados para "${term}"`, 'info');
-        }
-
-        // Limpiar búsqueda
-        searchInput.value = '';
-    }
-
-    // Encontrar sección padre
-    function findParentSection(element) {
-        let parent = element.parentElement;
-        while (parent && !parent.matches('section')) {
-            parent = parent.parentElement;
-        }
-        return parent;
-    }
-
-    // Resaltar elemento
-    function highlightElement(element) {
-        const originalBg = element.style.backgroundColor;
-        element.style.backgroundColor = 'rgba(212, 255, 0, 0.3)';
-        element.style.transition = 'background-color 0.3s ease';
-        
-        setTimeout(() => {
-            element.style.backgroundColor = originalBg;
-            setTimeout(() => {
-                element.style.transition = '';
-            }, 300);
-        }, 2000);
-    }
-
-    // Manejo del formulario de contacto
+// FORMULARIOS
+function initForms() {
+    // Formulario de contacto
+    const contactForm = document.querySelector('.contact-form form');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            const formData = new FormData(this);
-            const formObject = {};
-            
-            // Obtener todos los campos del formulario
-            const inputs = this.querySelectorAll('input, textarea');
-            let isValid = true;
-            
-            inputs.forEach(input => {
-                const value = input.value.trim();
-                formObject[input.name || input.placeholder] = value;
-                
-                // Validación básica
-                if (input.hasAttribute('required') && !value) {
-                    showFieldError(input, 'Este campo es obligatorio');
-                    isValid = false;
-                } else if (input.type === 'email' && value && !isValidEmail(value)) {
-                    showFieldError(input, 'Por favor, ingresa un email válido');
-                    isValid = false;
-                } else {
-                    clearFieldError(input);
-                }
-            });
-            
-            if (isValid) {
-                // Simular envío del formulario
-                const submitBtn = this.querySelector('.submit-btn');
-                const originalText = submitBtn.textContent;
-                
-                submitBtn.textContent = 'Enviando...';
-                submitBtn.disabled = true;
-                
-                setTimeout(() => {
-                    showMessage('¡Mensaje enviado exitosamente! Te contactaremos pronto.', 'success');
-                    this.reset();
-                    submitBtn.textContent = originalText;
-                    submitBtn.disabled = false;
-                }, 2000);
-            }
+            showMessage('¡Mensaje enviado exitosamente!', 'success');
+            this.reset();
         });
     }
-
-    // Manejo del formulario de newsletter
+    
+    // Newsletter
+    const newsletterForm = document.querySelector('.newsletter-form');
     if (newsletterForm) {
         newsletterForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            const emailInput = this.querySelector('input[type="email"]');
-            const email = emailInput.value.trim();
-            
-            if (!email) {
-                showMessage('Por favor, ingresa tu correo electrónico', 'warning');
-                return;
-            }
-            
-            if (!isValidEmail(email)) {
-                showMessage('Por favor, ingresa un correo electrónico válido', 'warning');
-                return;
-            }
-            
-            // Simular suscripción
-            const submitBtn = this.querySelector('button');
-            const originalText = submitBtn.textContent;
-            
-            submitBtn.textContent = 'Suscribiendo...';
-            submitBtn.disabled = true;
-            
-            setTimeout(() => {
-                showMessage('¡Te has suscrito exitosamente a nuestro newsletter!', 'success');
-                emailInput.value = '';
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }, 1500);
+            showMessage('¡Suscripción exitosa!', 'success');
+            this.reset();
         });
     }
+}
 
-    // Validación de email
-    function isValidEmail(email) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-    }
+// SISTEMA DE MENSAJES
+function showMessage(text, type = 'info') {
+    const message = document.createElement('div');
+    message.className = `toast toast-${type}`;
+    message.textContent = text;
+    message.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #d4ff00;
+        color: #000;
+        padding: 15px 20px;
+        border-radius: 8px;
+        z-index: 9999;
+        font-family: 'Poppins', sans-serif;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        animation: slideIn 0.3s ease;
+    `;
+    
+    document.body.appendChild(message);
+    
+    setTimeout(() => {
+        message.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => message.remove(), 300);
+    }, 3000);
+}
 
-    // Mostrar error en campo
-    function showFieldError(field, message) {
-        clearFieldError(field);
+// INICIALIZACIÓN PRINCIPAL
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 Iniciando aplicación...');
+    
+    // Esperar un poco para asegurar que el DOM esté completamente listo
+    setTimeout(() => {
+        initMenu();
+        initScrollButton();
+        initScrollEffects();
+        initSmoothScroll();
+        initForms();
         
-        field.style.borderColor = '#ff4444';
-        const errorDiv = document.createElement('div');
-        errorDiv.className = 'field-error';
-        errorDiv.textContent = message;
-        errorDiv.style.cssText = `
-            color: #ff4444;
-            font-size: 12px;
-            margin-top: 5px;
-            animation: fadeInUp 0.3s ease;
-        `;
-        
-        field.parentNode.insertBefore(errorDiv, field.nextSibling);
-    }
-
-    // Limpiar error de campo
-    function clearFieldError(field) {
-        field.style.borderColor = '';
-        const existingError = field.parentNode.querySelector('.field-error');
-        if (existingError) {
-            existingError.remove();
-        }
-    }
-
-    // Sistema de mensajes/notificaciones
-    function showMessage(message, type = 'info') {
-        // Crear elemento de mensaje
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `message message-${type}`;
-        messageDiv.textContent = message;
-        
-        // Estilos del mensaje
-        const colors = {
-            success: '#4CAF50',
-            warning: '#FF9800',
-            error: '#f44336',
-            info: '#2196F3'
-        };
-        
-        messageDiv.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: ${colors[type] || colors.info};
-            color: white;
-            padding: 15px 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            z-index: 9999;
-            font-family: 'Poppins', sans-serif;
-            font-size: 14px;
-            max-width: 300px;
-            animation: slideInFromRight 0.3s ease;
-            cursor: pointer;
-        `;
-        
-        // Añadir al DOM
-        document.body.appendChild(messageDiv);
-        
-        // Auto-remover después de 5 segundos
-        setTimeout(() => {
-            messageDiv.style.animation = 'slideOutToRight 0.3s ease';
-            setTimeout(() => {
-                if (messageDiv.parentNode) {
-                    messageDiv.parentNode.removeChild(messageDiv);
-                }
-            }, 300);
-        }, 5000);
-        
-        // Remover al hacer click
-        messageDiv.addEventListener('click', () => {
-            messageDiv.style.animation = 'slideOutToRight 0.3s ease';
-            setTimeout(() => {
-                if (messageDiv.parentNode) {
-                    messageDiv.parentNode.removeChild(messageDiv);
-                }
-            }, 300);
-        });
-    }
-
-    // Animaciones en scroll (Intersection Observer)
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
-            }
-        });
-    }, observerOptions);
-
-    // Observar elementos para animaciones
-    const animateElements = document.querySelectorAll('.service-card, .iot-card, .mv-card');
-    animateElements.forEach(el => observer.observe(el));
-
-    // Botones CTA con efecto ripple
-    document.querySelectorAll('.cta-button, .submit-btn').forEach(button => {
-        button.addEventListener('click', function(e) {
-            const ripple = document.createElement('span');
-            const rect = this.getBoundingClientRect();
-            const size = Math.max(rect.width, rect.height);
-            const x = e.clientX - rect.left - size / 2;
-            const y = e.clientY - rect.top - size / 2;
-            
-            ripple.style.cssText = `
-                position: absolute;
-                width: ${size}px;
-                height: ${size}px;
-                left: ${x}px;
-                top: ${y}px;
-                background: rgba(255, 255, 255, 0.3);
-                border-radius: 50%;
-                transform: scale(0);
-                animation: ripple 0.6s linear;
-                pointer-events: none;
-            `;
-            
-            this.style.position = 'relative';
-            this.style.overflow = 'hidden';
-            this.appendChild(ripple);
-            
-            setTimeout(() => {
-                ripple.remove();
-            }, 600);
-        });
-    });
-
-    // Lazy loading para imágenes (si las hay)
-    const images = document.querySelectorAll('img[data-src]');
-    const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.classList.add('loaded');
-                imageObserver.unobserve(img);
-            }
-        });
-    });
-
-    images.forEach(img => imageObserver.observe(img));
-
-    // Prevenir comportamiento por defecto en botones sin href
-    document.querySelectorAll('button, .cta-button').forEach(button => {
-        if (!button.type && !button.form) {
-            button.addEventListener('click', function(e) {
-                if (!this.getAttribute('onclick') && !this.getAttribute('href')) {
-                    // Puedes personalizar las acciones aquí
-                    showMessage('Funcionalidad en desarrollo. ¡Pronto estará disponible!', 'info');
-                }
-            });
-        }
-    });
+        console.log('🎉 Aplicación inicializada completamente');
+    }, 100);
 });
 
-// Agregar estilos CSS para las animaciones mediante JavaScript
-const styleSheet = document.createElement('style');
-styleSheet.textContent = `
-    @keyframes slideInFromRight {
-        from {
-            transform: translateX(100%);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
+// EVENTOS DE VENTANA
+window.addEventListener('resize', function() {
+    if (window.innerWidth > 768 && isMenuOpen) {
+        closeMenu();
     }
+});
 
-    @keyframes slideOutToRight {
-        from {
-            transform: translateX(0);
-            opacity: 1;
-        }
-        to {
-            transform: translateX(100%);
-            opacity: 0;
-        }
-    }
-
-    @keyframes ripple {
-        to {
-            transform: scale(4);
-            opacity: 0;
-        }
-    }
-
-    .menu-open {
-        overflow: hidden;
-    }
-
-    .header.scrolled {
-        background-color: rgba(26, 26, 26, 0.98);
-        backdrop-filter: blur(20px);
-    }
-
-    .field-error {
-        animation: fadeInUp 0.3s ease;
-    }
-
-    @media (max-width: 768px) {
-        .message {
-            right: 10px !important;
-            left: 10px !important;
-            max-width: none !important;
-        }
-    }
-`;
-
-document.head.appendChild(styleSheet);
-
-// Función de utilidad para detectar dispositivo móvil
-function isMobile() {
-    return window.innerWidth <= 768;
-}
-
-// Función de utilidad para detectar Safari
-function isSafari() {
-    return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-}
-
-// Optimizaciones específicas para Safari
-if (isSafari()) {
-    document.body.classList.add('safari');
-    const safariStyles = document.createElement('style');
-    safariStyles.textContent = `
-        .safari .header {
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-    `;
-    document.head.appendChild(safariStyles);
-}
-
-// Manejar cambios de orientación en móviles
 window.addEventListener('orientationchange', function() {
-    // Cerrar menú móvil si está abierto
-    const mobileMenu = document.getElementById('mobile-menu');
-    const navMenu = document.getElementById('nav-menu');
-    
-    if (navMenu && navMenu.classList.contains('active')) {
-        mobileMenu.classList.remove('active');
-        navMenu.classList.remove('active');
-        document.body.classList.remove('menu-open');
-    }
-    
-    // Recalcular alturas después del cambio de orientación
     setTimeout(() => {
-        window.scrollTo(0, window.scrollY);
+        if (isMenuOpen) {
+            closeMenu();
+        }
     }, 500);
 });
 
-// Manejar cambios de tamaño de ventana
-window.addEventListener('resize', function() {
-    const header = document.querySelector('.header');
-    const scrollToTopBtn = document.getElementById('scrollToTop');
-    
-    if (header && window.innerWidth > 768) {
-        // En PC siempre mostrar header y ocultar botón scroll
-        header.style.transform = 'translateY(0)';
-        if (scrollToTopBtn) {
-            scrollToTopBtn.classList.remove('show');
-        }
+// ESTILOS DINÁMICOS
+const dynamicStyles = document.createElement('style');
+dynamicStyles.textContent = `
+    @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
     }
-});
+    
+    @keyframes slideOut {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100%); opacity: 0; }
+    }
+    
+    .menu-open {
+        overflow: hidden !important;
+    }
+`;
+document.head.appendChild(dynamicStyles);
 
-console.log('🔒 CyberIAFigueroaSec - Sistema inicializado correctamente');
+console.log('📜 Script cargado completamente');
