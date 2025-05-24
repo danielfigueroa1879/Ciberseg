@@ -1,4 +1,12 @@
-// Menu hamburguesa y funcionalidades
+// Funcionalidad del botón scroll to top
+    if (scrollToTopBtn) {
+        scrollToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }// Menu hamburguesa y funcionalidades
 document.addEventListener('DOMContentLoaded', function() {
     // Elementos del DOM
     const mobileMenu = document.getElementById('mobile-menu');
@@ -9,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchBtn = document.querySelector('.search-btn');
     const contactForm = document.querySelector('.contact-form form');
     const newsletterForm = document.querySelector('.newsletter-form');
+    const scrollToTopBtn = document.getElementById('scrollToTop');
 
     // Toggle del menú móvil
     if (mobileMenu && navMenu) {
@@ -45,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Header con efecto scroll
+    // Header con efecto scroll y botón scroll to top
     let lastScrollTop = 0;
     window.addEventListener('scroll', function() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -54,6 +63,15 @@ document.addEventListener('DOMContentLoaded', function() {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
+        }
+        
+        // Mostrar/ocultar botón scroll to top (solo móviles)
+        if (scrollToTopBtn && window.innerWidth <= 768) {
+            if (scrollTop > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
         }
         
         // Auto-hide header en scroll down, show en scroll up (solo en móviles)
@@ -520,9 +538,14 @@ window.addEventListener('orientationchange', function() {
 // Manejar cambios de tamaño de ventana
 window.addEventListener('resize', function() {
     const header = document.querySelector('.header');
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+    
     if (header && window.innerWidth > 768) {
-        // En PC siempre mostrar header
+        // En PC siempre mostrar header y ocultar botón scroll
         header.style.transform = 'translateY(0)';
+        if (scrollToTopBtn) {
+            scrollToTopBtn.classList.remove('show');
+        }
     }
 });
 
