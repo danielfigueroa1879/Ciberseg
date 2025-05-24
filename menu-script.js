@@ -56,10 +56,15 @@ document.addEventListener('DOMContentLoaded', function() {
             header.classList.remove('scrolled');
         }
         
-        // Auto-hide header en scroll down, show en scroll up
-        if (scrollTop > lastScrollTop && scrollTop > 200) {
-            header.style.transform = 'translateY(-100%)';
+        // Auto-hide header en scroll down, show en scroll up (solo en móviles)
+        if (window.innerWidth <= 768) {
+            if (scrollTop > lastScrollTop && scrollTop > 200) {
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                header.style.transform = 'translateY(0)';
+            }
         } else {
+            // En PC siempre visible
             header.style.transform = 'translateY(0)';
         }
         
@@ -510,6 +515,15 @@ window.addEventListener('orientationchange', function() {
     setTimeout(() => {
         window.scrollTo(0, window.scrollY);
     }, 500);
+});
+
+// Manejar cambios de tamaño de ventana
+window.addEventListener('resize', function() {
+    const header = document.querySelector('.header');
+    if (header && window.innerWidth > 768) {
+        // En PC siempre mostrar header
+        header.style.transform = 'translateY(0)';
+    }
 });
 
 console.log('🔒 CyberIAFigueroaSec - Sistema inicializado correctamente');
