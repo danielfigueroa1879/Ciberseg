@@ -176,13 +176,14 @@ body {
 }
 
 .bar {
-    width: 25px;
+    width: 28px;
     height: 3px;
     background-color: #d4ff00;
-    margin: 3px 0;
-    transition: all 0.3s ease;
+    margin: 4px 0;
+    transition: all 0.4s ease;
     border-radius: 2px;
     display: block;
+    transform-origin: center;
 }
 
 /* Sección Hero */
@@ -217,12 +218,12 @@ body {
 }
 
 .hero-description {
-    font-size: 22px;
+    font-size: 26px;
     font-weight: 200;
     max-width: none;
     width: 100%;
     margin: 0;
-    padding: 0 60px;
+    padding: 0 100px;
     text-align: justify;
     line-height: 1.8;
     animation: fadeInUp 1s ease-out 0.3s both;
@@ -812,7 +813,7 @@ html {
         background-color: rgba(26, 26, 26, 0.98);
         width: 100%;
         text-align: center;
-        transition: left 0.3s ease;
+        transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         box-shadow: 0 10px 27px rgba(0, 0, 0, 0.3);
         padding: 30px 0;
         backdrop-filter: blur(20px);
@@ -838,12 +839,17 @@ html {
         background-color: rgba(212, 255, 0, 0.15);
         border: 2px solid rgba(212, 255, 0, 0.4);
         border-radius: 15px;
-        padding: 10px;
+        padding: 12px;
         cursor: pointer;
         z-index: 1001;
         position: relative;
         user-select: none;
         -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+        min-height: 48px;
+        min-width: 48px;
+        justify-content: center;
+        align-items: center;
     }
 
     .nav-toggle:hover,
@@ -854,6 +860,7 @@ html {
 
     .nav-toggle:active {
         background-color: rgba(212, 255, 0, 0.3);
+        transform: scale(0.95);
     }
 
     .nav-toggle.active {
@@ -863,14 +870,15 @@ html {
 
     .nav-toggle.active .bar:nth-child(2) {
         opacity: 0;
+        transform: translateX(20px);
     }
 
     .nav-toggle.active .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
+        transform: translateY(7px) rotate(45deg);
     }
 
     .nav-toggle.active .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
+        transform: translateY(-7px) rotate(-45deg);
     }
 
     /* Hero responsive */
