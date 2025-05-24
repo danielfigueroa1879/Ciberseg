@@ -1,4 +1,18 @@
-// Funcionalidad del botón scroll to top
+// Reinicializar menú después de un breve delay para asegurar que el DOM esté listo
+    setTimeout(function() {
+        const mobileMenuCheck = document.getElementById('mobile-menu');
+        const navMenuCheck = document.getElementById('nav-menu');
+        
+        console.log('Delayed check - Mobile menu exists:', !!mobileMenuCheck);
+        console.log('Delayed check - Nav menu exists:', !!navMenuCheck);
+        
+        if (!mobileMenuCheck) {
+            console.error('CRITICAL: Mobile menu button with ID "mobile-menu" not found in DOM!');
+        }
+        if (!navMenuCheck) {
+            console.error('CRITICAL: Navigation menu with ID "nav-menu" not found in DOM!');
+        }
+    }, 500);    // Funcionalidad del botón scroll to top
     if (scrollToTopBtn) {
         scrollToTopBtn.addEventListener('click', function() {
             window.scrollTo({
@@ -8,53 +22,90 @@
         });
     }// Menu hamburguesa y funcionalidades
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, initializing menu...');
+    
     // Elementos del DOM
     const mobileMenu = document.getElementById('mobile-menu');
     const navMenu = document.getElementById('nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
     const header = document.querySelector('.header');
-    const searchInput = document.querySelector('.search-input');
-    const searchBtn = document.querySelector('.search-btn');
     const contactForm = document.querySelector('.contact-form form');
     const newsletterForm = document.querySelector('.newsletter-form');
     const scrollToTopBtn = document.getElementById('scrollToTop');
 
-    // Debug: verificar que los elementos existen
-    console.log('Mobile menu:', mobileMenu);
-    console.log('Nav menu:', navMenu);
+    // Debug detallado
+    console.log('Elements found:');
+    console.log('- Mobile menu button:', mobileMenu);
+    console.log('- Navigation menu:', navMenu);
+    console.log('- Nav links count:', navLinks.length);
     
-    // Toggle del menú móvil
-    if (mobileMenu && navMenu) {
+    // Función para toggle del menú
+    function toggleMenu() {
+        console.log('Toggling menu...');
+        
+        if (!mobileMenu || !navMenu) {
+            console.error('Menu elements missing!');
+            return;
+        }
+        
+        const isActive = navMenu.classList.contains('active');
+        console.log('Menu currently active:', isActive);
+        
+        if (isActive) {
+            // Cerrar menú
+            mobileMenu.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            console.log('Menu closed');
+        } else {
+            // Abrir menú
+            mobileMenu.classList.add('active');
+            navMenu.classList.add('active');
+            document.body.classList.add('menu-open');
+            console.log('Menu opened');
+        }
+    }
+    
+    // Event listener para el botón hamburguesa
+    if (mobileMenu) {
+        // Remover listeners previos si existen
+        mobileMenu.removeEventListener('click', toggleMenu);
+        
+        // Agregar nuevo listener
         mobileMenu.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            
-            console.log('Menu clicked'); // Debug
-            
-            // Toggle clases activas
-            mobileMenu.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            
-            // Prevenir scroll del body cuando el menú está abierto
-            if (navMenu.classList.contains('active')) {
-                document.body.classList.add('menu-open');
-            } else {
-                document.body.classList.remove('menu-open');
-            }
+            console.log('Hamburger button clicked');
+            toggleMenu();
         });
+        
+        // También agregar listener táctil para móviles
+        mobileMenu.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            console.log('Hamburger button touched');
+            toggleMenu();
+        });
+        
+        console.log('Menu button listeners attached');
     } else {
-        console.error('Menu elements not found!');
+        console.error('Mobile menu button not found! Check if ID "mobile-menu" exists');
+    }
+
+    // Función para cerrar menú
+    function closeMenu() {
+        if (mobileMenu && navMenu) {
+            mobileMenu.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            console.log('Menu closed by function');
+        }
     }
 
     // Cerrar menú al hacer click en un enlace
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            console.log('Nav link clicked'); // Debug
-            if (navMenu && navMenu.classList.contains('active')) {
-                mobileMenu.classList.remove('active');
-                navMenu.classList.remove('active');
-                document.body.classList.remove('menu-open');
-            }
+    navLinks.forEach((link, index) => {
+        link.addEventListener('click', function(e) {
+            console.log(`Nav link ${index} clicked`);
+            closeMenu();
         });
     });
 
@@ -66,10 +117,16 @@ document.addEventListener('DOMContentLoaded', function() {
         const isClickOnToggle = mobileMenu.contains(event.target);
         
         if (!isClickInsideNav && !isClickOnToggle && navMenu.classList.contains('active')) {
-            console.log('Closing menu - click outside'); // Debug
-            mobileMenu.classList.remove('active');
-            navMenu.classList.remove('active');
-            document.body.classList.remove('menu-open');
+            console.log('Closing menu - clicked outside');
+            closeMenu();
+        }
+    });
+
+    // Cerrar menú con tecla Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && navMenu && navMenu.classList.contains('active')) {
+            console.log('Closing menu - Escape key');
+            closeMenu();
         }
     });
 
