@@ -3,235 +3,299 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ciberseguridad y Diseño Web</title>
+    <title>CyberIAFigueroaSec - Líderes en Ciberseguridad</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Importar fuentes */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700&display=swap');
-        
-        body {
-            margin: 0;
-            font-family: 'Poppins', Arial, sans-serif;
-            background-color: #0f0f0f;
-            color: #fff;
-            text-align: center;
-            line-height: 1.6;
-        }
-        header {
-            background-color: #1a1a1a;
-            padding: 15px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-        }
-        nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-        }
-        nav ul li a {
-            color: #d4ff00;
-            text-decoration: none;
-            font-size: 26px;
-            transition: color 0.3s ease;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Sombra para el texto amarillo */
-        }
-        nav ul li a:hover {
-            color: #fff;
-        }
-        .search-bar {
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .search-bar input {
-            padding: 8px;
-            border: none;
-            border-radius: 5px;
-            width: 200px;
-        }
-        .search-bar button {
-            background-color: #d4ff00;
-            border: none;
-            padding: 8px 12px;
-            cursor: pointer;
-            border-radius: 5px;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Sombra para el botón amarillo */
-        }
-        .hero {
-            padding: 40px 20px;
-        }
-        .hero h1 {
-            font-size: 48px;
-            color: #d4ff00;
-            font-weight: bold;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Sombra para el título amarillo */
-        }
-        p {
-            font-family: 'Poppins', Arial, sans-serif;
-            font-weight: 200; /* Extra Light */
-            font-size: 20px; /* Tamaño en PC */
-            max-width: 1600px; /* Máximo ancho para PC */
-            margin: 20px auto; /* Margen consistente hacia abajo */
-            text-align: justify;
-            padding: 0 20px; /* Relleno lateral en PC */
-        }
-        .yellow-section2, .black-section {
-            padding: 60px 20px;
-            color: #000;
-            text-align: center;
-            width: 100%;
-            font-size: 18px;
-            border-radius: 8px;
-            margin-top: 50px;
-        }
-        .yellow-section2 {
-            background-color: #d4ff00;
-            color: #000;
-        }
-        .black-section {
-            background-color: #000;
-            color: #fff;
-        }
-        .yellow-section2 h2, .black-section h2 {
-            font-size: 32px;
-            margin-bottom: 20px;
-        }
-        .services-container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin: 50px auto;
-            max-width: 95%;
-        }
-        .service-box {
-            background-color: rgba(255,255,255,0.1);
-            border: 3px solid #fff;
-            padding: 20px;
-            width: 30%;
-            min-width: 280px;
-            text-align: center;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            transition: transform 0.3s ease;
-        }
-        .service-box:hover {
-            transform: scale(1.05); /* Efecto hover */
-        }
-        .service-box img {
-            width: 100%;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            height: 150px; /* Altura fija para las imágenes */
-            object-fit: cover; /* Mantener proporción */
-        }
-        .service-box h3 {
-            color: #fff;
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-        .service-box button {
-            background-color: #d4ff00;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: background-color 0.3s ease;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Sombra para los botones amarillos */
-        }
-        .service-box button:hover {
-            background-color: #b3cc00;
-        }
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 26px;
-            }
-            p {
-                font-size: 15px; /* Texto más pequeño en móviles */
-                padding: 0 5px; /* Casi sin margen lateral */
-                margin: 10px auto; /* Menor margen vertical */
-                max-width: 100%; /* Ocupar todo el ancho */
-            }
-            .yellow-section2, .black-section {
-                padding: 20px 5px; /* Reducir relleno en móviles */
-            }
-            .services-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            .service-box {
-                width: 90%; /* Ancho reducido en móviles */
-                min-width: auto; /* Eliminar ancho mínimo */
-                padding: 15px; /* Reducir relleno interno */
-                margin-bottom: 20px; /* Espaciado entre cuadros */
-            }
-            .service-box img {
-                width: 100%; /* Imágenes responsivas */
-                height: 120px; /* Altura reducida en móviles */
-                object-fit: cover; /* Mantener proporción */
-            }
-            .service-box h3 {
-                font-size: 16px; /* Tamaño de fuente más pequeño */
-            }
-            .service-box button {
-                font-size: 14px; /* Tamaño de fuente más pequeño */
-                padding: 8px 16px; /* Reducir tamaño del botón */
-            }
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Comprar</a></li>
-                <li><a href="#">Reservar online</a></li>
-                <li><a href="#">Blog</a></li>
-            </ul>
-            <div class="search-bar">
-                <input type="text" placeholder="Buscar...">
-                <button>🔍</button>
+    <!-- Header con navegación -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h2>CyberIAFigueroaSec</h2>
+                </div>
+                
+                <!-- Menú hamburguesa -->
+                <div class="nav-toggle" id="mobile-menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+                
+                <!-- Menú de navegación -->
+                <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item">
+                        <a href="#inicio" class="nav-link">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#servicios" class="nav-link">Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contacto" class="nav-link">Contacto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#blog" class="nav-link">Blog</a>
+                    </li>
+                </ul>
+                
+                <!-- Barra de búsqueda -->
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Buscar...">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
             </div>
         </nav>
     </header>
-    
-    <section class="hero">
-        <h1>LÍDERES EN CIBERSEGURIDAD CON IA <br> AVANZADA Y DISEÑO WEB.</h1>
-        <p>En un mundo cada vez más conectado, garantizar la seguridad digital y tecnológica es crucial. Nuestro conjunto integral de servicios, que abarca desde auditorías de seguridad y monitoreo de redes hasta consultoría especializada en ciberseguridad, está diseñado para proteger tus activos más valiosos. Con experiencia en ingeniería informática y soluciones innovadoras en IoT e inteligencia artificial, ofrecemos herramientas y estrategias personalizadas que fortalecen la protección de infraestructura digital, reducen riesgos y aseguran el cumplimiento de los estándares más exigentes. Tu seguridad es nuestra prioridad.</p>
-    </section>
-    <section class="black-section">
-        <h2>Soluciones de Seguridad</h2>
-        <p>Implementamos estrategias robustas para mitigar riesgos cibernéticos, protegiendo datos y redes contra amenazas avanzadas.</p>
-    </section>
-    <section class="yellow-section2">
-        <h2>Servicios de Seguridad IoT</h2>
-        <p class="shadow-text">Los dispositivos IoT conectan el mundo físico y digital, pero también abren nuevas puertas para los atacantes. Este servicio asegura la protección de dispositivos inteligentes, redes y datos asociados a través de soluciones personalizadas para entornos IoT. Esto incluye dispositivos industriales, domésticos, de salud, transporte y más.</p>
-    </section>
-    <div class="services-container">
-        <div class="service-box">
-            <img src="iot-security.jpg" alt="Evaluación de Vulnerabilidades IoT">
-            <h3>Evaluación de Vulnerabilidades IoT</h3>
-            <button>Elegir Producto</button>
+
+    <!-- Sección Hero -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                LÍDERES EN CIBERSEGURIDAD CON IA<br>
+                AVANZADA Y DISEÑO WEB.
+            </h1>
+            <p class="hero-description">
+                En un mundo cada vez más conectado, garantizar la seguridad digital y tecnológica es crucial. 
+                Nuestro conjunto integral de servicios, que abarca desde auditorías de seguridad y monitoreo 
+                de redes hasta consultoría especializada en ciberseguridad, está diseñado para proteger tus 
+                activos más valiosos. Con experiencia en ingeniería informática y soluciones innovadoras en 
+                IoT e inteligencia artificial, ofrecemos herramientas y estrategias personalizadas que 
+                fortalecen la protección de infraestructura digital, reducen riesgos y aseguran el 
+                cumplimiento de los estándares más exigentes. Tu seguridad es nuestra prioridad.
+            </p>
         </div>
-        <div class="service-box">
-            <img src="iot-implementation.jpg" alt="Implementación de Sistemas de Seguridad IoT">
-            <h3>Implementación de Sistemas de Seguridad IoT</h3>
-            <button>Elegir Producto</button>
+    </section>
+
+    <!-- Sección de Servicios Principales -->
+    <section class="main-services">
+        <div class="container">
+            <h2>Soluciones de Seguridad</h2>
+            <p>Implementamos estrategias robustas para mitigar riesgos cibernéticos, protegiendo datos y redes contra amenazas avanzadas.</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Auditorías de Seguridad</h3>
+                    <p>Evaluación completa de tu infraestructura digital</p>
+                    <span class="service-price">Consultar</span>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>Monitoreo de Redes</h3>
+                    <p>Supervisión 24/7 de tu red corporativa</p>
+                    <span class="service-price">Consultar</span>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3>Consultoría en Ciberseguridad</h3>
+                    <p>Asesoramiento experto personalizado</p>
+                    <span class="service-price">Consultar</span>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Implementación de Sistemas</h3>
+                    <p>Configuración de sistemas de seguridad</p>
+                    <span class="service-price">Consultar</span>
+                </div>
+            </div>
         </div>
-        <div class="service-box">
-            <img src="iot-monitoring.jpg" alt="Monitoreo y Respuesta en Tiempo Real">
-            <h3>Monitoreo y Respuesta en Tiempo Real</h3>
-            <button>Elegir Producto</button>
+    </section>
+
+    <!-- Sección IoT -->
+    <section id="servicios" class="iot-section">
+        <div class="container">
+            <h2>Servicios de Seguridad IoT</h2>
+            <p class="iot-description">
+                Los dispositivos IoT conectan el mundo físico y digital, pero también abren nuevas puertas para los atacantes. 
+                Este servicio asegura la protección de dispositivos inteligentes, redes y datos asociados a través de soluciones 
+                personalizadas para entornos IoT. Esto incluye dispositivos industriales, domésticos, de salud, transporte y más.
+            </p>
+            
+            <div class="iot-services">
+                <div class="iot-card">
+                    <div class="iot-image">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Evaluación de Vulnerabilidades IoT</h3>
+                    <div class="iot-details">
+                        <ul>
+                            <li>Identificación de posibles brechas en dispositivos, firmware y protocolos</li>
+                            <li>Pruebas de penetración específicas para dispositivos IoT</li>
+                            <li>Identificación proactiva de riesgos</li>
+                            <li>Informes detallados con soluciones recomendadas</li>
+                        </ul>
+                    </div>
+                    <button class="cta-button">Elegir Producto</button>
+                </div>
+                
+                <div class="iot-card">
+                    <div class="iot-image">
+                        <i class="fas fa-shield"></i>
+                    </div>
+                    <h3>Implementación de Sistemas de Seguridad IoT</h3>
+                    <div class="iot-details">
+                        <ul>
+                            <li>Configuración de firewalls y cifrado de datos</li>
+                            <li>Herramientas de autenticación para dispositivos conectados</li>
+                            <li>Segmentación de redes para aislar dispositivos vulnerables</li>
+                            <li>Protección robusta contra accesos no autorizados</li>
+                        </ul>
+                    </div>
+                    <button class="cta-button">Elegir Producto</button>
+                </div>
+                
+                <div class="iot-card">
+                    <div class="iot-image">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>Monitoreo y Respuesta en Tiempo Real</h3>
+                    <div class="iot-details">
+                        <ul>
+                            <li>Supervisión constante del tráfico y comportamiento</li>
+                            <li>Detección y mitigación de amenazas en tiempo real</li>
+                            <li>Minimización de interrupciones en dispositivos críticos</li>
+                            <li>Respuesta inmediata a intentos de explotación</li>
+                        </ul>
+                    </div>
+                    <button class="cta-button">Elegir Producto</button>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Sección Misión y Visión -->
+    <section class="mission-vision">
+        <div class="container">
+            <h2>Lineamientos y Directrices</h2>
+            
+            <div class="mv-grid">
+                <div class="mv-card">
+                    <h3>Misión</h3>
+                    <p>
+                        Proteger y fortalecer el ecosistema digital de nuestros clientes mediante soluciones innovadoras, 
+                        confiables y personalizadas en ciberseguridad, ingeniería informática y tecnología IoT. 
+                        Nos comprometemos a garantizar la integridad, disponibilidad y confidencialidad de sus datos, 
+                        impulsando un entorno más seguro y preparado para enfrentar los desafíos del mundo digital.
+                    </p>
+                </div>
+                
+                <div class="mv-card">
+                    <h3>Visión</h3>
+                    <p>
+                        Ser reconocidos como líderes en soluciones tecnológicas de seguridad digital, destacándonos por 
+                        nuestra innovación, profesionalismo y capacidad de adaptación a las necesidades cambiantes del mercado. 
+                        Aspiramos a construir un mundo digital más seguro, donde la tecnología y la confianza vayan de la mano, 
+                        y donde las organizaciones y personas puedan prosperar sin preocuparse por amenazas tecnológicas.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Contacto -->
+    <section id="contacto" class="contact-section">
+        <div class="container">
+            <h2>Póngase en Contacto</h2>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Información de Contacto</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>La Serena, Chile</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>danielfigueroa1879@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+569 59978963</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>WhatsApp: +569 59978963</span>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form>
+                        <div class="form-row">
+                            <input type="text" placeholder="Nombre" required>
+                            <input type="email" placeholder="Email" required>
+                        </div>
+                        <div class="form-row">
+                            <input type="tel" placeholder="Teléfono">
+                            <input type="text" placeholder="Asunto">
+                        </div>
+                        <textarea placeholder="Escribe tu mensaje aquí..." rows="5" required></textarea>
+                        <button type="submit" class="submit-btn">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CyberIAFigueroaSec</h3>
+                    <p>Protegiendo tu mundo digital con tecnología avanzada y experiencia profesional.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Síguenos</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Tu correo electrónico">
+                        <button type="submit">Suscribirse</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 by CyberIAFigueroaSec. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="menu-script.js"></script>
 </body>
 </html>
