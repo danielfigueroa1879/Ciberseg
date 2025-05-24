@@ -153,15 +153,15 @@ body {
     display: none;
     flex-direction: column;
     cursor: pointer;
-    padding: 8px;
+    padding: 6px;
     background-color: rgba(212, 255, 0, 0.1);
     border: 2px solid rgba(212, 255, 0, 0.3);
-    border-radius: 12px;
+    border-radius: 10px;
     transition: all 0.3s ease;
     position: relative;
     z-index: 1001;
-    min-height: 44px;
-    min-width: 44px;
+    min-height: 40px;
+    min-width: 40px;
     justify-content: center;
     align-items: center;
 }
@@ -176,10 +176,10 @@ body {
 }
 
 .bar {
-    width: 28px;
-    height: 3px;
+    width: 22px;
+    height: 2px;
     background-color: #d4ff00;
-    margin: 4px 0;
+    margin: 3px 0;
     transition: all 0.4s ease;
     border-radius: 2px;
     display: block;
@@ -218,7 +218,7 @@ body {
 }
 
 .hero-description {
-    font-size: 32px;
+    font-size: 36px;
     font-weight: 200;
     max-width: none;
     width: 100%;
@@ -512,6 +512,29 @@ body {
     width: 25px;
 }
 
+.contact-item a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+    color: #d4ff00;
+}
+
+.whatsapp-item a {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.whatsapp-item a:hover {
+    background-color: rgba(212, 255, 0, 0.1);
+    transform: translateX(5px);
+}
+
 .contact-form form {
     display: flex;
     flex-direction: column;
@@ -619,11 +642,49 @@ body {
     color: #d4ff00;
     font-size: 24px;
     transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+}
+
+.social-links a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(212, 255, 0, 0.1);
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.3s ease;
+}
+
+.social-links a:hover::before {
+    transform: scale(1);
 }
 
 .social-links a:hover {
     color: #fff;
-    transform: scale(1.2);
+    transform: scale(1.2) rotate(5deg);
+}
+
+/* Colores específicos para cada red social */
+.social-links a[aria-label="WhatsApp"]:hover {
+    color: #25D366;
+}
+
+.social-links a[aria-label="LinkedIn"]:hover {
+    color: #0077B5;
+}
+
+.social-links a[aria-label="Imprimir"]:hover {
+    color: #fff;
 }
 
 .newsletter-form {
@@ -808,22 +869,22 @@ html {
     .nav-menu {
         position: fixed;
         left: 0;
-        top: -100%;
+        top: -50vh;
         flex-direction: column;
-        background-color: rgba(212, 255, 0, 0.85);
+        background-color: rgba(212, 255, 0, 0.6);
         width: 100%;
         height: 50vh;
         text-align: center;
         transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         padding: 20px 0;
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
         z-index: 999;
         overflow-y: auto;
-        border-bottom-left-radius: 20px;
-        border-bottom-right-radius: 20px;
-        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+        border: 1px solid rgba(0, 0, 0, 0.05);
         opacity: 0;
         transform: translateY(-20px);
         display: flex;
@@ -832,7 +893,7 @@ html {
     }
 
     .nav-menu.active {
-        top: 0;
+        top: 80px;
         opacity: 1;
         transform: translateY(0);
     }
@@ -847,49 +908,49 @@ html {
 
     .nav-toggle {
         display: flex !important;
-        background-color: rgba(212, 255, 0, 0.15);
-        border: 2px solid rgba(212, 255, 0, 0.4);
-        border-radius: 15px;
-        padding: 12px;
+        background-color: rgba(212, 255, 0, 0.08);
+        border: 2px solid rgba(212, 255, 0, 0.2);
+        border-radius: 12px;
+        padding: 8px;
         cursor: pointer;
         z-index: 1001;
         position: relative;
         user-select: none;
         -webkit-tap-highlight-color: transparent;
         touch-action: manipulation;
-        min-height: 48px;
-        min-width: 48px;
+        min-height: 42px;
+        min-width: 42px;
         justify-content: center;
         align-items: center;
     }
 
     .nav-toggle:hover,
     .nav-toggle:focus {
-        background-color: rgba(212, 255, 0, 0.25);
+        background-color: rgba(212, 255, 0, 0.12);
         outline: none;
     }
 
     .nav-toggle:active {
-        background-color: rgba(212, 255, 0, 0.3);
+        background-color: rgba(212, 255, 0, 0.15);
         transform: scale(0.95);
     }
 
     .nav-toggle.active {
-        background-color: rgba(212, 255, 0, 0.25);
-        border-color: rgba(212, 255, 0, 0.6);
+        background-color: rgba(212, 255, 0, 0.15);
+        border-color: rgba(212, 255, 0, 0.3);
     }
 
     .nav-toggle.active .bar:nth-child(2) {
         opacity: 0;
-        transform: translateX(20px);
+        transform: translateX(15px);
     }
 
     .nav-toggle.active .bar:nth-child(1) {
-        transform: translateY(7px) rotate(45deg);
+        transform: translateY(5px) rotate(45deg);
     }
 
     .nav-toggle.active .bar:nth-child(3) {
-        transform: translateY(-7px) rotate(-45deg);
+        transform: translateY(-5px) rotate(-45deg);
     }
 
     /* Hero responsive */
@@ -1030,26 +1091,29 @@ html {
     .nav-toggle {
         background-color: rgba(212, 255, 0, 0.2);
         border: 2px solid rgba(212, 255, 0, 0.5);
-        border-radius: 12px;
-        padding: 8px;
+        border-radius: 10px;
+        padding: 6px;
+        min-height: 38px;
+        min-width: 38px;
     }
 
     .nav-menu {
-        top: -100%;
+        top: -45vh;
         height: 45vh;
         padding: 15px 0;
-        border-bottom-left-radius: 15px;
-        border-bottom-right-radius: 15px;
-        background-color: rgba(212, 255, 0, 0.8);
-        backdrop-filter: blur(25px);
-        -webkit-backdrop-filter: blur(25px);
-        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+        background-color: rgba(212, 255, 0, 0.5);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(0, 0, 0, 0.03);
         width: 100%;
         left: 0;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     }
 
     .nav-menu.active {
-        top: 0;
+        top: 80px;
     }
 
     .nav-menu li {
@@ -1058,14 +1122,15 @@ html {
 
     .nav-link {
         font-size: 24px;
-        font-weight: 600;
+        font-weight: 500;
         padding: 6px 15px;
         color: #000 !important;
     }
 
     .nav-link:hover {
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: rgba(0, 0, 0, 0.05);
         color: #000 !important;
+        transform: translateY(-1px) scale(1.02);
     }
 
     /* Hero móvil */
@@ -1191,6 +1256,16 @@ html {
 
     .contact-item {
         font-size: 14px;
+    }
+
+    .contact-item a {
+        font-size: 14px;
+    }
+
+    .social-links a {
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
     }
 
     .contact-form input,
@@ -1377,8 +1452,8 @@ html {
 
     /* Menú hamburguesa mejorado */
     .nav-toggle {
-        min-height: 44px;
-        min-width: 44px;
+        min-height: 42px;
+        min-width: 42px;
         display: flex !important;
         align-items: center;
         justify-content: center;
