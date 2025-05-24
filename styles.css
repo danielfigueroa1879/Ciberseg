@@ -48,7 +48,7 @@ body {
 }
 
 .navbar {
-    padding: 15px 0;
+    padding: 20px 0;
 }
 
 .nav-container {
@@ -188,7 +188,7 @@ body {
 
 /* Sección Hero */
 .hero {
-    padding: 120px 20px 80px;
+    padding: 140px 20px 80px;
     text-align: center;
     background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(42, 42, 42, 0.7)), url('fondo.png');
     background-size: cover;
@@ -218,7 +218,7 @@ body {
 }
 
 .hero-description {
-    font-size: 26px;
+    font-size: 28px;
     font-weight: 200;
     max-width: none;
     width: 100%;
@@ -807,29 +807,31 @@ html {
     
     .nav-menu {
         position: fixed;
-        left: -100%;
-        top: 70px;
+        left: -50%;
+        top: 80px;
         flex-direction: column;
         background-color: rgba(212, 255, 0, 0.9);
-        width: 100%;
+        width: 50%;
         text-align: center;
         transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-        padding: 40px 0;
+        padding: 25px 0;
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         z-index: 999;
-        max-height: calc(100vh - 70px);
+        max-height: calc(100vh - 80px);
         overflow-y: auto;
-        border-bottom-left-radius: 25px;
-        border-bottom-right-radius: 25px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
         border: 1px solid rgba(0, 0, 0, 0.1);
         opacity: 0;
         transform: translateX(-20px);
+        right: 0;
+        left: auto;
     }
 
     .nav-menu.active {
-        left: 0;
+        right: 0;
         opacity: 1;
         transform: translateX(0);
     }
@@ -1032,23 +1034,28 @@ html {
     }
 
     .nav-menu {
-        top: 70px;
-        padding: 35px 0;
-        border-bottom-left-radius: 20px;
-        border-bottom-right-radius: 20px;
+        top: 80px;
+        padding: 20px 0;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
         background-color: rgba(212, 255, 0, 0.95);
         backdrop-filter: blur(25px);
         -webkit-backdrop-filter: blur(25px);
         border: 1px solid rgba(0, 0, 0, 0.1);
+        width: 55%;
+        right: 0;
+        left: auto;
+        max-height: calc(100vh - 80px);
     }
 
     .nav-menu li {
-        margin: 20px 0;
+        margin: 12px 0;
     }
 
     .nav-link {
-        font-size: 20px;
-        padding: 12px 20px;
+        font-size: 22px;
+        font-weight: 600;
+        padding: 10px 12px;
         color: #000 !important;
     }
 
