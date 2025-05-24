@@ -19,22 +19,38 @@ document.addEventListener('DOMContentLoaded', function() {
     const newsletterForm = document.querySelector('.newsletter-form');
     const scrollToTopBtn = document.getElementById('scrollToTop');
 
+    // Debug: verificar que los elementos existen
+    console.log('Mobile menu:', mobileMenu);
+    console.log('Nav menu:', navMenu);
+    
     // Toggle del menú móvil
     if (mobileMenu && navMenu) {
-        mobileMenu.addEventListener('click', function() {
+        mobileMenu.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            console.log('Menu clicked'); // Debug
+            
             // Toggle clases activas
             mobileMenu.classList.toggle('active');
             navMenu.classList.toggle('active');
             
             // Prevenir scroll del body cuando el menú está abierto
-            document.body.classList.toggle('menu-open');
+            if (navMenu.classList.contains('active')) {
+                document.body.classList.add('menu-open');
+            } else {
+                document.body.classList.remove('menu-open');
+            }
         });
+    } else {
+        console.error('Menu elements not found!');
     }
 
     // Cerrar menú al hacer click en un enlace
     navLinks.forEach(link => {
         link.addEventListener('click', function() {
-            if (navMenu.classList.contains('active')) {
+            console.log('Nav link clicked'); // Debug
+            if (navMenu && navMenu.classList.contains('active')) {
                 mobileMenu.classList.remove('active');
                 navMenu.classList.remove('active');
                 document.body.classList.remove('menu-open');
@@ -44,10 +60,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Cerrar menú al hacer click fuera de él
     document.addEventListener('click', function(event) {
+        if (!navMenu || !mobileMenu) return;
+        
         const isClickInsideNav = navMenu.contains(event.target);
         const isClickOnToggle = mobileMenu.contains(event.target);
         
         if (!isClickInsideNav && !isClickOnToggle && navMenu.classList.contains('active')) {
+            console.log('Closing menu - click outside'); // Debug
             mobileMenu.classList.remove('active');
             navMenu.classList.remove('active');
             document.body.classList.remove('menu-open');
