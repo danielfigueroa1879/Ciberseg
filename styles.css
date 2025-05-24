@@ -810,7 +810,7 @@ html {
         left: -100%;
         top: 70px;
         flex-direction: column;
-        background-color: rgba(0, 0, 0, 0.85);
+        background-color: rgba(212, 255, 0, 0.9);
         width: 100%;
         text-align: center;
         transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -823,7 +823,7 @@ html {
         overflow-y: auto;
         border-bottom-left-radius: 25px;
         border-bottom-right-radius: 25px;
-        border: 1px solid rgba(212, 255, 0, 0.2);
+        border: 1px solid rgba(0, 0, 0, 0.1);
         opacity: 0;
         transform: translateX(-20px);
     }
@@ -1036,9 +1036,10 @@ html {
         padding: 35px 0;
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
-        background-color: rgba(0, 0, 0, 0.9);
+        background-color: rgba(212, 255, 0, 0.95);
         backdrop-filter: blur(25px);
         -webkit-backdrop-filter: blur(25px);
+        border: 1px solid rgba(0, 0, 0, 0.1);
     }
 
     .nav-menu li {
@@ -1048,6 +1049,12 @@ html {
     .nav-link {
         font-size: 20px;
         padding: 12px 20px;
+        color: #000 !important;
+    }
+
+    .nav-link:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+        color: #000 !important;
     }
 
     /* Hero móvil */
