@@ -602,11 +602,38 @@ body {
     text-align: center;
     padding-top: 40px;
     border-top: 1px solid rgba(255,255,255,0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .footer-bottom p {
     color: rgba(255,255,255,0.6);
     font-size: 14px;
+    margin: 0;
+}
+
+.signature {
+    text-align: right;
+}
+
+.signature p {
+    color: #d4ff00;
+    font-size: 14px;
+    margin: 2px 0;
+}
+
+.signature p:first-child {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.signature p:last-child {
+    font-size: 12px;
+    color: rgba(212, 255, 0, 0.8);
+    font-style: italic;
 }
 
 /* Animaciones */
@@ -650,25 +677,48 @@ html {
 
 /* RESPONSIVE DESIGN */
 
+/* General responsive fixes */
+.container {
+    padding: 0 15px;
+}
+
 /* Tablets (768px y menores) */
 @media screen and (max-width: 768px) {
-    /* Navegación */
+    /* Navegación responsive */
     .nav-container {
         flex-wrap: wrap;
+        padding: 0 15px;
+    }
+    
+    .nav-logo h2 {
+        font-size: 20px;
+    }
+    
+    .search-container {
+        order: -1;
+        width: 100%;
+        margin: 10px 0;
+        justify-content: center;
+    }
+
+    .search-input {
+        width: 60%;
+        max-width: 250px;
     }
     
     .nav-menu {
         position: fixed;
         left: -100%;
-        top: 70px;
+        top: 80px;
         flex-direction: column;
         background-color: rgba(26, 26, 26, 0.98);
         width: 100%;
         text-align: center;
         transition: 0.3s;
-        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
-        padding: 20px 0;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.3);
+        padding: 30px 0;
         backdrop-filter: blur(20px);
+        z-index: 999;
     }
 
     .nav-menu.active {
@@ -676,7 +726,11 @@ html {
     }
 
     .nav-menu li {
-        margin: 15px 0;
+        margin: 20px 0;
+    }
+
+    .nav-link {
+        font-size: 20px;
     }
 
     .nav-toggle {
@@ -695,51 +749,80 @@ html {
         transform: translateY(-8px) rotate(-45deg);
     }
 
-    .search-container {
-        order: -1;
-        width: 100%;
-        margin: 10px 0;
-        justify-content: center;
-    }
-
-    .search-input {
-        width: 250px;
-    }
-
-    /* Hero */
+    /* Hero responsive */
     .hero {
-        padding: 120px 20px 60px;
-        min-height: 80vh;
+        padding: 120px 15px 60px;
+        min-height: 70vh;
+    }
+
+    .hero-content {
+        max-width: 100%;
     }
 
     .hero-title {
-        font-size: 32px;
+        font-size: 28px;
         margin-bottom: 25px;
+        line-height: 1.3;
     }
 
     .hero-description {
         font-size: 16px;
         padding: 0 10px;
+        text-align: left;
+        line-height: 1.6;
     }
 
-    /* Servicios */
+    /* Servicios responsive */
+    .main-services,
+    .iot-section,
+    .mission-vision,
+    .contact-section {
+        padding: 60px 15px;
+    }
+
+    .main-services h2,
+    .iot-section h2,
+    .mission-vision h2,
+    .contact-section h2 {
+        font-size: 30px;
+    }
+
     .services-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 25px;
+        margin-top: 40px;
     }
 
     .service-card {
         padding: 30px 20px;
+        margin: 0 auto;
+        max-width: 400px;
     }
 
-    /* IoT */
+    /* IoT Section responsive */
+    .iot-description {
+        font-size: 16px;
+        text-align: left;
+        line-height: 1.6;
+    }
+
     .iot-services {
         grid-template-columns: 1fr;
         gap: 30px;
+        margin-top: 40px;
     }
 
     .iot-card {
         padding: 30px 20px;
+        margin: 0 auto;
+        max-width: 450px;
+    }
+
+    .iot-image img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 10px;
     }
 
     /* Misión y Visión */
@@ -770,6 +853,16 @@ html {
         text-align: center;
     }
 
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .signature {
+        text-align: center;
+    }
+
     .newsletter-form {
         flex-direction: column;
         gap: 15px;
@@ -778,50 +871,65 @@ html {
 
 /* Móviles pequeños (480px y menores) */
 @media screen and (max-width: 480px) {
-    /* Navegación */
+    /* Navegación móvil */
     .nav-logo h2 {
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .search-input {
-        width: 200px;
+        width: 70%;
+        max-width: 200px;
+        font-size: 14px;
     }
 
-    /* Hero */
+    .nav-menu {
+        top: 75px;
+        padding: 25px 0;
+    }
+
+    .nav-link {
+        font-size: 18px;
+    }
+
+    /* Hero móvil */
     .hero {
-        padding: 100px 15px 50px;
+        padding: 100px 10px 50px;
+        min-height: 60vh;
     }
 
     .hero-title {
-        font-size: 26px;
+        font-size: 24px;
         line-height: 1.2;
+        margin-bottom: 20px;
     }
 
     .hero-description {
         font-size: 14px;
         padding: 0 5px;
-        text-align: left;
+        line-height: 1.5;
     }
 
-    /* Secciones generales */
+    /* Secciones móviles */
     .main-services,
     .iot-section,
     .mission-vision,
     .contact-section {
-        padding: 60px 15px;
+        padding: 50px 10px;
     }
 
     .main-services h2,
     .iot-section h2,
     .mission-vision h2,
     .contact-section h2 {
-        font-size: 28px;
+        font-size: 26px;
+        margin-bottom: 20px;
     }
 
-    /* Servicios */
+    /* Servicios móviles */
     .service-card {
         padding: 25px 15px;
-        margin: 0 10px;
+        margin: 0 5px;
+        max-width: 100%;
     }
 
     .service-card h3 {
@@ -832,24 +940,28 @@ html {
         font-size: 36px;
     }
 
-    /* IoT */
+    .service-card p {
+        font-size: 14px;
+    }
+
+    /* IoT móvil */
     .iot-description {
-        font-size: 16px;
-        text-align: left;
+        font-size: 15px;
         padding: 0 5px;
     }
 
     .iot-card {
         padding: 25px 15px;
-        margin: 0 10px;
+        margin: 0 5px;
+        max-width: 100%;
     }
 
     .iot-card h3 {
         font-size: 18px;
     }
 
-    .iot-image {
-        font-size: 48px;
+    .iot-image img {
+        height: 150px;
     }
 
     .iot-details li {
@@ -861,10 +973,15 @@ html {
         font-size: 14px;
     }
 
-    /* Misión y Visión */
+    /* Misión y Visión móvil */
+    .mv-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
     .mv-card {
         padding: 25px 15px;
-        margin: 0 10px;
+        margin: 0 5px;
     }
 
     .mv-card h3 {
@@ -876,7 +993,17 @@ html {
         text-align: left;
     }
 
-    /* Contacto */
+    /* Contacto móvil */
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
     .contact-item {
         font-size: 14px;
     }
@@ -892,26 +1019,50 @@ html {
         font-size: 14px;
     }
 
-    /* Footer */
+    /* Footer móvil */
     .footer {
-        padding: 40px 15px 15px;
+        padding: 40px 10px 15px;
     }
 
-    .footer-section h3,
-    .footer-section h4 {
-        font-size: 18px;
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        text-align: center;
     }
 
-    .footer-section p,
-    .footer-section ul li a {
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        padding-top: 30px;
+    }
+
+    .signature {
+        text-align: center;
+    }
+
+    .signature p {
         font-size: 13px;
+    }
+
+    .newsletter-form {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .newsletter-form input {
+        padding: 12px;
+    }
+
+    .newsletter-form button {
+        padding: 12px 20px;
     }
 }
 
-/* Móviles muy pequeños (320px y menores) */
-@media screen and (max-width: 320px) {
+/* Móviles muy pequeños (360px y menores) */
+@media screen and (max-width: 360px) {
     .hero-title {
-        font-size: 22px;
+        font-size: 20px;
     }
 
     .hero-description {
@@ -919,52 +1070,88 @@ html {
     }
 
     .search-input {
-        width: 150px;
+        width: 65%;
+        max-width: 180px;
     }
 
     .service-card,
     .iot-card,
     .mv-card {
-        margin: 0 5px;
-        padding: 20px 10px;
+        margin: 0;
+        padding: 20px 12px;
     }
 
     .main-services h2,
     .iot-section h2,
     .mission-vision h2,
     .contact-section h2 {
-        font-size: 24px;
+        font-size: 22px;
+    }
+
+    .main-services,
+    .iot-section,
+    .mission-vision,
+    .contact-section {
+        padding: 40px 8px;
+    }
+
+    .iot-image img {
+        height: 120px;
+    }
+
+    .footer-section h3,
+    .footer-section h4 {
+        font-size: 16px;
+    }
+
+    .footer-section p,
+    .footer-section ul li a {
+        font-size: 12px;
     }
 }
 
 /* Landscape móviles */
 @media screen and (max-height: 500px) and (orientation: landscape) {
     .hero {
-        min-height: 100vh;
-        padding: 80px 20px 40px;
+        min-height: 90vh;
+        padding: 60px 20px 30px;
     }
 
     .hero-title {
-        font-size: 32px;
+        font-size: 28px;
         margin-bottom: 15px;
     }
 
     .hero-description {
-        font-size: 16px;
+        font-size: 14px;
+    }
+
+    .nav-menu {
+        top: 65px;
     }
 }
 
 /* Tablets en landscape */
 @media screen and (min-width: 769px) and (max-width: 1024px) {
     .hero-title {
-        font-size: 42px;
+        font-size: 40px;
+    }
+
+    .hero-description {
+        font-size: 18px;
     }
 
     .services-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
     }
 
     .iot-services {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+
+    .mv-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
@@ -973,7 +1160,41 @@ html {
     }
 }
 
-/* Pantallas grandes */
+/* Mejoras adicionales para móviles */
+@media screen and (max-width: 768px) {
+    /* Prevenir zoom en inputs en iOS */
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea {
+        font-size: 16px !important;
+    }
+
+    /* Mejorar touch targets */
+    .nav-link,
+    .cta-button,
+    .submit-btn,
+    .search-btn {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Scroll suave en móviles */
+    html {
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Mejorar rendimiento en móviles */
+    .service-card,
+    .iot-card,
+    .mv-card {
+        transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+}
 @media screen and (min-width: 1200px) {
     .container {
         max-width: 1400px;
