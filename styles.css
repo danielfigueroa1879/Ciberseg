@@ -1,4 +1,12 @@
-.iot-image {
+/* Estilos específicos para el texto hero */
+.hero .hero-description {
+    font-size: 42px !important;
+    font-weight: 200 !important;
+    font-family: 'Poppins', Arial, sans-serif !important;
+    text-align: justify !important;
+    line-height: 1.8 !important;
+    color: #fff !important;
+}    .iot-image {
         height: 70px;
     }.iot-details p {
     text-align: justify;
@@ -218,7 +226,7 @@ body {
 }
 
 .hero-description {
-    font-size: 36px;
+    font-size: 42px !important;
     font-weight: 200;
     max-width: none;
     width: 100%;
@@ -1403,7 +1411,7 @@ html {
     }
 
     .hero-description {
-        font-size: 18px;
+        font-size: 32px !important;
     }
 
     .services-grid {
@@ -1422,6 +1430,14 @@ html {
 
     .contact-content {
         gap: 40px;
+    }
+}
+
+/* Desktop estándar */
+@media screen and (min-width: 1025px) and (max-width: 1199px) {
+    .hero-description {
+        font-size: 38px !important;
+        padding: 0 80px;
     }
 }
 
