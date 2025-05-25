@@ -276,9 +276,9 @@ body {
 }
 
 .main-services p {
-    font-size: 14px;
+    font-size: 20px;
     margin-bottom: 50px;
-    max-width: 900px;
+    max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
     text-align: justify;
@@ -358,6 +358,7 @@ body {
     text-align: justify;
     line-height: 1.5;
     text-shadow: 3px 4px 8px rgba(0, 0, 0, 0.35);
+    /* Se remueven los padding-left y padding-right para ocupar todo el ancho disponible */
 }
 
 .iot-services {
@@ -901,43 +902,46 @@ html {
     }
 
     .nav-menu {
-    position: fixed;
-    left: 0;
-    top: -50vh;
-    flex-direction: column;
-    background: rgba(0, 0, 0, 0.75);
-    width: 100%;
-    height: 50vh;
-    text-align: center;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    padding: 20px 0;
-    z-index: 999;
-    overflow-y: auto;
-    border-bottom-left-radius: 40px;
-    border-bottom-right-radius: 40px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    opacity: 0;
-    transform: translateY(-20px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+        position: fixed;
+        left: 0;
+        top: -50vh;
+        flex-direction: column;
+        background: rgba(0, 0, 0, 0.75);
+        width: 100%; /* Ocupa el 100% del ancho de la ventana */
+        height: 50vh;
+        text-align: center;
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        padding: 20px 0;
+        z-index: 999;
+        overflow-y: auto;
+        border-bottom-left-radius: 40px;
+        border-bottom-right-radius: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        opacity: 0;
+        transform: translateY(-20px);
+        display: flex;
+        /* CORRECCIÓN: Eliminar centrado vertical y horizontal para que los elementos fluyan desde arriba */
+        /* justify-content: center; */
+        /* align-items: center; */
+        /* Asegurar que el padding superior sea suficiente para que "Inicio" no se corte */
+        padding-top: 20px;
+    }
 
-/* Agregar un pseudo-elemento para el efecto borroso */
-.nav-menu::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><filter id="blur"><feGaussianBlur stdDeviation="3"/></filter></defs><rect width="100" height="100" fill="rgba(0,0,0,0.1)" filter="url(%23blur)"/></svg>');
-    backdrop-filter: blur(80px);
-    -webkit-backdrop-filter: blur(80px);
-    border-radius: 15px;
-    z-index: -1;
-}
+    /* Agregar un pseudo-elemento para el efecto borroso */
+    .nav-menu::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><filter id="blur"><feGaussianBlur stdDeviation="3"/></filter></defs><rect width="100" height="100" fill="rgba(0,0,0,0.1)" filter="url(%23blur)"/></svg>');
+        backdrop-filter: blur(80px);
+        -webkit-backdrop-filter: blur(80px);
+        border-radius: 15px;
+        z-index: -1;
+    }
     .nav-menu.active {
         top: 80px;
         opacity: 1;
@@ -945,27 +949,26 @@ html {
     }
 
     .nav-menu li {
-    margin: 10px 0;
-    position: relative;
-    padding-bottom:10px;
-}
+        margin: 10px 0;
+        position: relative;
+        padding-bottom:10px;
+        /* CORRECCIÓN: Asegurar que cada elemento de la lista ocupe el 100% del ancho del menú */
+        width: 100%;
+    }
 
-.nav-menu li::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: -44vw;  /* Extiende hacia la izquierda */
-    right: -40vw; /* Extiende hacia la derecha */
-    width: 100vw; /* Ancho completo de la pantalla */
-    height: 1px;
-    background: rgba(255, 255, 255, 0.4);
-    margin-left: 50vw;
-    transform: translateX(-50%);
-}
-
-.nav-menu li:last-child::after {
-    display: none;  /* Quitar línea del último elemento (Blog) */
-}
+    .nav-menu li::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        /* CORRECCIÓN: Las líneas ocupan el ancho completo del elemento li (que ahora es 100% del menú) */
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.4);
+        /* Eliminar propiedades redundantes/conflictivas */
+        /* margin-left: 50vw; */
+        /* transform: translateX(-50%); */
+    }
     .nav-link {
         font-size: 20px;
     }
@@ -1189,6 +1192,8 @@ html {
 
     .nav-menu li {
         margin: 6px 0;
+        /* CORRECCIÓN: Asegurar que cada elemento de la lista ocupe el 100% del ancho del menú */
+        width: 100%;
     }
 
     .nav-link {
@@ -1199,6 +1204,14 @@ html {
         color: #fff !important;
     }
 
+  .main-services p {
+    font-size: 16px;
+    margin-bottom: 50px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: justify;
+}
     .nav-link:hover {
         /* CAMBIO: Fondo sutil al pasar el ratón y mantener letras blancas */
         background-color: rgba(255, 255, 255, 0.08);
@@ -1270,6 +1283,12 @@ html {
         font-size: 16px;
         padding: 0 1px;
         text-align: justify;
+    }
+
+    .iot-services {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-top: 40px;
     }
 
     .iot-card {
@@ -1456,7 +1475,14 @@ html {
         min-height: 90vh;
         padding: 60px 20px 30px;
     }
-
+   .main-services p {
+    font-size: 15px;
+    margin-bottom: 50px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: justify;
+}
     .hero-title {
         font-size: 28px;
         margin-bottom: 15px;
@@ -1480,7 +1506,14 @@ html {
     .hero-description {
         font-size: 28px !important;
     }
-
+    .main-services p {
+    font-size: 16px;
+    margin-bottom: 50px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: justify;
+}
     .services-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 25px;
@@ -1498,6 +1531,12 @@ html {
     .contact-content {
         gap: 40px;
     }
+    /* Se remueven los padding-left y padding-right para ocupar todo el ancho disponible */
+    .iot-description {
+        /* padding-left: 80px; */
+        /* padding-right: 80px; */
+        box-sizing: border-box;
+    }
 }
 
 /* Desktop estándar */
@@ -1506,6 +1545,20 @@ html {
         font-size: 32px !important;
         padding: 0 80px;
     }
+    /* Se remueven los padding-left y padding-right para ocupar todo el ancho disponible */
+    .iot-description {
+        /* padding-left: 100px; */
+        /* padding-right: 100px; */
+        box-sizing: border-box;
+    }
+}
+    .main-services p {
+    font-size: 15px;
+    margin-bottom: 50px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: justify;
 }
 
 /* Mejoras adicionales para móviles */
@@ -1532,7 +1585,14 @@ html {
         align-items: center;
         justify-content: center;
     }
-
+    .main-services p {
+    font-size: 18px;
+    margin-bottom: 50px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: justify;
+}
     /* Menú hamburguesa mejorado */
     .nav-toggle {
         min-height: 42px;
@@ -1578,6 +1638,12 @@ html {
 
     .iot-services {
         grid-template-columns: repeat(3, 1fr);
+    }
+    /* Se remueven los padding-left y padding-right para ocupar todo el ancho disponible */
+    .iot-description {
+        /* padding-left: 150px; */
+        /* padding-right: 150px; */
+        box-sizing: border-box;
     }
 }
 
@@ -1661,3 +1727,5 @@ html {
     100% {
         background-position: 0% 50%;
         text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.6);
+    }
+}
