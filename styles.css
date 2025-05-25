@@ -1459,12 +1459,12 @@ html {
         line-height: 1.4;
     }
     .service-icon img {
-        width: 70px;  /* Muy pequeño en móviles pequeños */
-        height: 70px;
+        width: 100px;  /* Muy pequeño en móviles pequeños */
+        height: 100px;
     }
     
     .service-icon {
-        height: 70px; /* Ajustar contenedor */
+        height: 100px; /* Ajustar contenedor */
     }
 
 
