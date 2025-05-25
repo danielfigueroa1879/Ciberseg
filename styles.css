@@ -321,14 +321,14 @@ body {
 
 /* ---- NUEVA REGLA AGREGADA/MODIFICADA PARA LAS IMÁGENES DENTRO DE service-icon ---- */
 .service-icon img {
-    width: 300px;  /* Tamaño deseado para las imágenes */
-    height: 300px; /* Tamaño deseado para las imágenes */
+    width: 280px;  /* Tamaño deseado para las imágenes */
+    height: 280px; /* Tamaño deseado para las imágenes */
     display: block; /* Asegura que la imagen se comporte como un bloque */
     object-fit: contain; /* Ajusta la imagen sin recortarla, manteniendo su relación de aspecto */
 
 .consultoria-img {
-    width: 350px !important;  /* Más grande que las otras */
-    height: 350px !important;
+    width: 320px !important;  /* Más grande que las otras */
+    height: 320px !important;
 }
 
 
