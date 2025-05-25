@@ -228,17 +228,17 @@
                 </div>
                 
                 <div class="contact-form">
-                  <form class="newsletter-form" action="enviar_correo.php" method="post">
+                    <form class="newsletter-form" action="enviar_correo.php" method="post" accept-charset="UTF-8">
                         <div class="form-row">
-                            <input type="text" name="nombre" placeholder="Nombre" required>
-                            <input type="email" name="email" placeholder="Email" required>
+                            <input type="text" name="nombre" placeholder="Nombre" required maxlength="100">
+                            <input type="email" name="email" placeholder="Email" required maxlength="100">
                         </div>
                         <div class="form-row">
-                            <input type="tel" name="telefono" placeholder="Teléfono">
-                            <input type="text" name="asunto" placeholder="Asunto" required>
+                            <input type="tel" name="telefono" placeholder="Teléfono" maxlength="20">
+                            <input type="text" name="asunto" placeholder="Asunto" required maxlength="200">
                         </div>
-                        <textarea name="mensaje" placeholder="Escribe tu mensaje aquí..." rows="5" required></textarea>
-                        <button type="submit" class="submit-btn">Submit</button>
+                        <textarea name="mensaje" placeholder="Escribe tu mensaje aquí..." rows="5" required maxlength="1000"></textarea>
+                        <button type="submit" class="submit-btn">Enviar Mensaje</button>
                     </form>
                 </div>
             </div>
@@ -258,16 +258,16 @@
                     </div>
                 </div>
                 
-               <div class="footer-section newsletter-section">
-                <h4>Formulario de suscripción</h4>
-                    <form class="newsletter-form" action="enviar_correo.php" method="post">
-                    <input type="text" name="nombre" placeholder="Nombre">
-                    <input type="email" name="email" placeholder="Email">
-                    <input type="tel" name="telefono" placeholder="Teléfono">
-                    <input type="text" name="asunto" placeholder="Asunto">
-                   <textarea name="mensaje" placeholder="Escribe aquí..." rows="5" required></textarea>
-                    <button type="submit">Enviar</button>
-                </form>
+                <div class="footer-section newsletter-section">
+                    <h4>Formulario de suscripción</h4>
+                    <form class="newsletter-form" action="enviar_correo.php" method="post" accept-charset="UTF-8">
+                        <input type="text" name="nombre" placeholder="Nombre" maxlength="100">
+                        <input type="email" name="email" placeholder="Email" required maxlength="100">
+                        <input type="tel" name="telefono" placeholder="Teléfono" maxlength="20">
+                        <input type="text" name="asunto" placeholder="Asunto" value="Suscripción Newsletter" maxlength="200">
+                        <textarea name="mensaje" placeholder="Escribe aquí..." rows="5" required maxlength="1000"></textarea>
+                        <button type="submit">Suscribirse</button>
+                    </form>
                 </div>
             </div>
             
