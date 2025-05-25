@@ -316,13 +316,13 @@ body {
     display: flex; /* Añadido para centrar el contenido */
     justify-content: center; /* Añadido para centrar el contenido */
     align-items: center; /* Añadido para centrar el contenido */
-    height: 200px; /* Asegura que el contenedor tenga espacio para la imagen de 80px */
+    height: 220px; /* Asegura que el contenedor tenga espacio para la imagen de 80px */
 }
 
 /* ---- NUEVA REGLA AGREGADA/MODIFICADA PARA LAS IMÁGENES DENTRO DE service-icon ---- */
 .service-icon img {
-    width: 200px;  /* Tamaño deseado para las imágenes */
-    height: 200px; /* Tamaño deseado para las imágenes */
+    width: 220px;  /* Tamaño deseado para las imágenes */
+    height: 220px; /* Tamaño deseado para las imágenes */
     display: block; /* Asegura que la imagen se comporte como un bloque */
     object-fit: contain; /* Ajusta la imagen sin recortarla, manteniendo su relación de aspecto */
 }
@@ -909,6 +909,14 @@ html {
         text-align: center;
 
     }
+    .service-icon img {
+        width: 100px;  /* Más pequeño en tablets */
+        height: 100px;
+    }
+    
+    .service-icon {
+        height: 100px; /* Ajustar contenedor */
+    }
 
     /* Ocultar búsqueda en móviles */
     .search-container {
@@ -1173,7 +1181,17 @@ html {
     .search-container {
         display: none;
     }
+   .service-icon img {
+        width: 80px;  /* Aún más pequeño en móviles */
+        height: 80px;
+    }
+    
+    .service-icon {
+        height: 80px; /* Ajustar contenedor */
+    }
 
+
+    
     .nav-toggle {
         /* CAMBIO: Fondo negro para el botón de hamburguesa en móvil pequeño */
         background-color: #000;
@@ -1440,7 +1458,17 @@ html {
         padding: 0 8px;
         line-height: 1.4;
     }
+    .service-icon img {
+        width: 70px;  /* Muy pequeño en móviles pequeños */
+        height: 70px;
+    }
+    
+    .service-icon {
+        height: 70px; /* Ajustar contenedor */
+    }
 
+
+    
     .search-input {
         width: 65%;
         max-width: 180px;
