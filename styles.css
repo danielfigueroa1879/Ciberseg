@@ -909,6 +909,11 @@ html {
         text-align: center;
 
     }
+
+    .consultoria-img {
+    width: 400px !important;  /* Más grande que las otras */
+    height: 400px !important;
+}
     .service-icon img {
         width: 350px;  /* Más pequeño en tablets */
         height: 350px;
@@ -1181,13 +1186,19 @@ html {
     .search-container {
         display: none;
     }
+.consultoria-img {
+    width: 400px !important;  /* Más grande que las otras */
+    height: 400px !important;
+}
+
+    
    .service-icon img {
-        width: 150px;  /* Aún más pequeño en móviles */
-        height: 150px;
+        width: 350px;  /* Aún más pequeño en móviles */
+        height: 350px;
     }
     
     .service-icon {
-        height: 150px; /* Ajustar contenedor */
+        height: 350px; /* Ajustar contenedor */
     }
 
 
