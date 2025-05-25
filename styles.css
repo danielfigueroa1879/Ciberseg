@@ -316,13 +316,13 @@ body {
     display: flex; /* Añadido para centrar el contenido */
     justify-content: center; /* Añadido para centrar el contenido */
     align-items: center; /* Añadido para centrar el contenido */
-    height: 150px; /* Asegura que el contenedor tenga espacio para la imagen de 80px */
+    height: 350px; /* Asegura que el contenedor tenga espacio para la imagen de 80px */
 }
 
 /* ---- NUEVA REGLA AGREGADA/MODIFICADA PARA LAS IMÁGENES DENTRO DE service-icon ---- */
 .service-icon img {
-    width: 150px;  /* Tamaño deseado para las imágenes */
-    height: 150px; /* Tamaño deseado para las imágenes */
+    width: 350px;  /* Tamaño deseado para las imágenes */
+    height: 350px; /* Tamaño deseado para las imágenes */
     display: block; /* Asegura que la imagen se comporte como un bloque */
     object-fit: contain; /* Ajusta la imagen sin recortarla, manteniendo su relación de aspecto */
 }
