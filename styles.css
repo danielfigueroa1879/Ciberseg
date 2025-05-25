@@ -6,9 +6,10 @@
     text-align: justify !important;
     line-height: 1.8 !important;
     color: #fff !important;
-}    .iot-image {
-        height: 70px;
-    }.iot-details p {
+}
+.iot-image {
+    height: 70px;
+}.iot-details p {
     text-align: justify;
     margin-bottom: 15px;
     line-height: 1.5;
@@ -17,7 +18,8 @@
     text-align: left;
     margin: 0;
     padding: 0;
-}/* Reset y estilos base */
+}
+/* Reset y estilos base */
 * {
     margin: 0;
     padding: 0;
@@ -70,8 +72,8 @@ body {
 }
 
 .nav-logo h2 {
-     color: #c1d72b;
-    font-size:  30px;
+    color: #c1d72b;
+    font-size: 30px;
     font-weight: 700;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
@@ -161,8 +163,9 @@ body {
     flex-direction: column;
     cursor: pointer;
     padding: 6px;
-    background-color: rgba(224, 253, 44, 0.1);
-    border: 2px solid rgba(224, 253, 44, 0.3);
+    /* CAMBIO: Fondo negro para el botón de hamburguesa */
+    background-color: #000;
+    border: 2px solid rgba(255, 255, 255, 0.3); /* Borde blanco sutil */
     border-radius: 10px;
     transition: all 0.3s ease;
     position: relative;
@@ -174,8 +177,9 @@ body {
 }
 
 .nav-toggle:hover {
-    background-color: rgba(224, 253, 44, 0.2);
-    border-color: rgba(224, 253, 44, 0.5);
+    /* CAMBIO: Fondo negro más oscuro o con una sutil transparencia al pasar el ratón */
+    background-color: rgba(0, 0, 0, 0.8);
+    border-color: rgba(255, 255, 255, 0.5);
 }
 
 .nav-toggle:active {
@@ -185,7 +189,8 @@ body {
 .bar {
     width: 22px;
     height: 2px;
-    background-color: #E0FD2C;
+    /* CAMBIO: Barras blancas */
+    background-color: #fff;
     margin: 3px 0;
     transition: all 0.4s ease;
     border-radius: 2px;
@@ -230,15 +235,15 @@ body {
 
 /* Animación más sutil */
 @keyframes subtleGoldShine {
-    0% { 
+    0% {
         background-position: 0% 50%;
         text-shadow: 0 0 8px rgba(255, 215, 0, 0.2);
     }
-    50% { 
+    50% {
         background-position: 100% 50%;
         text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
     }
-    100% { 
+    100% {
         background-position: 0% 50%;
         text-shadow: 0 0 8px rgba(255, 215, 0, 0.2);
     }
@@ -344,7 +349,7 @@ body {
     font-size: 36px;
     margin-bottom: 30px;
     font-weight: 700;
-  text-shadow: 3px 4px 8px rgba(0, 0, 0, 0.35);
+    text-shadow: 3px 4px 8px rgba(0, 0, 0, 0.35);
 }
 
 .iot-description {
@@ -352,7 +357,7 @@ body {
     margin: 0 auto 10px;
     text-align: justify;
     line-height: 1.5;
-   text-shadow: 3px 4px 8px rgba(0, 0, 0, 0.35);
+    text-shadow: 3px 4px 8px rgba(0, 0, 0, 0.35);
 }
 
 .iot-services {
@@ -883,18 +888,18 @@ html {
         padding: 0 15px;
         justify-content: space-between;
     }
-    
+
     .nav-logo h2 {
         font-size: 28px;
-       text-align: center;
-      
+        text-align: center;
+
     }
-    
+
     /* Ocultar búsqueda en móviles */
     .search-container {
         display: none;
     }
-    
+
     .nav-menu {
     position: fixed;
     left: 0;
@@ -967,15 +972,17 @@ html {
 
     .nav-toggle {
         display: flex !important;
-        background-color: rgba(224, 253, 44, 0.08);
-        border: 2px solid rgba(224, 253, 44, 0.2);
+        /* CAMBIO: Fondo negro para el botón de hamburguesa en móvil */
+        background-color: #000;
+        /* CAMBIO: Borde blanco sutil en móvil */
+        border: 2px solid rgba(255, 255, 255, 0.2);
         border-radius:20px;
         padding: 8px;
         cursor: pointer;
         z-index: 1001;
         position: relative;
         user-select: none;
-         -webkit-backdrop-filter: blur(50px);
+        -webkit-backdrop-filter: blur(50px);
         touch-action: manipulation;
         min-height: 42px;
         min-width: 42px;
@@ -985,18 +992,19 @@ html {
 
     .nav-toggle:hover,
     .nav-toggle:focus {
-        background-color: rgba(224, 253, 44, 0.12);
+        /* CAMBIO: Fondo negro más oscuro o con una sutil transparencia al pasar el ratón en móvil */
+        background-color: rgba(0, 0, 0, 0.8);
         outline: none;
     }
 
     .nav-toggle:active {
-        background-color: rgba(224, 253, 44, 0.15);
+        background-color: rgba(0, 0, 0, 0.85); /* Un poco más oscuro al presionar */
         transform: scale(0.95);
     }
 
     .nav-toggle.active {
-        background-color: rgba(224, 253, 44, 0.15);
-        border-color: rgba(224, 253, 44, 0.3);
+        background-color: rgba(0, 0, 0, 0.85); /* Fondo negro cuando está activo */
+        border-color: rgba(255, 255, 255, 0.3); /* Borde blanco cuando está activo */
     }
 
     .nav-toggle.active .bar:nth-child(2) {
@@ -1038,7 +1046,7 @@ html {
         width: 100%;
         margin: 0;
     }
-  
+
 
     /* Servicios responsive */
     .main-services,
@@ -1149,8 +1157,10 @@ html {
     }
 
     .nav-toggle {
-        background-color: rgba(224, 253, 44, 0.2);
-        border: 2px solid rgba(224, 253, 44, 0.5);
+        /* CAMBIO: Fondo negro para el botón de hamburguesa en móvil pequeño */
+        background-color: #000;
+        /* CAMBIO: Borde blanco sutil en móvil pequeño */
+        border: 2px solid rgba(255, 255, 255, 0.5);
         border-radius: 10px;
         padding: 6px;
         min-height: 38px;
@@ -1163,7 +1173,8 @@ html {
         padding: 15px 0;
         border-bottom-left-radius: 12px;
         border-bottom-right-radius: 12px;
-        background-color: rgba(255, 255, 255, 0.8);
+        /* CAMBIO: Fondo del menú desplegable a negro con transparencia */
+        background-color: rgba(0, 0, 0, 0.9);
         backdrop-filter: blur(30px);
         -webkit-backdrop-filter: blur(30px);
         border: 1px solid rgba(255, 255, 255, 0.4);
@@ -1184,12 +1195,14 @@ html {
         font-size: 24px;
         font-weight: 500;
         padding: 6px 15px;
-        color: #000 !important;
+        /* CAMBIO: Color de las letras del menú a blanco */
+        color: #fff !important;
     }
 
     .nav-link:hover {
-        background-color: rgba(0, 0, 0, 0.08);
-        color: #000 !important;
+        /* CAMBIO: Fondo sutil al pasar el ratón y mantener letras blancas */
+        background-color: rgba(255, 255, 255, 0.08);
+        color: #fff !important;
         transform: translateY(-1px) scale(1.02);
     }
 
@@ -1555,7 +1568,7 @@ html {
     .hero-description {
         font-size: 22px;
     }
-  .main-services p {
+    .main-services p {
         font-size: 26px; /* Aún más grande en pantallas grandes */
     }
 
@@ -1584,7 +1597,7 @@ html {
     .contact-section h2 {
         text-shadow: none;
     }
-    
+
     .service-card,
     .iot-card,
     .mv-card {
@@ -1618,12 +1631,12 @@ html {
     .submit-btn {
         display: none;
     }
-    
+
     body {
         background: white;
         color: black;
     }
-    
+
     .hero-title,
     .nav-link {
         color: black;
@@ -1637,16 +1650,14 @@ html {
 }
 
 @keyframes goldShine {
-    0% { 
+    0% {
         background-position: 0% 50%;
         text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.6);
     }
-    50% { 
+    50% {
         background-position: 100% 50%;
         text-shadow: 0 0 30px rgba(255, 215, 0, 1), 0 0 60px rgba(255, 215, 0, 0.8);
     }
-    100% { 
+    100% {
         background-position: 0% 50%;
         text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.6);
-    }
-}
