@@ -321,7 +321,7 @@ body {
 
 /* ---- NUEVA REGLA AGREGADA/MODIFICADA PARA LAS IMÁGENES DENTRO DE service-icon ---- */
 .service-icon img {
-    width: 2500px;  /* Tamaño deseado para las imágenes */
+    width: 250px;  /* Tamaño deseado para las imágenes */
     height: 250px; /* Tamaño deseado para las imágenes */
     display: block; /* Asegura que la imagen se comporte como un bloque */
     object-fit: contain; /* Ajusta la imagen sin recortarla, manteniendo su relación de aspecto */
@@ -910,12 +910,12 @@ html {
 
     }
     .service-icon img {
-        width: 150px;  /* Más pequeño en tablets */
-        height: 150px;
+        width: 100px;  /* Más pequeño en tablets */
+        height: 100px;
     }
     
     .service-icon {
-        height: 150px; /* Ajustar contenedor */
+        height: 100px; /* Ajustar contenedor */
     }
 
     /* Ocultar búsqueda en móviles */
