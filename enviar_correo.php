@@ -1,7 +1,7 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = $_POST["nombre"];
-    $correo = $_POST["correo"];
+    $email = $_POST["email"];
     $mensaje = $_POST["mensaje"];
     $destinatario = "danielfigueroa1879@gmail.com";
     $asunto = "Nuevo mensaje del formulario de contacto";
