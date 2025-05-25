@@ -1,4 +1,8 @@
-/* Estilos específicos para el texto hero */
+.hero-description {
+        font-size: 10px !important;
+        padding: 0 15px;
+        text-align: justify;
+        line-height: 1.6/* Estilos específicos para el texto hero */
 .hero .hero-description {
     font-size: 30px !important;
     font-weight: 200 !important;
@@ -64,14 +68,21 @@ body {
     margin: 0 auto;
     padding: 0 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    position: relative;
+}
+
+.nav-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .nav-logo h2 {
     color: #d4ff00;
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 700;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
@@ -82,6 +93,11 @@ body {
     gap: 30px;
     margin: 0;
     padding: 0;
+    margin-left: auto;
+}
+
+.nav-toggle {
+    margin-left: auto;
 }
 
 .nav-link {
@@ -862,11 +878,28 @@ html {
     .nav-container {
         flex-wrap: wrap;
         padding: 0 15px;
-        justify-content: space-between;
+        justify-content: center;
+        position: relative;
+    }
+    
+    .nav-logo {
+        position: static;
+        transform: none;
+        order: 1;
     }
     
     .nav-logo h2 {
-        font-size: 20px;
+        font-size: 22px;
+        text-align: center;
+    }
+
+    .nav-toggle {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        order: 2;
+        margin-left: 0;
     }
     
     /* Ocultar búsqueda en móviles */
@@ -979,7 +1012,7 @@ html {
     }
 
     .hero-description {
-        font-size: 14px !important;
+        font-size: 10px !important;
         padding: 0 15px;
         text-align: justify;
         line-height: 1.6;
@@ -1088,7 +1121,8 @@ html {
 @media screen and (max-width: 480px) {
     /* Navegación móvil */
     .nav-logo h2 {
-        font-size: 18px;
+        font-size: 20px;
+        text-align: center;
     }
 
     /* Búsqueda oculta en móviles */
@@ -1156,7 +1190,7 @@ html {
     }
 
     .hero-description {
-        font-size: 14px !important;
+        font-size: 10px !important;
         padding: 0 10px;
         line-height: 1.5;
         text-align: justify;
