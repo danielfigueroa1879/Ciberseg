@@ -910,12 +910,12 @@ html {
 
     }
     .service-icon img {
-        width: 200px;  /* Más pequeño en tablets */
-        height: 200px;
+        width: 250px;  /* Más pequeño en tablets */
+        height: 250px;
     }
     
     .service-icon {
-        height: 200px; /* Ajustar contenedor */
+        height: 250px; /* Ajustar contenedor */
     }
 
     /* Ocultar búsqueda en móviles */
