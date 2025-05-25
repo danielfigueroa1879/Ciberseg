@@ -326,7 +326,7 @@ body {
     font-size: 36px;
     margin-bottom: 30px;
     font-weight: 700;
-  text-shadow: 3px 4px 8px rgba(0, 0, 0, 0.35);
+  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.35);
 }
 
 .iot-description {
@@ -334,7 +334,7 @@ body {
     margin: 0 auto 10px;
     text-align: justify;
     line-height: 1.5;
-   text-shadow: 3px 4px 8px rgba(0, 0, 0, 0.35);
+   text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.35);
 }
 
 .iot-services {
