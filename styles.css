@@ -329,12 +329,12 @@ body {
 }
 
 .iot-description {
-    font-size: 18px;
+    font-size: 26px;
     max-width: 1100px;
     margin: 0 auto 60px;
     text-align: justify;
     line-height: 1.7;
-    text-shadow: 1px 1px 9px rgba(0, 0, 0, 4); /* AGREGAR ESTA LÍNEA */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 4); /* AGREGAR ESTA LÍNEA */
 }
 
 .iot-services {
@@ -1019,7 +1019,7 @@ html {
 
     /* IoT Section responsive */
     .iot-description {
-        font-size: 16px;
+        font-size: 19px;
         text-align: justify;
         line-height: 1.6;
         max-width: 100%;
@@ -1204,8 +1204,8 @@ html {
 
     /* IoT móvil */
     .iot-description {
-        font-size: 15px;
-        padding: 0 5px;
+        font-size: 16px;
+        padding: 0 1px;
         text-align: justify;
     }
 
@@ -1336,7 +1336,7 @@ html {
     }
 
     .hero-description {
-        font-size: 12px !important; /* Tamaño mínimo para móviles muy pequeños */
+        font-size: 13px !important; /* Tamaño mínimo para móviles muy pequeños */
         padding: 0 8px;
         line-height: 1.4;
     }
