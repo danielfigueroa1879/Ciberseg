@@ -308,10 +308,11 @@ body {
     box-shadow: 0 20px 40px rgba(224, 253, 44, 0.2);
 }
 
-.service-icon {
-    font-size: 80px;
-    color: #E0FD2C;
-    margin-bottom: 20px;
+.service-icon img { /* Agrega esta nueva regla para las imágenes dentro del icono */
+    width: 100px;  /* Asegura el ancho */
+    height: 100px; /* Asegura el alto */
+    display: block; /* Para centrar si es necesario, aunque aquí ya se centra por el flexbox del padre */
+    margin: 0 auto; /* Para centrar la imagen dentro del contenedor */
 }
 
 .service-card h3 {
