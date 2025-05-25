@@ -896,31 +896,43 @@ html {
     }
     
     .nav-menu {
-        position: fixed;
-        left: 0;
-        top: -50vh;
-        flex-direction: column;
-        background-color: rgba(255, 255, 255, 0.7);
-        width: 100%;
-        height: 50vh;
-        text-align: center;
-        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        padding: 20px 0;
-        backdrop-filter: blur(25px);
-        -webkit-backdrop-filter: blur(25px);
-        z-index: 999;
-        overflow-y: auto;
-        border-bottom-left-radius: 15px;
-        border-bottom-right-radius: 15px;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        opacity: 0;
-        transform: translateY(-20px);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+    position: fixed;
+    left: 0;
+    top: -50vh;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.75);
+    width: 100%;
+    height: 50vh;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    padding: 20px 0;
+    z-index: 999;
+    overflow-y: auto;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transform: translateY(-20px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+/* Agregar un pseudo-elemento para el efecto borroso */
+.nav-menu::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><filter id="blur"><feGaussianBlur stdDeviation="3"/></filter></defs><rect width="100" height="100" fill="rgba(0,0,0,0.1)" filter="url(%23blur)"/></svg>');
+    backdrop-filter: blur(80px);
+    -webkit-backdrop-filter: blur(80px);
+    border-radius: 15px;
+    z-index: -1;
+}
     .nav-menu.active {
         top: 80px;
         opacity: 1;
@@ -928,9 +940,27 @@ html {
     }
 
     .nav-menu li {
-        margin: 20px 0;
-    }
+    margin: 10px 0;
+    position: relative;
+    padding-bottom:10px;
+}
 
+.nav-menu li::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -44vw;  /* Extiende hacia la izquierda */
+    right: -40vw; /* Extiende hacia la derecha */
+    width: 100vw; /* Ancho completo de la pantalla */
+    height: 1px;
+    background: rgba(255, 255, 255, 0.4);
+    margin-left: 50vw;
+    transform: translateX(-50%);
+}
+
+.nav-menu li:last-child::after {
+    display: none;  /* Quitar línea del último elemento (Blog) */
+}
     .nav-link {
         font-size: 20px;
     }
@@ -939,13 +969,13 @@ html {
         display: flex !important;
         background-color: rgba(224, 253, 44, 0.08);
         border: 2px solid rgba(224, 253, 44, 0.2);
-        border-radius: 12px;
+        border-radius:20px;
         padding: 8px;
         cursor: pointer;
         z-index: 1001;
         position: relative;
         user-select: none;
-        -webkit-tap-highlight-color: transparent;
+         -webkit-backdrop-filter: blur(50px);
         touch-action: manipulation;
         min-height: 42px;
         min-width: 42px;
