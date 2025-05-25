@@ -308,12 +308,25 @@ body {
     box-shadow: 0 20px 40px rgba(224, 253, 44, 0.2);
 }
 
-.service-icon img { /* Agrega esta nueva regla para las imágenes dentro del icono */
-    width: 100px;  /* Asegura el ancho */
-    height: 100px; /* Asegura el alto */
-    display: block; /* Para centrar si es necesario, aunque aquí ya se centra por el flexbox del padre */
-    margin: 0 auto; /* Para centrar la imagen dentro del contenedor */
+.service-icon {
+    /* Ya no afecta el tamaño de la imagen directamente, solo el icono de fuente */
+    font-size: 48px; /* Mantener si hay otros iconos en este contenedor */
+    color: #E0FD2C;
+    margin-bottom: 20px;
+    display: flex; /* Añadido para centrar el contenido */
+    justify-content: center; /* Añadido para centrar el contenido */
+    align-items: center; /* Añadido para centrar el contenido */
+    height: 80px; /* Asegura que el contenedor tenga espacio para la imagen de 80px */
 }
+
+/* ---- NUEVA REGLA AGREGADA/MODIFICADA PARA LAS IMÁGENES DENTRO DE service-icon ---- */
+.service-icon img {
+    width: 80px;  /* Tamaño deseado para las imágenes */
+    height: 80px; /* Tamaño deseado para las imágenes */
+    display: block; /* Asegura que la imagen se comporte como un bloque */
+    object-fit: contain; /* Ajusta la imagen sin recortarla, manteniendo su relación de aspecto */
+}
+/* --------------------------------------------------------------------------------- */
 
 .service-card h3 {
     font-size: 22px;
@@ -360,7 +373,6 @@ body {
     text-align: justify;
     line-height: 1.5;
     text-shadow: 3px 4px 8px rgba(0, 0, 0, 0.35);
-    /* Se remueven los padding-left y padding-right para ocupar todo el ancho disponible */
 }
 
 .iot-services {
@@ -1174,7 +1186,7 @@ html {
     }
 
     .nav-menu {
-        top: -45vh;
+        top: 45px; /* Reducido para pantallas más pequeñas */
         height: 45vh;
         padding: 15px 0;
         border-bottom-left-radius: 12px;
@@ -1264,7 +1276,7 @@ html {
     /* Servicios móviles */
     .service-card {
         padding: 25px 15px;
-        margin: 0 5px;
+        margin: 0 auto;
         max-width: 100%;
     }
 
@@ -1305,8 +1317,11 @@ html {
     }
 
     .iot-image {
-        height: 80px;
+        height: 80px; /* Ajuste para que el contenedor de la imagen IoT sea más pequeño en móvil */
         margin-bottom: 12px;
+    }
+    .iot-image::after {
+        font-size: 10px; /* Reducir tamaño del texto "Espacio para imagen" en móviles */
     }
 
     .iot-details li {
