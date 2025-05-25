@@ -1187,18 +1187,18 @@ html {
         display: none;
     }
 .consultoria-img {
-    width: 400px !important;  /* Más grande que las otras */
-    height: 400px !important;
+    width: 350px !important;  /* Más grande que las otras */
+    height: 350px !important;
 }
 
     
    .service-icon img {
-        width: 350px;  /* Aún más pequeño en móviles */
-        height: 350px;
+        width: 250px;  /* Aún más pequeño en móviles */
+        height: 250px;
     }
     
     .service-icon {
-        height: 350px; /* Ajustar contenedor */
+        height: 250px; /* Ajustar contenedor */
     }
 
 
