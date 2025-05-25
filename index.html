@@ -228,7 +228,12 @@
                 </div>
                 
                 <div class="contact-form">
-                    <form class="newsletter-form" action="enviar_correo.php" method="post" accept-charset="UTF-8">
+                    <form class="newsletter-form" name="contacto" method="post" data-netlify="true" netlify-honeypot="bot-field" accept-charset="UTF-8">
+                        <!-- Campo oculto anti-spam -->
+                        <div style="display: none;">
+                            <label>No llenes este campo si eres humano: <input name="bot-field" /></label>
+                        </div>
+                        
                         <div class="form-row">
                             <input type="text" name="nombre" placeholder="Nombre" required maxlength="100">
                             <input type="email" name="email" placeholder="Email" required maxlength="100">
@@ -238,6 +243,11 @@
                             <input type="text" name="asunto" placeholder="Asunto" required maxlength="200">
                         </div>
                         <textarea name="mensaje" placeholder="Escribe tu mensaje aquí..." rows="5" required maxlength="1000"></textarea>
+                        
+                        <!-- Campos ocultos para Netlify -->
+                        <input type="hidden" name="form-name" value="contacto">
+                        <input type="hidden" name="_subject" value="Nuevo mensaje desde RECYBERSEG">
+                        
                         <button type="submit" class="submit-btn">Enviar Mensaje</button>
                     </form>
                 </div>
@@ -260,12 +270,22 @@
                 
                 <div class="footer-section newsletter-section">
                     <h4>Formulario de suscripción</h4>
-                    <form class="newsletter-form" action="enviar_correo.php" method="post" accept-charset="UTF-8">
+                    <form class="newsletter-form" name="suscripcion" method="post" data-netlify="true" netlify-honeypot="bot-field2" accept-charset="UTF-8">
+                        <!-- Campo oculto anti-spam -->
+                        <div style="display: none;">
+                            <label>No llenes este campo si eres humano: <input name="bot-field2" /></label>
+                        </div>
+                        
                         <input type="text" name="nombre" placeholder="Nombre" maxlength="100">
                         <input type="email" name="email" placeholder="Email" required maxlength="100">
                         <input type="tel" name="telefono" placeholder="Teléfono" maxlength="20">
                         <input type="text" name="asunto" placeholder="Asunto" value="Suscripción Newsletter" maxlength="200">
                         <textarea name="mensaje" placeholder="Escribe aquí..." rows="5" required maxlength="1000"></textarea>
+                        
+                        <!-- Campos ocultos para Netlify -->
+                        <input type="hidden" name="form-name" value="suscripcion">
+                        <input type="hidden" name="_subject" value="Nueva suscripción desde RECYBERSEG">
+                        
                         <button type="submit">Suscribirse</button>
                     </form>
                 </div>
