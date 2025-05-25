@@ -316,13 +316,13 @@ body {
     display: flex; /* Añadido para centrar el contenido */
     justify-content: center; /* Añadido para centrar el contenido */
     align-items: center; /* Añadido para centrar el contenido */
-    height: 220px; /* Asegura que el contenedor tenga espacio para la imagen de 80px */
+    height: 250px; /* Asegura que el contenedor tenga espacio para la imagen de 80px */
 }
 
 /* ---- NUEVA REGLA AGREGADA/MODIFICADA PARA LAS IMÁGENES DENTRO DE service-icon ---- */
 .service-icon img {
-    width: 220px;  /* Tamaño deseado para las imágenes */
-    height: 220px; /* Tamaño deseado para las imágenes */
+    width: 2500px;  /* Tamaño deseado para las imágenes */
+    height: 250px; /* Tamaño deseado para las imágenes */
     display: block; /* Asegura que la imagen se comporte como un bloque */
     object-fit: contain; /* Ajusta la imagen sin recortarla, manteniendo su relación de aspecto */
 }
@@ -910,12 +910,12 @@ html {
 
     }
     .service-icon img {
-        width: 100px;  /* Más pequeño en tablets */
-        height: 100px;
+        width: 150px;  /* Más pequeño en tablets */
+        height: 150px;
     }
     
     .service-icon {
-        height: 100px; /* Ajustar contenedor */
+        height: 150px; /* Ajustar contenedor */
     }
 
     /* Ocultar búsqueda en móviles */
@@ -1182,12 +1182,12 @@ html {
         display: none;
     }
    .service-icon img {
-        width: 80px;  /* Aún más pequeño en móviles */
-        height: 80px;
+        width: 100px;  /* Aún más pequeño en móviles */
+        height: 100px;
     }
     
     .service-icon {
-        height: 80px; /* Ajustar contenedor */
+        height: 100px; /* Ajustar contenedor */
     }
 
 
