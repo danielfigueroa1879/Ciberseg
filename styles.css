@@ -910,12 +910,12 @@ html {
 
     }
     .service-icon img {
-        width: 100px;  /* Más pequeño en tablets */
-        height: 100px;
+        width: 150px;  /* Más pequeño en tablets */
+        height: 150px;
     }
     
     .service-icon {
-        height: 100px; /* Ajustar contenedor */
+        height: 150px; /* Ajustar contenedor */
     }
 
     /* Ocultar búsqueda en móviles */
@@ -1182,12 +1182,12 @@ html {
         display: none;
     }
    .service-icon img {
-        width: 100px;  /* Aún más pequeño en móviles */
-        height: 100px;
+        width: 150px;  /* Aún más pequeño en móviles */
+        height: 150px;
     }
     
     .service-icon {
-        height: 100px; /* Ajustar contenedor */
+        height: 150px; /* Ajustar contenedor */
     }
 
 
@@ -1459,12 +1459,12 @@ html {
         line-height: 1.4;
     }
     .service-icon img {
-        width: 100px;  /* Muy pequeño en móviles pequeños */
-        height: 100px;
+        width: 150px;  /* Muy pequeño en móviles pequeños */
+        height: 150px;
     }
     
     .service-icon {
-        height: 100px; /* Ajustar contenedor */
+        height: 150px; /* Ajustar contenedor */
     }
 
 
