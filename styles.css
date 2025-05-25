@@ -1,5 +1,5 @@
 /* Estilos específicos para el texto hero */
-.hero .hero-description {
+.hero-description {
     font-size: 30px !important;
     font-weight: 200 !important;
     font-family: 'Poppins', Arial, sans-serif !important;
@@ -979,7 +979,7 @@ html {
     }
 
     .hero-description {
-        font-size: 16px !important;
+        font-size: 16px !important; /* Cambiado de 10px a 16px para mejor legibilidad */
         padding: 0 15px;
         text-align: justify;
         line-height: 1.6;
@@ -987,6 +987,7 @@ html {
         width: 100%;
         margin: 0;
     }
+  
 
     /* Servicios responsive */
     .main-services,
@@ -1156,7 +1157,7 @@ html {
     }
 
     .hero-description {
-        font-size: 14px !important;
+        font-size: 15px !important; /* Tamaño óptimo para móviles pequeños */
         padding: 0 10px;
         line-height: 1.5;
         text-align: justify;
@@ -1334,7 +1335,9 @@ html {
     }
 
     .hero-description {
-        font-size: 13px;
+        font-size: 12px !important; /* Tamaño mínimo para móviles muy pequeños */
+        padding: 0 8px;
+        line-height: 1.4;
     }
 
     .search-input {
@@ -1396,7 +1399,7 @@ html {
     }
 
     .hero-description {
-        font-size: 14px;
+        font-size: 1px;
     }
 
     .nav-menu {
