@@ -70,7 +70,7 @@ body {
 }
 
 .nav-logo h2 {
-    color: #d4ff00;
+    color: #E0FD2C;
     font-size: 24px;
     font-weight: 700;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
@@ -85,7 +85,7 @@ body {
 }
 
 .nav-link {
-    color: #d4ff00;
+    color: #E0FD2C;
     text-decoration: none;
     font-size: 18px;
     font-weight: 400;
@@ -106,7 +106,7 @@ body {
     left: 0;
     width: 0;
     height: 2px;
-    background-color: #d4ff00;
+    background-color: #E0FD2C;
     transition: width 0.3s ease;
 }
 
@@ -142,7 +142,7 @@ body {
 }
 
 .search-btn {
-    background-color: #d4ff00;
+    background-color: #E0FD2C;
     border: none;
     padding: 10px 15px;
     cursor: pointer;
@@ -152,7 +152,7 @@ body {
 }
 
 .search-btn:hover {
-    background-color: #b3cc00;
+    background-color: #C7E525;
     transform: scale(1.1);
 }
 
@@ -162,8 +162,8 @@ body {
     flex-direction: column;
     cursor: pointer;
     padding: 6px;
-    background-color: rgba(212, 255, 0, 0.1);
-    border: 2px solid rgba(212, 255, 0, 0.3);
+    background-color: rgba(224, 253, 44, 0.1);
+    border: 2px solid rgba(224, 253, 44, 0.3);
     border-radius: 10px;
     transition: all 0.3s ease;
     position: relative;
@@ -175,8 +175,8 @@ body {
 }
 
 .nav-toggle:hover {
-    background-color: rgba(212, 255, 0, 0.2);
-    border-color: rgba(212, 255, 0, 0.5);
+    background-color: rgba(224, 253, 44, 0.2);
+    border-color: rgba(224, 253, 44, 0.5);
 }
 
 .nav-toggle:active {
@@ -186,7 +186,7 @@ body {
 .bar {
     width: 22px;
     height: 2px;
-    background-color: #d4ff00;
+    background-color: #E0FD2C;
     margin: 3px 0;
     transition: all 0.4s ease;
     border-radius: 2px;
@@ -218,7 +218,7 @@ body {
 
 .hero-title {
     font-size: 48px;
-    color: #d4ff00;
+    color: #E0FD2C;
     font-weight: 700;
     margin-bottom: 30px;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
@@ -280,13 +280,13 @@ body {
 
 .service-card:hover {
     transform: translateY(-10px);
-    border-color: #d4ff00;
-    box-shadow: 0 20px 40px rgba(212, 255, 0, 0.2);
+    border-color: #E0FD2C;
+    box-shadow: 0 20px 40px rgba(224, 253, 44, 0.2);
 }
 
 .service-icon {
     font-size: 48px;
-    color: #d4ff00;
+    color: #E0FD2C;
     margin-bottom: 20px;
 }
 
@@ -306,7 +306,7 @@ body {
 
 .service-price {
     display: inline-block;
-    background-color: #d4ff00;
+    background-color: #E0FD2C;
     color: #000;
     padding: 8px 20px;
     border-radius: 20px;
@@ -317,7 +317,7 @@ body {
 /* Sección IoT */
 .iot-section {
     padding: 80px 20px;
-    background-color: #d4ff00;
+    background-color: #E0FD2C;
     color: #000;
     text-align: center;
 }
@@ -334,7 +334,7 @@ body {
     margin: 0 auto 10px;
     text-align: justify;
     line-height: 1.7;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 4); /* AGREGAR ESTA LÍNEA */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 4);
 }
 
 .iot-services {
@@ -360,20 +360,20 @@ body {
 
 .iot-card:hover {
     transform: translateY(-5px);
-    border-color: #d4ff00;
+    border-color: #E0FD2C;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
 }
 
 .iot-image {
     height: 120px;
-    background-color: rgba(212, 255, 0, 0.1);
-    border: 2px dashed rgba(212, 255, 0, 0.3);
+    background-color: rgba(224, 253, 44, 0.1);
+    border: 2px dashed rgba(224, 253, 44, 0.3);
     border-radius: 10px;
     margin-bottom: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgba(212, 255, 0, 0.6);
+    color: rgba(224, 253, 44, 0.6);
     font-size: 14px;
     position: relative;
 }
@@ -382,7 +382,7 @@ body {
     content: "Espacio para imagen";
     position: absolute;
     font-size: 12px;
-    color: rgba(212, 255, 0, 0.5);
+    color: rgba(224, 253, 44, 0.5);
 }
 
 .iot-card h3 {
@@ -407,14 +407,14 @@ body {
 
 .iot-details li::before {
     content: '✓';
-    color: #d4ff00;
+    color: #E0FD2C;
     font-weight: bold;
     position: absolute;
     left: 0;
 }
 
 .cta-button {
-    background-color: #d4ff00;
+    background-color: #E0FD2C;
     color: #000;
     border: none;
     padding: 10px 20px;
@@ -428,7 +428,7 @@ body {
 }
 
 .cta-button:hover {
-    background-color: #b3cc00;
+    background-color: #C7E525;
     transform: scale(1.05);
 }
 
@@ -441,7 +441,7 @@ body {
 .mission-vision h2 {
     text-align: center;
     font-size: 36px;
-    color: #d4ff00;
+    color: #E0FD2C;
     margin-bottom: 50px;
     font-weight: 700;
 }
@@ -456,17 +456,17 @@ body {
     background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
     padding: 40px;
     border-radius: 15px;
-    border: 2px solid rgba(212, 255, 0, 0.3);
+    border: 2px solid rgba(224, 253, 44, 0.3);
     transition: all 0.3s ease;
 }
 
 .mv-card:hover {
-    border-color: #d4ff00;
+    border-color: #E0FD2C;
     transform: translateY(-5px);
 }
 
 .mv-card h3 {
-    color: #d4ff00;
+    color: #E0FD2C;
     font-size: 28px;
     margin-bottom: 20px;
     font-weight: 600;
@@ -487,7 +487,7 @@ body {
 .contact-section h2 {
     text-align: center;
     font-size: 36px;
-    color: #d4ff00;
+    color: #E0FD2C;
     margin-bottom: 50px;
     font-weight: 700;
 }
@@ -501,7 +501,7 @@ body {
 }
 
 .contact-info h3 {
-    color: #d4ff00;
+    color: #E0FD2C;
     font-size: 24px;
     margin-bottom: 30px;
     font-weight: 600;
@@ -515,7 +515,7 @@ body {
 }
 
 .contact-item i {
-    color: #d4ff00;
+    color: #E0FD2C;
     margin-right: 15px;
     font-size: 20px;
     width: 25px;
@@ -528,7 +528,7 @@ body {
 }
 
 .contact-item a:hover {
-    color: #d4ff00;
+    color: #E0FD2C;
 }
 
 .whatsapp-item a {
@@ -540,7 +540,7 @@ body {
 }
 
 .whatsapp-item a:hover {
-    background-color: rgba(212, 255, 0, 0.1);
+    background-color: rgba(224, 253, 44, 0.1);
     transform: translateX(5px);
 }
 
@@ -570,7 +570,7 @@ body {
 .contact-form input:focus,
 .contact-form textarea:focus {
     outline: none;
-    border-color: #d4ff00;
+    border-color: #E0FD2C;
     background-color: rgba(255,255,255,0.15);
 }
 
@@ -580,7 +580,7 @@ body {
 }
 
 .submit-btn {
-    background-color: #d4ff00;
+    background-color: #E0FD2C;
     color: #000;
     border: none;
     padding: 15px 30px;
@@ -594,7 +594,7 @@ body {
 }
 
 .submit-btn:hover {
-    background-color: #b3cc00;
+    background-color: #C7E525;
     transform: translateY(-2px);
 }
 
@@ -613,7 +613,7 @@ body {
 
 .footer-section h3,
 .footer-section h4 {
-    color: #d4ff00;
+    color: #E0FD2C;
     margin-bottom: 20px;
     font-weight: 600;
 }
@@ -639,7 +639,7 @@ body {
 }
 
 .footer-section ul li a:hover {
-    color: #d4ff00;
+    color: #E0FD2C;
 }
 
 .social-links {
@@ -648,7 +648,7 @@ body {
 }
 
 .social-links a {
-    color: #d4ff00;
+    color: #E0FD2C;
     font-size: 24px;
     transition: all 0.3s ease;
     display: inline-flex;
@@ -668,7 +668,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(212, 255, 0, 0.1);
+    background: rgba(224, 253, 44, 0.1);
     border-radius: 50%;
     transform: scale(0);
     transition: transform 0.3s ease;
@@ -713,7 +713,7 @@ body {
 
 .newsletter-form input:focus {
     outline: none;
-    border-color: #d4ff00;
+    border-color: #E0FD2C;
 }
 
 .newsletter-form input::placeholder {
@@ -721,7 +721,7 @@ body {
 }
 
 .newsletter-form button {
-    background-color: #d4ff00;
+    background-color: #E0FD2C;
     color: #000;
     border: none;
     padding: 10px 20px;
@@ -732,7 +732,7 @@ body {
 }
 
 .newsletter-form button:hover {
-    background-color: #b3cc00;
+    background-color: #C7E525;
 }
 
 .footer-bottom {
@@ -757,7 +757,7 @@ body {
 }
 
 .signature p {
-    color: #d4ff00;
+    color: #E0FD2C;
     font-size: 14px;
     margin: 2px 0;
 }
@@ -769,7 +769,7 @@ body {
 
 .signature p:last-child {
     font-size: 12px;
-    color: rgba(212, 255, 0, 0.8);
+    color: rgba(224, 253, 44, 0.8);
     font-style: italic;
 }
 
@@ -814,7 +814,7 @@ body {
     right: 20px;
     width: 50px;
     height: 50px;
-    background: rgba(212, 255, 0, 0.9);
+    background: rgba(224, 253, 44, 0.9);
     border: none;
     border-radius: 50%;
     color: #000;
@@ -830,7 +830,7 @@ body {
 }
 
 .scroll-to-top:hover {
-    background: rgba(212, 255, 0, 1);
+    background: rgba(224, 253, 44, 1);
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
 }
@@ -917,8 +917,8 @@ html {
 
     .nav-toggle {
         display: flex !important;
-        background-color: rgba(212, 255, 0, 0.08);
-        border: 2px solid rgba(212, 255, 0, 0.2);
+        background-color: rgba(224, 253, 44, 0.08);
+        border: 2px solid rgba(224, 253, 44, 0.2);
         border-radius: 12px;
         padding: 8px;
         cursor: pointer;
@@ -935,18 +935,18 @@ html {
 
     .nav-toggle:hover,
     .nav-toggle:focus {
-        background-color: rgba(212, 255, 0, 0.12);
+        background-color: rgba(224, 253, 44, 0.12);
         outline: none;
     }
 
     .nav-toggle:active {
-        background-color: rgba(212, 255, 0, 0.15);
+        background-color: rgba(224, 253, 44, 0.15);
         transform: scale(0.95);
     }
 
     .nav-toggle.active {
-        background-color: rgba(212, 255, 0, 0.15);
-        border-color: rgba(212, 255, 0, 0.3);
+        background-color: rgba(224, 253, 44, 0.15);
+        border-color: rgba(224, 253, 44, 0.3);
     }
 
     .nav-toggle.active .bar:nth-child(2) {
@@ -1099,8 +1099,8 @@ html {
     }
 
     .nav-toggle {
-        background-color: rgba(212, 255, 0, 0.2);
-        border: 2px solid rgba(212, 255, 0, 0.5);
+        background-color: rgba(224, 253, 44, 0.2);
+        border: 2px solid rgba(224, 253, 44, 0.5);
         border-radius: 10px;
         padding: 6px;
         min-height: 38px;
