@@ -1812,3 +1812,157 @@ html {
         text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.6);
     }
 }
+/* CSS FORZADO para el formulario de suscripción - Agregar al final de styles.css */
+
+/* Contenedor principal del formulario */
+.footer-section.newsletter-section {
+    max-width: 400px !important;
+    padding: 20px !important;
+}
+
+/* Título del formulario */
+.newsletter-section h4 {
+    margin-bottom: 20px !important;
+    color: #fff !important;
+    font-size: 18px !important;
+}
+
+/* Formulario principal */
+.newsletter-section .newsletter-form {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 15px !important;
+    width: 100% !important;
+}
+
+/* Filas de inputs (2 por fila) */
+.newsletter-section .form-row {
+    display: flex !important;
+    gap: 12px !important;
+    width: 100% !important;
+    margin-bottom: 10px !important;
+}
+
+/* Inputs individuales en las filas */
+.newsletter-section .form-row input {
+    flex: 1 !important;
+    width: calc(50% - 6px) !important;
+    padding: 12px 15px !important;
+    border: 1px solid #ddd !important;
+    border-radius: 6px !important;
+    font-size: 14px !important;
+    font-family: 'Poppins', sans-serif !important;
+    background-color: #fff !important;
+    transition: all 0.3s ease !important;
+    box-sizing: border-box !important;
+    height: 45px !important;
+}
+
+.newsletter-section .form-row input:focus {
+    outline: none !important;
+    border-color: #007bff !important;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3) !important;
+}
+
+/* Contenedor del área de mensaje */
+.newsletter-section .form-message {
+    width: 100% !important;
+    margin: 10px 0 !important;
+}
+
+/* Área de texto del mensaje */
+.newsletter-section .form-message textarea {
+    width: 100% !important;
+    padding: 15px !important;
+    border: 1px solid #ddd !important;
+    border-radius: 6px !important;
+    font-size: 14px !important;
+    font-family: 'Poppins', sans-serif !important;
+    background-color: #fff !important;
+    resize: vertical !important;
+    min-height: 100px !important;
+    height: 100px !important;
+    transition: all 0.3s ease !important;
+    box-sizing: border-box !important;
+    line-height: 1.4 !important;
+}
+
+.newsletter-section .form-message textarea:focus {
+    outline: none !important;
+    border-color: #007bff !important;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3) !important;
+}
+
+/* Contenedor del botón */
+.newsletter-section .form-submit {
+    display: flex !important;
+    justify-content: center !important;
+    margin-top: 15px !important;
+    width: 100% !important;
+}
+
+/* Botón de suscripción */
+.newsletter-section .subscribe-btn {
+    background: linear-gradient(135deg, #007bff, #0056b3) !important;
+    color: white !important;
+    padding: 14px 35px !important;
+    border: none !important;
+    border-radius: 25px !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    font-family: 'Poppins', sans-serif !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+}
+
+.newsletter-section .subscribe-btn:hover {
+    background: linear-gradient(135deg, #0056b3, #004494) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4) !important;
+}
+
+.newsletter-section .subscribe-btn:active {
+    transform: translateY(0) !important;
+}
+
+/* Placeholders */
+.newsletter-section input::placeholder,
+.newsletter-section textarea::placeholder {
+    color: #999 !important;
+    font-style: italic !important;
+    opacity: 1 !important;
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+    .newsletter-section .form-row {
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+    
+    .newsletter-section .form-row input {
+        width: 100% !important;
+        margin-bottom: 5px !important;
+    }
+    
+    .footer-section.newsletter-section {
+        max-width: 100% !important;
+        padding: 15px !important;
+    }
+}
+
+/* Sobreescribir cualquier estilo previo del footer */
+.footer .newsletter-section input,
+.footer .newsletter-section textarea,
+.footer .newsletter-section button {
+    margin: 0 !important;
+    display: block !important;
+}
+
+/* Resetear cualquier estilo de grid o flexbox del footer que interfiera */
+.footer-content .newsletter-section * {
+    box-sizing: border-box !important;
+}
