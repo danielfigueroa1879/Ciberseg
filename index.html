@@ -228,22 +228,18 @@
                 </div>
                 
                 <div class="contact-form">
-                    <!-- FORMULARIO DE SUSCRIPCIÓN MOVIDO AQUÍ -->
-                    <form class="newsletter-form" name="suscripcion" method="post" data-netlify="true" netlify-honeypot="bot-field2" accept-charset="UTF-8">
+                    <!-- FORMULARIO CORREGIDO PARA NETLIFY -->
+                    <form class="newsletter-form" method="post" data-netlify="true" name="suscripcion" netlify-honeypot="bot-field2">
                         <!-- Campo oculto anti-spam -->
                         <div style="display: none;">
                             <label>No llenes este campo si eres humano: <input name="bot-field2" /></label>
                         </div>
                         
-                        <input type="text" name="nombre" placeholder="Nombre" maxlength="100">
+                        <input type="text" name="nombre" placeholder="Nombre" maxlength="100" required>
                         <input type="email" name="email" placeholder="Email" required maxlength="100">
                         <input type="tel" name="telefono" placeholder="Teléfono" maxlength="20">
                         <input type="text" name="asunto" placeholder="Asunto" value="Suscripción Newsletter" maxlength="200">
                         <textarea name="mensaje" placeholder="Escribe aquí..." rows="5" required maxlength="1000"></textarea>
-                        
-                        <!-- Campos ocultos para Netlify -->
-                        <input type="hidden" name="form-name" value="suscripcion">
-                        <input type="hidden" name="_subject" value="Nueva suscripción desde RECYBERSEG">
                         
                         <button type="submit">Suscribirse</button>
                     </form>
@@ -283,5 +279,14 @@
     </button>
 
     <script src="menu-script.js"></script>
+    
+    <!-- Formulario oculto para que Netlify lo detecte correctamente -->
+    <form name="suscripcion" netlify netlify-honeypot="bot-field2" hidden>
+        <input type="text" name="nombre">
+        <input type="email" name="email">
+        <input type="tel" name="telefono">
+        <input type="text" name="asunto">
+        <textarea name="mensaje"></textarea>
+    </form>
 </body>
 </html>
