@@ -156,55 +156,10 @@ function initSmoothScroll() {
     });
 }
 
-// FORMULARIOS
-function initForms() {
-    // Formulario de contacto
-    const contactForm = document.querySelector('.contact-form form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            showMessage('¡Mensaje enviado exitosamente!', 'success');
-            this.reset();
-        });
-    }
-    
-    // Newsletter
-    const newsletterForm = document.querySelector('.newsletter-form');
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            showMessage('¡Suscripción exitosa!', 'success');
-            this.reset();
-        });
-    }
-}
-
-// SISTEMA DE MENSAJES
-function showMessage(text, type = 'info') {
-    const message = document.createElement('div');
-    message.className = `toast toast-${type}`;
-    message.textContent = text;
-    message.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: #d4ff00;
-        color: #000;
-        padding: 15px 20px;
-        border-radius: 8px;
-        z-index: 9999;
-        font-family: 'Poppins', sans-serif;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        animation: slideIn 0.3s ease;
-    `;
-    
-    document.body.appendChild(message);
-    
-    setTimeout(() => {
-        message.style.animation = 'slideOut 0.3s ease';
-        setTimeout(() => message.remove(), 300);
-    }, 3000);
-}
+// ============================================
+// FORMULARIOS - SECCIÓN COMPLETAMENTE ELIMINADA
+// Ya no interfiere con Netlify Forms
+// ============================================
 
 // INICIALIZACIÓN PRINCIPAL
 document.addEventListener('DOMContentLoaded', function() {
@@ -216,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
         initScrollButton();
         initScrollEffects();
         initSmoothScroll();
-        initForms();
+        // ❌ initForms(); <- ELIMINADO para que Netlify funcione
         
         console.log('🎉 Aplicación inicializada completamente');
     }, 100);
