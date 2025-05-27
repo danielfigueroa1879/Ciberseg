@@ -3069,7 +3069,7 @@ html {
 @media screen and (max-width: 768px) {
     .contact-form-wrapper h2 {
         color: #E0FD2C !important;
-        font-size: 20px !important; /* Más pequeño */
+        font-size: 25px !important; /* Más pequeño */
         font-weight: 700 !important;
         margin: 0 0 20px 0 !important;
         text-align: center !important;
