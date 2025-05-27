@@ -4434,8 +4434,8 @@ html {
 /* 4. FORMULARIO CENTRADO DENTRO DEL CUADRADO DEL MISMO ANCHO */
 @media screen and (max-width: 768px) {
     .newsletter-form {
-        width: 100% !important; /* Ocupar todo el ancho del cuadrado */
-        max-width: 85% !important; /* Con márgenes internos iguales */
+        width: 105% !important; /* Ocupar todo el ancho del cuadrado */
+        max-width: 90% !important; /* Con márgenes internos iguales */
         margin: 0 auto !important; /* Centrado dentro del cuadrado */
         display: flex !important;
         flex-direction: column !important;
@@ -4573,6 +4573,6 @@ html {
     .contact-info-wrapper:hover,
     .contact-form-wrapper:hover {
         /* Solo efectos que no cambien el ancho */
-        transform: translateY(-3px) !important;
+        transform: translateY(-2px) !important;
     }
 }
