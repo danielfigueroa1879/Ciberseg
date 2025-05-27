@@ -325,17 +325,12 @@ body {
     height: 240px; /* Tamaño deseado para las imágenes */
     display: block; /* Asegura que la imagen se comporte como un bloque */
     object-fit: contain; /* Ajusta la imagen sin recortarla, manteniendo su relación de aspecto */
+}
 
 .consultoria-img {
     width: 280px !important;  /* Más grande que las otras */
     height: 280px !important;
 }
-
-
-
-    
-}
-/* --------------------------------------------------------------------------------- */
 
 .service-card h3 {
     font-size: 22px;
@@ -897,6 +892,98 @@ html {
     scroll-behavior: smooth;
 }
 
+/* ===== CORRECCIONES Y AJUSTES ESPECÍFICOS ===== */
+
+/* CORRECCIÓN: FORMULARIO VERTICAL EN PC Y MÓVIL */
+.newsletter-form {
+    display: flex !important;
+    flex-direction: column !important; /* SIEMPRE en columna */
+    gap: 20px !important;
+    width: 100% !important;
+    max-width: 500px !important; /* Ancho máximo para PC */
+    margin: 0 auto !important; /* Centrado en PC */
+}
+
+/* INPUTS INDIVIDUALES UNO DEBAJO DEL OTRO */
+.newsletter-form input,
+.newsletter-form textarea {
+    width: 100% !important;
+    padding: 15px !important;
+    border: 2px solid rgba(255,255,255,0.2) !important;
+    border-radius: 8px !important;
+    background-color: rgba(255,255,255,0.1) !important;
+    color: #fff !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 16px !important;
+    transition: all 0.3s ease !important;
+    box-sizing: border-box !important;
+    margin-bottom: 0 !important; /* Sin margen adicional */
+}
+
+.newsletter-form input:focus,
+.newsletter-form textarea:focus {
+    outline: none !important;
+    border-color: #E0FD2C !important;
+    background-color: rgba(255,255,255,0.15) !important;
+    box-shadow: 0 0 10px rgba(224, 253, 44, 0.3) !important;
+}
+
+.newsletter-form input::placeholder,
+.newsletter-form textarea::placeholder {
+    color: rgba(255,255,255,0.7) !important;
+}
+
+/* BOTÓN DE ENVÍO */
+.newsletter-form button[type="submit"] {
+    background-color: #E0FD2C !important;
+    color: #000 !important;
+    border: none !important;
+    padding: 15px 30px !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    margin-top: 10px !important;
+    width: auto !important;
+    align-self: flex-start !important; /* Alineado a la izquierda */
+}
+
+.newsletter-form button[type="submit"]:hover {
+    background-color: #C7E525 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(224, 253, 44, 0.4) !important;
+}
+
+/* ELIMINAR CUALQUIER GRID EN FORMULARIOS QUE CAUSE LAYOUT HORIZONTAL */
+.form-row {
+    display: flex !important;
+    flex-direction: column !important; /* FORZAR columna */
+    gap: 20px !important;
+    width: 100% !important;
+}
+
+/* Si existe algún form-row, también hacerlo vertical */
+.contact-form .form-row {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+}
+
+.contact-form .form-row input {
+    width: 100% !important;
+    margin-bottom: 0 !important;
+}
+
+/* ASEGURAR QUE NO HAYA CONFLICTOS CON ESTILOS PREVIOS */
+.contact-form form {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+}
+
 /* RESPONSIVE DESIGN */
 
 /* General responsive fixes */
@@ -904,25 +991,107 @@ html {
     padding: 0 15px;
 }
 
+/* LAYOUT DE CONTACTO EN PC (DESKTOP) */
+@media screen and (min-width: 769px) {
+    .contact-section {
+        padding: 80px 20px !important;
+    }
+    
+    .contact-section .container {
+        max-width: 1000px !important;
+        margin: 0 auto !important;
+    }
+    
+    /* Layout de dos columnas en PC */
+    .contact-content-wrapper {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 60px !important;
+        align-items: start !important;
+    }
+    
+    /* Información de contacto a la izquierda */
+    .contact-info-wrapper {
+        grid-column: 1 !important;
+    }
+    
+    .contact-info-wrapper h3 {
+        color: #E0FD2C !important;
+        font-size: 24px !important;
+        margin-bottom: 30px !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Formulario a la derecha */
+    .contact-form-wrapper {
+        grid-column: 2 !important;
+    }
+    
+    .contact-form-wrapper h2 {
+        color: #E0FD2C !important;
+        font-size: 24px !important;
+        margin-bottom: 30px !important;
+        font-weight: 600 !important;
+        text-align: left !important;
+    }
+    
+    /* Formulario vertical en PC */
+    .newsletter-form {
+        max-width: 400px !important; /* Más angosto en PC */
+        margin: 0 !important; /* Sin centrado automático en PC */
+    }
+    
+    .newsletter-form input,
+    .newsletter-form textarea {
+        font-size: 14px !important; /* Texto más pequeño en PC */
+        padding: 12px 15px !important;
+    }
+    
+    .newsletter-form button[type="submit"] {
+        font-size: 14px !important;
+        padding: 12px 25px !important;
+        min-width: 140px !important;
+    }
+}
+
 /* Tablets (768px y menores) */
 @media screen and (max-width: 768px) {
-    /* Navegación responsive */
+    /* MENÚ HAMBURGUESA SIEMPRE AL LADO DERECHO */
     .nav-container {
-        flex-wrap: wrap;
-        padding: 0 15px;
-        justify-content: space-between;
+        flex-direction: row !important; /* Cambiar de columna a fila */
+        justify-content: space-between !important; /* Espacio entre elementos */
+        align-items: center !important;
+        padding: 0 20px !important;
     }
-
+    
+    .nav-logo {
+        order: 1 !important;
+        flex: 1 !important; /* Ocupar espacio disponible */
+        text-align: center !important;
+    }
+    
     .nav-logo h2 {
-        font-size: 28px;
-        text-align: center;
-
+        text-align: center !important;
+        margin: 0 !important;
+        font-size: 28px !important;
+    }
+    
+    .nav-toggle {
+        order: 2 !important;
+        position: relative !important;
+        margin-left: auto !important; /* Empujar al lado derecho */
+        flex-shrink: 0 !important; /* No se encoja */
+    }
+    
+    .search-container {
+        display: none !important;
     }
 
     .consultoria-img {
-    width: 350px !important;  /* Más grande que las otras */
-    height: 350px !important;
-}
+        width: 350px !important;  /* Más grande que las otras */
+        height: 350px !important;
+    }
+    
     .service-icon img {
         width: 250px;  /* Más pequeño en tablets */
         height: 250px;
@@ -940,16 +1109,16 @@ html {
     .nav-menu {
         position: fixed;
         left: 0;
-        top: -50vh;
+        top: -100vh;
         flex-direction: column;
-        background: rgba(0, 0, 0, 0.75);
+        background: rgba(0, 0, 0, 0.95);
         width: 100%; /* Ocupa el 100% del ancho de la ventana */
         height: 50vh;
         text-align: center;
         transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         padding: 20px 0;
-        z-index: 999;
+        z-index: 1001;
         overflow-y: auto;
         border-bottom-left-radius: 40px;
         border-bottom-right-radius: 40px;
@@ -957,29 +1126,13 @@ html {
         opacity: 0;
         transform: translateY(-20px);
         display: flex;
-        /* CORRECCIÓN: Eliminar centrado vertical y horizontal para que los elementos fluyan desde arriba */
-        /* justify-content: center; */
-        /* align-items: center; */
-        /* Asegurar que el padding superior sea suficiente para que "Inicio" no se corte */
         padding-top: 20px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
     }
 
-    /* Agregar un pseudo-elemento para el efecto borroso */
-    .nav-menu::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><filter id="blur"><feGaussianBlur stdDeviation="3"/></filter></defs><rect width="100" height="100" fill="rgba(0,0,0,0.1)" filter="url(%23blur)"/></svg>');
-        backdrop-filter: blur(80px);
-        -webkit-backdrop-filter: blur(80px);
-        border-radius: 15px;
-        z-index: -1;
-    }
     .nav-menu.active {
-        top: 80px;
+        top: 120px;
         opacity: 1;
         transform: translateY(0);
     }
@@ -987,8 +1140,7 @@ html {
     .nav-menu li {
         margin: 10px 0;
         position: relative;
-        padding-bottom:10px;
-        /* CORRECCIÓN: Asegurar que cada elemento de la lista ocupe el 100% del ancho del menú */
+        padding-bottom: 10px;
         width: 100%;
     }
 
@@ -996,29 +1148,35 @@ html {
         content: '';
         position: absolute;
         bottom: 0;
-        /* CORRECCIÓN: Las líneas ocupan el ancho completo del elemento li (que ahora es 100% del menú) */
         left: 0;
         width: 100%;
         height: 1px;
         background: rgba(255, 255, 255, 0.4);
-        /* Eliminar propiedades redundantes/conflictivas */
-        /* margin-left: 50vw; */
-        /* transform: translateX(-50%); */
     }
+    
     .nav-link {
         font-size: 20px;
+        color: #fff !important;
+        padding: 10px 20px;
+        display: block;
+        width: 100%;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+    
+    .nav-link:hover {
+        background-color: rgba(224, 253, 44, 0.1) !important;
+        color: #E0FD2C !important;
     }
 
     .nav-toggle {
         display: flex !important;
-        /* CAMBIO: Fondo negro para el botón de hamburguesa en móvil */
-        background-color: #000;
-        /* CAMBIO: Borde blanco sutil en móvil */
-        border: 2px solid rgba(255, 255, 255, 0.2);
-        border-radius:20px;
+        background-color: #000 !important;
+        border: 2px solid rgba(255, 255, 255, 0.2) !important;
+        border-radius: 20px;
         padding: 8px;
         cursor: pointer;
-        z-index: 1001;
+        z-index: 1002;
         position: relative;
         user-select: none;
         -webkit-backdrop-filter: blur(50px);
@@ -1031,19 +1189,18 @@ html {
 
     .nav-toggle:hover,
     .nav-toggle:focus {
-        /* CAMBIO: Fondo negro más oscuro o con una sutil transparencia al pasar el ratón en móvil */
-        background-color: rgba(0, 0, 0, 0.8);
+        background-color: rgba(0, 0, 0, 0.8) !important;
         outline: none;
     }
 
     .nav-toggle:active {
-        background-color: rgba(0, 0, 0, 0.85); /* Un poco más oscuro al presionar */
+        background-color: rgba(0, 0, 0, 0.85);
         transform: scale(0.95);
     }
 
     .nav-toggle.active {
-        background-color: rgba(0, 0, 0, 0.85); /* Fondo negro cuando está activo */
-        border-color: rgba(255, 255, 255, 0.3); /* Borde blanco cuando está activo */
+        background-color: rgba(0, 0, 0, 0.85);
+        border-color: rgba(255, 255, 255, 0.3);
     }
 
     .nav-toggle.active .bar:nth-child(2) {
@@ -1057,6 +1214,57 @@ html {
 
     .nav-toggle.active .bar:nth-child(3) {
         transform: translateY(-5px) rotate(-45deg);
+    }
+
+    /* LAYOUT EN MÓVILES */
+    .contact-section {
+        padding: 80px 15px !important;
+    }
+    
+    /* Una sola columna en móviles */
+    .contact-content-wrapper {
+        display: block !important;
+    }
+    
+    /* Información de contacto primero */
+    .contact-info-wrapper {
+        margin-bottom: 40px !important;
+        text-align: left !important;
+    }
+    
+    .contact-info-wrapper h3 {
+        color: #E0FD2C !important;
+        font-size: 24px !important;
+        margin-bottom: 25px !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Formulario después */
+    .contact-form-wrapper {
+        padding-left: 15px !important; /* Un poquito a la izquierda */
+        max-width: calc(100% - 15px) !important;
+    }
+    
+    .contact-form-wrapper h2 {
+        color: #E0FD2C !Important;
+        font-size: 28px !important;
+        font-weight: 700 !important;
+        margin: 0 0 25px 0 !important;
+        text-align: left !important;
+    }
+    
+    /* Formulario vertical en móviles */
+    .newsletter-form {
+        max-width: 95% !important;
+        margin: 0 !important;
+    }
+    
+    .newsletter-form button[type="submit"] {
+        font-size: 18px !important; /* Más grande en móviles */
+        padding: 18px 40px !important;
+        font-weight: 700 !important;
+        letter-spacing: 1.5px !important;
+        min-width: 180px !important;
     }
 
     /* Hero responsive */
@@ -1086,19 +1294,16 @@ html {
         margin: 0;
     }
 
-
     /* Servicios responsive */
     .main-services,
     .iot-section,
-    .mission-vision,
-    .contact-section {
+    .mission-vision {
         padding: 60px 15px;
     }
 
     .main-services h2,
     .iot-section h2,
-    .mission-vision h2,
-    .contact-section h2 {
+    .mission-vision h2 {
         font-size: 30px;
     }
 
@@ -1150,22 +1355,60 @@ html {
         padding: 30px 20px;
     }
 
-    /* Contacto */
-    .contact-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-
-    .form-row {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-
-    /* Footer */
+    /* Footer responsive */
     .footer-content {
         grid-template-columns: 1fr;
         gap: 30px;
         text-align: center;
+    }
+    
+    .footer-section {
+        text-align: center;
+    }
+    
+    .social-links {
+        display: flex !important;
+        justify-content: center !important; /* Centrar horizontalmente */
+        align-items: center !important;
+        gap: 20px !important;
+        margin: 20px 0 !important;
+        padding: 0 !important;
+    }
+    
+    .social-links a {
+        color: #E0FD2C !important;
+        font-size: 28px !important; /* Un poco más grandes */
+        transition: all 0.3s ease !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 50px !important;
+        height: 50px !important;
+        border-radius: 50% !important;
+        position: relative !important;
+        overflow: hidden !important;
+    }
+    
+    /* Mejorar el efecto hover de los iconos */
+    .social-links a::before {
+        content: '' !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        background: rgba(224, 253, 44, 0.1) !important;
+        border-radius: 50% !important;
+        transform: scale(0) !important;
+        transition: transform 0.3s ease !important;
+    }
+    
+    .social-links a:hover::before {
+        transform: scale(1) !important;
+    }
+    
+    .social-links a:hover {
+        transform: scale(1.15) !important;
     }
 
     .footer-bottom {
@@ -1182,6 +1425,61 @@ html {
         flex-direction: column;
         gap: 15px;
     }
+
+    /* AJUSTAR EL HEADER PARA ACOMODAR EL NUEVO LAYOUT */
+    .navbar {
+        padding: 15px 0 !important;
+    }
+    
+    .header {
+        min-height: 100px !important; /* Más alto para acomodar el logo centrado */
+        z-index: 1000 !important; /* Restaurar z-index original */
+    }
+    
+    /* Asegurar que el contenido principal no se superponga */
+    .hero {
+        padding-top: 120px !important; /* Ajustar para el header más alto */
+    }
+
+    /* ITEMS DE CONTACTO MEJORADOS */
+    .contact-item {
+        display: flex !important;
+        align-items: center !important;
+        margin-bottom: 15px !important;
+        font-size: 16px !important;
+        text-align: left !important;
+    }
+    
+    .contact-item i {
+        color: #E0FD2C !important;
+        margin-right: 15px !important;
+        font-size: 20px !important;
+        width: 25px !important;
+        flex-shrink: 0 !important;
+    }
+    
+    .contact-item a {
+        color: #fff !important;
+        text-decoration: none !important;
+        transition: color 0.3s ease !important;
+    }
+    
+    .contact-item a:hover {
+        color: #E0FD2C !important;
+    }
+    
+    .whatsapp-item a {
+        display: inline-flex !important;
+        align-items: center !important;
+        padding: 5px 10px !important;
+        border-radius: 8px !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    .whatsapp-item a:hover {
+        background-color: rgba(224, 253, 44, 0.1) !important;
+        transform: translateX(3px) !important;
+    }
 }
 
 /* Móviles pequeños (480px y menores) */
@@ -1196,8 +1494,7 @@ html {
         display: none;
     }
 
-    
-   .service-icon img {
+    .service-icon img {
         width: 220px;  /* Aún más pequeño en móviles */
         height: 220px;
     }
@@ -1206,17 +1503,14 @@ html {
         height: 220px; /* Ajustar contenedor */
     }
 
-     .consultoria-img {
-    width: 250px !important;  /* Más grande que las otras */
-    height: 250px !important;
-}
-
+    .consultoria-img {
+        width: 250px !important;  /* Más grande que las otras */
+        height: 250px !important;
+    }
     
     .nav-toggle {
-        /* CAMBIO: Fondo negro para el botón de hamburguesa en móvil pequeño */
-        background-color: #000;
-        /* CAMBIO: Borde blanco sutil en móvil pequeño */
-        border: 2px solid rgba(255, 255, 255, 0.5);
+        background-color: #000 !important;
+        border: 2px solid rgba(255, 255, 255, 0.5) !important;
         border-radius: 10px;
         padding: 6px;
         min-height: 38px;
@@ -1229,7 +1523,6 @@ html {
         padding: 15px 0;
         border-bottom-left-radius: 12px;
         border-bottom-right-radius: 12px;
-        /* CAMBIO: Fondo del menú desplegable a negro con transparencia */
         background-color: rgba(0, 0, 0, 0.9);
         backdrop-filter: blur(30px);
         -webkit-backdrop-filter: blur(30px);
@@ -1245,7 +1538,6 @@ html {
 
     .nav-menu li {
         margin: 6px 0;
-        /* CORRECCIÓN: Asegurar que cada elemento de la lista ocupe el 100% del ancho del menú */
         width: 100%;
     }
 
@@ -1253,20 +1545,19 @@ html {
         font-size: 24px;
         font-weight: 500;
         padding: 6px 15px;
-        /* CAMBIO: Color de las letras del menú a blanco */
         color: #fff !important;
     }
 
-  .main-services p {
-    font-size: 16px;
-    margin-bottom: 50px;
-    max-width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: justify;
-}
+    .main-services p {
+        font-size: 16px;
+        margin-bottom: 50px;
+        max-width: 1400px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: justify;
+    }
+    
     .nav-link:hover {
-        /* CAMBIO: Fondo sutil al pasar el ratón y mantener letras blancas */
         background-color: rgba(255, 255, 255, 0.08);
         color: #fff !important;
         transform: translateY(-1px) scale(1.02);
@@ -1411,9 +1702,9 @@ html {
     }
 
     .social-links a {
-        width: 35px;
-        height: 35px;
-        font-size: 20px;
+        width: 35px !important;
+        height: 35px !important;
+        font-size: 20px !important;
     }
 
     .contact-form input,
@@ -1465,6 +1756,10 @@ html {
     .newsletter-form button {
         padding: 12px 20px;
     }
+
+    .social-links {
+        gap: 15px !important;
+    }
 }
 
 /* Móviles muy pequeños (360px y menores) */
@@ -1480,19 +1775,18 @@ html {
     }
 
     .consultoria-img {
-    width: 220px !important;  /* Más grande que las otras */
-    height: 220px !important;
-}
+        width: 220px !important;  /* Más grande que las otras */
+        height: 220px !important;
+    }
+    
     .service-icon img {
-        width:180px;  /* Muy pequeño en móviles pequeños */
+        width: 180px;  /* Muy pequeño en móviles pequeños */
         height: 180px;
     }
     
     .service-icon {
         height: 180px; /* Ajustar contenedor */
     }
-
-
     
     .search-input {
         width: 65%;
@@ -1547,13 +1841,13 @@ html {
         padding: 60px 20px 30px;
     }
    .main-services p {
-    font-size: 15px;
-    margin-bottom: 50px;
-    max-width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: justify;
-}
+        font-size: 15px;
+        margin-bottom: 50px;
+        max-width: 1400px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: justify;
+    }
     .hero-title {
         font-size: 28px;
         margin-bottom: 15px;
@@ -1578,13 +1872,13 @@ html {
         font-size: 28px !important;
     }
     .main-services p {
-    font-size: 16px;
-    margin-bottom: 50px;
-    max-width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: justify;
-}
+        font-size: 16px;
+        margin-bottom: 50px;
+        max-width: 1400px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: justify;
+    }
     .services-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 25px;
@@ -1602,10 +1896,8 @@ html {
     .contact-content {
         gap: 40px;
     }
-    /* Se remueven los padding-left y padding-right para ocupar todo el ancho disponible */
+    
     .iot-description {
-        /* padding-left: 80px; */
-        /* padding-right: 80px; */
         box-sizing: border-box;
     }
 }
@@ -1616,20 +1908,19 @@ html {
         font-size: 32px !important;
         padding: 0 80px;
     }
-    /* Se remueven los padding-left y padding-right para ocupar todo el ancho disponible */
+    
     .iot-description {
-        /* padding-left: 100px; */
-        /* padding-right: 100px; */
         box-sizing: border-box;
     }
-}
+    
     .main-services p {
-    font-size: 15px;
-    margin-bottom: 50px;
-    max-width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: justify;
+        font-size: 15px;
+        margin-bottom: 50px;
+        max-width: 1400px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: justify;
+    }
 }
 
 /* Mejoras adicionales para móviles */
@@ -1648,17 +1939,19 @@ html {
     }
 
     .service-icon img {
-    width: 220px;  /* ccvvxxxxx0px */
-    height: 220px;
-}
+        width: 220px;  
+        height: 220px;
+    }
 
-.service-icon {
-    height: 220px; /* Cambiar de 80px a 100px */
-}
+    .service-icon {
+        height: 220px; 
+    }
+    
     .consultoria-img {
-    width: 250px !important;  /* Más grande que las otras */
-    height: 250px !important;
-}
+        width: 250px !important;  
+        height: 250px !important;
+    }
+    
     /* Mejorar touch targets */
     .nav-link,
     .cta-button,
@@ -1668,14 +1961,16 @@ html {
         align-items: center;
         justify-content: center;
     }
+    
     .main-services p {
-    font-size: 18px;
-    margin-bottom: 50px;
-    max-width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: justify;
-}
+        font-size: 18px;
+        margin-bottom: 50px;
+        max-width: 1400px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: justify;
+    }
+    
     /* Menú hamburguesa mejorado */
     .nav-toggle {
         min-height: 40px;
@@ -1699,6 +1994,7 @@ html {
         backface-visibility: hidden;
     }
 }
+
 @media screen and (min-width: 1200px) {
     .container {
         max-width: 1400px;
@@ -1722,10 +2018,8 @@ html {
     .iot-services {
         grid-template-columns: repeat(3, 1fr);
     }
-    /* Se remueven los padding-left y padding-right para ocupar todo el ancho disponible */
+    
     .iot-description {
-        /* padding-left: 150px; */
-        /* padding-right: 150px; */
         box-sizing: border-box;
     }
 }
@@ -1791,6 +2085,7 @@ html {
         color: black;
     }
 }
+
 /* Agregar esta animación al final de tu CSS */
 @keyframes goldShine {
     0% { background-position: 0% 50%; }
@@ -1812,6 +2107,7 @@ html {
         text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.6);
     }
 }
+
 /* CSS FORZADO para el formulario de suscripción - Agregar al final de styles.css */
 
 /* Contenedor principal del formulario */
@@ -1966,15 +2262,16 @@ html {
 .footer-content .newsletter-section * {
     box-sizing: border-box !important;
 }
-/* SOLUCIÓN PARA EL PROBLEMA DEL FORMULARIO EN MÓVILES */
 
-/* 1. Ajustar el z-index del header para que no interfiera con inputs */
+/* ===== SOLUCIÓN PARA EL PROBLEMA DEL FORMULARIO EN MÓVILES ===== */
+
+/* Ajustar el z-index del header para que no interfiera con inputs */
 @media screen and (max-width: 768px) {
     .header {
         z-index: 999; /* Reducido de 1000 para permitir que inputs tengan mayor prioridad */
     }
     
-    /* 2. Asegurar que los inputs del formulario tengan z-index superior */
+    /* Asegurar que los inputs del formulario tengan z-index superior */
     .contact-form input,
     .contact-form textarea,
     .newsletter-form input,
@@ -1983,23 +2280,23 @@ html {
         z-index: 1001 !important; /* Mayor que el header */
     }
     
-    /* 3. Ajustar el padding-top de la sección de contacto para compensar el header fijo */
+    /* Ajustar el padding-top de la sección de contacto para compensar el header fijo */
     .contact-section {
         padding-top: 120px !important; /* Aumentado para dar más espacio */
     }
     
-    /* 4. Crear más espacio entre el header y el formulario */
+    /* Crear más espacio entre el header y el formulario */
     .contact-section h2 {
         margin-top: 20px !important;
         margin-bottom: 40px !important;
     }
     
-    /* 5. Asegurar que el contenido del formulario tenga suficiente espacio */
+    /* Asegurar que el contenido del formulario tenga suficiente espacio */
     .contact-content {
         margin-top: 30px !important;
     }
     
-    /* 6. Mejorar la interacción táctil en inputs */
+    /* Mejorar la interacción táctil en inputs */
     .contact-form input:focus,
     .contact-form textarea:focus,
     .newsletter-form input:focus,
@@ -2011,13 +2308,13 @@ html {
         z-index: 1002 !important; /* Aún mayor cuando está enfocado */
     }
     
-    /* 7. Asegurar que el header se oculte automáticamente al hacer scroll hacia abajo */
+    /* Asegurar que el header se oculte automáticamente al hacer scroll hacia abajo */
     .header.scrolled {
         transform: translateY(-100%) !important;
         transition: transform 0.3s ease !important;
     }
     
-    /* 8. Crear un área de "zona segura" para inputs en la parte superior */
+    /* Crear un área de "zona segura" para inputs en la parte superior */
     .contact-form,
     .newsletter-form {
         margin-top: 40px !important;
@@ -2025,13 +2322,13 @@ html {
         z-index: 1001 !important;
     }
     
-    /* 9. Ajuste específico para el formulario del footer */
+    /* Ajuste específico para el formulario del footer */
     .footer .newsletter-form {
         margin-top: 20px !important;
         padding-top: 20px !important;
     }
     
-    /* 10. Prevenir que el header interfiera durante el scroll */
+    /* Prevenir que el header interfiera durante el scroll */
     body.form-focused {
         overflow-y: auto !important;
     }
@@ -2094,221 +2391,5 @@ html {
     .submit-btn {
         margin-top: 30px !important;
         margin-bottom: 40px !important;
-    }
-}
-
-/* CORRECCIONES PARA LOGO, FORMULARIO Y MENÚ */
-
-/* 1. CENTRAR LA PALABRA "RECYBERSEG" EN MÓVILES */
-@media screen and (max-width: 768px) {
-    .nav-container {
-        flex-direction: column !important; /* Cambiar a columna en móviles */
-        align-items: center !important;
-        gap: 15px !important;
-    }
-    
-    .nav-logo {
-        order: 1 !important; /* Logo primero */
-        text-align: center !important;
-        width: 100% !important;
-    }
-    
-    .nav-logo h2 {
-        text-align: center !important;
-        margin: 0 !important;
-        font-size: 28px !important;
-    }
-    
-    .nav-toggle {
-        order: 2 !important; /* Botón hamburguesa segundo */
-        position: relative !important; /* Quitar position fixed si lo tenía */
-        margin: 0 auto !important;
-    }
-    
-    .search-container {
-        order: 3 !important;
-        display: none !important; /* Mantener oculto en móviles */
-    }
-}
-
-/* 2. MOVER "FORMULARIO DE INSCRIPCIÓN" DEBAJO DE WHATSAPP */
-@media screen and (max-width: 768px) {
-    .contact-content {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 30px !important;
-    }
-    
-    .contact-info {
-        order: 1 !important; /* Información de contacto primero */
-    }
-    
-    .contact-form {
-        order: 2 !important; /* Formulario segundo (debajo) */
-        margin-top: 20px !important;
-    }
-    
-    /* Título del formulario */
-    .contact-section h2 {
-        order: 0 !important;
-        margin-bottom: 30px !important;
-        text-align: center !important;
-    }
-    
-    /* Reorganizar para que el título quede después de la info de contacto */
-    .contact-section {
-        display: flex !important;
-        flex-direction: column !important;
-    }
-    
-    .contact-section .container {
-        display: flex !important;
-        flex-direction: column !important;
-    }
-    
-    .contact-section h2 {
-        order: 2 !important; /* Título después de la info de contacto */
-        margin: 20px 0 !important;
-    }
-    
-    .contact-content .contact-info {
-        order: 1 !important; /* Info de contacto primero */
-    }
-    
-    .contact-content .contact-form {
-        order: 3 !important; /* Formulario al final */
-    }
-}
-
-/* 3. ARREGLAR EL MENÚ HAMBURGUESA */
-@media screen and (max-width: 768px) {
-    /* Resetear z-index del header para que el menú funcione */
-    .header {
-        z-index: 1000 !important; /* Restaurar z-index original */
-    }
-    
-    /* Asegurar que el menú tenga z-index correcto */
-    .nav-menu {
-        z-index: 1001 !important; /* Menú por encima del header */
-        position: fixed !important;
-        top: -100vh !important; /* Empezar completamente oculto */
-        left: 0 !important;
-        width: 100% !important;
-        height: 50vh !important;
-        background: rgba(0, 0, 0, 0.95) !important;
-        backdrop-filter: blur(10px) !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: flex-start !important;
-        align-items: center !important;
-        padding-top: 30px !important;
-        transition: all 0.4s ease !important;
-        opacity: 0 !important;
-    }
-    
-    .nav-menu.active {
-        top: 120px !important; /* Aparecer debajo del header más alto */
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-    }
-    
-    /* Botón hamburguesa */
-    .nav-toggle {
-        z-index: 1002 !important; /* Por encima del menú */
-        background-color: #000 !important;
-        border: 2px solid rgba(255, 255, 255, 0.3) !important;
-        position: relative !important;
-        display: flex !important;
-    }
-    
-    /* Elementos del menú */
-    .nav-menu li {
-        width: 90% !important;
-        text-align: center !important;
-        margin: 8px 0 !important;
-    }
-    
-    .nav-link {
-        color: #fff !important;
-        font-size: 20px !important;
-        padding: 10px 20px !important;
-        display: block !important;
-        width: 100% !important;
-        border-radius: 8px !important;
-        transition: all 0.3s ease !important;
-    }
-    
-    .nav-link:hover {
-        background-color: rgba(224, 253, 44, 0.1) !important;
-        color: #E0FD2C !important;
-    }
-    
-    /* Líneas separadoras entre elementos del menú */
-    .nav-menu li::after {
-        content: '' !important;
-        position: absolute !important;
-        bottom: 0 !important;
-        left: 10% !important;
-        width: 80% !important;
-        height: 1px !important;
-        background: rgba(255, 255, 255, 0.2) !important;
-    }
-    
-    .nav-menu li:last-child::after {
-        display: none !important;
-    }
-}
-
-/* 4. AJUSTAR EL HEADER PARA ACOMODAR EL NUEVO LAYOUT */
-@media screen and (max-width: 768px) {
-    .navbar {
-        padding: 15px 0 !important;
-    }
-    
-    .header {
-        min-height: 100px !important; /* Más alto para acomodar el logo centrado */
-    }
-    
-    /* Asegurar que el contenido principal no se superponga */
-    .hero {
-        padding-top: 120px !important; /* Ajustar para el header más alto */
-    }
-}
-
-/* 5. CORREGIR Z-INDEX PARA INPUTS SIN ROMPER EL MENÚ */
-@media screen and (max-width: 768px) {
-    .contact-form input:focus,
-    .contact-form textarea:focus,
-    .newsletter-form input:focus,
-    .newsletter-form textarea:focus {
-        z-index: 999 !important; /* Menor que el menú pero mayor que el header */
-        position: relative !important;
-    }
-    
-    /* Solo ocultar header cuando se enfoque input Y el menú no esté activo */
-    body:not(.menu-open) .contact-form input:focus ~ * .header,
-    body:not(.menu-open) .contact-form textarea:focus ~ * .header {
-        transform: translateY(-100%) !important;
-        transition: transform 0.3s ease !important;
-    }
-}
-
-/* 6. MÓVILES MUY PEQUEÑOS */
-@media screen and (max-width: 480px) {
-    .nav-logo h2 {
-        font-size: 24px !important;
-    }
-    
-    .contact-section h2 {
-        font-size: 22px !important;
-    }
-    
-    .nav-menu {
-        height: 40vh !important;
-        padding-top: 20px !important;
-    }
-    
-    .nav-menu.active {
-        top: 100px !important;
     }
 }
