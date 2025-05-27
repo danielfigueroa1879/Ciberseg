@@ -3527,3 +3527,281 @@ html {
         display: none !important; /* Ocultar menú cuando hay input enfocado */
     }
 }
+/* ===== CORRECCIÓN Z-INDEX PARA MENÚ MÓVIL ===== */
+
+/* 1. JERARQUÍA DE Z-INDEX CORREGIDA */
+@media screen and (max-width: 768px) {
+    /* Header base */
+    .header {
+        z-index: 1000 !important; /* Restaurado a valor original */
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+    }
+    
+    /* Botón hamburguesa - debe estar por encima del header */
+    .nav-toggle {
+        z-index: 1002 !important;
+        position: relative !important;
+    }
+    
+    /* Menú desplegable - debe estar por encima de todo */
+    .nav-menu {
+        z-index: 1001 !important;
+        position: fixed !important;
+    }
+    
+    /* CUANDO EL MENÚ ESTÁ ACTIVO, debe tener prioridad absoluta */
+    .nav-menu.active {
+        z-index: 1005 !important; /* Por encima de inputs enfocados */
+    }
+    
+    /* Overlay del menú para bloquear interacciones */
+    body.menu-open::before {
+        content: '' !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        background: rgba(0, 0, 0, 0.3) !important;
+        z-index: 1000 !important;
+        backdrop-filter: blur(2px) !important;
+    }
+}
+
+/* 2. INPUTS CON Z-INDEX CONDICIONAL */
+@media screen and (max-width: 768px) {
+    /* Z-index normal para inputs cuando no hay menú activo */
+    .contact-form input,
+    .contact-form textarea,
+    .newsletter-form input,
+    .newsletter-form textarea {
+        position: relative !important;
+        z-index: 999 !important; /* Por debajo del header cuando está normal */
+    }
+    
+    /* Z-index alto solo cuando están enfocados Y no hay menú activo */
+    body:not(.menu-open) .contact-form input:focus,
+    body:not(.menu-open) .contact-form textarea:focus,
+    body:not(.menu-open) .newsletter-form input:focus,
+    body:not(.menu-open) .newsletter-form textarea:focus {
+        z-index: 1003 !important; /* Por encima del header solo si no hay menú */
+        position: relative !important;
+    }
+    
+    /* Cuando el menú está abierto, inputs deben tener z-index bajo */
+    body.menu-open .contact-form input,
+    body.menu-open .contact-form textarea,
+    body.menu-open .newsletter-form input,
+    body.menu-open .newsletter-form textarea {
+        z-index: 10 !important; /* Muy bajo cuando menú está activo */
+    }
+    
+    /* Prevenir enfoque de inputs cuando menú está abierto */
+    body.menu-open .contact-form input,
+    body.menu-open .contact-form textarea,
+    body.menu-open .newsletter-form input,
+    body.menu-open .newsletter-form textarea {
+        pointer-events: none !important; /* Desactivar interacción */
+    }
+}
+
+/* 3. CUADRADOS CON Z-INDEX AJUSTADO */
+@media screen and (max-width: 768px) {
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        position: relative !important;
+        z-index: 1 !important; /* Muy bajo para no interferir */
+    }
+    
+    /* Cuando el menú está activo, cuadrados deben ser no-interactivos */
+    body.menu-open .contact-info-wrapper,
+    body.menu-open .contact-form-wrapper {
+        pointer-events: none !important;
+        opacity: 0.5 !important;
+        transition: opacity 0.3s ease !important;
+    }
+    
+    /* El formulario específicamente */
+    .newsletter-form {
+        position: relative !important;
+        z-index: 2 !important;
+    }
+    
+    /* Cuando menú está activo, formulario no interactivo */
+    body.menu-open .newsletter-form {
+        pointer-events: none !important;
+    }
+}
+
+/* 4. HEADER COMPORTAMIENTO MEJORADO */
+@media screen and (max-width: 768px) {
+    /* Header visible cuando menú está activo */
+    body.menu-open .header {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+    
+    /* Header oculto solo cuando input enfocado Y menú cerrado */
+    body:not(.menu-open).form-input-focused .header {
+        transform: translateY(-100%) !important;
+        transition: transform 0.3s ease !important;
+    }
+    
+    /* Header normal en otros casos */
+    body:not(.menu-open):not(.form-input-focused) .header {
+        transform: translateY(0) !important;
+        transition: transform 0.3s ease !important;
+    }
+}
+
+/* 5. MENÚ MEJORADO CON MEJOR ESTILO */
+@media screen and (max-width: 768px) {
+    .nav-menu {
+        background: rgba(0, 0, 0, 0.95) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        border: 2px solid rgba(224, 253, 44, 0.3) !important;
+        border-radius: 0 0 25px 25px !important;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4) !important;
+        
+        /* Posicionamiento */
+        top: -100vh !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 50vh !important;
+        
+        /* Flexbox para centrar contenido */
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        padding: 30px 0 20px 0 !important;
+        
+        /* Transición suave */
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+        opacity: 0 !important;
+    }
+    
+    .nav-menu.active {
+        top: 100px !important; /* Debajo del header */
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+    
+    /* Links del menú */
+    .nav-link {
+        font-size: 18px !important;
+        font-weight: 500 !important;
+        padding: 10px 20px !important;
+        border-radius: 12px !important;
+        color: #fff !important;
+        text-decoration: none !important;
+        transition: all 0.3s ease !important;
+        display: block !important;
+        text-align: center !important;
+        min-width: 120px !important;
+    }
+    
+    .nav-link:hover {
+        background-color: rgba(224, 253, 44, 0.15) !important;
+        color: #E0FD2C !important;
+        transform: translateY(-1px) !important;
+    }
+    
+    /* Items del menú */
+    .nav-menu li {
+        margin: 5px 0 !important;
+        width: auto !important;
+        position: relative !important;
+    }
+    
+    /* Líneas separadoras más sutiles */
+    .nav-menu li::after {
+        content: '' !important;
+        position: absolute !important;
+        bottom: -3px !important;
+        left: 10% !important;
+        width: 80% !important;
+        height: 1px !important;
+        background: rgba(224, 253, 44, 0.2) !important;
+    }
+    
+    .nav-menu li:last-child::after {
+        display: none !important;
+    }
+}
+
+/* 6. ANIMACIONES DEL BOTÓN HAMBURGUESA */
+@media screen and (max-width: 768px) {
+    .nav-toggle {
+        background-color: #000 !important;
+        border: 2px solid rgba(255, 255, 255, 0.3) !important;
+        border-radius: 12px !important;
+        padding: 8px !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+        min-height: 42px !important;
+        min-width: 42px !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+    
+    .nav-toggle:hover {
+        background-color: rgba(0, 0, 0, 0.8) !important;
+        border-color: rgba(255, 255, 255, 0.5) !important;
+        transform: scale(1.05) !important;
+    }
+    
+    .nav-toggle:active {
+        transform: scale(0.95) !important;
+    }
+    
+    /* Animación de las barras */
+    .nav-toggle.active .bar:nth-child(1) {
+        transform: translateY(5px) rotate(45deg) !important;
+    }
+    
+    .nav-toggle.active .bar:nth-child(2) {
+        opacity: 0 !important;
+        transform: translateX(20px) !important;
+    }
+    
+    .nav-toggle.active .bar:nth-child(3) {
+        transform: translateY(-5px) rotate(-45deg) !important;
+    }
+    
+    .bar {
+        width: 22px !important;
+        height: 2px !important;
+        background-color: #fff !important;
+        margin: 3px 0 !important;
+        transition: all 0.4s ease !important;
+        border-radius: 2px !important;
+        display: block !important;
+    }
+}
+
+/* 7. SCROLL LOCK CUANDO MENÚ ESTÁ ABIERTO */
+@media screen and (max-width: 768px) {
+    body.menu-open {
+        overflow: hidden !important;
+        position: fixed !important;
+        width: 100% !important;
+        height: 100% !important;
+    }
+    
+    /* Prevenir scroll del contenido de fondo */
+    body.menu-open .hero,
+    body.menu-open .main-services,
+    body.menu-open .iot-section,
+    body.menu-open .mission-vision,
+    body.menu-open .contact-section,
+    body.menu-open .footer {
+        pointer-events: none !important;
+    }
+}
