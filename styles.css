@@ -3613,3 +3613,155 @@ html {
         contain: layout style !important;
     }
 }
+
+
+
+
+/* ===== MOVER FORMULARIO A LA DERECHA SOLO EN MÓVILES ===== */
+
+/* MÓVILES - Mover cuadro del formulario hacia la derecha */
+@media screen and (max-width: 768px) {
+    .contact-form-wrapper {
+        /* Opción 1: Margen izquierdo (Recomendado) */
+        margin-left: 20px !important;
+        margin-right: 10px !important; /* Compensar para que no se salga */
+        
+        /* Opción 2: Padding izquierdo (descomenta si prefieres esta) */
+        /* padding-left: 25px !important; */
+        
+        /* Opción 3: Transform (descomenta si prefieres esta) */
+        /* transform: translateX(15px) !important; */
+    }
+    
+    /* Mover también el contenido interno del formulario */
+    .contact-form-wrapper h2 {
+        margin-left: 10px !important; /* Título también a la derecha */
+    }
+    
+    .newsletter-form {
+        margin-left: 10px !important; /* Formulario a la derecha */
+        max-width: calc(100% - 30px) !important; /* Ajustar ancho para que no se salga */
+    }
+}
+
+/* MÓVILES PEQUEÑOS - Movimiento más sutil */
+@media screen and (max-width: 480px) {
+    .contact-form-wrapper {
+        margin-left: 15px !important;
+        margin-right: 5px !important;
+    }
+    
+    .contact-form-wrapper h2 {
+        margin-left: 8px !important;
+    }
+    
+    .newsletter-form {
+        margin-left: 8px !important;
+        max-width: calc(100% - 25px) !important;
+    }
+}
+
+/* MÓVILES MUY PEQUEÑOS - Movimiento mínimo */
+@media screen and (max-width: 360px) {
+    .contact-form-wrapper {
+        margin-left: 10px !important;
+        margin-right: 0 !important;
+    }
+    
+    .contact-form-wrapper h2 {
+        margin-left: 5px !important;
+    }
+    
+    .newsletter-form {
+        margin-left: 5px !important;
+        max-width: calc(100% - 15px) !important;
+    }
+}
+
+/* ===== OPCIONES ALTERNATIVAS PARA MÓVILES ===== */
+
+/* Opción A: Solo mover el formulario (no el título) */
+/*
+@media screen and (max-width: 768px) {
+    .newsletter-form {
+        margin-left: 25px !important;
+        max-width: calc(100% - 35px) !important;
+    }
+}
+*/
+
+/* Opción B: Usar padding en lugar de margin */
+/*
+@media screen and (max-width: 768px) {
+    .contact-form-wrapper {
+        padding-left: 30px !important;
+        padding-right: 15px !important;
+        box-sizing: border-box !important;
+    }
+}
+*/
+
+/* Opción C: Mover usando flexbox */
+/*
+@media screen and (max-width: 768px) {
+    .contact-form-wrapper {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        padding-left: 25px !important;
+    }
+}
+*/
+
+/* ===== ASEGURAR QUE NO SE SALGA DE LA PANTALLA ===== */
+@media screen and (max-width: 768px) {
+    /* Contenedor padre con espacio suficiente */
+    .contact-section .container {
+        padding-right: 15px !important; /* Más espacio a la derecha */
+        max-width: 100% !important;
+        overflow-x: hidden !important; /* Evitar scroll horizontal */
+    }
+    
+    /* Inputs que no se salgan */
+    .newsletter-form input,
+    .newsletter-form textarea {
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Botón que no se salga */
+    .newsletter-form button[type="submit"] {
+        max-width: 180px !important;
+    }
+}
+
+/* ===== AJUSTE VISUAL MEJORADO ===== */
+@media screen and (max-width: 768px) {
+    /* Si también quieres mover la información de contacto para equilibrar */
+    .contact-info-wrapper {
+        margin-left: 5px !important; /* Movimiento muy sutil */
+    }
+    
+    /* O si prefieres centrar mejor el conjunto */
+    .contact-content-wrapper {
+        padding-left: 10px !important;
+        padding-right: 5px !important;
+    }
+}
+
+/* ===== SOLO DESKTOP Y TABLETS SIN CAMBIOS ===== */
+@media screen and (min-width: 769px) {
+    /* Asegurar que en desktop no haya cambios */
+    .contact-form-wrapper {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    
+    .newsletter-form {
+        margin-left: 0 !important;
+    }
+    
+    .contact-form-wrapper h2 {
+        margin-left: 0 !important;
+    }
+}
