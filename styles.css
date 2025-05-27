@@ -3624,11 +3624,11 @@ html {
     /* 1. AGRANDAR EL CUADRO DEL FORMULARIO */
     .contact-form-wrapper {
         /* Hacer el cuadro más ancho */
-        width: 100% !important;
+        width: 105% !important;
         max-width: 100% !important;
         
         /* Aumentar padding interno para agrandarlo */
-        padding: 30px 25px !important; /* Aumentado de 25px 20px */
+        padding: 35px 25px !important; /* Aumentado de 25px 20px */
         
         /* Opcional: Hacer el cuadro más alto también */
         min-height: auto !important;
