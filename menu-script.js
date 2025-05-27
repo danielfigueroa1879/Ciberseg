@@ -126,49 +126,75 @@ function initAdvancedMobileFormFix() {
             console.log(`📐 Viewport: ${currentHeight}px, Teclado: ${keyboardHeight}px`);
         }
         
-        // PASO 2: MANEJO INTELIGENTE DEL HEADER
+        // PASO 2: MANEJO AGRESIVO DEL HEADER - OCULTAR COMPLETAMENTE
         function smartHeaderControl() {
             if (!header) return;
             
             if (isInputFocused && !isMenuOpen) {
-                // OCULTAR HEADER COMPLETAMENTE cuando input está enfocado
+                // OCULTAR HEADER COMPLETAMENTE Y AGRESIVAMENTE
+                header.style.display = 'none'; // Ocultar completamente
+                header.style.visibility = 'hidden';
+                header.style.opacity = '0';
                 header.style.transform = 'translateY(-100%)';
-                header.style.transition = 'transform 0.2s ease';
-                header.style.zIndex = '1';
-                body.classList.add('header-hidden');
-                console.log('🙈 Header ocultado para formulario');
+                header.style.zIndex = '-1';
+                header.style.pointerEvents = 'none';
+                body.classList.add('header-hidden', 'form-input-active');
+                body.style.paddingTop = '0';
+                console.log('🙈 Header COMPLETAMENTE ocultado para formulario');
             } else if (!isMenuOpen) {
                 // MOSTRAR HEADER cuando no hay input enfocado
+                header.style.display = 'block';
+                header.style.visibility = 'visible';
+                header.style.opacity = '1';
                 header.style.transform = 'translateY(0)';
-                header.style.transition = 'transform 0.3s ease';
                 header.style.zIndex = '1000';
-                body.classList.remove('header-hidden');
-                console.log('👁️ Header mostrado');
+                header.style.pointerEvents = 'auto';
+                body.classList.remove('header-hidden', 'form-input-active');
+                body.style.paddingTop = '';
+                console.log('👁️ Header completamente restaurado');
             }
         }
         
-        // PASO 3: SCROLL INTELIGENTE A INPUT
+        // PASO 3: SCROLL ULTRA AGRESIVO PARA POSICIONAR INPUT CORRECTAMENTE
         function smartScrollToInput(input) {
             if (isMenuOpen) return;
             
             clearTimeout(scrollTimeout);
             scrollTimeout = setTimeout(() => {
-                console.log('📍 Scroll inteligente al input');
+                console.log('📍 Scroll ULTRA AGRESIVO al input');
                 
-                // Calcular posición óptima
+                // Desactivar cualquier interferencia del header
+                if (header) {
+                    header.style.position = 'absolute';
+                    header.style.top = '-200px';
+                }
+                
+                // Calcular posición sin considerar header
                 const inputRect = input.getBoundingClientRect();
                 const currentScroll = window.pageYOffset;
                 const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
                 
-                // Posición que deja el input en el tercio superior de la pantalla visible
-                const targetScroll = currentScroll + inputRect.top - (viewportHeight * 0.25);
+                // Posición agresiva: input en la parte MUY superior de la pantalla
+                const targetScroll = currentScroll + inputRect.top - 50; // Solo 50px desde arriba
                 
+                // Scroll inmediato y forzado
                 window.scrollTo({
                     top: Math.max(0, targetScroll),
-                    behavior: 'smooth'
+                    behavior: 'instant' // Cambiar a instant para ser más rápido
                 });
                 
-            }, 150);
+                // Scroll adicional después de un momento para asegurar posición
+                setTimeout(() => {
+                    const newInputRect = input.getBoundingClientRect();
+                    if (newInputRect.top > 100) {
+                        window.scrollTo({
+                            top: window.pageYOffset + newInputRect.top - 50,
+                            behavior: 'instant'
+                        });
+                    }
+                }, 100);
+                
+            }, 50); // Reducir delay
         }
         
         // PASO 4: PREVENIR ZOOM EN IOS
@@ -186,24 +212,45 @@ function initAdvancedMobileFormFix() {
         
         // PASO 5: EVENT LISTENERS MEJORADOS
         inputs.forEach((input, index) => {
-            // EVENTO FOCUS
+            // EVENTO FOCUS - ULTRA AGRESIVO
             input.addEventListener('focus', function(e) {
                 if (isMenuOpen) {
                     this.blur();
                     return;
                 }
                 
-                console.log(`📝 Input ${index + 1} enfocado`);
+                console.log(`📝 Input ${index + 1} enfocado - MODO AGRESIVO`);
                 
                 clearTimeout(focusTimeout);
                 isInputFocused = true;
                 
-                // Secuencia de acciones
+                // SECUENCIA ULTRA AGRESIVA
+                // 1. Ocultar header INMEDIATAMENTE
+                if (header) {
+                    header.style.display = 'none';
+                    header.style.position = 'absolute';
+                    header.style.top = '-500px';
+                    header.style.zIndex = '-999';
+                }
+                
+                // 2. Preparar el input para máxima visibilidad
+                this.style.position = 'relative';
+                this.style.zIndex = '9999';
+                this.style.isolation = 'isolate';
+                
+                // 3. Ejecutar acciones de forma inmediata
                 setTimeout(() => {
                     setDynamicViewport();
                     smartHeaderControl();
                     smartScrollToInput(this);
-                }, 50);
+                    
+                    // 4. Forzar que el input esté visible
+                    this.scrollIntoView({
+                        behavior: 'instant',
+                        block: 'start',
+                        inline: 'nearest'
+                    });
+                }, 10); // Muy rápido
                 
             }, { passive: false });
             
