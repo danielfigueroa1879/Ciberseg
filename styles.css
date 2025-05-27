@@ -2941,3 +2941,364 @@ html {
         font-size: 15px !important;
     }
 }
+/* ===== CUADRADOS Y LAYOUT UNIFORME EN MÓVILES ===== */
+
+/* 1. ANCHO UNIFORME PARA TODAS LAS SECCIONES DESDE "SOLUCIONES DE SEGURIDAD" */
+@media screen and (max-width: 768px) {
+    /* Contenedor uniforme para todas las secciones */
+    .main-services .container,
+    .iot-section .container,
+    .mission-vision .container,
+    .contact-section .container {
+        max-width: 90% !important; /* Ancho uniforme para todas */
+        margin: 0 auto !important;
+        padding: 0 15px !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Ajustar padding de las secciones para uniformidad */
+    .main-services,
+    .iot-section,
+    .mission-vision,
+    .contact-section {
+        padding: 60px 5% !important; /* Padding uniforme */
+    }
+}
+
+/* 2. CUADRADOS PARA INFORMACIÓN DE CONTACTO Y FORMULARIO EN MÓVILES */
+@media screen and (max-width: 768px) {
+    .contact-content-wrapper {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 25px !important; /* Separación equitativa */
+        align-items: center !important;
+        width: 100% !important;
+    }
+    
+    /* CUADRADO DE INFORMACIÓN DE CONTACTO */
+    .contact-info-wrapper {
+        background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)) !important;
+        border: 2px solid rgba(224, 253, 44, 0.3) !important;
+        border-radius: 15px !important;
+        padding: 25px 20px !important; /* Padding más compacto */
+        backdrop-filter: blur(10px) !important;
+        transition: all 0.3s ease !important;
+        
+        /* Mismo ancho que otras secciones */
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+        
+        /* Altura fija para uniformidad */
+        min-height: 200px !important;
+        
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+    }
+    
+    .contact-info-wrapper:hover {
+        border-color: #E0FD2C !important;
+        transform: translateY(-3px) !important;
+        box-shadow: 0 8px 25px rgba(224, 253, 44, 0.2) !important;
+    }
+    
+    /* CUADRADO DEL FORMULARIO */
+    .contact-form-wrapper {
+        background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)) !important;
+        border: 2px solid rgba(224, 253, 44, 0.3) !important;
+        border-radius: 15px !important;
+        padding: 25px 20px !important; /* Padding más compacto */
+        backdrop-filter: blur(10px) !important;
+        transition: all 0.3s ease !important;
+        
+        /* Mismo ancho que otras secciones */
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+        
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+    }
+    
+    .contact-form-wrapper:hover {
+        border-color: #E0FD2C !important;
+        transform: translateY(-3px) !important;
+        box-shadow: 0 8px 25px rgba(224, 253, 44, 0.2) !important;
+    }
+    
+    /* Título de información de contacto */
+    .contact-info-wrapper h3 {
+        color: #E0FD2C !important;
+        font-size: 20px !important;
+        margin-bottom: 15px !important;
+        font-weight: 600 !important;
+        text-align: center !important;
+        flex-shrink: 0 !important;
+    }
+    
+    /* Items de contacto más compactos */
+    .contact-info-items {
+        flex: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        gap: 12px !important;
+    }
+    
+    .contact-item {
+        display: flex !important;
+        align-items: center !important;
+        font-size: 14px !important;
+        padding: 5px 0 !important;
+    }
+    
+    .contact-item i {
+        color: #E0FD2C !important;
+        margin-right: 12px !important;
+        font-size: 16px !important;
+        width: 20px !important;
+        flex-shrink: 0 !important;
+    }
+}
+
+/* 3. FORMULARIO MÁS DELGADO Y OPTIMIZADO */
+@media screen and (max-width: 768px) {
+    .contact-form-wrapper h2 {
+        color: #E0FD2C !important;
+        font-size: 20px !important; /* Más pequeño */
+        font-weight: 700 !important;
+        margin: 0 0 20px 0 !important;
+        text-align: center !important;
+        line-height: 1.2 !important;
+        word-spacing: -1px !important;
+        flex-shrink: 0 !important;
+    }
+    
+    .newsletter-form {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 15px !important; /* Espaciado más compacto */
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    /* INPUTS MÁS DELGADOS */
+    .newsletter-form input,
+    .newsletter-form textarea {
+        width: 100% !important;
+        padding: 12px 15px !important; /* Padding más delgado */
+        border: 2px solid rgba(255,255,255,0.2) !important;
+        border-radius: 8px !important;
+        background-color: rgba(255,255,255,0.1) !important;
+        color: #fff !important;
+        font-family: 'Poppins', sans-serif !important;
+        font-size: 14px !important; /* Texto más pequeño */
+        transition: all 0.3s ease !important;
+        box-sizing: border-box !important;
+        height: 45px !important; /* Altura más delgada */
+    }
+    
+    .newsletter-form textarea {
+        height: 80px !important; /* Textarea más delgada */
+        resize: none !important;
+        line-height: 1.4 !important;
+    }
+    
+    /* BOTÓN SUSCRIBIRSE MÁS PEQUEÑO Y A LA IZQUIERDA */
+    .newsletter-form button[type="submit"] {
+        background-color: #E0FD2C !important;
+        color: #000 !important;
+        border: none !important;
+        padding: 10px 20px !important; /* Más pequeño */
+        font-size: 14px !important; /* Letra más pequeña */
+        font-weight: 600 !important;
+        cursor: pointer !important;
+        border-radius: 8px !important;
+        transition: all 0.3s ease !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important; /* Menos espaciado */
+        
+        /* ALINEADO A LA IZQUIERDA */
+        align-self: flex-start !important;
+        margin: 15px 0 0 0 !important;
+        min-width: 120px !important; /* Ancho mínimo más pequeño */
+        max-width: 150px !important; /* Ancho máximo limitado */
+    }
+    
+    .newsletter-form button[type="submit"]:hover {
+        background-color: #C7E525 !important;
+        transform: translateY(-1px) !important;
+        box-shadow: 0 3px 10px rgba(224, 253, 44, 0.3) !important;
+    }
+}
+
+/* 4. AJUSTES PARA OTRAS SECCIONES - MISMO ANCHO */
+@media screen and (max-width: 768px) {
+    /* Tarjetas de servicios con mismo ancho */
+    .services-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px !important;
+        align-items: center !important;
+    }
+    
+    .service-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 25px 20px !important;
+    }
+    
+    /* Tarjetas IoT con mismo ancho */
+    .iot-services {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px !important;
+        align-items: center !important;
+    }
+    
+    .iot-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 20px 15px !important;
+    }
+    
+    /* Tarjetas de Misión y Visión con mismo ancho */
+    .mv-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px !important;
+        align-items: center !important;
+    }
+    
+    .mv-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 25px 20px !important;
+    }
+}
+
+/* 5. MÓVILES PEQUEÑOS - AJUSTES ADICIONALES */
+@media screen and (max-width: 480px) {
+    .main-services .container,
+    .iot-section .container,
+    .mission-vision .container,
+    .contact-section .container {
+        max-width: 95% !important; /* Más ancho en móviles pequeños */
+        padding: 0 10px !important;
+    }
+    
+    .main-services,
+    .iot-section,
+    .mission-vision,
+    .contact-section {
+        padding: 50px 2.5% !important;
+    }
+    
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        padding: 20px 15px !important;
+        min-height: 180px !important;
+    }
+    
+    .contact-info-wrapper h3,
+    .contact-form-wrapper h2 {
+        font-size: 18px !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .newsletter-form input,
+    .newsletter-form textarea {
+        padding: 10px 12px !important;
+        font-size: 13px !important;
+        height: 40px !important;
+    }
+    
+    .newsletter-form textarea {
+        height: 70px !important;
+    }
+    
+    .newsletter-form button[type="submit"] {
+        padding: 8px 16px !important;
+        font-size: 12px !important;
+        min-width: 100px !important;
+        max-width: 130px !important;
+    }
+    
+    .contact-item {
+        font-size: 13px !important;
+    }
+    
+    .contact-item i {
+        font-size: 14px !important;
+        width: 18px !important;
+        margin-right: 10px !important;
+    }
+}
+
+/* 6. MÓVILES MUY PEQUEÑOS - OPTIMIZACIÓN EXTREMA */
+@media screen and (max-width: 360px) {
+    .main-services .container,
+    .iot-section .container,
+    .mission-vision .container,
+    .contact-section .container {
+        max-width: 98% !important;
+        padding: 0 5px !important;
+    }
+    
+    .contact-content-wrapper {
+        gap: 20px !important;
+    }
+    
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        padding: 18px 12px !important;
+        border-radius: 10px !important;
+    }
+    
+    .newsletter-form {
+        gap: 12px !important;
+    }
+    
+    .newsletter-form button[type="submit"] {
+        font-size: 11px !important;
+        padding: 7px 14px !important;
+        min-width: 90px !important;
+    }
+}
+
+/* 7. ASEGURAR CONSISTENCIA EN TODOS LOS ELEMENTOS */
+@media screen and (max-width: 768px) {
+    /* Todos los contenedores principales */
+    .hero-content,
+    .main-services .container,
+    .iot-section .container,
+    .mission-vision .container,
+    .contact-section .container,
+    .footer .container {
+        box-sizing: border-box !important;
+    }
+    
+    /* Espaciado uniforme entre secciones */
+    .main-services,
+    .iot-section,
+    .mission-vision {
+        margin-bottom: 0 !important;
+    }
+    
+    /* Títulos con mismo ancho */
+    .main-services h2,
+    .iot-section h2,
+    .mission-vision h2 {
+        text-align: center !important;
+        margin-bottom: 30px !important;
+        padding: 0 10px !important;
+    }
+}
