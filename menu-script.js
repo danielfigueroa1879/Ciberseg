@@ -144,45 +144,29 @@ function initFormSolution() {
         console.log('✅ Header restaurado');
     }
     
-    // DETECTAR CUANDO EL USUARIO INTERACTÚA CON EL FORMULARIO
+    // DETECTAR CUANDO EL USUARIO TOCA ESPECÍFICAMENTE EL FORMULARIO
     
-    // 1. Al tocar cualquier parte de la sección de contacto
-    if (contactSection) {
-        contactSection.addEventListener('touchstart', function(e) {
+    // 1. Solo al tocar el área específica del formulario (no toda la sección)
+    if (formWrapper) {
+        formWrapper.addEventListener('touchstart', function(e) {
             if (isMenuOpen) return;
             
-            console.log('👆 Touch en sección de contacto');
+            console.log('👆 Touch específico en formulario');
             enterFormMode();
         }, { passive: true });
         
-        contactSection.addEventListener('click', function(e) {
+        formWrapper.addEventListener('click', function(e) {
             if (isMenuOpen) return;
             
-            console.log('👆 Click en sección de contacto');
+            console.log('👆 Click específico en formulario');
             enterFormMode();
         });
     }
     
-    // 2. Al hacer scroll cerca del formulario
-    let scrollTimeout;
-    window.addEventListener('scroll', function() {
-        if (isMenuOpen) return;
-        
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-            const contactTop = contactSection.offsetTop;
-            const scrollPosition = window.pageYOffset + window.innerHeight;
-            
-            // Si está cerca del formulario, activar modo formulario
-            if (scrollPosition > contactTop + 100) {
-                if (!isFormActive) {
-                    enterFormMode();
-                }
-            }
-        }, 100);
-    });
+    // 2. ELIMINADO - No activar automáticamente por scroll
+    // Solo se activa cuando el usuario toca específicamente el formulario
     
-    // 3. Al tocar inputs específicamente
+    // 2. Al tocar inputs específicamente
     const inputs = document.querySelectorAll('.newsletter-form input, .newsletter-form textarea');
     inputs.forEach((input, index) => {
         // Touch events
@@ -231,7 +215,7 @@ function initFormSolution() {
         });
     });
     
-    // 4. BOTÓN PARA SALIR DEL MODO FORMULARIO
+    // 3. BOTÓN PARA SALIR DEL MODO FORMULARIO
     function createExitButton() {
         const exitBtn = document.createElement('button');
         exitBtn.id = 'exit-form-mode';
@@ -297,7 +281,7 @@ function initFormSolution() {
         updateExitButton();
     };
     
-    // 5. SALIR DEL MODO FORMULARIO AL NAVEGAR
+    // 4. SALIR DEL MODO FORMULARIO AL NAVEGAR
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
         link.addEventListener('click', function() {
@@ -307,15 +291,15 @@ function initFormSolution() {
         });
     });
     
-    // 6. MANEJAR SCROLL HACIA ARRIBA PARA SALIR
+    // 5. MODIFICADO - Solo salir si scroll MUY arriba y estaba en modo formulario
     let lastScrollTop = 0;
     window.addEventListener('scroll', function() {
         if (!isFormActive || isMenuOpen) return;
         
         const scrollTop = window.pageYOffset;
         
-        // Si scroll hacia arriba y está cerca del top, salir del modo formulario
-        if (scrollTop < lastScrollTop && scrollTop < 100) {
+        // Solo salir si scroll hacia arriba y está en el TOP de la página
+        if (scrollTop < lastScrollTop && scrollTop < 50) {
             exitFormMode();
         }
         
