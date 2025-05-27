@@ -4049,3 +4049,281 @@ html {
         box-shadow: 0 8px 25px rgba(224, 253, 44, 0.2) !important;
     }
 }
+/* ===== SUBIR CUADRADOS MUCHO MÁS ARRIBA EN MÓVIL ===== */
+
+/* 1. REDUCIR DRASTICAMENTE EL PADDING SUPERIOR */
+@media screen and (max-width: 768px) {
+    .contact-section {
+        padding-top: 90px !important; /* Reducido significativamente de 120px */
+        padding-bottom: 20px !important; /* También reducir padding inferior */
+        padding-left: 5% !important;
+        padding-right: 5% !important;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .contact-section {
+        padding-top: 80px !important; /* Aún más arriba en móviles pequeños */
+        padding-bottom: 15px !important;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .contact-section {
+        padding-top: 70px !important; /* Máximo arriba en móviles muy pequeños */
+        padding-bottom: 10px !important;
+    }
+}
+
+/* 2. ELIMINAR TODOS LOS MÁRGENES SUPERIORES */
+@media screen and (max-width: 768px) {
+    .contact-content-wrapper {
+        margin-top: -10px !important; /* Margen negativo para subir más */
+        padding-top: 0 !important;
+        gap: 15px !important; /* Separación mínima entre cuadrados */
+    }
+    
+    .contact-info-wrapper {
+        margin-top: -5px !important; /* Margen negativo adicional */
+        margin-bottom: 15px !important; /* Separación mínima */
+    }
+    
+    .contact-form-wrapper {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+}
+
+/* 3. REDUCIR ESPACIOS INTERNOS DE LOS TÍTULOS */
+@media screen and (max-width: 768px) {
+    .contact-info-wrapper h3 {
+        margin-top: 0 !important;
+        margin-bottom: 10px !important; /* Reducido de 15px */
+        font-size: 20px !important;
+        line-height: 1.2 !important; /* Altura de línea más compacta */
+    }
+    
+    .contact-form-wrapper h2 {
+        margin-top: 0 !important;
+        margin-bottom: 15px !important; /* Reducido de 20px */
+        font-size: 20px !important;
+        line-height: 1.2 !important;
+    }
+}
+
+/* 4. COMPACTAR AÚN MÁS LOS CUADRADOS */
+@media screen and (max-width: 768px) {
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        padding: 20px 15px !important; /* Reducido de 25px */
+        min-height: 160px !important; /* Altura mínima más pequeña */
+    }
+    
+    /* Items de contacto más compactos */
+    .contact-info-items {
+        gap: 8px !important; /* Reducido de 12px */
+    }
+    
+    .contact-item {
+        padding: 3px 0 !important; /* Reducido de 5px */
+        font-size: 14px !important;
+        margin-bottom: 5px !important; /* Menos separación entre items */
+    }
+    
+    .contact-item i {
+        font-size: 16px !important;
+        width: 20px !important;
+        margin-right: 10px !important;
+    }
+}
+
+/* 5. FORMULARIO MÁS COMPACTO */
+@media screen and (max-width: 768px) {
+    .newsletter-form {
+        gap: 12px !important; /* Reducido de 15px */
+        margin-top: 5px !important; /* Menos margen superior */
+    }
+    
+    .newsletter-form input,
+    .newsletter-form textarea {
+        height: 40px !important; /* Reducido de 45px */
+        padding: 10px 12px !important; /* Padding más pequeño */
+        font-size: 13px !important; /* Texto más pequeño */
+    }
+    
+    .newsletter-form textarea {
+        height: 70px !important; /* Reducido de 80px */
+    }
+    
+    .newsletter-form button[type="submit"] {
+        margin-top: 10px !important; /* Reducido de 15px */
+        padding: 8px 16px !important;
+        font-size: 13px !important;
+    }
+}
+
+/* 6. MÓVILES PEQUEÑOS - EXTREMADAMENTE COMPACTO */
+@media screen and (max-width: 480px) {
+    .contact-content-wrapper {
+        margin-top: -15px !important; /* Margen negativo mayor */
+        gap: 12px !important; /* Separación mínima */
+    }
+    
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        padding: 15px 12px !important; /* Muy compacto */
+        min-height: 140px !important;
+    }
+    
+    .contact-info-wrapper h3,
+    .contact-form-wrapper h2 {
+        font-size: 18px !important;
+        margin-bottom: 8px !important;
+    }
+    
+    .contact-info-items {
+        gap: 6px !important;
+    }
+    
+    .contact-item {
+        font-size: 13px !important;
+        padding: 2px 0 !important;
+    }
+    
+    .newsletter-form {
+        gap: 10px !important;
+    }
+    
+    .newsletter-form input,
+    .newsletter-form textarea {
+        height: 38px !important;
+        padding: 8px 10px !important;
+        font-size: 12px !important;
+    }
+    
+    .newsletter-form textarea {
+        height: 65px !important;
+    }
+}
+
+/* 7. MÓVILES MUY PEQUEÑOS - MÁXIMA COMPACTACIÓN */
+@media screen and (max-width: 360px) {
+    .contact-content-wrapper {
+        margin-top: -20px !important; /* Margen negativo máximo */
+        gap: 10px !important;
+    }
+    
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        padding: 12px 8px !important; /* Mínimo padding */
+        min-height: 120px !important;
+        border-radius: 10px !important; /* Bordes más pequeños */
+    }
+    
+    .contact-info-wrapper h3,
+    .contact-form-wrapper h2 {
+        font-size: 16px !important;
+        margin-bottom: 6px !important;
+    }
+    
+    .contact-info-items {
+        gap: 4px !important;
+    }
+    
+    .contact-item {
+        font-size: 12px !important;
+        padding: 1px 0 !important;
+    }
+    
+    .contact-item i {
+        font-size: 14px !important;
+        width: 18px !important;
+        margin-right: 8px !important;
+    }
+    
+    .newsletter-form {
+        gap: 8px !important;
+        max-width: 98% !important;
+    }
+    
+    .newsletter-form input,
+    .newsletter-form textarea {
+        height: 35px !important;
+        padding: 6px 8px !important;
+        font-size: 11px !important;
+    }
+    
+    .newsletter-form textarea {
+        height: 60px !important;
+    }
+    
+    .newsletter-form button[type="submit"] {
+        padding: 6px 12px !important;
+        font-size: 11px !important;
+        margin-top: 8px !important;
+    }
+}
+
+/* 8. AJUSTE DEL HEADER PARA EVITAR SUPERPOSICIÓN */
+@media screen and (max-width: 768px) {
+    /* Reducir altura del header si es posible */
+    .header {
+        min-height: 80px !important; /* Reducido para liberar espacio */
+    }
+    
+    .navbar {
+        padding: 12px 0 !important; /* Reducido de 15px */
+    }
+    
+    .nav-logo h2 {
+        font-size: 26px !important; /* Ligeramente más pequeño */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .header {
+        min-height: 70px !important;
+    }
+    
+    .navbar {
+        padding: 10px 0 !important;
+    }
+    
+    .nav-logo h2 {
+        font-size: 24px !important;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .header {
+        min-height: 65px !important;
+    }
+    
+    .navbar {
+        padding: 8px 0 !important;
+    }
+    
+    .nav-logo h2 {
+        font-size: 22px !important;
+    }
+}
+
+/* 9. VERIFICACIÓN FINAL - POSICIONAMIENTO EXTREMO */
+@media screen and (max-width: 768px) {
+    /* Si aún necesitas subirlos más, usa transform */
+    .contact-content-wrapper {
+        transform: translateY(-20px) !important; /* Subir 20px adicionales */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .contact-content-wrapper {
+        transform: translateY(-25px) !important; /* Subir 25px adicionales */
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .contact-content-wrapper {
+        transform: translateY(-30px) !important; /* Subir 30px adicionales */
+    }
+}
