@@ -4807,3 +4807,28 @@ html {
         overflow: visible !important;
     }
 }
+/* ===== SOLUCIÓN SIMPLE PARA IGUALAR ANCHO DE CUADRADOS ===== */
+
+@media screen and (max-width: 768px) {
+    /* Igualar exactamente el ancho de los cuadrados de contacto */
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 20px 15px !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Asegurar que el contenedor padre sea igual */
+    .contact-section .container {
+        max-width: 90% !important;
+        padding: 0 15px !important;
+    }
+    
+    /* Quitar cualquier centrado que los haga más pequeños */
+    .contact-content-wrapper {
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+}
