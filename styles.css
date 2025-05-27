@@ -3805,3 +3805,247 @@ html {
         pointer-events: none !important;
     }
 }
+/* ===== CENTRAR FORMULARIO Y SUBIR CUADRADOS EN MÓVIL ===== */
+
+/* 1. SUBIR LOS CUADRADOS (INFORMACIÓN DE CONTACTO Y FORMULARIO) */
+@media screen and (max-width: 768px) {
+    .contact-section {
+        padding: 40px 5% !important; /* Reducido de 60px a 40px para subir */
+    }
+    
+    /* Reducir margen superior del contenedor */
+    .contact-content-wrapper {
+        margin-top: 0 !important; /* Sin margen superior adicional */
+        padding-top: 0 !important; /* Sin padding superior adicional */
+    }
+    
+    /* Información de contacto más arriba */
+    .contact-info-wrapper {
+        margin-top: 0 !important; /* Sin margen superior */
+        margin-bottom: 20px !important; /* Reducido de 25px a 20px */
+    }
+    
+    .contact-info-wrapper h3 {
+        margin-top: 0 !important; /* Sin margen superior */
+        margin-bottom: 15px !important; /* Reducido de 20px */
+    }
+}
+
+/* 2. CENTRAR PERFECTAMENTE LOS INPUTS DEL FORMULARIO DENTRO DEL CUADRADO */
+@media screen and (max-width: 768px) {
+    .contact-form-wrapper {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important; /* Centrar todo el contenido */
+        padding: 25px 15px !important; /* Padding uniforme */
+        margin-top: 0 !important; /* Sin margen superior adicional */
+    }
+    
+    .contact-form-wrapper h2 {
+        text-align: center !important;
+        margin: 0 0 20px 0 !important; /* Sin margen superior */
+        width: 100% !important;
+    }
+    
+    /* Formulario centrado dentro del cuadrado */
+    .newsletter-form {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important; /* Centrar horizontalmente */
+        width: 100% !important;
+        max-width: 85% !important; /* Márgenes iguales a ambos lados */
+        margin: 0 auto !important; /* Centrado automático */
+        padding: 0 !important; /* Sin padding adicional */
+        gap: 15px !important;
+    }
+    
+    /* INPUTS PERFECTAMENTE CENTRADOS */
+    .newsletter-form input,
+    .newsletter-form textarea {
+        width: 100% !important; /* Ocupar todo el ancho disponible del formulario */
+        max-width: 100% !important;
+        margin: 0 auto !important; /* Centrado automático */
+        box-sizing: border-box !important;
+        
+        /* Asegurar centrado visual */
+        text-align: left !important; /* Texto alineado a la izquierda dentro del input */
+        
+        /* Estilo visual */
+        padding: 12px 15px !important;
+        border: 2px solid rgba(255,255,255,0.2) !important;
+        border-radius: 8px !important;
+        background-color: rgba(255,255,255,0.1) !important;
+        color: #fff !important;
+        font-family: 'Poppins', sans-serif !important;
+        font-size: 14px !important;
+        transition: all 0.3s ease !important;
+        height: 45px !important;
+    }
+    
+    .newsletter-form textarea {
+        height: 80px !important;
+        resize: none !important;
+        line-height: 1.4 !important;
+    }
+    
+    /* BOTÓN CENTRADO HORIZONTALMENTE PERO ALINEADO A LA IZQUIERDA DEL FORMULARIO */
+    .newsletter-form button[type="submit"] {
+        align-self: flex-start !important; /* Alineado al inicio del formulario (izquierda) */
+        margin: 15px 0 0 0 !important; /* Solo margen superior */
+        
+        /* Mantener tamaño pequeño */
+        padding: 10px 20px !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        min-width: 120px !important;
+        max-width: 150px !important;
+        
+        /* Estilo */
+        background-color: #E0FD2C !important;
+        color: #000 !important;
+        border: none !important;
+        border-radius: 8px !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
+    }
+}
+
+/* 3. AJUSTES PARA MÓVILES PEQUEÑOS */
+@media screen and (max-width: 480px) {
+    .contact-section {
+        padding: 30px 2.5% !important; /* Aún más arriba en móviles pequeños */
+    }
+    
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        margin-bottom: 15px !important; /* Menos separación entre cuadrados */
+        padding: 20px 12px !important; /* Padding más compacto */
+    }
+    
+    .newsletter-form {
+        max-width: 90% !important; /* Formulario un poco más ancho en móviles pequeños */
+    }
+    
+    .newsletter-form input,
+    .newsletter-form textarea {
+        font-size: 13px !important; /* Texto más pequeño */
+        padding: 10px 12px !important;
+        height: 40px !important;
+    }
+    
+    .newsletter-form textarea {
+        height: 70px !important;
+    }
+    
+    .newsletter-form button[type="submit"] {
+        padding: 8px 16px !important;
+        font-size: 12px !important;
+        min-width: 100px !important;
+        max-width: 130px !important;
+    }
+    
+    .contact-info-wrapper h3,
+    .contact-form-wrapper h2 {
+        font-size: 18px !important;
+        margin-bottom: 12px !important;
+    }
+}
+
+/* 4. MÓVILES MUY PEQUEÑOS */
+@media screen and (max-width: 360px) {
+    .contact-section {
+        padding: 25px 1% !important; /* Máximo arriba */
+    }
+    
+    .contact-content-wrapper {
+        gap: 15px !important; /* Menos separación entre cuadrados */
+    }
+    
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        padding: 18px 10px !important;
+        margin-bottom: 10px !important;
+    }
+    
+    .newsletter-form {
+        max-width: 95% !important; /* Usar casi todo el ancho disponible */
+        gap: 12px !important; /* Menos espaciado entre elementos */
+    }
+    
+    .newsletter-form button[type="submit"] {
+        font-size: 11px !important;
+        padding: 7px 14px !important;
+        min-width: 90px !important;
+    }
+}
+
+/* 5. ASEGURAR QUE EL HEADER NO INTERFIERA CON LOS CUADRADOS MÁS ARRIBA */
+@media screen and (max-width: 768px) {
+    /* Ajustar padding-top para compensar los cuadrados más arriba */
+    .contact-section {
+        padding-top: 120px !important; /* Espacio suficiente para el header fijo */
+    }
+    
+    /* Si los cuadrados quedan muy arriba, ajustar este valor */
+    @media screen and (max-width: 480px) {
+        .contact-section {
+            padding-top: 110px !important;
+        }
+    }
+    
+    @media screen and (max-width: 360px) {
+        .contact-section {
+            padding-top: 100px !important;
+        }
+    }
+}
+
+/* 6. CENTRADO VISUAL PERFECTO */
+@media screen and (max-width: 768px) {
+    /* Contenedor del formulario con centrado perfecto */
+    .newsletter-form {
+        /* Flexbox para centrado perfecto */
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: stretch !important; /* Los inputs ocupan todo el ancho */
+    }
+    
+    /* Cada input centrado individualmente */
+    .newsletter-form > * {
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+    
+    /* Excepto el botón que va alineado a la izquierda */
+    .newsletter-form button[type="submit"] {
+        margin-left: 0 !important;
+        margin-right: auto !important;
+    }
+}
+
+/* 7. VERIFICAR QUE LOS CUADRADOS MANTENGAN SU ESTILO */
+@media screen and (max-width: 768px) {
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        /* Mantener el estilo de cuadrado */
+        background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)) !important;
+        border: 2px solid rgba(224, 253, 44, 0.3) !important;
+        border-radius: 15px !important;
+        backdrop-filter: blur(10px) !important;
+        transition: all 0.3s ease !important;
+        
+        /* Posicionamiento mejorado */
+        position: relative !important;
+        top: 0 !important; /* Sin desplazamiento adicional */
+    }
+    
+    .contact-info-wrapper:hover,
+    .contact-form-wrapper:hover {
+        border-color: #E0FD2C !important;
+        transform: translateY(-3px) !important;
+        box-shadow: 0 8px 25px rgba(224, 253, 44, 0.2) !important;
+    }
+}
