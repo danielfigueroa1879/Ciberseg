@@ -227,10 +227,10 @@ function initRadicalMobileFormFix() {
             input.style.cssText = `
                 width: 100% !important;
                 padding: 16px 18px !important;
-                border: 2px solid rgba(255,255,255,0.3) !important;
+                border: 2px solid rgba(224, 253, 44, 0.3) !important;
                 border-radius: 8px !important;
-                background-color: rgba(255,255,255,0.95) !important;
-                color: #000 !important;
+                background-color: rgba(255,255,255,0.1) !important;
+                color: #fff !important;
                 font-family: 'Poppins', sans-serif !important;
                 font-size: 16px !important;
                 font-weight: 500 !important;
@@ -243,13 +243,13 @@ function initRadicalMobileFormFix() {
             input.addEventListener('focus', function() {
                 this.style.borderColor = '#E0FD2C';
                 this.style.boxShadow = '0 0 0 3px rgba(224, 253, 44, 0.3)';
-                this.style.backgroundColor = '#ffffff';
+                this.style.backgroundColor = 'rgba(255,255,255,0.2)';
             });
             
             input.addEventListener('blur', function() {
-                this.style.borderColor = 'rgba(255,255,255,0.3)';
+                this.style.borderColor = 'rgba(224, 253, 44, 0.3)';
                 this.style.boxShadow = 'none';
-                this.style.backgroundColor = 'rgba(255,255,255,0.95)';
+                this.style.backgroundColor = 'rgba(255,255,255,0.1)';
             });
             
             form.appendChild(input);
@@ -265,10 +265,10 @@ function initRadicalMobileFormFix() {
         textarea.style.cssText = `
             width: 100% !important;
             padding: 16px 18px !important;
-            border: 2px solid rgba(255,255,255,0.3) !important;
+            border: 2px solid rgba(224, 253, 44, 0.3) !important;
             border-radius: 8px !important;
-            background-color: rgba(255,255,255,0.95) !important;
-            color: #000 !important;
+            background-color: rgba(255,255,255,0.1) !important;
+            color: #fff !important;
             font-family: 'Poppins', sans-serif !important;
             font-size: 16px !important;
             font-weight: 500 !important;
@@ -281,13 +281,13 @@ function initRadicalMobileFormFix() {
         textarea.addEventListener('focus', function() {
             this.style.borderColor = '#E0FD2C';
             this.style.boxShadow = '0 0 0 3px rgba(224, 253, 44, 0.3)';
-            this.style.backgroundColor = '#ffffff';
+            this.style.backgroundColor = 'rgba(255,255,255,0.2)';
         });
         
         textarea.addEventListener('blur', function() {
-            this.style.borderColor = 'rgba(255,255,255,0.3)';
+            this.style.borderColor = 'rgba(224, 253, 44, 0.3)';
             this.style.boxShadow = 'none';
-            this.style.backgroundColor = 'rgba(255,255,255,0.95)';
+            this.style.backgroundColor = 'rgba(255,255,255,0.1)';
         });
         
         form.appendChild(textarea);
