@@ -3616,6 +3616,7 @@ html {
 
 
 
+
 /* ===== IGUALAR ANCHO DE CUADROS DE CONTACTO CON MISIÓN Y VISIÓN ===== */
 
 /* MÓVILES - Mismo ancho que las tarjetas de Misión y Visión */
@@ -3660,18 +3661,18 @@ html {
         width: 100% !important;
     }
     
-    /* 3. SECCIÓN DE CONTACTO CON MISMO CONTAINER */
+    /* 3. SECCIÓN DE CONTACTO - MÁXIMO ANCHO CON MARGEN SUTIL */
     .contact-section .container {
-        /* Mismo ancho que otras secciones */
-        max-width: 90% !important; /* Igual que main-services, iot-section, etc. */
+        /* Máximo ancho con solo margen sutil */
+        max-width: 96% !important; /* Máximo ancho, solo 4% de margen total */
         margin: 0 auto !important;
-        padding: 0 15px !important;
+        padding: 0 8px !important; /* Padding muy sutil */
         box-sizing: border-box !important;
     }
     
     .contact-section {
-        /* Mismo padding que otras secciones */
-        padding: 60px 5% !important; /* Igual que main-services, iot-section, mission-vision */
+        /* Padding lateral mínimo */
+        padding: 60px 2% !important; /* Solo 2% de padding lateral */
     }
     
     /* 3.1. BAJAR LOS CUADROS UN POQUITO */
@@ -3679,11 +3680,11 @@ html {
         margin-top: 15px !important; /* Bajar los cuadros 15px */
     }
     
-    /* 4. FORMULARIO MOVIDO A LA DERECHA DENTRO DEL CUADRO */
+    /* 4. FORMULARIO MOVIDO MENOS A LA DERECHA (MÁS A LA IZQUIERDA) */
     .newsletter-form {
-        margin-left: 25px !important; /* Mover inputs hacia la derecha */
-        margin-right: 10px !important;
-        max-width: calc(100% - 35px) !important;
+        margin-left: 15px !important; /* Reducido de 25px a 15px */
+        margin-right: 15px !important; /* Aumentado para mantener centrado */
+        max-width: calc(100% - 30px) !important;
         
         display: flex !important;
         flex-direction: column !important;
@@ -3692,8 +3693,8 @@ html {
     
     /* 5. TÍTULO DEL FORMULARIO */
     .contact-form-wrapper h2 {
-        margin-left: 25px !important;
-        margin-right: 10px !important;
+        margin-left: 15px !important; /* Reducido de 25px a 15px */
+        margin-right: 15px !important; /* Aumentado para mantener centrado */
         text-align: left !important;
         color: #E0FD2C !important;
         font-size: 20px !important;
@@ -3712,15 +3713,15 @@ html {
     }
 }
 
-/* MÓVILES PEQUEÑOS - Mismo comportamiento que otras secciones */
+/* MÓVILES PEQUEÑOS - Máximo ancho con margen mínimo */
 @media screen and (max-width: 480px) {
     .contact-section .container {
-        max-width: 95% !important; /* Igual que otras secciones en móviles pequeños */
-        padding: 0 10px !important;
+        max-width: 98% !important; /* Aún más ancho en móviles pequeños */
+        padding: 0 5px !important; /* Padding mínimo */
     }
     
     .contact-section {
-        padding: 50px 2.5% !important; /* Igual que otras secciones */
+        padding: 50px 1% !important; /* Padding lateral mínimo */
     }
     
     .contact-info-wrapper,
@@ -3733,25 +3734,29 @@ html {
         margin-top: 10px !important; /* Bajar un poquito menos en móviles pequeños */
     }
     
-    /* Formulario con menos movimiento */
+    /* Formulario con menos movimiento hacia la derecha */
     .newsletter-form {
-        margin-left: 20px !important;
-        margin-right: 5px !important;
-        max-width: calc(100% - 25px) !important;
+        margin-left: 12px !important; /* Reducido de 20px a 12px */
+        margin-right: 12px !important; /* Equilibrado */
+        max-width: calc(100% - 24px) !important;
     }
     
     .contact-form-wrapper h2 {
-        margin-left: 20px !important;
-        margin-right: 5px !important;
+        margin-left: 12px !important; /* Reducido de 20px a 12px */
+        margin-right: 12px !important; /* Equilibrado */
         font-size: 18px !important;
     }
 }
 
-/* MÓVILES MUY PEQUEÑOS */
+/* MÓVILES MUY PEQUEÑOS - Máximo ancho posible */
 @media screen and (max-width: 360px) {
     .contact-section .container {
-        max-width: 98% !important;
-        padding: 0 5px !important;
+        max-width: 99% !important; /* Máximo ancho posible */
+        padding: 0 3px !important; /* Padding muy mínimo */
+    }
+    
+    .contact-section {
+        padding: 40px 0.5% !important; /* Padding lateral casi nulo */
     }
     
     .contact-info-wrapper,
@@ -3766,14 +3771,14 @@ html {
     }
     
     .newsletter-form {
-        margin-left: 15px !important;
-        margin-right: 0 !important;
-        max-width: calc(100% - 15px) !important;
+        margin-left: 8px !important; /* Reducido de 15px a 8px */
+        margin-right: 8px !important; /* Equilibrado */
+        max-width: calc(100% - 16px) !important;
     }
     
     .contact-form-wrapper h2 {
-        margin-left: 15px !important;
-        margin-right: 0 !important;
+        margin-left: 8px !important; /* Reducido de 15px a 8px */
+        margin-right: 8px !important; /* Equilibrado */
         font-size: 16px !important;
     }
 }
@@ -3812,14 +3817,11 @@ html {
         padding: 60px 5% !important;
     }
     
-    /* Todos los containers con mismo ancho */
-    .main-services .container,
-    .iot-section .container,
-    .mission-vision .container,
+    /* Todos los containers de contacto con máximo ancho */
     .contact-section .container {
-        max-width: 90% !important;
+        max-width: 96% !important; /* Máximo ancho con margen sutil */
         margin: 0 auto !important;
-        padding: 0 15px !important;
+        padding: 0 8px !important; /* Padding muy sutil */
         box-sizing: border-box !important;
     }
 }
