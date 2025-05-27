@@ -3715,21 +3715,21 @@ html {
 
 /* MÓVILES PEQUEÑOS - Mismo ancho máximo para todos */
 @media screen and (max-width: 480px) {
-    /* TODAS las secciones con mismo container un poco reducido */
+    /* TODAS las secciones con ancho 97% */
     .main-services .container,
     .iot-section .container,
     .mission-vision .container,
     .contact-section .container {
-        max-width: 96% !important; /* Reducido de 99.5% a 96% */
-        padding: 0 6px !important; /* Aumentado de 2px a 6px */
+        max-width: 97% !important; /* Ajustado a 97% */
+        padding: 0 4px !important; /* Reducido de 6px a 4px */
     }
     
-    /* TODAS las secciones con padding un poco mayor */
+    /* TODAS las secciones con padding ajustado */
     .main-services,
     .iot-section,
     .mission-vision,
     .contact-section {
-        padding: 50px 2% !important; /* Aumentado de 0.25% a 2% */
+        padding: 50px 1.5% !important; /* Ajustado a 1.5% */
     }
     
     .contact-info-wrapper,
@@ -3827,22 +3827,22 @@ html {
         align-items: center !important;
     }
     
-    /* TODAS las secciones con padding un poco mayor */
+    /* TODAS las secciones con padding ajustado */
     .main-services,
     .iot-section,
     .mission-vision,
     .contact-section {
-        padding: 60px 2.5% !important; /* Aumentado de 0.5% a 2.5% */
+        padding: 60px 1.5% !important; /* Ajustado a 1.5% */
     }
     
-    /* TODOS los containers con ancho un poco reducido */
+    /* TODOS los containers con ancho 97% */
     .main-services .container,
     .iot-section .container,
     .mission-vision .container,
     .contact-section .container {
-        max-width: 95% !important; /* Reducido de 99% a 95% */
+        max-width: 97% !important; /* Ajustado a 97% desde 99% */
         margin: 0 auto !important;
-        padding: 0 8px !important; /* Aumentado de 3px a 8px */
+        padding: 0 5px !important; /* Reducido de 8px a 5px */
         box-sizing: border-box !important;
     }
 }
