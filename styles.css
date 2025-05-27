@@ -3616,193 +3616,239 @@ html {
 
 
 
-/* ===== AGRANDAR CUADRO Y CENTRAR INPUTS EN MÓVILES ===== */
+/* ===== IGUALAR ANCHO DE CUADROS DE CONTACTO CON MISIÓN Y VISIÓN ===== */
 
-/* MÓVILES - Agrandar cuadro del formulario y centrar contenido */
+/* MÓVILES - Mismo ancho que las tarjetas de Misión y Visión */
 @media screen and (max-width: 768px) {
     
-    /* 1. AGRANDAR EL CUADRO DEL FORMULARIO */
+    /* 1. CUADROS DE CONTACTO CON MISMO ANCHO QUE MISIÓN Y VISIÓN */
+    .contact-info-wrapper,
     .contact-form-wrapper {
-        /* Hacer el cuadro más ancho */
-        width: 105% !important;
+        /* Copiar exactamente el ancho de las tarjetas mv-card */
+        width: 100% !important;
         max-width: 100% !important;
+        margin: 0 auto !important;
         
-        /* Aumentar padding interno para agrandarlo */
-        padding: 35px 25px !important; /* Aumentado de 25px 20px */
-        
-        /* Opcional: Hacer el cuadro más alto también */
-        min-height: auto !important;
+        /* Mismo padding que las tarjetas de misión y visión */
+        padding: 25px 20px !important; /* Igual que .mv-card */
         
         /* Mantener el diseño de cuadro */
         background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)) !important;
         border: 2px solid rgba(224, 253, 44, 0.3) !important;
         border-radius: 15px !important;
         backdrop-filter: blur(10px) !important;
+        transition: all 0.3s ease !important;
+        
+        /* Mismo comportamiento hover que misión y visión */
+        box-sizing: border-box !important;
     }
     
-    /* 2. MOVER LOS INPUTS A LA DERECHA DENTRO DEL CUADRO */
+    .contact-info-wrapper:hover,
+    .contact-form-wrapper:hover {
+        border-color: #E0FD2C !important;
+        transform: translateY(-3px) !important; /* Mismo hover que mv-card */
+        box-shadow: 0 8px 25px rgba(224, 253, 44, 0.2) !important;
+    }
+    
+    /* 2. CONTENEDOR PADRE CON MISMO COMPORTAMIENTO */
+    .contact-content-wrapper {
+        /* Mismo comportamiento que .mv-grid */
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px !important; /* Mismo gap que .mv-grid */
+        align-items: center !important;
+        width: 100% !important;
+    }
+    
+    /* 3. SECCIÓN DE CONTACTO CON MISMO CONTAINER */
+    .contact-section .container {
+        /* Mismo ancho que otras secciones */
+        max-width: 90% !important; /* Igual que main-services, iot-section, etc. */
+        margin: 0 auto !important;
+        padding: 0 15px !important;
+        box-sizing: border-box !important;
+    }
+    
+    .contact-section {
+        /* Mismo padding que otras secciones */
+        padding: 60px 5% !important; /* Igual que main-services, iot-section, mission-vision */
+    }
+    
+    /* 3.1. BAJAR LOS CUADROS UN POQUITO */
+    .contact-content-wrapper {
+        margin-top: 15px !important; /* Bajar los cuadros 15px */
+    }
+    
+    /* 4. FORMULARIO MOVIDO A LA DERECHA DENTRO DEL CUADRO */
     .newsletter-form {
-        /* Mover todo el formulario hacia la derecha */
-        margin-left: 30px !important; /* Ajusta este valor según necesites */
-        margin-right: 15px !important; /* Compensar para mantener centrado */
+        margin-left: 25px !important; /* Mover inputs hacia la derecha */
+        margin-right: 10px !important;
+        max-width: calc(100% - 35px) !important;
         
-        /* Asegurar que no se salga */
-        max-width: calc(100% - 45px) !important;
-        
-        /* Mantener la estructura vertical */
         display: flex !important;
         flex-direction: column !important;
         gap: 15px !important;
     }
     
-    /* 3. TÍTULO DEL FORMULARIO TAMBIÉN CENTRADO */
+    /* 5. TÍTULO DEL FORMULARIO */
     .contact-form-wrapper h2 {
-        /* Mover el título para que esté alineado con los inputs */
-        margin-left: 30px !important;
-        margin-right: 15px !important;
-        text-align: left !important; /* O center si prefieres */
+        margin-left: 25px !important;
+        margin-right: 10px !important;
+        text-align: left !important;
+        color: #E0FD2C !important;
+        font-size: 20px !important;
+        font-weight: 700 !important;
+        margin-bottom: 20px !important;
     }
     
-    /* 4. INPUTS INDIVIDUALES */
-    .newsletter-form input,
-    .newsletter-form textarea {
-        width: 100% !important;
-        box-sizing: border-box !important;
-        /* Los inputs ya estarán centrados por el margin del contenedor padre */
-    }
-    
-    /* 5. BOTÓN TAMBIÉN CENTRADO */
-    .newsletter-form button[type="submit"] {
-        align-self: flex-start !important; /* Alineado a la izquierda del formulario movido */
-        margin: 15px 0 0 0 !important;
+    /* 6. TÍTULO DE INFORMACIÓN DE CONTACTO */
+    .contact-info-wrapper h3 {
+        margin-left: 0 !important; /* Centrado normal */
+        text-align: center !important;
+        color: #E0FD2C !important;
+        font-size: 20px !important;
+        margin-bottom: 15px !important;
+        font-weight: 600 !important;
     }
 }
 
-/* MÓVILES PEQUEÑOS - Ajustes más sutiles */
+/* MÓVILES PEQUEÑOS - Mismo comportamiento que otras secciones */
 @media screen and (max-width: 480px) {
-    .contact-form-wrapper {
-        padding: 25px 20px !important; /* Menos padding en móviles pequeños */
+    .contact-section .container {
+        max-width: 95% !important; /* Igual que otras secciones en móviles pequeños */
+        padding: 0 10px !important;
     }
     
+    .contact-section {
+        padding: 50px 2.5% !important; /* Igual que otras secciones */
+    }
+    
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        padding: 20px 15px !important; /* Mismo padding que mv-card en móviles pequeños */
+    }
+    
+    .contact-content-wrapper {
+        gap: 20px !important;
+        margin-top: 10px !important; /* Bajar un poquito menos en móviles pequeños */
+    }
+    
+    /* Formulario con menos movimiento */
     .newsletter-form {
-        margin-left: 20px !important; /* Menos movimiento */
-        margin-right: 10px !important;
-        max-width: calc(100% - 30px) !important;
+        margin-left: 20px !important;
+        margin-right: 5px !important;
+        max-width: calc(100% - 25px) !important;
     }
     
     .contact-form-wrapper h2 {
         margin-left: 20px !important;
-        margin-right: 10px !important;
+        margin-right: 5px !important;
+        font-size: 18px !important;
     }
 }
 
-/* MÓVILES MUY PEQUEÑOS - Ajustes mínimos */
+/* MÓVILES MUY PEQUEÑOS */
 @media screen and (max-width: 360px) {
+    .contact-section .container {
+        max-width: 98% !important;
+        padding: 0 5px !important;
+    }
+    
+    .contact-info-wrapper,
     .contact-form-wrapper {
-        padding: 20px 15px !important;
+        padding: 18px 12px !important;
+        border-radius: 10px !important;
+    }
+    
+    .contact-content-wrapper {
+        gap: 20px !important;
+        margin-top: 8px !important; /* Bajar muy poquito en móviles muy pequeños */
     }
     
     .newsletter-form {
         margin-left: 15px !important;
-        margin-right: 5px !important;
-        max-width: calc(100% - 20px) !important;
+        margin-right: 0 !important;
+        max-width: calc(100% - 15px) !important;
     }
     
     .contact-form-wrapper h2 {
         margin-left: 15px !important;
-        margin-right: 5px !important;
+        margin-right: 0 !important;
+        font-size: 16px !important;
     }
 }
 
-/* ===== OPCIONES ALTERNATIVAS ===== */
-
-/* Opción A: Si quieres CENTRAR completamente los inputs */
-/*
+/* ASEGURAR CONSISTENCIA CON MISIÓN Y VISIÓN */
 @media screen and (max-width: 768px) {
-    .newsletter-form {
-        margin: 0 auto !important;
-        max-width: 80% !important;
-        padding: 0 !important;
-    }
     
-    .contact-form-wrapper h2 {
-        text-align: center !important;
-        margin: 0 0 25px 0 !important;
-    }
-}
-*/
-
-/* Opción B: Si quieres un padding lateral uniforme */
-/*
-@media screen and (max-width: 768px) {
-    .newsletter-form {
-        margin: 0 !important;
-        padding: 0 40px !important;
+    /* Todos los cuadros (servicios, iot, misión-visión, contacto) con mismo ancho */
+    .service-card,
+    .iot-card,
+    .mv-card,
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        width: 100% !important;
         max-width: 100% !important;
+        margin: 0 auto !important;
         box-sizing: border-box !important;
     }
     
-    .contact-form-wrapper h2 {
-        padding: 0 40px !important;
-        margin-bottom: 25px !important;
-    }
-}
-*/
-
-/* Opción C: Usar flexbox para centrado perfecto */
-/*
-@media screen and (max-width: 768px) {
-    .contact-form-wrapper {
+    /* Todos los grids con mismo comportamiento */
+    .services-grid,
+    .iot-services,
+    .mv-grid,
+    .contact-content-wrapper {
         display: flex !important;
         flex-direction: column !important;
+        gap: 20px !important;
         align-items: center !important;
-        padding: 30px !important;
     }
     
-    .newsletter-form {
-        width: 85% !important;
-        max-width: 85% !important;
-        margin: 0 !important;
+    /* Todas las secciones con mismo padding */
+    .main-services,
+    .iot-section,
+    .mission-vision,
+    .contact-section {
+        padding: 60px 5% !important;
     }
     
-    .contact-form-wrapper h2 {
-        width: 85% !important;
-        text-align: center !important;
-        margin: 0 0 25px 0 !important;
-    }
-}
-*/
-
-/* ===== AJUSTES VISUALES ADICIONALES ===== */
-@media screen and (max-width: 768px) {
-    
-    /* Si quieres que el cuadro de información también sea más grande para equilibrar */
-    .contact-info-wrapper {
-        padding: 30px 25px !important; /* Mismo padding que el formulario */
-        width: 100% !important;
-        max-width: 100% !important;
-    }
-    
-    /* Asegurar espaciado uniforme entre cuadros */
-    .contact-content-wrapper {
-        gap: 25px !important;
-    }
-    
-    /* Prevenir scroll horizontal */
+    /* Todos los containers con mismo ancho */
+    .main-services .container,
+    .iot-section .container,
+    .mission-vision .container,
     .contact-section .container {
-        overflow-x: hidden !important;
-        padding-left: 15px !important;
-        padding-right: 15px !important;
+        max-width: 90% !important;
+        margin: 0 auto !important;
+        padding: 0 15px !important;
+        box-sizing: border-box !important;
     }
 }
 
-/* ===== DESKTOP Y TABLETS - SIN CAMBIOS ===== */
+/* DESKTOP - Mantener diseño de dos columnas para contacto */
 @media screen and (min-width: 769px) {
-    /* Asegurar que en desktop todo permanezca igual */
-    .contact-form-wrapper {
-        padding: 40px 30px !important; /* Mantener padding original */
+    
+    /* Contacto mantiene su diseño de dos columnas */
+    .contact-content-wrapper {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 40px !important;
+        align-items: stretch !important;
+        max-width: 1000px !important;
+        margin: 0 auto !important;
+        margin-top: 0 !important; /* Sin margin-top en desktop */
     }
     
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        /* Mantener el diseño original de desktop */
+        padding: 40px 30px !important;
+        height: 500px !important;
+        min-height: 500px !important;
+        max-height: 500px !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Limpiar ajustes móviles en desktop */
     .newsletter-form {
         margin-left: 0 !important;
         margin-right: 0 !important;
@@ -3813,5 +3859,11 @@ html {
         margin-left: 0 !important;
         margin-right: 0 !important;
         text-align: center !important;
+        font-size: 24px !important;
+    }
+    
+    .contact-info-wrapper h3 {
+        text-align: center !important;
+        font-size: 24px !important;
     }
 }
