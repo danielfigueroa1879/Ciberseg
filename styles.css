@@ -2393,3 +2393,307 @@ html {
         margin-bottom: 40px !important;
     }
 }
+/* ===== AJUSTES FINALES ESPECÍFICOS ===== */
+
+/* 1. TÍTULO "FORMULARIO DE INSCRIPCIÓN" MÁS PEQUEÑO EN MÓVILES */
+@media screen and (max-width: 768px) {
+    .contact-form-wrapper h2 {
+        color: #E0FD2C !important;
+        font-size: 22px !important; /* Reducido de 28px a 22px */
+        font-weight: 700 !important;
+        margin: 0 0 25px 0 !important;
+        text-align: left !important;
+        line-height: 1.2 !important; /* Mejor espaciado de línea */
+        word-spacing: -2px !important; /* Acercar palabras para que quepa en una línea */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .contact-form-wrapper h2 {
+        font-size: 20px !important; /* Aún más pequeño en móviles pequeños */
+        word-spacing: -1px !important;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .contact-form-wrapper h2 {
+        font-size: 18px !important; /* Mínimo para móviles muy pequeños */
+    }
+}
+
+/* 2. FORMULARIO CENTRADO CON MÁRGENES IGUALES EN MÓVILES */
+@media screen and (max-width: 768px) {
+    .contact-form-wrapper {
+        padding-left: 0 !important; /* Eliminar padding izquierdo */
+        max-width: 100% !important; /* Ocupar todo el ancho disponible */
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important; /* Centrar contenido */
+    }
+    
+    .newsletter-form {
+        max-width: 90% !important; /* Márgenes iguales a ambos lados */
+        margin: 0 auto !important; /* Centrado */
+        padding: 0 20px !important; /* Padding interno uniforme */
+        box-sizing: border-box !important;
+    }
+    
+    .newsletter-form input,
+    .newsletter-form textarea {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        box-sizing: border-box !important;
+    }
+}
+
+/* 3. BOTÓN SUSCRIBIRSE AL CENTRO EN MÓVILES */
+@media screen and (max-width: 768px) {
+    .newsletter-form button[type="submit"] {
+        align-self: center !important; /* Centrar el botón */
+        margin: 25px auto 0 auto !important; /* Centrado con margen superior */
+        display: block !important;
+    }
+}
+
+/* 4. SUBIR LA SECCIÓN DE INFORMACIÓN DE CONTACTO */
+@media screen and (max-width: 768px) {
+    .contact-section {
+        padding: 60px 15px !important; /* Reducido de 80px a 60px */
+    }
+    
+    .contact-info-wrapper {
+        margin-bottom: 30px !important; /* Reducido de 40px a 30px */
+        margin-top: 0 !important; /* Sin margen superior adicional */
+    }
+    
+    .contact-info-wrapper h3 {
+        margin-bottom: 20px !important; /* Reducido de 25px a 20px */
+        margin-top: 0 !important;
+    }
+}
+
+/* 5. CAMBIAR "BLOG" POR "SUSCRIPCIÓN" Y LETRAS MÁS PEQUEÑAS EN MENÚ */
+/* Esto se hace en HTML, pero aquí ajustamos los estilos */
+@media screen and (max-width: 768px) {
+    .nav-link {
+        font-size: 18px !important; /* Reducido de 20px a 18px */
+        font-weight: 500 !important;
+        padding: 8px 15px !important; /* Más padding para mejor touch */
+        border-radius: 12px !important; /* Más redondeado */
+        transition: all 0.3s ease !important;
+    }
+    
+    .nav-menu {
+        border-radius: 25px !important; /* Menú más redondeado */
+        border-bottom-left-radius: 25px !important;
+        border-bottom-right-radius: 25px !important;
+    }
+    
+    .nav-menu li {
+        margin: 5px 0 !important; /* Menos espaciado entre elementos */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .nav-link {
+        font-size: 16px !important; /* Aún más pequeño en móviles pequeños */
+        padding: 6px 12px !important;
+    }
+}
+
+/* 6. PC: FOOTER CENTRADO - RECYBERSEG, NÚMERO Y REDES SOCIALES */
+@media screen and (min-width: 769px) {
+    .footer-content {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
+        max-width: 600px !important;
+        margin: 0 auto !important;
+    }
+    
+    .footer-section {
+        text-align: center !important;
+        width: 100% !important;
+    }
+    
+    .footer-section h3 {
+        text-align: center !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .footer-section p {
+        text-align: center !important;
+        margin-bottom: 20px !important;
+    }
+    
+    .social-links {
+        justify-content: center !important;
+        margin: 0 auto !important;
+    }
+}
+
+/* 7. PC: CUADRADOS PARA INFORMACIÓN DE CONTACTO Y FORMULARIO */
+@media screen and (min-width: 769px) {
+    .contact-content-wrapper {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 40px !important; /* Separación entre cuadrados */
+        align-items: start !important;
+        max-width: 1000px !important;
+        margin: 0 auto !important;
+    }
+    
+    /* Cuadrado para información de contacto */
+    .contact-info-wrapper {
+        background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)) !important;
+        border: 2px solid rgba(224, 253, 44, 0.3) !important;
+        border-radius: 15px !important;
+        padding: 40px 30px !important;
+        backdrop-filter: blur(10px) !important;
+        transition: all 0.3s ease !important;
+        min-height: 400px !important; /* Altura mínima para igualar */
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+    }
+    
+    .contact-info-wrapper:hover {
+        border-color: #E0FD2C !important;
+        transform: translateY(-5px) !important;
+        box-shadow: 0 10px 30px rgba(224, 253, 44, 0.2) !important;
+    }
+    
+    /* Cuadrado para formulario */
+    .contact-form-wrapper {
+        background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)) !important;
+        border: 2px solid rgba(224, 253, 44, 0.3) !important;
+        border-radius: 15px !important;
+        padding: 40px 30px !important;
+        backdrop-filter: blur(10px) !important;
+        transition: all 0.3s ease !important;
+        min-height: 400px !important; /* Altura mínima para igualar */
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+    }
+    
+    .contact-form-wrapper:hover {
+        border-color: #E0FD2C !important;
+        transform: translateY(-5px) !important;
+        box-shadow: 0 10px 30px rgba(224, 253, 44, 0.2) !important;
+    }
+    
+    /* Título del formulario en PC */
+    .contact-form-wrapper h2 {
+        color: #E0FD2C !important;
+        font-size: 24px !important;
+        margin-bottom: 25px !important;
+        font-weight: 600 !important;
+        text-align: center !important; /* Centrado en PC */
+    }
+    
+    /* Título de información de contacto en PC */
+    .contact-info-wrapper h3 {
+        color: #E0FD2C !important;
+        font-size: 24px !important;
+        margin-bottom: 25px !important;
+        font-weight: 600 !important;
+        text-align: center !important; /* Centrado en PC */
+    }
+    
+    /* Formulario centrado en PC */
+    .newsletter-form {
+        max-width: 100% !important;
+        margin: 0 auto !important;
+    }
+    
+    /* Botón centrado en PC */
+    .newsletter-form button[type="submit"] {
+        align-self: center !important;
+        margin: 20px auto 0 auto !important;
+        display: block !important;
+    }
+}
+
+/* 8. AJUSTES ADICIONALES PARA CONSISTENCIA */
+@media screen and (max-width: 768px) {
+    /* Asegurar que el título quede en una línea */
+    .contact-form-wrapper h2 {
+        white-space: nowrap !important; /* Forzar una sola línea */
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+    
+    /* Si es demasiado largo, permitir ajuste automático */
+    @media screen and (max-width: 320px) {
+        .contact-form-wrapper h2 {
+            white-space: normal !important;
+            font-size: 16px !important;
+        }
+    }
+}
+
+/* 9. MEJORAS EN EL DISEÑO DEL MENÚ MÓVIL */
+@media screen and (max-width: 768px) {
+    .nav-menu {
+        background: rgba(0, 0, 0, 0.95) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        border: 2px solid rgba(224, 253, 44, 0.2) !important;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3) !important;
+    }
+    
+    .nav-menu li::after {
+        background: rgba(224, 253, 44, 0.2) !important; /* Líneas más sutiles */
+        height: 1px !important;
+    }
+    
+    .nav-menu li:last-child::after {
+        display: none !important;
+    }
+}
+
+/* 10. ESPACIADO MEJORADO EN MÓVILES */
+@media screen and (max-width: 480px) {
+    .contact-section {
+        padding: 50px 10px !important; /* Más compacto en móviles pequeños */
+    }
+    
+    .contact-info-wrapper {
+        margin-bottom: 25px !important;
+    }
+    
+    .newsletter-form {
+        max-width: 95% !important;
+        padding: 0 15px !important;
+    }
+}
+
+/* 11. TABLET AJUSTES */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .contact-content-wrapper {
+        gap: 30px !important; /* Menos separación en tablets */
+    }
+    
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        padding: 35px 25px !important; /* Menos padding en tablets */
+        min-height: 350px !important; /* Altura ajustada */
+    }
+}
+
+/* 12. DESKTOP GRANDE - AJUSTES FINALES */
+@media screen and (min-width: 1200px) {
+    .contact-content-wrapper {
+        gap: 50px !important; /* Más separación en pantallas grandes */
+        max-width: 1200px !important;
+    }
+    
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        padding: 45px 35px !important;
+        min-height: 450px !important;
+    }
+}
