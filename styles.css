@@ -3713,15 +3713,23 @@ html {
     }
 }
 
-/* MÓVILES PEQUEÑOS - Ancho casi completo */
+/* MÓVILES PEQUEÑOS - Mismo ancho máximo para todos */
 @media screen and (max-width: 480px) {
+    /* TODAS las secciones con mismo container */
+    .main-services .container,
+    .iot-section .container,
+    .mission-vision .container,
     .contact-section .container {
-        max-width: 99.5% !important; /* Aumentado de 98% a 99.5% */
-        padding: 0 2px !important; /* Reducido de 5px a 2px */
+        max-width: 99.5% !important; /* Mismo ancho para todos */
+        padding: 0 2px !important; /* Mismo padding para todos */
     }
     
+    /* TODAS las secciones con mismo padding lateral */
+    .main-services,
+    .iot-section,
+    .mission-vision,
     .contact-section {
-        padding: 50px 0.25% !important; /* Reducido de 1% a 0.25% */
+        padding: 50px 0.25% !important; /* Mismo padding para todos */
     }
     
     .contact-info-wrapper,
@@ -3748,15 +3756,23 @@ html {
     }
 }
 
-/* MÓVILES MUY PEQUEÑOS - Ancho completo */
+/* MÓVILES MUY PEQUEÑOS - Ancho completo para todos */
 @media screen and (max-width: 360px) {
+    /* TODAS las secciones con ancho completo */
+    .main-services .container,
+    .iot-section .container,
+    .mission-vision .container,
     .contact-section .container {
-        max-width: 100% !important; /* Ancho completo, aumentado de 99% */
-        padding: 0 1px !important; /* Reducido de 3px a 1px */
+        max-width: 100% !important; /* Ancho completo para todos */
+        padding: 0 1px !important; /* Padding mínimo para todos */
     }
     
+    /* TODAS las secciones sin padding lateral */
+    .main-services,
+    .iot-section,
+    .mission-vision,
     .contact-section {
-        padding: 40px 0% !important; /* Sin padding lateral */
+        padding: 40px 0% !important; /* Sin padding lateral para todos */
     }
     
     .contact-info-wrapper,
@@ -3783,10 +3799,10 @@ html {
     }
 }
 
-/* ASEGURAR CONSISTENCIA CON MISIÓN Y VISIÓN */
+/* ASEGURAR MISMO ANCHO PARA TODOS LOS CUADROS */
 @media screen and (max-width: 768px) {
     
-    /* Todos los cuadros (servicios, iot, misión-visión, contacto) con mismo ancho */
+    /* Todos los cuadros (servicios, iot, misión-visión, contacto) con mismo ancho máximo */
     .service-card,
     .iot-card,
     .mv-card,
@@ -3809,19 +3825,22 @@ html {
         align-items: center !important;
     }
     
-    /* Todas las secciones con mismo padding */
+    /* TODAS las secciones con mismo padding mínimo */
     .main-services,
     .iot-section,
     .mission-vision,
     .contact-section {
-        padding: 60px 5% !important;
+        padding: 60px 0.5% !important; /* Mismo padding ultra mínimo */
     }
     
-    /* Todos los containers de contacto con ancho máximo */
+    /* TODOS los containers con mismo ancho máximo */
+    .main-services .container,
+    .iot-section .container,
+    .mission-vision .container,
     .contact-section .container {
-        max-width: 99% !important; /* Ancho máximo con margen mínimo */
+        max-width: 99% !important; /* Mismo ancho máximo para todos */
         margin: 0 auto !important;
-        padding: 0 3px !important; /* Padding mínimo */
+        padding: 0 3px !important; /* Mismo padding mínimo para todos */
         box-sizing: border-box !important;
     }
 }
