@@ -3302,3 +3302,314 @@ html {
         padding: 0 10px !important;
     }
 }
+/* ===== SOLUCIÓN CSS SIMPLE Y FLUIDA ===== */
+
+/* 1. ELIMINAR INTERFERENCIAS DEL HEADER EN MÓVILES */
+@media screen and (max-width: 768px) {
+    
+    /* Header con transiciones suaves */
+    .header {
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                   opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        will-change: transform, opacity !important;
+    }
+    
+    /* Body con transición suave */
+    body {
+        transition: padding-top 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+    
+    /* 2. INPUTS SIN INTERFERENCIAS */
+    .contact-section {
+        /* Reducir padding superior para evitar zona muerta */
+        padding-top: 60px !important;
+        position: relative !important;
+        z-index: 1 !important;
+    }
+    
+    /* 3. FORMULARIOS ACCESIBLES */
+    .newsletter-form,
+    .contact-form {
+        position: relative !important;
+        z-index: 10 !important;
+    }
+    
+    /* 4. INPUTS OPTIMIZADOS */
+    .newsletter-form input,
+    .newsletter-form textarea,
+    .contact-form input,
+    .contact-form textarea {
+        /* Propiedades básicas mejoradas */
+        -webkit-appearance: none !important;
+        appearance: none !important;
+        border-radius: 8px !important;
+        min-height: 48px !important;
+        font-size: 16px !important; /* Prevenir zoom iOS */
+        
+        /* Interactividad táctil */
+        touch-action: manipulation !important;
+        -webkit-touch-callout: default !important;
+        -webkit-user-select: text !important;
+        user-select: text !important;
+        
+        /* Transiciones suaves */
+        transition: border-color 0.3s ease, 
+                   background-color 0.3s ease, 
+                   box-shadow 0.3s ease !important;
+        
+        /* Asegurar accesibilidad */
+        pointer-events: auto !important;
+        position: relative !important;
+        z-index: 20 !important;
+        
+        /* Estilos base */
+        border: 2px solid rgba(255,255,255,0.2) !important;
+        background-color: rgba(255,255,255,0.1) !important;
+        color: #fff !important;
+        padding: 12px 15px !important;
+    }
+    
+    /* 5. ESTADO FOCUS MEJORADO */
+    .newsletter-form input:focus,
+    .newsletter-form textarea:focus,
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+        outline: none !important;
+        border-color: #E0FD2C !important;
+        background-color: rgba(255,255,255,0.15) !important;
+        box-shadow: 0 0 10px rgba(224, 253, 44, 0.3) !important;
+        
+        /* Asegurar que esté por encima de todo */
+        z-index: 30 !important;
+        position: relative !important;
+    }
+    
+    /* 6. PLACEHOLDERS VISIBLES */
+    input::placeholder,
+    textarea::placeholder {
+        color: rgba(255,255,255,0.7) !important;
+        opacity: 1 !important;
+    }
+    
+    input:focus::placeholder,
+    textarea:focus::placeholder {
+        color: rgba(255,255,255,0.5) !important;
+    }
+    
+    /* 7. BOTONES ACCESIBLES */
+    .newsletter-form button[type="submit"],
+    .contact-form button[type="submit"] {
+        min-height: 48px !important;
+        touch-action: manipulation !important;
+        position: relative !important;
+        z-index: 25 !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    /* 8. MENÚ HAMBURGUESA */
+    .nav-menu {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        transform: translateY(-20px) !important;
+    }
+    
+    .nav-menu.active {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(0) !important;
+    }
+    
+    /* 9. PREVENIR SCROLL CUANDO MENÚ ABIERTO */
+    body:has(.nav-menu.active) {
+        overflow: hidden !important;
+    }
+    
+    /* 10. TEXTAREAS ESPECÍFICAMENTE */
+    textarea {
+        resize: vertical !important;
+        min-height: 100px !important;
+        line-height: 1.5 !important;
+    }
+    
+    textarea:focus {
+        resize: none !important;
+    }
+    
+    /* 11. CONTENEDORES SIN INTERFERENCIAS */
+    .contact-form-wrapper,
+    .contact-info-wrapper {
+        position: static !important;
+        transform: none !important;
+    }
+    
+    .contact-form-wrapper:hover,
+    .contact-info-wrapper:hover {
+        transform: translateY(-3px) !important;
+    }
+    
+    /* 12. ELIMINAR OVERLAYS QUE INTERFIERAN */
+    .hero::before,
+    .hero::after,
+    .contact-section::before,
+    .contact-section::after {
+        pointer-events: none !important;
+    }
+    
+    /* 13. SCROLL BEHAVIOR */
+    html {
+        scroll-behavior: smooth !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+    
+    body {
+        -webkit-overflow-scrolling: touch !important;
+    }
+    
+    /* 14. FORMULARIO EN FOOTER */
+    .footer .newsletter-form input,
+    .footer .newsletter-form textarea {
+        font-size: 16px !important;
+        min-height: 48px !important;
+        touch-action: manipulation !important;
+    }
+}
+
+/* ===== MÓVILES PEQUEÑOS ===== */
+@media screen and (max-width: 480px) {
+    .contact-section {
+        padding-top: 40px !important;
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+    
+    .newsletter-form input,
+    .newsletter-form textarea,
+    .contact-form input,
+    .contact-form textarea {
+        padding: 10px 12px !important;
+        min-height: 46px !important;
+    }
+    
+    textarea {
+        min-height: 90px !important;
+    }
+}
+
+/* ===== MÓVILES MUY PEQUEÑOS ===== */
+@media screen and (max-width: 360px) {
+    .contact-section {
+        padding-top: 30px !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+    
+    .newsletter-form input,
+    .newsletter-form textarea {
+        padding: 8px 10px !important;
+        min-height: 44px !important;
+    }
+}
+
+/* ===== LANDSCAPE MÓVIL ===== */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .contact-section {
+        padding-top: 20px !important;
+        padding-bottom: 30px !important;
+    }
+    
+    textarea {
+        min-height: 70px !important;
+    }
+}
+
+/* ===== TABLETS ===== */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .contact-section {
+        padding-top: 50px !important;
+    }
+    
+    .newsletter-form input,
+    .newsletter-form textarea {
+        min-height: 50px !important;
+        padding: 14px 16px !important;
+    }
+}
+
+/* ===== DESKTOP - COMPORTAMIENTO NORMAL ===== */
+@media screen and (min-width: 769px) {
+    .header {
+        position: fixed !important;
+        top: 0 !important;
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+        z-index: 1000 !important;
+    }
+    
+    .contact-section {
+        padding-top: 80px !important;
+    }
+    
+    body {
+        padding-top: auto !important;
+    }
+}
+
+/* ===== ACCESIBILIDAD ===== */
+@media (prefers-reduced-motion: reduce) {
+    @media screen and (max-width: 768px) {
+        .header,
+        body,
+        input,
+        textarea,
+        .nav-menu {
+            transition: none !important;
+        }
+    }
+}
+
+/* ===== HIGH CONTRAST ===== */
+@media (prefers-contrast: high) {
+    @media screen and (max-width: 768px) {
+        input:focus,
+        textarea:focus {
+            border-color: #fff !important;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8) !important;
+        }
+    }
+}
+
+/* ===== MODO OSCURO ===== */
+@media (prefers-color-scheme: dark) {
+    @media screen and (max-width: 768px) {
+        input,
+        textarea {
+            background-color: rgba(255,255,255,0.05) !important;
+            border-color: rgba(255,255,255,0.2) !important;
+        }
+        
+        input:focus,
+        textarea:focus {
+            background-color: rgba(255,255,255,0.1) !important;
+        }
+    }
+}
+
+/* ===== PERFORMANCE OPTIMIZATIONS ===== */
+@media screen and (max-width: 768px) {
+    /* GPU acceleration para elementos que se transforman */
+    .header,
+    .nav-menu,
+    input:focus,
+    textarea:focus {
+        will-change: transform, opacity !important;
+        -webkit-backface-visibility: hidden !important;
+        backface-visibility: hidden !important;
+    }
+    
+    /* Contain para mejor rendimiento */
+    .newsletter-form,
+    .contact-form {
+        contain: layout style !important;
+    }
+}
