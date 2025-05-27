@@ -21,7 +21,7 @@ function initMenu() {
         return;
     }
     
-    // Limpiar eventos previos
+    // Limpiar eventos previos para evitar duplicados
     menuButton.removeEventListener('click', toggleMenu);
     
     // Evento click principal
@@ -64,7 +64,7 @@ function toggleMenu() {
 function openMenu() {
     console.log('📂 Abriendo menú...');
     
-    // Desenfocar cualquier input activo
+    // Desenfocar cualquier input activo antes de abrir el menú
     const activeInput = document.activeElement;
     if (activeInput && (activeInput.tagName === 'INPUT' || activeInput.tagName === 'TEXTAREA')) {
         activeInput.blur();
@@ -74,16 +74,20 @@ function openMenu() {
     menuButton.classList.add('active');
     mobileMenu.classList.add('active');
     document.body.classList.add('menu-open');
-    document.body.classList.remove('form-input-focused');
+    document.body.classList.remove('form-input-focused'); // Asegurarse de quitar esta clase
     
     isMenuOpen = true;
     
-    // Forzar que el header sea visible
+    // Forzar que el header sea visible y con alto z-index cuando el menú está abierto
     const header = document.querySelector('.header');
     if (header) {
         header.style.transform = 'translateY(0) !important';
-        header.style.zIndex = '1000';
+        header.style.zIndex = '1000'; // Asegurar que el header esté por encima cuando el menú está abierto
         header.style.position = 'fixed';
+        header.style.display = 'block'; // Asegurar que sea visible
+        header.style.visibility = 'visible';
+        header.style.opacity = '1';
+        header.style.pointerEvents = 'auto';
     }
     
     console.log('✅ Menú abierto');
@@ -97,18 +101,25 @@ function closeMenu() {
     document.body.classList.remove('menu-open');
     
     isMenuOpen = false;
-    document.body.style.overflow = '';
+    document.body.style.overflow = ''; // Restaurar overflow del body
+    
+    // Restaurar el header si no hay inputs enfocados
+    if (!isInputFocused) {
+        smartHeaderControl();
+    }
     
     console.log('✅ Menú cerrado');
 }
 
 // FUNCIÓN 2: CORRECCIÓN AVANZADA PARA FORMULARIOS MÓVILES
 function initAdvancedMobileFormFix() {
+    // Solo aplicar en dispositivos móviles
     if (window.innerWidth <= 768) {
         console.log('📱 Inicializando corrección avanzada de formulario móvil...');
         
         const header = document.querySelector('.header');
         const body = document.body;
+        // Seleccionar todos los inputs de texto y textareas
         const inputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], textarea');
         
         let focusTimeout;
@@ -136,68 +147,67 @@ function initAdvancedMobileFormFix() {
                 header.style.visibility = 'hidden';
                 header.style.opacity = '0';
                 header.style.transform = 'translateY(-100%)';
-                header.style.zIndex = '-1';
-                header.style.pointerEvents = 'none';
+                header.style.zIndex = '-1'; // Asegurar que esté por debajo de todo
+                header.style.pointerEvents = 'none'; // Desactivar eventos de ratón
                 body.classList.add('header-hidden', 'form-input-active');
-                body.style.paddingTop = '0';
+                body.style.paddingTop = '0'; // Eliminar cualquier padding superior del body
                 console.log('🙈 Header COMPLETAMENTE ocultado para formulario');
             } else if (!isMenuOpen) {
-                // MOSTRAR HEADER cuando no hay input enfocado
+                // MOSTRAR HEADER cuando no hay input enfocado y el menú no está abierto
                 header.style.display = 'block';
                 header.style.visibility = 'visible';
                 header.style.opacity = '1';
                 header.style.transform = 'translateY(0)';
-                header.style.zIndex = '1000';
+                header.style.zIndex = '999'; // Restaurar z-index para que sea visible pero debajo de inputs enfocados
                 header.style.pointerEvents = 'auto';
                 body.classList.remove('header-hidden', 'form-input-active');
-                body.style.paddingTop = '';
+                body.style.paddingTop = ''; // Restaurar padding original del body
                 console.log('👁️ Header completamente restaurado');
             }
         }
         
         // PASO 3: SCROLL ULTRA AGRESIVO PARA POSICIONAR INPUT CORRECTAMENTE
         function smartScrollToInput(input) {
-            if (isMenuOpen) return;
+            if (isMenuOpen) return; // No hacer scroll si el menú está abierto
             
             clearTimeout(scrollTimeout);
             scrollTimeout = setTimeout(() => {
                 console.log('📍 Scroll ULTRA AGRESIVO al input');
                 
-                // Desactivar cualquier interferencia del header
-                if (header) {
-                    header.style.position = 'absolute';
-                    header.style.top = '-200px';
-                }
+                // Asegurarse de que el input tenga un z-index alto
+                input.style.position = 'relative';
+                input.style.zIndex = '1001'; // Más alto que el header
                 
-                // Calcular posición sin considerar header
                 const inputRect = input.getBoundingClientRect();
                 const currentScroll = window.pageYOffset;
                 const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
                 
-                // Posición agresiva: input en la parte MUY superior de la pantalla
-                const targetScroll = currentScroll + inputRect.top - 50; // Solo 50px desde arriba
+                // Calcular la posición deseada para el input (ej. 20px desde la parte superior del viewport)
+                const targetTop = 20; 
+                const targetScroll = currentScroll + inputRect.top - targetTop;
                 
-                // Scroll inmediato y forzado
+                // Forzar el scroll inmediato
                 window.scrollTo({
                     top: Math.max(0, targetScroll),
-                    behavior: 'instant' // Cambiar a instant para ser más rápido
+                    behavior: 'instant' 
                 });
                 
-                // Scroll adicional después de un momento para asegurar posición
+                // Un pequeño retraso para asegurar que el scroll se complete
                 setTimeout(() => {
                     const newInputRect = input.getBoundingClientRect();
-                    if (newInputRect.top > 100) {
+                    if (newInputRect.top < targetTop || newInputRect.bottom > viewportHeight - keyboardHeight) {
+                        // Si el input aún no está en la posición deseada o está cubierto por el teclado
                         window.scrollTo({
-                            top: window.pageYOffset + newInputRect.top - 50,
+                            top: window.pageYOffset + newInputRect.top - targetTop,
                             behavior: 'instant'
                         });
                     }
-                }, 100);
+                }, 50); // Reducir delay
                 
-            }, 50); // Reducir delay
+            }, 10); // Reducir aún más el delay inicial
         }
         
-        // PASO 4: PREVENIR ZOOM EN IOS
+        // PASO 4: PREVENIR ZOOM EN IOS (ya implementado, asegurar que el tamaño sea 16px o más)
         function preventIOSZoom() {
             inputs.forEach(input => {
                 const computedStyle = window.getComputedStyle(input);
@@ -215,7 +225,7 @@ function initAdvancedMobileFormFix() {
             // EVENTO FOCUS - ULTRA AGRESIVO
             input.addEventListener('focus', function(e) {
                 if (isMenuOpen) {
-                    this.blur();
+                    this.blur(); // Si el menú está abierto, no permitir enfocar el input
                     return;
                 }
                 
@@ -223,36 +233,37 @@ function initAdvancedMobileFormFix() {
                 
                 clearTimeout(focusTimeout);
                 isInputFocused = true;
+                document.body.classList.add('form-input-focused'); // Añadir clase al body
                 
                 // SECUENCIA ULTRA AGRESIVA
                 // 1. Ocultar header INMEDIATAMENTE
                 if (header) {
                     header.style.display = 'none';
-                    header.style.position = 'absolute';
-                    header.style.top = '-500px';
+                    header.style.position = 'absolute'; // Cambiar a absolute para sacarlo del flujo
+                    header.style.top = '-500px'; // Moverlo muy arriba
                     header.style.zIndex = '-999';
                 }
                 
-                // 2. Preparar el input para máxima visibilidad
+                // 2. Preparar el input para máxima visibilidad (z-index alto)
                 this.style.position = 'relative';
-                this.style.zIndex = '9999';
-                this.style.isolation = 'isolate';
+                this.style.zIndex = '1001'; // Asegurar que el input esté por encima
+                this.style.isolation = 'isolate'; // Crear un nuevo contexto de apilamiento
                 
                 // 3. Ejecutar acciones de forma inmediata
                 setTimeout(() => {
                     setDynamicViewport();
-                    smartHeaderControl();
-                    smartScrollToInput(this);
+                    smartHeaderControl(); // Ocultar el header
+                    smartScrollToInput(this); // Desplazar al input
                     
-                    // 4. Forzar que el input esté visible
+                    // 4. Forzar que el input esté visible de nuevo (redundante pero seguro)
                     this.scrollIntoView({
                         behavior: 'instant',
                         block: 'start',
                         inline: 'nearest'
                     });
-                }, 10); // Muy rápido
+                }, 5); // Muy rápido
                 
-            }, { passive: false });
+            }, { passive: false }); // Usar passive: false para prevenir el comportamiento por defecto del navegador si es necesario
             
             // EVENTO BLUR
             input.addEventListener('blur', function(e) {
@@ -265,13 +276,13 @@ function initAdvancedMobileFormFix() {
                     if (!anyFocused && !isMenuOpen) {
                         console.log('📝 Todos los inputs desenfocados');
                         isInputFocused = false;
-                        setDynamicViewport();
-                        smartHeaderControl();
+                        document.body.classList.remove('form-input-focused'); // Quitar clase del body
+                        smartHeaderControl(); // Restaurar el header
                     }
-                }, 200);
+                }, 100); // Reducir delay para una respuesta más rápida
             });
             
-            // PREVENIR INTERACCIÓN CUANDO MENÚ ABIERTO
+            // PREVENIR INTERACCIÓN CUANDO MENÚ ABIERTO (ya implementado)
             input.addEventListener('touchstart', function(e) {
                 if (isMenuOpen) {
                     e.preventDefault();
@@ -297,9 +308,13 @@ function initAdvancedMobileFormFix() {
                 resizeTimeout = setTimeout(() => {
                     setDynamicViewport();
                     if (isInputFocused) {
-                        smartHeaderControl();
+                        smartHeaderControl(); // Reajustar header si el teclado aparece/desaparece
+                        const focusedInput = document.activeElement;
+                        if (focusedInput && (focusedInput.tagName === 'INPUT' || focusedInput.tagName === 'TEXTAREA')) {
+                            smartScrollToInput(focusedInput); // Reajustar scroll si el teclado cambia
+                        }
                     }
-                }, 100);
+                }, 50); // Reducir delay
             });
         }
         
@@ -317,7 +332,7 @@ function initAdvancedMobileFormFix() {
                         smartScrollToInput(focusedInput);
                     }
                 }
-            }, 500);
+            }, 300); // Reducir delay
         });
         
         // PASO 8: CLICK FUERA DEL FORMULARIO
@@ -335,9 +350,10 @@ function initAdvancedMobileFormFix() {
                 setTimeout(() => {
                     if (!document.querySelector('input:focus, textarea:focus')) {
                         isInputFocused = false;
+                        document.body.classList.remove('form-input-focused');
                         smartHeaderControl();
                     }
-                }, 100);
+                }, 50); // Reducir delay
             }
         });
         
@@ -418,6 +434,7 @@ function initSmoothScroll() {
 function initAll() {
     console.log('🚀 Iniciando aplicación corregida...');
     
+    // Un pequeño retraso para asegurar que el DOM esté completamente cargado
     setTimeout(() => {
         initMenu();
         initAdvancedMobileFormFix(); // ← CORRECCIÓN PRINCIPAL
@@ -426,7 +443,7 @@ function initAll() {
         initSmoothScroll();
         
         console.log('🎉 Aplicación completamente inicializada');
-    }, 100);
+    }, 50); // Reducir el delay de inicialización
 }
 
 // FUNCIÓN 6: MANEJAR REDIMENSIONAMIENTO
@@ -436,11 +453,12 @@ window.addEventListener('resize', function() {
         closeMenu();
     }
     
-    // Re-inicializar en móviles
+    // Re-inicializar en móviles si el ancho de la ventana es menor o igual a 768px
     if (window.innerWidth <= 768) {
         setTimeout(() => {
-            initAdvancedMobileFormFix();
-        }, 300);
+            originalViewportHeight = window.innerHeight; // Actualizar altura original del viewport
+            initAdvancedMobileFormFix(); // Volver a inicializar la corrección del formulario
+        }, 100); // Un pequeño delay para que el navegador se ajuste
     } else {
         // Limpiar estados en desktop
         isInputFocused = false;
@@ -448,12 +466,16 @@ window.addEventListener('resize', function() {
         if (header) {
             header.style.transform = 'translateY(0)';
             header.style.zIndex = '1000';
+            header.style.display = 'block'; // Asegurarse de que el header sea visible en desktop
+            header.style.visibility = 'visible';
+            header.style.opacity = '1';
+            header.style.pointerEvents = 'auto';
         }
         document.body.classList.remove('header-hidden', 'form-input-focused');
     }
 });
 
-// ESTILOS DINÁMICOS MEJORADOS
+// ESTILOS DINÁMICOS MEJORADOS (inyectados en el head del documento)
 const enhancedStyles = document.createElement('style');
 enhancedStyles.innerHTML = `
     /* Estilos para corrección de formulario móvil */
@@ -462,29 +484,40 @@ enhancedStyles.innerHTML = `
             padding-top: 0 !important;
         }
         
-        .form-input-focused .header {
+        /* Ocultar el header completamente cuando un input está enfocado */
+        body.form-input-focused .header {
             transform: translateY(-100%) !important;
-            z-index: 1 !important;
+            z-index: -1 !important; /* Asegurar que esté por debajo */
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+            display: none !important; /* Ocultar completamente */
         }
         
-        .menu-open {
-            overflow: hidden !important;
-        }
-        
+        /* Asegurar que el menú abierto siempre muestre el header */
         .menu-open .header {
             transform: translateY(0) !important;
             z-index: 1000 !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+            display: block !important;
         }
         
-        /* Asegurar que inputs sean accesibles */
+        .menu-open {
+            overflow: hidden !important; /* Prevenir scroll del body cuando el menú está abierto */
+        }
+        
+        /* Asegurar que inputs sean accesibles y estén por encima de otros elementos */
         input:focus,
         textarea:focus {
             position: relative !important;
-            z-index: 2000 !important;
-            transform: translateZ(0) !important;
+            z-index: 2000 !important; /* Muy alto para asegurar visibilidad */
+            transform: translateZ(0) !important; /* Forzar aceleración de hardware */
+            -webkit-transform: translateZ(0) !important;
         }
         
-        /* Prevenir zoom en iOS */
+        /* Prevenir zoom en iOS (asegurar font-size >= 16px) */
         input[type="text"],
         input[type="email"], 
         input[type="tel"],
@@ -499,16 +532,32 @@ enhancedStyles.innerHTML = `
         .newsletter-form textarea,
         .contact-form input,
         .contact-form textarea {
-            min-height: 48px !important;
-            -webkit-appearance: none !important;
+            min-height: 48px !important; /* Tamaño mínimo para facilitar el toque */
+            -webkit-appearance: none !important; /* Eliminar estilos nativos de iOS */
             border-radius: 8px !important;
         }
         
-        /* Asegurar visibilidad del formulario */
+        /* Asegurar visibilidad del formulario y sus elementos */
         .contact-form-wrapper,
         .newsletter-form {
             position: relative !important;
-            z-index: 100 !important;
+            z-index: 100 !important; /* Asegurar que el formulario esté por encima del contenido normal */
+        }
+
+        /* Ajustar el padding-top de la sección de contacto para compensar el header */
+        .contact-section {
+            padding-top: 120px !important; /* Aumentado para dar más espacio */
+        }
+        
+        /* Crear más espacio entre el header y el formulario */
+        .contact-section h2 {
+            margin-top: 20px !important;
+            margin-bottom: 40px !important;
+        }
+        
+        /* Asegurar que el contenido del formulario tenga suficiente espacio */
+        .contact-content {
+            margin-top: 30px !important;
         }
     }
     
@@ -525,7 +574,6 @@ enhancedStyles.innerHTML = `
 `;
 document.head.appendChild(enhancedStyles);
 
-// INICIALIZACIÓN AUTOMÁTICA
+// INICIALIZACIÓN AUTOMÁTICA cuando el DOM esté completamente cargado
 document.addEventListener('DOMContentLoaded', initAll);
 console.log('📜 Script completo cargado - Formulario móvil corregido');
-
