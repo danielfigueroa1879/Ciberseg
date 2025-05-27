@@ -4327,3 +4327,252 @@ html {
         transform: translateY(-30px) !important; /* Subir 30px adicionales */
     }
 }
+/* ===== IGUALAR ANCHO DE TODOS LOS CUADRADOS EN MÓVIL ===== */
+
+/* 1. DEFINIR ANCHO ESTÁNDAR PARA TODOS LOS CUADRADOS */
+@media screen and (max-width: 768px) {
+    /* Contenedor base para todas las secciones con cuadrados */
+    .main-services .container,
+    .iot-section .container,
+    .mission-vision .container,
+    .contact-section .container {
+        max-width: 90% !important; /* Ancho uniforme para todas */
+        margin: 0 auto !important;
+        padding: 0 15px !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* TODOS LOS TIPOS DE CUADRADOS CON EL MISMO ANCHO */
+    .service-card,
+    .iot-card,
+    .mv-card,
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        width: 100% !important; /* Ocupar todo el ancho del contenedor */
+        max-width: 100% !important; /* Sin límite máximo diferente */
+        margin: 0 auto !important; /* Centrado automático */
+        box-sizing: border-box !important;
+    }
+}
+
+/* 2. CUADRADOS DE CONTACTO ESPECÍFICAMENTE IGUALADOS */
+@media screen and (max-width: 768px) {
+    .contact-content-wrapper {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 15px !important;
+        align-items: stretch !important; /* Forzar mismo ancho */
+        width: 100% !important;
+        margin: 0 auto !important;
+        padding: 0 !important; /* Sin padding adicional */
+    }
+    
+    /* Información de contacto con mismo ancho que service-card */
+    .contact-info-wrapper {
+        /* Heredar estilos de service-card */
+        background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)) !important;
+        border: 2px solid rgba(224, 253, 44, 0.3) !important;
+        border-radius: 15px !important;
+        padding: 20px 15px !important; /* Mismo padding que service-card */
+        backdrop-filter: blur(10px) !important;
+        transition: all 0.3s ease !important;
+        
+        /* Mismo ancho exacto */
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Formulario con mismo ancho que service-card */
+    .contact-form-wrapper {
+        /* Heredar estilos de service-card */
+        background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)) !important;
+        border: 2px solid rgba(224, 253, 44, 0.3) !important;
+        border-radius: 15px !important;
+        padding: 20px 15px !important; /* Mismo padding que service-card */
+        backdrop-filter: blur(10px) !important;
+        transition: all 0.3s ease !important;
+        
+        /* Mismo ancho exacto */
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+        
+        /* Centrar contenido interno */
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+}
+
+/* 3. VERIFICAR QUE TODOS LOS CUADRADOS TENGAN ESTILOS CONSISTENTES */
+@media screen and (max-width: 768px) {
+    /* Hover effects iguales para todos */
+    .service-card:hover,
+    .iot-card:hover,
+    .mv-card:hover,
+    .contact-info-wrapper:hover,
+    .contact-form-wrapper:hover {
+        transform: translateY(-3px) !important;
+        border-color: #E0FD2C !important;
+        box-shadow: 0 8px 25px rgba(224, 253, 44, 0.2) !important;
+    }
+    
+    /* Padding uniforme para todos */
+    .service-card,
+    .iot-card,
+    .mv-card,
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        padding: 20px 15px !important; /* Padding estándar uniforme */
+        margin-bottom: 0 !important; /* Sin márgenes inferiores inconsistentes */
+    }
+}
+
+/* 4. FORMULARIO CENTRADO DENTRO DEL CUADRADO DEL MISMO ANCHO */
+@media screen and (max-width: 768px) {
+    .newsletter-form {
+        width: 100% !important; /* Ocupar todo el ancho del cuadrado */
+        max-width: 85% !important; /* Con márgenes internos iguales */
+        margin: 0 auto !important; /* Centrado dentro del cuadrado */
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important; /* Inputs ocupan todo el ancho disponible */
+        gap: 12px !important;
+    }
+    
+    .newsletter-form input,
+    .newsletter-form textarea {
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .newsletter-form button[type="submit"] {
+        align-self: flex-start !important; /* Botón alineado a la izquierda */
+        margin-top: 10px !important;
+    }
+}
+
+/* 5. CONTENIDO DE INFORMACIÓN DE CONTACTO CENTRADO */
+@media screen and (max-width: 768px) {
+    .contact-info-wrapper h3 {
+        text-align: center !important;
+        margin-bottom: 15px !important;
+        font-size: 20px !important;
+    }
+    
+    .contact-info-items {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        width: 100% !important;
+    }
+    
+    .contact-item {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important; /* Alineado a la izquierda */
+        padding: 3px 0 !important;
+        font-size: 14px !important;
+    }
+}
+
+/* 6. MÓVILES PEQUEÑOS - MANTENER CONSISTENCIA */
+@media screen and (max-width: 480px) {
+    .main-services .container,
+    .iot-section .container,
+    .mission-vision .container,
+    .contact-section .container {
+        max-width: 95% !important; /* Ligeramente más ancho en móviles pequeños */
+        padding: 0 10px !important;
+    }
+    
+    .service-card,
+    .iot-card,
+    .mv-card,
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        padding: 15px 12px !important; /* Padding uniforme más pequeño */
+    }
+    
+    .newsletter-form {
+        max-width: 90% !important; /* Ajuste para móviles pequeños */
+    }
+}
+
+/* 7. MÓVILES MUY PEQUEÑOS - MÁXIMA CONSISTENCIA */
+@media screen and (max-width: 360px) {
+    .main-services .container,
+    .iot-section .container,
+    .mission-vision .container,
+    .contact-section .container {
+        max-width: 98% !important; /* Usar casi todo el ancho disponible */
+        padding: 0 5px !important;
+    }
+    
+    .service-card,
+    .iot-card,
+    .mv-card,
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        padding: 12px 8px !important; /* Padding mínimo uniforme */
+        border-radius: 10px !important; /* Bordes más pequeños uniformes */
+    }
+    
+    .newsletter-form {
+        max-width: 95% !important;
+    }
+}
+
+/* 8. GRIDS UNIFORMES PARA TODAS LAS SECCIONES */
+@media screen and (max-width: 768px) {
+    /* Todas las grids con el mismo comportamiento */
+    .services-grid,
+    .iot-services,
+    .mv-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 15px !important; /* Misma separación que contact-content-wrapper */
+        align-items: stretch !important; /* Mismo ancho para todos */
+        width: 100% !important;
+    }
+    
+    /* Contact-content-wrapper sigue el mismo patrón */
+    .contact-content-wrapper {
+        gap: 15px !important; /* Misma separación que las otras grids */
+    }
+}
+
+/* 9. VERIFICACIÓN FINAL - FORZAR MISMO ANCHO */
+@media screen and (max-width: 768px) {
+    /* Si algún cuadrado sigue siendo diferente, forzar */
+    .service-card,
+    .iot-card,
+    .mv-card,
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        /* Forzar dimensiones exactamente iguales */
+        width: calc(100% - 0px) !important; /* Restar cualquier margen/padding */
+        min-width: 0 !important; /* Sin ancho mínimo diferente */
+        max-width: none !important; /* Sin ancho máximo diferente */
+        flex: none !important; /* Sin comportamiento flex diferente */
+        
+        /* Asegurar que el box-sizing sea igual */
+        box-sizing: border-box !important;
+        
+        /* Eliminar cualquier transform que afecte el ancho */
+        transform: none !important;
+    }
+    
+    .service-card:hover,
+    .iot-card:hover,
+    .mv-card:hover,
+    .contact-info-wrapper:hover,
+    .contact-form-wrapper:hover {
+        /* Solo efectos que no cambien el ancho */
+        transform: translateY(-3px) !important;
+    }
+}
