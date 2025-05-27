@@ -1966,3 +1966,133 @@ html {
 .footer-content .newsletter-section * {
     box-sizing: border-box !important;
 }
+/* SOLUCIÓN PARA EL PROBLEMA DEL FORMULARIO EN MÓVILES */
+
+/* 1. Ajustar el z-index del header para que no interfiera con inputs */
+@media screen and (max-width: 768px) {
+    .header {
+        z-index: 999; /* Reducido de 1000 para permitir que inputs tengan mayor prioridad */
+    }
+    
+    /* 2. Asegurar que los inputs del formulario tengan z-index superior */
+    .contact-form input,
+    .contact-form textarea,
+    .newsletter-form input,
+    .newsletter-form textarea {
+        position: relative !important;
+        z-index: 1001 !important; /* Mayor que el header */
+    }
+    
+    /* 3. Ajustar el padding-top de la sección de contacto para compensar el header fijo */
+    .contact-section {
+        padding-top: 120px !important; /* Aumentado para dar más espacio */
+    }
+    
+    /* 4. Crear más espacio entre el header y el formulario */
+    .contact-section h2 {
+        margin-top: 20px !important;
+        margin-bottom: 40px !important;
+    }
+    
+    /* 5. Asegurar que el contenido del formulario tenga suficiente espacio */
+    .contact-content {
+        margin-top: 30px !important;
+    }
+    
+    /* 6. Mejorar la interacción táctil en inputs */
+    .contact-form input:focus,
+    .contact-form textarea:focus,
+    .newsletter-form input:focus,
+    .newsletter-form textarea:focus {
+        transform: scale(1.02) !important;
+        border-color: #E0FD2C !important;
+        background-color: rgba(255,255,255,0.2) !important;
+        box-shadow: 0 0 15px rgba(224, 253, 44, 0.3) !important;
+        z-index: 1002 !important; /* Aún mayor cuando está enfocado */
+    }
+    
+    /* 7. Asegurar que el header se oculte automáticamente al hacer scroll hacia abajo */
+    .header.scrolled {
+        transform: translateY(-100%) !important;
+        transition: transform 0.3s ease !important;
+    }
+    
+    /* 8. Crear un área de "zona segura" para inputs en la parte superior */
+    .contact-form,
+    .newsletter-form {
+        margin-top: 40px !important;
+        position: relative !important;
+        z-index: 1001 !important;
+    }
+    
+    /* 9. Ajuste específico para el formulario del footer */
+    .footer .newsletter-form {
+        margin-top: 20px !important;
+        padding-top: 20px !important;
+    }
+    
+    /* 10. Prevenir que el header interfiera durante el scroll */
+    body.form-focused {
+        overflow-y: auto !important;
+    }
+    
+    body.form-focused .header {
+        transform: translateY(-100%) !important;
+    }
+}
+
+/* PARA MÓVILES MUY PEQUEÑOS (480px y menores) */
+@media screen and (max-width: 480px) {
+    .contact-section {
+        padding-top: 140px !important; /* Aún más espacio en móviles pequeños */
+    }
+    
+    .contact-form input,
+    .contact-form textarea {
+        font-size: 16px !important; /* Prevenir zoom en iOS */
+        min-height: 48px !important; /* Mejor área de toque */
+    }
+    
+    /* Ocultar el header completamente cuando se enfoque un input */
+    .contact-form input:focus ~ .header,
+    .contact-form textarea:focus ~ .header {
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+}
+
+/* SOLUCIÓN ALTERNATIVA: Auto-hide del header al enfocar inputs */
+@media screen and (max-width: 768px) {
+    /* Cuando cualquier input esté enfocado, ocultar el header */
+    body:has(input:focus) .header,
+    body:has(textarea:focus) .header {
+        transform: translateY(-100%) !important;
+        transition: transform 0.3s ease !important;
+    }
+    
+    /* Restaurar el header cuando se pierde el foco */
+    body:not(:has(input:focus)):not(:has(textarea:focus)) .header {
+        transform: translateY(0) !important;
+    }
+}
+
+/* AJUSTES ADICIONALES PARA MEJORAR LA EXPERIENCIA */
+@media screen and (max-width: 768px) {
+    /* Asegurar que los inputs sean completamente visibles */
+    .contact-form {
+        min-height: calc(100vh - 200px) !important;
+        padding-bottom: 60px !important;
+    }
+    
+    /* Mejorar el espaciado entre elementos del formulario */
+    .contact-form input,
+    .contact-form textarea {
+        margin-bottom: 20px !important;
+    }
+    
+    /* Botón de envío con más espacio */
+    .submit-btn {
+        margin-top: 30px !important;
+        margin-bottom: 40px !important;
+    }
+}
