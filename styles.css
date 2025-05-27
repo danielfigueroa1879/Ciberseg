@@ -2096,3 +2096,219 @@ html {
         margin-bottom: 40px !important;
     }
 }
+
+/* CORRECCIONES PARA LOGO, FORMULARIO Y MENÚ */
+
+/* 1. CENTRAR LA PALABRA "RECYBERSEG" EN MÓVILES */
+@media screen and (max-width: 768px) {
+    .nav-container {
+        flex-direction: column !important; /* Cambiar a columna en móviles */
+        align-items: center !important;
+        gap: 15px !important;
+    }
+    
+    .nav-logo {
+        order: 1 !important; /* Logo primero */
+        text-align: center !important;
+        width: 100% !important;
+    }
+    
+    .nav-logo h2 {
+        text-align: center !important;
+        margin: 0 !important;
+        font-size: 28px !important;
+    }
+    
+    .nav-toggle {
+        order: 2 !important; /* Botón hamburguesa segundo */
+        position: relative !important; /* Quitar position fixed si lo tenía */
+        margin: 0 auto !important;
+    }
+    
+    .search-container {
+        order: 3 !important;
+        display: none !important; /* Mantener oculto en móviles */
+    }
+}
+
+/* 2. MOVER "FORMULARIO DE INSCRIPCIÓN" DEBAJO DE WHATSAPP */
+@media screen and (max-width: 768px) {
+    .contact-content {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 30px !important;
+    }
+    
+    .contact-info {
+        order: 1 !important; /* Información de contacto primero */
+    }
+    
+    .contact-form {
+        order: 2 !important; /* Formulario segundo (debajo) */
+        margin-top: 20px !important;
+    }
+    
+    /* Título del formulario */
+    .contact-section h2 {
+        order: 0 !important;
+        margin-bottom: 30px !important;
+        text-align: center !important;
+    }
+    
+    /* Reorganizar para que el título quede después de la info de contacto */
+    .contact-section {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    
+    .contact-section .container {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    
+    .contact-section h2 {
+        order: 2 !important; /* Título después de la info de contacto */
+        margin: 20px 0 !important;
+    }
+    
+    .contact-content .contact-info {
+        order: 1 !important; /* Info de contacto primero */
+    }
+    
+    .contact-content .contact-form {
+        order: 3 !important; /* Formulario al final */
+    }
+}
+
+/* 3. ARREGLAR EL MENÚ HAMBURGUESA */
+@media screen and (max-width: 768px) {
+    /* Resetear z-index del header para que el menú funcione */
+    .header {
+        z-index: 1000 !important; /* Restaurar z-index original */
+    }
+    
+    /* Asegurar que el menú tenga z-index correcto */
+    .nav-menu {
+        z-index: 1001 !important; /* Menú por encima del header */
+        position: fixed !important;
+        top: -100vh !important; /* Empezar completamente oculto */
+        left: 0 !important;
+        width: 100% !important;
+        height: 50vh !important;
+        background: rgba(0, 0, 0, 0.95) !important;
+        backdrop-filter: blur(10px) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        padding-top: 30px !important;
+        transition: all 0.4s ease !important;
+        opacity: 0 !important;
+    }
+    
+    .nav-menu.active {
+        top: 120px !important; /* Aparecer debajo del header más alto */
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+    
+    /* Botón hamburguesa */
+    .nav-toggle {
+        z-index: 1002 !important; /* Por encima del menú */
+        background-color: #000 !important;
+        border: 2px solid rgba(255, 255, 255, 0.3) !important;
+        position: relative !important;
+        display: flex !important;
+    }
+    
+    /* Elementos del menú */
+    .nav-menu li {
+        width: 90% !important;
+        text-align: center !important;
+        margin: 8px 0 !important;
+    }
+    
+    .nav-link {
+        color: #fff !important;
+        font-size: 20px !important;
+        padding: 10px 20px !important;
+        display: block !important;
+        width: 100% !important;
+        border-radius: 8px !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    .nav-link:hover {
+        background-color: rgba(224, 253, 44, 0.1) !important;
+        color: #E0FD2C !important;
+    }
+    
+    /* Líneas separadoras entre elementos del menú */
+    .nav-menu li::after {
+        content: '' !important;
+        position: absolute !important;
+        bottom: 0 !important;
+        left: 10% !important;
+        width: 80% !important;
+        height: 1px !important;
+        background: rgba(255, 255, 255, 0.2) !important;
+    }
+    
+    .nav-menu li:last-child::after {
+        display: none !important;
+    }
+}
+
+/* 4. AJUSTAR EL HEADER PARA ACOMODAR EL NUEVO LAYOUT */
+@media screen and (max-width: 768px) {
+    .navbar {
+        padding: 15px 0 !important;
+    }
+    
+    .header {
+        min-height: 100px !important; /* Más alto para acomodar el logo centrado */
+    }
+    
+    /* Asegurar que el contenido principal no se superponga */
+    .hero {
+        padding-top: 120px !important; /* Ajustar para el header más alto */
+    }
+}
+
+/* 5. CORREGIR Z-INDEX PARA INPUTS SIN ROMPER EL MENÚ */
+@media screen and (max-width: 768px) {
+    .contact-form input:focus,
+    .contact-form textarea:focus,
+    .newsletter-form input:focus,
+    .newsletter-form textarea:focus {
+        z-index: 999 !important; /* Menor que el menú pero mayor que el header */
+        position: relative !important;
+    }
+    
+    /* Solo ocultar header cuando se enfoque input Y el menú no esté activo */
+    body:not(.menu-open) .contact-form input:focus ~ * .header,
+    body:not(.menu-open) .contact-form textarea:focus ~ * .header {
+        transform: translateY(-100%) !important;
+        transition: transform 0.3s ease !important;
+    }
+}
+
+/* 6. MÓVILES MUY PEQUEÑOS */
+@media screen and (max-width: 480px) {
+    .nav-logo h2 {
+        font-size: 24px !important;
+    }
+    
+    .contact-section h2 {
+        font-size: 22px !important;
+    }
+    
+    .nav-menu {
+        height: 40vh !important;
+        padding-top: 20px !important;
+    }
+    
+    .nav-menu.active {
+        top: 100px !important;
+    }
+}
