@@ -3900,7 +3900,7 @@ html {
 }
 
 /* ESTILOS PARA DEBUGGING - QUITAR DESPUÉS DE PRUEBAS */
-/*
+
 @media screen and (max-width: 768px) {
     .newsletter-form input:focus,
     .newsletter-form textarea:focus {
@@ -3921,4 +3921,4 @@ html {
         z-index: 999999 !important;
     }
 }
-*/
+
