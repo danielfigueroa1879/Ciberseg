@@ -3081,7 +3081,7 @@ html {
     .newsletter-form {
         display: flex !important;
         flex-direction: column !important;
-        gap: 15px !important; /* Espaciado más compacto */
+        gap: 20px !important; /* Espaciado más compacto */
         width: 100% !important;
         margin: 0 !important;
         padding: 0 !important;
@@ -3300,5 +3300,230 @@ html {
         text-align: center !important;
         margin-bottom: 30px !important;
         padding: 0 10px !important;
+    }
+}
+/* ===== SOLUCIÓN DEFINITIVA PARA FORMULARIO MÓVIL ===== */
+
+/* 1. AJUSTAR Z-INDEX Y POSICIONAMIENTO DEL HEADER */
+@media screen and (max-width: 768px) {
+    .header {
+        z-index: 999 !important; /* Reducido para que inputs tengan prioridad */
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+    }
+    
+    /* Asegurar que el menú tenga z-index correcto */
+    .nav-menu {
+        z-index: 1001 !important; /* Por encima del header */
+    }
+    
+    .nav-toggle {
+        z-index: 1002 !important; /* Por encima del menú */
+    }
+}
+
+/* 2. Z-INDEX SUPERIOR PARA TODOS LOS INPUTS DEL FORMULARIO */
+@media screen and (max-width: 768px) {
+    .contact-form input,
+    .contact-form textarea,
+    .newsletter-form input,
+    .newsletter-form textarea {
+        position: relative !important;
+        z-index: 1003 !important; /* Mayor que header y menú */
+    }
+    
+    /* Z-index aún mayor cuando están enfocados */
+    .contact-form input:focus,
+    .contact-form textarea:focus,
+    .newsletter-form input:focus,
+    .newsletter-form textarea:focus {
+        z-index: 1004 !important;
+        position: relative !important;
+        transform: none !important; /* Eliminar transformaciones que puedan causar problemas */
+    }
+}
+
+/* 3. PADDING SUPERIOR SUFICIENTE EN LA SECCIÓN DE CONTACTO */
+@media screen and (max-width: 768px) {
+    .contact-section {
+        padding-top: 140px !important; /* Espacio suficiente para el header */
+        position: relative !important;
+    }
+    
+    /* Asegurar que el contenido esté por debajo del header */
+    .contact-section .container {
+        position: relative !important;
+        z-index: 1 !important; /* Por debajo de los inputs */
+    }
+}
+
+/* 4. CUADRADOS DEL FORMULARIO CON Z-INDEX CORRECTO */
+@media screen and (max-width: 768px) {
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        position: relative !important;
+        z-index: 2 !important; /* Por encima del contenedor general */
+    }
+    
+    /* El formulario específicamente debe tener z-index alto */
+    .newsletter-form {
+        position: relative !important;
+        z-index: 3 !important;
+    }
+}
+
+/* 5. OCULTAR HEADER AUTOMÁTICAMENTE AL ENFOCAR INPUTS */
+@media screen and (max-width: 768px) {
+    /* Cuando cualquier input del formulario esté enfocado */
+    body:has(.newsletter-form input:focus) .header,
+    body:has(.newsletter-form textarea:focus) .header {
+        transform: translateY(-100%) !important;
+        transition: transform 0.3s ease !important;
+    }
+    
+    /* Restaurar header cuando se pierde el foco */
+    body:not(:has(.newsletter-form input:focus)):not(:has(.newsletter-form textarea:focus)) .header {
+        transform: translateY(0) !important;
+        transition: transform 0.3s ease 0.2s !important; /* Delay para suavizar */
+    }
+    
+    /* También aplicar a inputs de contacto si existen */
+    body:has(.contact-form input:focus) .header,
+    body:has(.contact-form textarea:focus) .header {
+        transform: translateY(-100%) !important;
+        transition: transform 0.3s ease !important;
+    }
+}
+
+/* 6. ZONA SEGURA PARA INPUTS EN LA PARTE SUPERIOR */
+@media screen and (max-width: 768px) {
+    /* Crear espacio seguro arriba del formulario */
+    .newsletter-form::before {
+        content: '' !important;
+        display: block !important;
+        height: 20px !important; /* Espacio adicional arriba */
+        width: 100% !important;
+    }
+    
+    /* Inputs con área de toque mejorada */
+    .newsletter-form input,
+    .newsletter-form textarea {
+        min-height: 48px !important; /* Área de toque mínima recomendada */
+        touch-action: manipulation !important; /* Mejor respuesta táctil */
+    }
+}
+
+/* 7. SOLUCIÓN ALTERNATIVA CON JAVASCRIPT VIEWPORT */
+@media screen and (max-width: 768px) {
+    /* Ajustar altura del viewport para el teclado virtual */
+    .contact-section {
+        min-height: 100vh !important;
+        min-height: calc(var(--vh, 1vh) * 100) !important;
+    }
+    
+    /* Cuando un input está enfocado, crear más espacio */
+    .newsletter-form input:focus,
+    .newsletter-form textarea:focus {
+        scroll-margin-top: 120px !important; /* Espacio para scroll automático */
+    }
+}
+
+/* 8. PREVENIR INTERFERENCIA DEL HEADER CON INPUTS */
+@media screen and (max-width: 768px) {
+    /* El header no debe interferir con eventos de toque */
+    .header.input-focused {
+        pointer-events: none !important;
+        opacity: 0.5 !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    /* Restaurar cuando no hay inputs enfocados */
+    .header:not(.input-focused) {
+        pointer-events: auto !important;
+        opacity: 1 !important;
+    }
+}
+
+/* 9. SCROLL MEJORADO PARA INPUTS */
+@media screen and (max-width: 768px) {
+    /* Cuando se enfoca un input, hacer scroll suave */
+    .newsletter-form input:focus,
+    .newsletter-form textarea:focus {
+        /* El JavaScript se encargará del scroll */
+        outline: 2px solid #E0FD2C !important;
+        outline-offset: 2px !important;
+        border-color: #E0FD2C !important;
+        background-color: rgba(255,255,255,0.15) !important;
+        box-shadow: 0 0 15px rgba(224, 253, 44, 0.4) !important;
+    }
+}
+
+/* 10. ASEGURAR QUE LOS CUADRADOS NO INTERFIERAN */
+@media screen and (max-width: 768px) {
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        /* No usar transform que pueda crear nuevos contextos de apilamiento */
+        transform: none !important;
+        will-change: auto !important;
+    }
+    
+    .contact-info-wrapper:hover,
+    .contact-form-wrapper:hover {
+        /* Efectos hover más suaves que no interfieran */
+        border-color: #E0FD2C !important;
+        box-shadow: 0 5px 20px rgba(224, 253, 44, 0.2) !important;
+        transform: none !important; /* Sin elevación que pueda causar problemas */
+    }
+}
+
+/* 11. MÓVILES PEQUEÑOS - AJUSTES ESPECÍFICOS */
+@media screen and (max-width: 480px) {
+    .contact-section {
+        padding-top: 160px !important; /* Más espacio en móviles pequeños */
+    }
+    
+    .newsletter-form::before {
+        height: 30px !important; /* Más espacio de seguridad */
+    }
+    
+    .newsletter-form input,
+    .newsletter-form textarea {
+        min-height: 50px !important; /* Área de toque más grande */
+        font-size: 16px !important; /* Prevenir zoom en iOS */
+    }
+}
+
+/* 12. MÓVILES MUY PEQUEÑOS - OPTIMIZACIÓN EXTREMA */
+@media screen and (max-width: 360px) {
+    .contact-section {
+        padding-top: 180px !important; /* Máximo espacio de seguridad */
+    }
+    
+    /* Header más pequeño para liberar espacio */
+    .header {
+        min-height: 70px !important;
+    }
+    
+    .navbar {
+        padding: 10px 0 !important;
+    }
+    
+    .nav-logo h2 {
+        font-size: 22px !important;
+    }
+}
+
+/* 13. FALLBACK PARA NAVEGADORES QUE NO SOPORTAN :has() */
+@media screen and (max-width: 768px) {
+    /* Clase que se agregará con JavaScript */
+    .form-input-focused .header {
+        transform: translateY(-100%) !important;
+        transition: transform 0.3s ease !important;
+    }
+    
+    .form-input-focused .nav-menu {
+        display: none !important; /* Ocultar menú cuando hay input enfocado */
     }
 }
