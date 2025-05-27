@@ -3302,12 +3302,115 @@ html {
         padding: 0 10px !important;
     }
 }
-/* ===== CORRECCIÓN ESPECÍFICA PARA FORMULARIO MÓVIL ===== */
+/* ===== CORRECCIÓN ULTRA AGRESIVA PARA FORMULARIO MÓVIL ===== */
 
 /* Variables CSS para viewport dinámico */
 :root {
     --real-vh: 1vh;
     --keyboard-height: 0px;
+}
+
+/* ESTADOS PARA CUANDO EL FORMULARIO ESTÁ ACTIVO */
+@media screen and (max-width: 768px) {
+    
+    /* CUANDO HAY UN INPUT ENFOCADO - OCULTAR TODO */
+    .form-input-active {
+        overflow: visible !important;
+    }
+    
+    .form-input-active .header {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        transform: translateY(-200px) !important;
+        z-index: -999 !important;
+        pointer-events: none !important;
+        position: absolute !important;
+        top: -500px !important;
+    }
+    
+    .header-hidden {
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+    
+    .header-hidden .contact-section {
+        padding-top: 10px !important;
+        margin-top: 0 !important;
+    }
+    
+    /* FORZAR INPUTS AL FRENTE DE TODO */
+    .newsletter-form input:focus,
+    .newsletter-form textarea:focus {
+        position: relative !important;
+        z-index: 99999 !important;
+        isolation: isolate !important;
+        transform: translateZ(0) !important;
+        -webkit-transform: translateZ(0) !important;
+        
+        /* Asegurar máxima visibilidad */
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        
+        /* Eliminar cualquier interferencia */
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        
+        /* Fondo más visible */
+        background-color: rgba(255,255,255,0.9) !important;
+        color: #000 !important;
+        border: 3px solid #E0FD2C !important;
+        box-shadow: 0 0 20px rgba(224, 253, 44, 0.8) !important;
+    }
+    
+    /* CONTENEDOR DEL FORMULARIO CON MÁXIMA PRIORIDAD */
+    .newsletter-form:focus-within {
+        position: relative !important;
+        z-index: 99998 !important;
+        isolation: isolate !important;
+        background: rgba(0, 0, 0, 0.1) !important;
+        padding: 10px !important;
+        border-radius: 10px !important;
+        margin-top: 0 !important;
+    }
+    
+    /* WRAPPER DEL FORMULARIO */
+    .contact-form-wrapper:focus-within {
+        position: relative !important;
+        z-index: 99997 !important;
+        isolation: isolate !important;
+        transform: translateZ(0) !important;
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+    
+    /* SECCIÓN DE CONTACTO CUANDO HAY FOCO */
+    .contact-section:focus-within {
+        position: relative !important;
+        z-index: 99996 !important;
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+    
+    /* ELIMINAR CUALQUIER ESPACIO SUPERIOR CUANDO HAY FOCO */
+    .form-input-active .contact-section {
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+    
+    .form-input-active .contact-content-wrapper {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+    
+    .form-input-active .contact-form-wrapper {
+        margin-top: 0 !important;
+        padding-top: 15px !important;
+    }
 }
 
 /* SECCIÓN DE CONTACTO - AJUSTES PARA MÓVILES */
@@ -3612,3 +3715,210 @@ html {
         isolation: isolate !important;
     }
 }
+/* ===== SOLUCIÓN DE EMERGENCIA PARA FORMULARIO MÓVIL ===== */
+/* AGREGAR AL FINAL DEL CSS - MÁXIMA PRIORIDAD */
+
+/* SOLO MÓVILES - SOLUCIÓN ULTRA AGRESIVA */
+@media screen and (max-width: 768px) {
+    
+    /* CUANDO HAY CUALQUIER INPUT ENFOCADO - ELIMINAR HEADER COMPLETAMENTE */
+    body:has(input:focus) .header,
+    body:has(textarea:focus) .header {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        height: 0 !important;
+        min-height: 0 !important;
+        max-height: 0 !important;
+        overflow: hidden !important;
+        position: absolute !important;
+        top: -1000px !important;
+        left: -1000px !important;
+        z-index: -9999 !important;
+        pointer-events: none !important;
+        transform: translateY(-200px) scale(0) !important;
+    }
+    
+    /* AJUSTAR BODY CUANDO HAY INPUT ENFOCADO */
+    body:has(input:focus),
+    body:has(textarea:focus) {
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+    
+    /* SECCIÓN DE CONTACTO SIN HEADER */
+    body:has(input:focus) .contact-section,
+    body:has(textarea:focus) .contact-section {
+        padding-top: 10px !important;
+        margin-top: 0 !important;
+    }
+    
+    /* INPUTS CON PRIORIDAD ABSOLUTA */
+    .newsletter-form input:focus,
+    .newsletter-form textarea:focus,
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+        /* Z-INDEX ULTRA ALTO */
+        z-index: 999999 !important;
+        position: relative !important;
+        isolation: isolate !important;
+        
+        /* VISIBILIDAD MÁXIMA */
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        
+        /* FONDO MUY VISIBLE */
+        background-color: rgba(255, 255, 255, 0.98) !important;
+        color: #000 !important;
+        border: 3px solid #E0FD2C !important;
+        box-shadow: 
+            0 0 0 5px rgba(224, 253, 44, 0.3),
+            0 0 30px rgba(224, 253, 44, 0.5),
+            0 8px 25px rgba(0, 0, 0, 0.2) !important;
+        
+        /* ELIMINAR TRANSFORMS CONFLICTIVAS */
+        transform: translateZ(0) !important;
+        -webkit-transform: translateZ(0) !important;
+        
+        /* ÁREA DE TOQUE GRANDE */
+        min-height: 52px !important;
+        padding: 16px 20px !important;
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        
+        /* ELIMINAR MARGINS QUE PUEDAN INTERFERIR */
+        margin: 5px 0 !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+    }
+    
+    /* PLACEHOLDER MUY VISIBLE */
+    .newsletter-form input:focus::placeholder,
+    .newsletter-form textarea:focus::placeholder,
+    .contact-form input:focus::placeholder,
+    .contact-form textarea:focus::placeholder {
+        color: #666 !important;
+        opacity: 0.8 !important;
+        font-weight: 500 !important;
+    }
+    
+    /* CONTENEDORES CON PRIORIDAD */
+    .newsletter-form:focus-within,
+    .contact-form:focus-within {
+        z-index: 999998 !important;
+        position: relative !important;
+        isolation: isolate !important;
+        background: rgba(0, 0, 0, 0.05) !important;
+        padding: 15px !important;
+        border-radius: 12px !important;
+        margin: 10px 0 !important;
+        box-shadow: 0 0 15px rgba(224, 253, 44, 0.2) !important;
+    }
+    
+    /* WRAPPER CON PRIORIDAD */
+    .contact-form-wrapper:focus-within {
+        z-index: 999997 !important;
+        position: relative !important;
+        isolation: isolate !important;
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+    
+    /* FORZAR SCROLL AL TOP CUANDO SE ENFOCA */
+    .newsletter-form input:focus,
+    .newsletter-form textarea:focus {
+        scroll-margin-top: 20px !important;
+        scroll-behavior: instant !important;
+    }
+    
+    /* NAVEGACIÓN OCULTA CUANDO HAY FOCO */
+    .nav-menu:has(~ * input:focus),
+    .nav-menu:has(~ * textarea:focus) {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        z-index: -1 !important;
+    }
+    
+    /* BOTÓN HAMBURGUESA OCULTO CUANDO HAY FOCO */
+    body:has(input:focus) .nav-toggle,
+    body:has(textarea:focus) .nav-toggle {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+    
+    /* CUALQUIER ELEMENTO QUE PUEDA INTERFERIR */
+    body:has(input:focus) .search-container,
+    body:has(textarea:focus) .search-container,
+    body:has(input:focus) .scroll-to-top,
+    body:has(textarea:focus) .scroll-to-top {
+        display: none !important;
+        visibility: hidden !important;
+        z-index: -1 !important;
+    }
+}
+
+/* PREVENIR ZOOM EN IOS - CRÍTICO */
+@media screen and (max-width: 768px) {
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea {
+        font-size: 16px !important;
+        -webkit-text-size-adjust: 100% !important;
+        -webkit-appearance: none !important;
+        -webkit-border-radius: 8px !important;
+        border-radius: 8px !important;
+    }
+}
+
+/* SI EL NAVEGADOR NO SOPORTA :has() - FALLBACK */
+@supports not (selector(:has(*))) {
+    @media screen and (max-width: 768px) {
+        /* Clase que se aplicará via JavaScript */
+        .form-active-fallback .header {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            z-index: -9999 !important;
+            position: absolute !important;
+            top: -1000px !important;
+        }
+        
+        .form-active-fallback {
+            padding-top: 0 !important;
+        }
+        
+        .form-active-fallback .contact-section {
+            padding-top: 10px !important;
+        }
+    }
+}
+
+/* ESTILOS PARA DEBUGGING - QUITAR DESPUÉS DE PRUEBAS */
+/*
+@media screen and (max-width: 768px) {
+    .newsletter-form input:focus,
+    .newsletter-form textarea:focus {
+        border: 5px solid red !important;
+        background: yellow !important;
+        color: black !important;
+    }
+    
+    body:has(input:focus) .header::before,
+    body:has(textarea:focus) .header::before {
+        content: "HEADER DEBERÍA ESTAR OCULTO" !important;
+        position: fixed !important;
+        top: 10px !important;
+        left: 10px !important;
+        background: red !important;
+        color: white !important;
+        padding: 10px !important;
+        z-index: 999999 !important;
+    }
+}
+*/
