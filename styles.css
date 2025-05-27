@@ -3661,18 +3661,18 @@ html {
         width: 100% !important;
     }
     
-    /* 3. SECCIÓN DE CONTACTO - MÁXIMO ANCHO CON MARGEN SUTIL */
+    /* 3. SECCIÓN DE CONTACTO - MÁXIMO ANCHO POSIBLE */
     .contact-section .container {
-        /* Máximo ancho con solo margen sutil */
-        max-width: 96% !important; /* Máximo ancho, solo 4% de margen total */
+        /* Prácticamente todo el ancho disponible */
+        max-width: 99% !important; /* Aumentado de 96% a 99% */
         margin: 0 auto !important;
-        padding: 0 8px !important; /* Padding muy sutil */
+        padding: 0 3px !important; /* Reducido de 8px a 3px */
         box-sizing: border-box !important;
     }
     
     .contact-section {
-        /* Padding lateral mínimo */
-        padding: 60px 2% !important; /* Solo 2% de padding lateral */
+        /* Padding lateral casi nulo */
+        padding: 60px 0.5% !important; /* Reducido de 2% a 0.5% */
     }
     
     /* 3.1. BAJAR LOS CUADROS UN POQUITO */
@@ -3713,15 +3713,15 @@ html {
     }
 }
 
-/* MÓVILES PEQUEÑOS - Máximo ancho con margen mínimo */
+/* MÓVILES PEQUEÑOS - Ancho casi completo */
 @media screen and (max-width: 480px) {
     .contact-section .container {
-        max-width: 98% !important; /* Aún más ancho en móviles pequeños */
-        padding: 0 5px !important; /* Padding mínimo */
+        max-width: 99.5% !important; /* Aumentado de 98% a 99.5% */
+        padding: 0 2px !important; /* Reducido de 5px a 2px */
     }
     
     .contact-section {
-        padding: 50px 1% !important; /* Padding lateral mínimo */
+        padding: 50px 0.25% !important; /* Reducido de 1% a 0.25% */
     }
     
     .contact-info-wrapper,
@@ -3748,15 +3748,15 @@ html {
     }
 }
 
-/* MÓVILES MUY PEQUEÑOS - Máximo ancho posible */
+/* MÓVILES MUY PEQUEÑOS - Ancho completo */
 @media screen and (max-width: 360px) {
     .contact-section .container {
-        max-width: 99% !important; /* Máximo ancho posible */
-        padding: 0 3px !important; /* Padding muy mínimo */
+        max-width: 100% !important; /* Ancho completo, aumentado de 99% */
+        padding: 0 1px !important; /* Reducido de 3px a 1px */
     }
     
     .contact-section {
-        padding: 40px 0.5% !important; /* Padding lateral casi nulo */
+        padding: 40px 0% !important; /* Sin padding lateral */
     }
     
     .contact-info-wrapper,
@@ -3817,11 +3817,11 @@ html {
         padding: 60px 5% !important;
     }
     
-    /* Todos los containers de contacto con máximo ancho */
+    /* Todos los containers de contacto con ancho máximo */
     .contact-section .container {
-        max-width: 96% !important; /* Máximo ancho con margen sutil */
+        max-width: 99% !important; /* Ancho máximo con margen mínimo */
         margin: 0 auto !important;
-        padding: 0 8px !important; /* Padding muy sutil */
+        padding: 0 3px !important; /* Padding mínimo */
         box-sizing: border-box !important;
     }
 }
