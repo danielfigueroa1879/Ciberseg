@@ -4576,3 +4576,234 @@ html {
         transform: translateY(-3px) !important;
     }
 }
+/* ===== FORZAR MISMO ANCHO EXACTO PARA CUADRADOS DE CONTACTO ===== */
+
+/* 1. ELIMINAR CUALQUIER RESTRICCIÓN DE ANCHO EN LA SECCIÓN DE CONTACTO */
+@media screen and (max-width: 768px) {
+    .contact-section .container {
+        max-width: 90% !important; /* Mismo que las otras secciones */
+        margin: 0 auto !important;
+        padding: 0 15px !important; /* Mismo padding que otras secciones */
+        box-sizing: border-box !important;
+        width: 90% !important; /* Forzar ancho exacto */
+    }
+    
+    .contact-content-wrapper {
+        width: 100% !important; /* Ocupar todo el contenedor */
+        max-width: 100% !important;
+        margin: 0 !important; /* Sin márgenes que reduzcan el ancho */
+        padding: 0 !important; /* Sin padding que reduzca el ancho */
+        box-sizing: border-box !important;
+    }
+}
+
+/* 2. FORZAR ANCHO EXACTO IGUALADO A SERVICE-CARD */
+@media screen and (max-width: 768px) {
+    /* Copiar exactamente las propiedades de ancho de service-card */
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        /* FORZAR MISMO ANCHO QUE SERVICE-CARD */
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 100% !important;
+        
+        /* ELIMINAR CUALQUIER LIMITACIÓN */
+        margin: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 15px !important; /* Mismo que service-card */
+        padding-right: 15px !important; /* Mismo que service-card */
+        padding-top: 20px !important;
+        padding-bottom: 20px !important;
+        
+        /* ASEGURAR BOX-SIZING IGUAL */
+        box-sizing: border-box !important;
+        
+        /* ELIMINAR CUALQUIER TRANSFORM O FLEX QUE AFECTE ANCHO */
+        transform: none !important;
+        flex: none !important;
+        flex-shrink: 0 !important;
+        flex-grow: 1 !important;
+        flex-basis: auto !important;
+        
+        /* POSICIONAMIENTO */
+        position: relative !important;
+        left: 0 !important;
+        right: 0 !important;
+        
+        /* DISPLAY */
+        display: block !important;
+    }
+}
+
+/* 3. VERIFICAR QUE NO HAYA CONTENEDORES INTERMEDIOS QUE LIMITEN EL ANCHO */
+@media screen and (max-width: 768px) {
+    /* Asegurar que contact-form-wrapper no tenga limitaciones adicionales */
+    .contact-form-wrapper {
+        /* REMOVER CUALQUIER LIMITACIÓN DE FLEX */
+        align-items: stretch !important; /* En lugar de center */
+        justify-content: stretch !important;
+    }
+    
+    /* El formulario interno puede ser más pequeño, pero el cuadrado debe ser igual */
+    .newsletter-form {
+        width: 85% !important; /* Centrado dentro del cuadrado */
+        max-width: 85% !important;
+        margin: 0 auto !important; /* Centrado dentro del cuadrado de ancho completo */
+    }
+}
+
+/* 4. COPIAR EXACTAMENTE LOS ESTILOS DE SERVICE-CARD */
+@media screen and (max-width: 768px) {
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        /* COPIAR ESTILOS EXACTOS DE SERVICE-CARD */
+        background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)) !important;
+        border: 2px solid rgba(255,255,255,0.2) !important;
+        border-radius: 15px !important;
+        text-align: center !important;
+        transition: all 0.3s ease !important;
+        backdrop-filter: blur(10px) !important;
+        
+        /* MISMO HOVER QUE SERVICE-CARD */
+        &:hover {
+            transform: translateY(-10px) !important;
+            border-color: #E0FD2C !important;
+            box-shadow: 0 20px 40px rgba(224, 253, 44, 0.2) !important;
+        }
+    }
+}
+
+/* 5. IGUALAR EXACTAMENTE AL CONTAINER DE SERVICES */
+@media screen and (max-width: 768px) {
+    /* Hacer que contact-section tenga el mismo comportamiento que main-services */
+    .contact-section {
+        padding: 60px 5% !important; /* Mismo que main-services */
+    }
+    
+    .contact-section .container {
+        /* COPIAR EXACTAMENTE DE MAIN-SERVICES */
+        max-width: 90% !important;
+        margin: 0 auto !important;
+        padding: 0 15px !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Contact-content-wrapper debe comportarse como services-grid */
+    .contact-content-wrapper {
+        /* COPIAR COMPORTAMIENTO DE SERVICES-GRID */
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 15px !important;
+        margin-top: 0 !important;
+        align-items: stretch !important; /* Forzar mismo ancho */
+    }
+}
+
+/* 6. OVERRIDE ESPECÍFICO PARA FORZAR ANCHO */
+@media screen and (max-width: 768px) {
+    /* Si aún no funciona, usar medidas absolutas */
+    .main-services .service-card {
+        width: calc(100% - 30px) !important; /* 100% menos padding del container */
+    }
+    
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        width: calc(100% - 30px) !important; /* EXACTAMENTE IGUAL que service-card */
+        margin-left: 15px !important; /* Mismo margen que service-card */
+        margin-right: 15px !important; /* Mismo margen que service-card */
+        box-sizing: border-box !important;
+    }
+}
+
+/* 7. PARA MÓVILES PEQUEÑOS - MANTENER IGUALDAD */
+@media screen and (max-width: 480px) {
+    .contact-section .container {
+        max-width: 95% !important; /* Mismo que otras secciones */
+        padding: 0 10px !important; /* Mismo que otras secciones */
+    }
+    
+    .main-services .service-card {
+        width: calc(100% - 20px) !important;
+    }
+    
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        width: calc(100% - 20px) !important; /* IGUAL que service-card */
+        margin-left: 10px !important;
+        margin-right: 10px !important;
+        padding: 15px 12px !important; /* Mismo que service-card */
+    }
+}
+
+/* 8. PARA MÓVILES MUY PEQUEÑOS */
+@media screen and (max-width: 360px) {
+    .contact-section .container {
+        max-width: 98% !important; /* Mismo que otras secciones */
+        padding: 0 5px !important; /* Mismo que otras secciones */
+    }
+    
+    .main-services .service-card {
+        width: calc(100% - 10px) !important;
+    }
+    
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        width: calc(100% - 10px) !important; /* IGUAL que service-card */
+        margin-left: 5px !important;
+        margin-right: 5px !important;
+        padding: 12px 8px !important; /* Mismo que service-card */
+    }
+}
+
+/* 9. DEBUGGING - PARA VERIFICAR VISUALMENTE (OPCIONAL) */
+@media screen and (max-width: 768px) {
+    /* Agregar borde temporal para verificar ancho (remover después) */
+    /*
+    .service-card {
+        border: 3px solid red !important;
+    }
+    
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        border: 3px solid blue !important;
+    }
+    */
+}
+
+/* 10. SOLUCIÓN ABSOLUTA - SI NADA MÁS FUNCIONA */
+@media screen and (max-width: 768px) {
+    /* Crear variable CSS para ancho exacto */
+    :root {
+        --card-width: calc(90vw - 30px); /* 90% del viewport menos padding */
+    }
+    
+    .service-card,
+    .iot-card,
+    .mv-card,
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        width: var(--card-width) !important;
+        max-width: var(--card-width) !important;
+        min-width: var(--card-width) !important;
+    }
+}
+
+/* 11. RESETEAR CUALQUIER ESTILO PREVIO QUE LIMITE EL ANCHO */
+@media screen and (max-width: 768px) {
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        /* RESETEAR ESTILOS PREVIOS */
+        max-width: none !important;
+        min-width: none !important;
+        width: auto !important;
+        
+        /* LUEGO APLICAR ANCHO CORRECTO */
+        width: 100% !important;
+        flex: 1 1 100% !important;
+        
+        /* ASEGURAR QUE NO HAY RESTRICCIONES */
+        contain: none !important;
+        overflow: visible !important;
+    }
+}
