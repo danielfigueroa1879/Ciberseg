@@ -3898,17 +3898,3 @@ html {
         }
     }
 }
-
-/* DEBUGGING - AGREGAR TEMPORALMENTE */
-@media screen and (max-width: 768px) {
-    .newsletter-form input:focus {
-        border: 5px solid red !important;
-        background: yellow !important;
-        color: black !important;
-        position: fixed !important;
-        top: 50px !important;
-        left: 10px !important;
-        right: 10px !important;
-        z-index: 999999 !important;
-    }
-}
