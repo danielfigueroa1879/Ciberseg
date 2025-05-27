@@ -1,12 +1,13 @@
-// MENÚ HAMBURGUESA SIMPLIFICADO
-console.log('🍔 Iniciando menú hamburguesa...');
+// MENÚ HAMBURGUESA Y FORMULARIO CORREGIDOS
+console.log('🍔 Iniciando menú hamburguesa corregido...');
 
 // Variables globales
 let menuButton;
 let mobileMenu;
 let isMenuOpen = false;
+let isInputFocused = false;
 
-// Función para inicializar el menú
+// Función para inicializar el menú (CORREGIDA)
 function initMenu() {
     console.log('📱 Inicializando menú móvil...');
     
@@ -31,6 +32,7 @@ function initMenu() {
     menuButton.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
+        console.log('🔘 Click en botón hamburguesa');
         toggleMenu();
     });
     
@@ -38,16 +40,17 @@ function initMenu() {
     function handleTouch(e) {
         e.preventDefault();
         e.stopPropagation();
+        console.log('👆 Touch en botón hamburguesa');
         toggleMenu();
     }
     
-    menuButton.addEventListener('touchend', handleTouch);
+    menuButton.addEventListener('touchend', handleTouch, { passive: false });
     
     // Cerrar menú al hacer click en enlaces
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
         link.addEventListener('click', function() {
-            console.log('🔗 Click en enlace - cerrando menú');
+            console.log('🔗 Click en enlace del menú:', this.textContent);
             closeMenu();
         });
     });
@@ -73,7 +76,7 @@ function initMenu() {
     console.log('✅ Menú inicializado correctamente');
 }
 
-// Función para abrir/cerrar menú (corregida)
+// Función para abrir/cerrar menú (MEJORADA)
 function toggleMenu() {
     console.log('🔄 Toggle menú - Estado actual:', isMenuOpen ? 'Abierto' : 'Cerrado');
     
@@ -84,7 +87,7 @@ function toggleMenu() {
     }
 }
 
-// Función para abrir menú (corregida)
+// Función para abrir menú (MEJORADA)
 function openMenu() {
     console.log('📂 Abriendo menú...');
     
@@ -93,21 +96,37 @@ function openMenu() {
         return;
     }
     
+    // Si hay un input enfocado, desenfocarlo primero
+    if (isInputFocused) {
+        const focusedInput = document.activeElement;
+        if (focusedInput && (focusedInput.tagName === 'INPUT' || focusedInput.tagName === 'TEXTAREA')) {
+            focusedInput.blur();
+            console.log('📝 Input desenfocado para abrir menú');
+        }
+        isInputFocused = false;
+    }
+    
     // Activar clases
     menuButton.classList.add('active');
     mobileMenu.classList.add('active');
     document.body.classList.add('menu-open');
+    document.body.classList.remove('form-input-focused'); // Remover clase de input enfocado
     
     // Cambiar variable de estado
     isMenuOpen = true;
     
-    // Prevenir scroll del body
-    document.body.style.overflow = 'hidden';
+    // Asegurar que el header esté visible
+    const header = document.querySelector('.header');
+    if (header) {
+        header.style.transform = 'translateY(0)';
+        header.style.opacity = '1';
+        header.style.pointerEvents = 'auto';
+    }
     
     console.log('✅ Menú abierto');
 }
 
-// Función para cerrar menú (corregida)
+// Función para cerrar menú (MEJORADA)
 function closeMenu() {
     console.log('📁 Cerrando menú...');
     
@@ -130,138 +149,40 @@ function closeMenu() {
     console.log('✅ Menú cerrado');
 }
 
-// Función mejorada para manejar formularios sin romper el menú
-function initMobileFormImprovements() {
-    console.log('📱 Inicializando mejoras para formularios móviles...');
-    
-    if (window.innerWidth <= 768) {
-        const header = document.querySelector('.header');
-        const inputs = document.querySelectorAll('input, textarea');
-        
-        inputs.forEach(input => {
-            // Al enfocar un input
-            input.addEventListener('focus', function() {
-                // Solo ocultar header si el menú NO está abierto
-                if (!isMenuOpen && header) {
-                    console.log('📝 Input enfocado - ocultando header');
-                    header.style.transform = 'translateY(-100%)';
-                    header.style.transition = 'transform 0.3s ease';
-                    document.body.classList.add('form-focused');
-                }
-                
-                // Scroll suave al input
-                setTimeout(() => {
-                    const rect = input.getBoundingClientRect();
-                    if (rect.top < 100) {
-                        input.scrollIntoView({ 
-                            behavior: 'smooth', 
-                            block: 'center' 
-                        });
-                    }
-                }, 100);
-            });
-            
-            // Al perder el foco
-            input.addEventListener('blur', function() {
-                setTimeout(() => {
-                    const anyInputFocused = document.querySelector('input:focus, textarea:focus');
-                    
-                    if (!anyInputFocused && !isMenuOpen && header) {
-                        console.log('📝 Restaurando header');
-                        header.style.transform = 'translateY(0)';
-                        document.body.classList.remove('form-focused');
-                    }
-                }, 150);
-            });
-        });
-    }
-    
-    console.log('✅ Mejoras móviles inicializadas');
-}
-
-// INICIALIZACIÓN PRINCIPAL CORREGIDA
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 Iniciando aplicación...');
-    
-    // Esperar un poco para asegurar que el DOM esté completamente listo
-    setTimeout(() => {
-        initMenu(); // ← Inicializar menú primero
-        initScrollButton();
-        initScrollEffects();
-        initSmoothScroll();
-        initMobileFormImprovements(); // ← Después las mejoras móviles
-        
-        console.log('🎉 Aplicación inicializada completamente');
-    }, 100);
-});
-
-// Manejar cambios de tamaño de ventana
-window.addEventListener('resize', function() {
-    // Cerrar menú si se cambia a desktop
-    if (window.innerWidth > 768 && isMenuOpen) {
-        closeMenu();
-    }
-    
-    // Re-inicializar mejoras móviles si es necesario
-    if (window.innerWidth <= 768) {
-        initMobileFormImprovements();
-    }
-});
-
-// Manejar cambios de orientación
-window.addEventListener('orientationchange', function() {
-    setTimeout(() => {
-        if (isMenuOpen) {
-            closeMenu();
-        }
-        if (window.innerWidth <= 768) {
-            initMobileFormImprovements();
-        }
-    }, 500);
-});
-
-console.log('📜 Script del menú cargado completamente');
-// ===== SOLUCIÓN JAVASCRIPT PARA FORMULARIO MÓVIL =====
-
-// Función principal para manejar el formulario en móviles
+// Función mejorada para manejar formularios SIN INTERFERIR CON EL MENÚ
 function initMobileFormFix() {
     if (window.innerWidth <= 768) {
-        console.log('📱 Inicializando corrección de formulario móvil...');
+        console.log('📱 Inicializando corrección de formulario móvil mejorada...');
         
         const header = document.querySelector('.header');
         const body = document.body;
         const inputs = document.querySelectorAll('.newsletter-form input, .newsletter-form textarea, .contact-form input, .contact-form textarea');
         
-        // Variables de control
-        let isInputFocused = false;
         let focusTimeout;
         
         // Configurar viewport height para móviles
         function setViewportHeight() {
             const vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
-            console.log('📐 Viewport height actualizado:', vh + 'px');
         }
         
         setViewportHeight();
         
-        // Función para ocultar header
+        // Función para ocultar header (SOLO si menú no está abierto)
         function hideHeader() {
-            if (header) {
+            if (header && !isMenuOpen) {
                 header.style.transform = 'translateY(-100%)';
                 header.style.transition = 'transform 0.3s ease';
-                header.classList.add('input-focused');
                 body.classList.add('form-input-focused');
-                console.log('🙈 Header ocultado');
+                console.log('🙈 Header ocultado por input enfocado');
             }
         }
         
-        // Función para mostrar header
+        // Función para mostrar header (SOLO si no hay inputs enfocados)
         function showHeader() {
-            if (header) {
+            if (header && !isMenuOpen) {
                 header.style.transform = 'translateY(0)';
                 header.style.transition = 'transform 0.3s ease';
-                header.classList.remove('input-focused');
                 body.classList.remove('form-input-focused');
                 console.log('👁️ Header mostrado');
             }
@@ -269,19 +190,17 @@ function initMobileFormFix() {
         
         // Función para hacer scroll al input
         function scrollToInput(input) {
+            // NO hacer scroll si el menú está abierto
+            if (isMenuOpen) return;
+            
             setTimeout(() => {
                 const headerHeight = header ? header.offsetHeight : 80;
                 const inputRect = input.getBoundingClientRect();
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                 
-                // Calcular posición objetivo
-                const targetY = scrollTop + inputRect.top - headerHeight - 20;
+                const targetY = scrollTop + inputRect.top - headerHeight - 30;
                 
-                console.log('📍 Haciendo scroll al input:', {
-                    inputTop: inputRect.top,
-                    headerHeight: headerHeight,
-                    targetY: targetY
-                });
+                console.log('📍 Haciendo scroll al input');
                 
                 window.scrollTo({
                     top: Math.max(0, targetY),
@@ -292,28 +211,23 @@ function initMobileFormFix() {
         
         // Event listeners para cada input
         inputs.forEach((input, index) => {
-            console.log(`🎯 Configurando input ${index + 1}:`, input.placeholder || input.name);
-            
-            // Evento focus
+            // Evento focus - SOLO si menú no está abierto
             input.addEventListener('focus', function(e) {
+                // NO procesar si el menú está abierto
+                if (isMenuOpen) {
+                    this.blur(); // Desenfocar inmediatamente
+                    return;
+                }
+                
                 console.log('📝 Input enfocado:', this.placeholder || this.name);
                 
-                // Limpiar timeout previo
                 if (focusTimeout) {
                     clearTimeout(focusTimeout);
                 }
                 
                 isInputFocused = true;
-                
-                // Ocultar header inmediatamente
                 hideHeader();
-                
-                // Hacer scroll al input
                 scrollToInput(this);
-                
-                // Asegurar z-index alto
-                this.style.zIndex = '1004';
-                this.style.position = 'relative';
                 
             }, { passive: false });
             
@@ -321,63 +235,57 @@ function initMobileFormFix() {
             input.addEventListener('blur', function(e) {
                 console.log('📝 Input desenfocado:', this.placeholder || this.name);
                 
-                // Esperar un poco para ver si otro input recibe foco
                 focusTimeout = setTimeout(() => {
                     const anyInputFocused = document.querySelector('.newsletter-form input:focus, .newsletter-form textarea:focus, .contact-form input:focus, .contact-form textarea:focus');
                     
-                    if (!anyInputFocused) {
+                    if (!anyInputFocused && !isMenuOpen) {
                         console.log('📝 Ningún input enfocado - mostrando header');
                         isInputFocused = false;
                         showHeader();
                     }
                 }, 150);
-                
-                // Restaurar z-index
-                this.style.zIndex = '1003';
             });
+            
+            // Prevenir enfoque cuando menú está abierto
+            input.addEventListener('touchstart', function(e) {
+                if (isMenuOpen) {
+                    e.preventDefault();
+                    console.log('👆 Touch en input bloqueado - menú abierto');
+                    return;
+                }
+            }, { passive: false });
             
             // Evento input para iOS
             input.addEventListener('input', function(e) {
-                if (isInputFocused) {
-                    // Asegurar que el header siga oculto mientras se escribe
+                if (isInputFocused && !isMenuOpen) {
                     hideHeader();
                 }
             });
-            
-            // Evento touchstart para mejor respuesta táctil
-            input.addEventListener('touchstart', function(e) {
-                console.log('👆 Touch en input:', this.placeholder || this.name);
-                
-                // Preparar para enfoque
-                if (!isInputFocused) {
-                    hideHeader();
-                }
-            }, { passive: true });
         });
         
         // Manejar cambios de orientación
         window.addEventListener('orientationchange', function() {
-            console.log('🔄 Cambio de orientación detectado');
-            
             setTimeout(() => {
                 setViewportHeight();
                 
-                // Si hay un input enfocado, reajustar
-                const focusedInput = document.querySelector('.newsletter-form input:focus, .newsletter-form textarea:focus');
-                if (focusedInput) {
-                    scrollToInput(focusedInput);
+                // Si hay un input enfocado y menú cerrado, reajustar
+                if (isInputFocused && !isMenuOpen) {
+                    const focusedInput = document.querySelector('.newsletter-form input:focus, .newsletter-form textarea:focus');
+                    if (focusedInput) {
+                        scrollToInput(focusedInput);
+                    }
                 }
             }, 500);
         });
         
-        // Manejar redimensionamiento de ventana
+        // Manejar redimensionamiento
         window.addEventListener('resize', function() {
             setViewportHeight();
             
-            // Si cambió a desktop, restaurar header
             if (window.innerWidth > 768) {
                 showHeader();
                 isInputFocused = false;
+                isMenuOpen = false;
             }
         });
         
@@ -385,7 +293,7 @@ function initMobileFormFix() {
         document.addEventListener('click', function(e) {
             const formElement = e.target.closest('.newsletter-form, .contact-form');
             
-            if (!formElement && isInputFocused) {
+            if (!formElement && isInputFocused && !isMenuOpen) {
                 console.log('👆 Click fuera del formulario');
                 
                 setTimeout(() => {
@@ -408,18 +316,83 @@ function initMobileFormFix() {
             });
         });
         
-        // Manejar tecla Escape
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && isInputFocused) {
-                console.log('⌨️ Tecla Escape - ocultando teclado');
-                document.activeElement.blur();
-                isInputFocused = false;
-                showHeader();
+        console.log('✅ Corrección de formulario móvil mejorada inicializada');
+    }
+}
+
+// SCROLL TO TOP BUTTON
+function initScrollButton() {
+    const scrollBtn = document.getElementById('scrollToTop');
+    if (!scrollBtn) return;
+    
+    scrollBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+// HEADER SCROLL EFFECTS
+function initScrollEffects() {
+    const header = document.querySelector('.header');
+    const scrollBtn = document.getElementById('scrollToTop');
+    let lastScrollTop = 0;
+    
+    window.addEventListener('scroll', function() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Header effects
+        if (header) {
+            if (scrollTop > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            // Auto-hide en móviles
+            if (window.innerWidth <= 768) {
+                if (scrollTop > lastScrollTop && scrollTop > 200) {
+                    header.style.transform = 'translateY(-100%)';
+                } else {
+                    header.style.transform = 'translateY(0)';
+                }
+            }
+        }
+        
+        // Scroll to top button
+        if (scrollBtn && window.innerWidth <= 768) {
+            if (scrollTop > 300) {
+                scrollBtn.classList.add('show');
+            } else {
+                scrollBtn.classList.remove('show');
+            }
+        }
+        
+        lastScrollTop = scrollTop;
+    });
+}
+
+// SMOOTH SCROLLING
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                const header = document.querySelector('.header');
+                const headerHeight = header ? header.offsetHeight : 0;
+                const targetPosition = targetSection.offsetTop - headerHeight - 20;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
             }
         });
-        
-        console.log('✅ Corrección de formulario móvil inicializada');
-    }
+    });
 }
 
 // Función mejorada para inicializar todo
@@ -449,37 +422,71 @@ function initEnhancedMobile() {
     console.log('✅ Mejoras móviles avanzadas completadas');
 }
 
-// Integrar con la inicialización existente
+// INICIALIZACIÓN PRINCIPAL CORREGIDA
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 DOM cargado - iniciando aplicación...');
+    console.log('🚀 Iniciando aplicación con menú y formulario corregidos...');
     
     setTimeout(() => {
-        initMenu();
+        initMenu(); // ← Menú corregido
         initScrollButton();
         initScrollEffects();
         initSmoothScroll();
-        initEnhancedMobile(); // ← Nueva función mejorada
+        initEnhancedMobile(); // ← Formulario que no interfiere con menú
         
         console.log('🎉 Aplicación completamente inicializada');
     }, 100);
 });
 
-// Reinicializar al cambiar tamaño de ventana
+// Manejar cambios de tamaño de ventana
 window.addEventListener('resize', function() {
+    // Cerrar menú si se cambia a desktop
+    if (window.innerWidth > 768 && isMenuOpen) {
+        closeMenu();
+        isMenuOpen = false;
+    }
+    
+    // Re-inicializar mejoras móviles si es necesario
     if (window.innerWidth <= 768) {
-        // Reinicializar solo si es necesario
         setTimeout(() => {
             initMobileFormFix();
         }, 300);
     }
 });
 
-// Debug: Mostrar información del viewport en móviles
-if (window.innerWidth <= 768) {
-    console.log('📱 Información del dispositivo:', {
-        width: window.innerWidth,
-        height: window.innerHeight,
-        userAgent: navigator.userAgent.substring(0, 50) + '...',
-        pixelRatio: window.devicePixelRatio
-    });
-}
+// Manejar cambios de orientación
+window.addEventListener('orientationchange', function() {
+    setTimeout(() => {
+        if (isMenuOpen) {
+            // Reajustar menú si está abierto
+            const mobileMenu = document.getElementById('nav-menu');
+            if (mobileMenu && mobileMenu.classList.contains('active')) {
+                console.log('🔄 Reajustando menú tras cambio de orientación');
+            }
+        }
+        
+        if (window.innerWidth <= 768) {
+            initMobileFormFix();
+        }
+    }, 500);
+});
+
+// Estilos dinámicos
+const dynamicStyles = document.createElement('style');
+dynamicStyles.textContent = `
+    @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+    
+    @keyframes slideOut {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100%); opacity: 0; }
+    }
+    
+    .menu-open {
+        overflow: hidden !important;
+    }
+`;
+document.head.appendChild(dynamicStyles);
+
+console.log('📜 Script del menú y formulario corregido cargado completamente');
