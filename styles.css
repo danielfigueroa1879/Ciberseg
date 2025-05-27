@@ -3302,3 +3302,313 @@ html {
         padding: 0 10px !important;
     }
 }
+/* ===== CORRECCIÓN ESPECÍFICA PARA FORMULARIO MÓVIL ===== */
+
+/* Variables CSS para viewport dinámico */
+:root {
+    --real-vh: 1vh;
+    --keyboard-height: 0px;
+}
+
+/* SECCIÓN DE CONTACTO - AJUSTES PARA MÓVILES */
+@media screen and (max-width: 768px) {
+    
+    /* Contenedor principal de contacto */
+    .contact-section {
+        padding: 40px 15px !important; /* Reducir padding superior */
+        margin-top: 0 !important;
+        position: relative !important;
+    }
+    
+    /* Título principal más arriba */
+    .contact-section h2 {
+        margin-top: 0 !important;
+        margin-bottom: 20px !important;
+        padding-top: 0 !important;
+    }
+    
+    /* Wrapper de contenido de contacto */
+    .contact-content-wrapper {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+    
+    /* CUADRADO DE INFORMACIÓN - MÁS COMPACTO */
+    .contact-info-wrapper {
+        margin-bottom: 20px !important;
+        padding: 20px 15px !important;
+        min-height: 160px !important; /* Más bajo */
+        background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)) !important;
+        border: 2px solid rgba(224, 253, 44, 0.3) !important;
+        border-radius: 15px !important;
+        backdrop-filter: blur(10px) !important;
+    }
+    
+    .contact-info-wrapper h3 {
+        margin-bottom: 15px !important;
+        font-size: 18px !important;
+    }
+    
+    .contact-item {
+        margin-bottom: 8px !important;
+        font-size: 14px !important;
+    }
+    
+    /* CUADRADO DEL FORMULARIO - OPTIMIZADO */
+    .contact-form-wrapper {
+        padding: 20px 15px !important;
+        background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)) !important;
+        border: 2px solid rgba(224, 253, 44, 0.3) !important;
+        border-radius: 15px !important;
+        backdrop-filter: blur(10px) !important;
+        position: relative !important;
+        z-index: 100 !important;
+    }
+    
+    .contact-form-wrapper h2 {
+        font-size: 20px !important;
+        margin-bottom: 15px !important;
+        text-align: center !important;
+    }
+    
+    /* FORMULARIO - INPUTS OPTIMIZADOS PARA MÓVIL */
+    .newsletter-form {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 15px !important;
+        position: relative !important;
+        z-index: 200 !important;
+    }
+    
+    .newsletter-form input,
+    .newsletter-form textarea {
+        width: 100% !important;
+        padding: 14px 16px !important;
+        border: 2px solid rgba(255,255,255,0.3) !important;
+        border-radius: 8px !important;
+        background-color: rgba(255,255,255,0.15) !important;
+        color: #fff !important;
+        font-family: 'Poppins', sans-serif !important;
+        font-size: 16px !important; /* Importante: previene zoom en iOS */
+        min-height: 48px !important; /* Área de toque adecuada */
+        box-sizing: border-box !important;
+        transition: all 0.3s ease !important;
+        
+        /* Estilos específicos para móvil */
+        -webkit-appearance: none !important;
+        -webkit-tap-highlight-color: transparent !important;
+        -webkit-touch-callout: none !important;
+        -webkit-user-select: text !important;
+        transform: translateZ(0) !important; /* Acelera el rendering */
+        position: relative !important;
+        z-index: 300 !important;
+    }
+    
+    .newsletter-form textarea {
+        height: 90px !important;
+        resize: none !important;
+        line-height: 1.4 !important;
+        font-family: 'Poppins', sans-serif !important;
+    }
+    
+    /* ESTADOS DE FOCO MEJORADOS */
+    .newsletter-form input:focus,
+    .newsletter-form textarea:focus {
+        outline: none !important;
+        border-color: #E0FD2C !important;
+        background-color: rgba(255,255,255,0.25) !important;
+        box-shadow: 0 0 0 3px rgba(224, 253, 44, 0.3) !important;
+        transform: translateZ(0) scale(1.02) !important;
+        z-index: 400 !important;
+    }
+    
+    /* BOTÓN DE ENVÍO */
+    .newsletter-form button[type="submit"] {
+        background-color: #E0FD2C !important;
+        color: #000 !important;
+        border: none !important;
+        padding: 12px 24px !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        cursor: pointer !important;
+        border-radius: 8px !important;
+        transition: all 0.3s ease !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
+        align-self: flex-start !important;
+        margin: 10px 0 0 0 !important;
+        min-width: 120px !important;
+        min-height: 44px !important; /* Área de toque adecuada */
+        
+        /* Estilos específicos para móvil */
+        -webkit-tap-highlight-color: transparent !important;
+        -webkit-appearance: none !important;
+        transform: translateZ(0) !important;
+        position: relative !important;
+        z-index: 300 !important;
+    }
+    
+    .newsletter-form button[type="submit"]:hover,
+    .newsletter-form button[type="submit"]:active {
+        background-color: #C7E525 !important;
+        transform: translateY(-1px) translateZ(0) !important;
+        box-shadow: 0 4px 12px rgba(224, 253, 44, 0.4) !important;
+    }
+    
+    /* PLACEHOLDER MEJORADO */
+    .newsletter-form input::placeholder,
+    .newsletter-form textarea::placeholder {
+        color: rgba(255,255,255,0.7) !important;
+        font-style: italic !important;
+        opacity: 1 !important;
+    }
+    
+    /* CUANDO EL HEADER ESTÁ OCULTO */
+    .header-hidden .contact-section {
+        padding-top: 20px !important;
+    }
+    
+    /* ASEGURAR QUE EL FORMULARIO ESTÉ SIEMPRE VISIBLE */
+    .form-input-focused .contact-form-wrapper {
+        position: relative !important;
+        z-index: 1000 !important;
+        margin-top: 0 !important;
+    }
+    
+    .form-input-focused .newsletter-form {
+        z-index: 1001 !important;
+    }
+    
+    .form-input-focused .newsletter-form input:focus,
+    .form-input-focused .newsletter-form textarea:focus {
+        z-index: 1002 !important;
+        position: relative !important;
+    }
+}
+
+/* MÓVILES PEQUEÑOS - AJUSTES ADICIONALES */
+@media screen and (max-width: 480px) {
+    .contact-section {
+        padding: 30px 10px !important;
+    }
+    
+    .contact-info-wrapper,
+    .contact-form-wrapper {
+        padding: 18px 12px !important;
+        margin: 0 5px !important;
+    }
+    
+    .newsletter-form input,
+    .newsletter-form textarea {
+        padding: 12px 14px !important;
+        font-size: 16px !important; /* Mantener 16px para prevenir zoom */
+    }
+    
+    .newsletter-form button[type="submit"] {
+        padding: 10px 20px !important;
+        font-size: 13px !important;
+        min-width: 110px !important;
+    }
+}
+
+/* MÓVILES MUY PEQUEÑOS */
+@media screen and (max-width: 360px) {
+    .contact-section {
+        padding: 25px 8px !important;
+    }
+    
+    .newsletter-form input,
+    .newsletter-form textarea {
+        padding: 11px 13px !important;
+    }
+    
+    .contact-form-wrapper h2 {
+        font-size: 18px !important;
+    }
+}
+
+/* LANDSCAPE EN MÓVILES */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .contact-section {
+        padding: 20px 15px !important;
+    }
+    
+    .contact-info-wrapper {
+        min-height: 120px !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .contact-form-wrapper {
+        padding: 15px 12px !important;
+    }
+    
+    .newsletter-form {
+        gap: 12px !important;
+    }
+    
+    .newsletter-form textarea {
+        height: 70px !important;
+    }
+}
+
+/* PREVENIR ZOOM EN SAFARI iOS */
+@supports (-webkit-touch-callout: none) {
+    .newsletter-form input,
+    .newsletter-form textarea {
+        font-size: 16px !important;
+        -webkit-text-size-adjust: 100% !important;
+    }
+}
+
+/* CORREGIR PROBLEMA ESPECÍFICO DEL TECLADO VIRTUAL */
+@media screen and (max-width: 768px) {
+    /* Cuando el teclado virtual aparece */
+    .keyboard-visible {
+        height: calc(var(--real-vh, 1vh) * 100) !important;
+        overflow: hidden !important;
+    }
+    
+    .keyboard-visible .contact-section {
+        height: calc(var(--real-vh, 1vh) * 100 - var(--keyboard-height, 0px)) !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+    
+    /* Asegurar que el formulario sea siempre visible */
+    .contact-form-wrapper {
+        margin-bottom: 60px !important; /* Espacio extra en la parte inferior */
+    }
+}
+
+/* MEJORAS ESPECÍFICAS PARA EL PROBLEMA REPORTADO */
+@media screen and (max-width: 768px) {
+    /* Asegurar que los inputs en la mitad superior sean accesibles */
+    .newsletter-form input:nth-child(1),
+    .newsletter-form input:nth-child(2) {
+        position: relative !important;
+        z-index: 500 !important;
+    }
+    
+    /* Cuando un input está enfocado, asegurar acceso total */
+    .newsletter-form input:focus,
+    .newsletter-form textarea:focus {
+        position: relative !important;
+        z-index: 1000 !important;
+        /* Forzar que esté por encima de todo */
+        isolation: isolate !important;
+    }
+    
+    /* Contenedor del formulario con z-index alto cuando hay foco */
+    .newsletter-form:focus-within {
+        position: relative !important;
+        z-index: 999 !important;
+        isolation: isolate !important;
+    }
+    
+    /* El wrapper del formulario también debe tener prioridad */
+    .contact-form-wrapper:focus-within {
+        position: relative !important;
+        z-index: 998 !important;
+        isolation: isolate !important;
+    }
+}
