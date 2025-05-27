@@ -1,37 +1,56 @@
-// SOLUCIÓN DEFINITIVA PARA FORMULARIO MÓVIL - HEADER NO INTERFIERE
-console.log('🔥 Iniciando solución DEFINITIVA para formulario móvil...');
+// SOLUCIÓN COMPLETA PARA FORMULARIO MÓVIL - SIN INTERFERENCIA DEL HEADER
+console.log('🔧 Iniciando corrección completa para formulario móvil...');
 
 // Variables globales
 let menuButton;
 let mobileMenu;
 let isMenuOpen = false;
-let isFormActive = false;
+let isInputFocused = false;
+let keyboardHeight = 0;
+let originalViewportHeight = window.innerHeight;
 
-// FUNCIÓN 1: MENÚ HAMBURGUESA BÁSICO
+// FUNCIÓN 1: INICIALIZAR MENÚ HAMBURGUESA
 function initMenu() {
-    console.log('🍔 Inicializando menú...');
+    console.log('📱 Inicializando menú móvil...');
     
     menuButton = document.getElementById('mobile-menu');
     mobileMenu = document.getElementById('nav-menu');
     
     if (!menuButton || !mobileMenu) {
-        console.error('❌ Elementos del menú no encontrados');
+        console.error('🚨 ERROR: Elementos del menú no encontrados');
         return;
     }
     
+    // Limpiar eventos previos
+    menuButton.removeEventListener('click', toggleMenu);
+    
+    // Evento click principal
     menuButton.addEventListener('click', function(e) {
         e.preventDefault();
+        e.stopPropagation();
+        console.log('🔘 Click en botón hamburguesa');
         toggleMenu();
     });
     
     // Cerrar menú al hacer click en enlaces
-    document.querySelectorAll('.nav-link').forEach(link => {
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
         link.addEventListener('click', function() {
+            console.log('🔗 Click en enlace del menú');
             closeMenu();
         });
     });
     
-    console.log('✅ Menú inicializado');
+    // Cerrar menú al hacer click fuera
+    document.addEventListener('click', function(e) {
+        if (isMenuOpen && 
+            !menuButton.contains(e.target) && 
+            !mobileMenu.contains(e.target)) {
+            closeMenu();
+        }
+    });
+    
+    console.log('✅ Menú inicializado correctamente');
 }
 
 function toggleMenu() {
@@ -43,303 +62,470 @@ function toggleMenu() {
 }
 
 function openMenu() {
-    if (isFormActive) {
-        exitFormMode();
+    console.log('📂 Abriendo menú...');
+    
+    // Desenfocar cualquier input activo
+    const activeInput = document.activeElement;
+    if (activeInput && (activeInput.tagName === 'INPUT' || activeInput.tagName === 'TEXTAREA')) {
+        activeInput.blur();
+        isInputFocused = false;
     }
     
     menuButton.classList.add('active');
     mobileMenu.classList.add('active');
     document.body.classList.add('menu-open');
+    document.body.classList.remove('form-input-focused');
+    
     isMenuOpen = true;
     
-    // Asegurar que header esté visible para el menú
+    // Forzar que el header sea visible
     const header = document.querySelector('.header');
     if (header) {
-        header.style.display = 'block';
-        header.style.position = 'fixed';
-        header.style.top = '0';
+        header.style.transform = 'translateY(0) !important';
         header.style.zIndex = '1000';
+        header.style.position = 'fixed';
     }
     
-    console.log('📂 Menú abierto');
+    console.log('✅ Menú abierto');
 }
 
 function closeMenu() {
+    console.log('📁 Cerrando menú...');
+    
     menuButton.classList.remove('active');
     mobileMenu.classList.remove('active');
     document.body.classList.remove('menu-open');
+    
     isMenuOpen = false;
-    console.log('📁 Menú cerrado');
+    document.body.style.overflow = '';
+    
+    console.log('✅ Menú cerrado');
 }
 
-// FUNCIÓN 2: SOLUCIÓN DEFINITIVA PARA FORMULARIOS
-function initFormSolution() {
-    // Solo aplicar en móviles
-    if (window.innerWidth > 768) {
-        return;
-    }
-    
-    console.log('🔥 Aplicando solución DEFINITIVA para formularios...');
-    
-    const header = document.querySelector('.header');
-    const contactSection = document.querySelector('.contact-section');
-    const formWrapper = document.querySelector('.contact-form-wrapper');
-    
-    if (!header || !contactSection) {
-        console.error('❌ Elementos necesarios no encontrados');
-        return;
-    }
-    
-    // FUNCIÓN PARA ACTIVAR MODO FORMULARIO
-    function enterFormMode() {
-        console.log('🔥 ACTIVANDO modo formulario - Header ELIMINADO');
+// FUNCIÓN 2: CORRECCIÓN AVANZADA PARA FORMULARIOS MÓVILES
+function initAdvancedMobileFormFix() {
+    if (window.innerWidth <= 768) {
+        console.log('📱 Inicializando corrección avanzada de formulario móvil...');
         
-        // 1. OCULTAR HEADER COMPLETAMENTE
-        header.style.display = 'none';
-        header.style.visibility = 'hidden';
-        header.style.opacity = '0';
-        header.style.zIndex = '-999';
-        header.style.pointerEvents = 'none';
+        const header = document.querySelector('.header');
+        const body = document.body;
+        const inputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], textarea');
         
-        // 2. AJUSTAR BODY Y PÁGINA
-        document.body.style.paddingTop = '0';
-        document.body.classList.add('form-mode-active');
+        let focusTimeout;
+        let scrollTimeout;
+        let resizeTimeout;
         
-        // 3. MOVER SECCIÓN DE FORMULARIO AL TOP
-        contactSection.style.paddingTop = '20px';
-        contactSection.style.marginTop = '0';
-        
-        // 4. SCROLL AL TOP DE LA PÁGINA
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-        
-        isFormActive = true;
-        console.log('✅ Modo formulario ACTIVADO');
-    }
-    
-    // FUNCIÓN PARA SALIR DEL MODO FORMULARIO
-    function exitFormMode() {
-        console.log('🔄 DESACTIVANDO modo formulario - Header restaurado');
-        
-        // 1. RESTAURAR HEADER
-        header.style.display = 'block';
-        header.style.visibility = 'visible';
-        header.style.opacity = '1';
-        header.style.zIndex = '1000';
-        header.style.pointerEvents = 'auto';
-        header.style.position = 'fixed';
-        header.style.top = '0';
-        
-        // 2. RESTAURAR BODY Y PÁGINA
-        document.body.style.paddingTop = '';
-        document.body.classList.remove('form-mode-active');
-        
-        // 3. RESTAURAR SECCIÓN DE FORMULARIO
-        contactSection.style.paddingTop = '';
-        contactSection.style.marginTop = '';
-        
-        isFormActive = false;
-        console.log('✅ Header restaurado');
-    }
-    
-    // DETECTAR CUANDO EL USUARIO TOCA ESPECÍFICAMENTE EL FORMULARIO
-    
-    // 1. Solo al tocar el área específica del formulario (no toda la sección)
-    if (formWrapper) {
-        formWrapper.addEventListener('touchstart', function(e) {
-            if (isMenuOpen) return;
+        // PASO 1: CONFIGURAR VIEWPORT DINÁMICO
+        function setDynamicViewport() {
+            const currentHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+            keyboardHeight = Math.max(0, originalViewportHeight - currentHeight);
             
-            console.log('👆 Touch específico en formulario');
-            enterFormMode();
-        }, { passive: true });
-        
-        formWrapper.addEventListener('click', function(e) {
-            if (isMenuOpen) return;
+            document.documentElement.style.setProperty('--real-vh', `${currentHeight * 0.01}px`);
+            document.documentElement.style.setProperty('--keyboard-height', `${keyboardHeight}px`);
             
-            console.log('👆 Click específico en formulario');
-            enterFormMode();
-        });
-    }
-    
-    // 2. ELIMINADO - No activar automáticamente por scroll
-    // Solo se activa cuando el usuario toca específicamente el formulario
-    
-    // 2. Al tocar inputs específicamente
-    const inputs = document.querySelectorAll('.newsletter-form input, .newsletter-form textarea');
-    inputs.forEach((input, index) => {
-        // Touch events
-        input.addEventListener('touchstart', function(e) {
-            if (isMenuOpen) {
-                e.preventDefault();
-                return;
-            }
-            
-            console.log(`📝 Touch en input ${index + 1}`);
-            enterFormMode();
-            
-            // Enfocar el input después de activar modo formulario
-            setTimeout(() => {
-                this.focus();
-            }, 300);
-        }, { passive: false });
-        
-        // Focus events
-        input.addEventListener('focus', function() {
-            if (isMenuOpen) {
-                this.blur();
-                return;
-            }
-            
-            console.log(`📝 Focus en input ${index + 1}`);
-            
-            if (!isFormActive) {
-                enterFormMode();
-            }
-            
-            // Scroll al input después de un momento
-            setTimeout(() => {
-                this.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center'
-                });
-            }, 200);
-        });
-        
-        // Blur events
-        input.addEventListener('blur', function() {
-            console.log(`📝 Blur en input ${index + 1}`);
-            // No salir del modo formulario automáticamente
-            // El usuario puede salir tocando fuera o navegando
-        });
-    });
-    
-    // 3. BOTÓN PARA SALIR DEL MODO FORMULARIO
-    function createExitButton() {
-        const exitBtn = document.createElement('button');
-        exitBtn.id = 'exit-form-mode';
-        exitBtn.innerHTML = '✕';
-        exitBtn.style.cssText = `
-            position: fixed !important;
-            top: 15px !important;
-            right: 15px !important;
-            width: 40px !important;
-            height: 40px !important;
-            background: #E0FD2C !important;
-            color: #000 !important;
-            border: none !important;
-            border-radius: 50% !important;
-            font-size: 20px !important;
-            font-weight: bold !important;
-            cursor: pointer !important;
-            z-index: 9999 !important;
-            display: none !important;
-            align-items: center !important;
-            justify-content: center !important;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3) !important;
-            transition: all 0.3s ease !important;
-        `;
-        
-        exitBtn.addEventListener('click', function() {
-            exitFormMode();
-            this.style.display = 'none';
-        });
-        
-        exitBtn.addEventListener('touchend', function(e) {
-            e.preventDefault();
-            exitFormMode();
-            this.style.display = 'none';
-        });
-        
-        document.body.appendChild(exitBtn);
-        return exitBtn;
-    }
-    
-    const exitButton = createExitButton();
-    
-    // Mostrar/ocultar botón de salida
-    function updateExitButton() {
-        if (isFormActive && !isMenuOpen) {
-            exitButton.style.display = 'flex';
-        } else {
-            exitButton.style.display = 'none';
+            console.log(`📐 Viewport: ${currentHeight}px, Teclado: ${keyboardHeight}px`);
         }
-    }
-    
-    // Actualizar botón cuando cambie el estado
-    const originalEnterFormMode = enterFormMode;
-    const originalExitFormMode = exitFormMode;
-    
-    enterFormMode = function() {
-        originalEnterFormMode();
-        updateExitButton();
-    };
-    
-    exitFormMode = function() {
-        originalExitFormMode();
-        updateExitButton();
-    };
-    
-    // 4. SALIR DEL MODO FORMULARIO AL NAVEGAR
-    const navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            if (isFormActive) {
-                exitFormMode();
+        
+        // PASO 2: MANEJO AGRESIVO DEL HEADER - OCULTAR COMPLETAMENTE
+        function smartHeaderControl() {
+            if (!header) return;
+            
+            if (isInputFocused && !isMenuOpen) {
+                // OCULTAR HEADER COMPLETAMENTE Y AGRESIVAMENTE
+                header.style.display = 'none'; // Ocultar completamente
+                header.style.visibility = 'hidden';
+                header.style.opacity = '0';
+                header.style.transform = 'translateY(-100%)';
+                header.style.zIndex = '-1';
+                header.style.pointerEvents = 'none';
+                body.classList.add('header-hidden', 'form-input-active');
+                body.style.paddingTop = '0';
+                console.log('🙈 Header COMPLETAMENTE ocultado para formulario');
+            } else if (!isMenuOpen) {
+                // MOSTRAR HEADER cuando no hay input enfocado
+                header.style.display = 'block';
+                header.style.visibility = 'visible';
+                header.style.opacity = '1';
+                header.style.transform = 'translateY(0)';
+                header.style.zIndex = '1000';
+                header.style.pointerEvents = 'auto';
+                body.classList.remove('header-hidden', 'form-input-active');
+                body.style.paddingTop = '';
+                console.log('👁️ Header completamente restaurado');
+            }
+        }
+        
+        // PASO 3: SCROLL ULTRA AGRESIVO PARA POSICIONAR INPUT CORRECTAMENTE
+        function smartScrollToInput(input) {
+            if (isMenuOpen) return;
+            
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                console.log('📍 Scroll ULTRA AGRESIVO al input');
+                
+                // Desactivar cualquier interferencia del header
+                if (header) {
+                    header.style.position = 'absolute';
+                    header.style.top = '-200px';
+                }
+                
+                // Calcular posición sin considerar header
+                const inputRect = input.getBoundingClientRect();
+                const currentScroll = window.pageYOffset;
+                const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+                
+                // Posición agresiva: input en la parte MUY superior de la pantalla
+                const targetScroll = currentScroll + inputRect.top - 50; // Solo 50px desde arriba
+                
+                // Scroll inmediato y forzado
+                window.scrollTo({
+                    top: Math.max(0, targetScroll),
+                    behavior: 'instant' // Cambiar a instant para ser más rápido
+                });
+                
+                // Scroll adicional después de un momento para asegurar posición
+                setTimeout(() => {
+                    const newInputRect = input.getBoundingClientRect();
+                    if (newInputRect.top > 100) {
+                        window.scrollTo({
+                            top: window.pageYOffset + newInputRect.top - 50,
+                            behavior: 'instant'
+                        });
+                    }
+                }, 100);
+                
+            }, 50); // Reducir delay
+        }
+        
+        // PASO 4: PREVENIR ZOOM EN IOS
+        function preventIOSZoom() {
+            inputs.forEach(input => {
+                const computedStyle = window.getComputedStyle(input);
+                const fontSize = parseFloat(computedStyle.fontSize);
+                
+                if (fontSize < 16) {
+                    input.style.fontSize = '16px';
+                    console.log('🍎 Zoom prevenido en input');
+                }
+            });
+        }
+        
+        // PASO 5: EVENT LISTENERS MEJORADOS
+        inputs.forEach((input, index) => {
+            // EVENTO FOCUS - ULTRA AGRESIVO
+            input.addEventListener('focus', function(e) {
+                if (isMenuOpen) {
+                    this.blur();
+                    return;
+                }
+                
+                console.log(`📝 Input ${index + 1} enfocado - MODO AGRESIVO`);
+                
+                clearTimeout(focusTimeout);
+                isInputFocused = true;
+                
+                // SECUENCIA ULTRA AGRESIVA
+                // 1. Ocultar header INMEDIATAMENTE
+                if (header) {
+                    header.style.display = 'none';
+                    header.style.position = 'absolute';
+                    header.style.top = '-500px';
+                    header.style.zIndex = '-999';
+                }
+                
+                // 2. Preparar el input para máxima visibilidad
+                this.style.position = 'relative';
+                this.style.zIndex = '9999';
+                this.style.isolation = 'isolate';
+                
+                // 3. Ejecutar acciones de forma inmediata
+                setTimeout(() => {
+                    setDynamicViewport();
+                    smartHeaderControl();
+                    smartScrollToInput(this);
+                    
+                    // 4. Forzar que el input esté visible
+                    this.scrollIntoView({
+                        behavior: 'instant',
+                        block: 'start',
+                        inline: 'nearest'
+                    });
+                }, 10); // Muy rápido
+                
+            }, { passive: false });
+            
+            // EVENTO BLUR
+            input.addEventListener('blur', function(e) {
+                console.log(`📝 Input ${index + 1} desenfocado`);
+                
+                clearTimeout(focusTimeout);
+                focusTimeout = setTimeout(() => {
+                    const anyFocused = document.querySelector('input:focus, textarea:focus');
+                    
+                    if (!anyFocused && !isMenuOpen) {
+                        console.log('📝 Todos los inputs desenfocados');
+                        isInputFocused = false;
+                        setDynamicViewport();
+                        smartHeaderControl();
+                    }
+                }, 200);
+            });
+            
+            // PREVENIR INTERACCIÓN CUANDO MENÚ ABIERTO
+            input.addEventListener('touchstart', function(e) {
+                if (isMenuOpen) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('🚫 Input bloqueado - menú abierto');
+                }
+            }, { passive: false });
+            
+            input.addEventListener('mousedown', function(e) {
+                if (isMenuOpen) {
+                    e.preventDefault();
+                    console.log('🚫 Input bloqueado - menú abierto');
+                }
+            });
+        });
+        
+        // PASO 6: VISUAL VIEWPORT API (iOS Safari)
+        if (window.visualViewport) {
+            console.log('📱 Visual Viewport API disponible');
+            
+            window.visualViewport.addEventListener('resize', function() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    setDynamicViewport();
+                    if (isInputFocused) {
+                        smartHeaderControl();
+                    }
+                }, 100);
+            });
+        }
+        
+        // PASO 7: MANEJAR CAMBIOS DE ORIENTACIÓN
+        window.addEventListener('orientationchange', function() {
+            console.log('🔄 Cambio de orientación detectado');
+            
+            setTimeout(() => {
+                originalViewportHeight = window.innerHeight;
+                setDynamicViewport();
+                
+                if (isInputFocused && !isMenuOpen) {
+                    const focusedInput = document.querySelector('input:focus, textarea:focus');
+                    if (focusedInput) {
+                        smartScrollToInput(focusedInput);
+                    }
+                }
+            }, 500);
+        });
+        
+        // PASO 8: CLICK FUERA DEL FORMULARIO
+        document.addEventListener('click', function(e) {
+            const isFormElement = e.target.closest('.newsletter-form, .contact-form, input, textarea');
+            
+            if (!isFormElement && isInputFocused && !isMenuOpen) {
+                console.log('👆 Click fuera del formulario - desenfocar');
+                
+                const activeInput = document.activeElement;
+                if (activeInput && (activeInput.tagName === 'INPUT' || activeInput.tagName === 'TEXTAREA')) {
+                    activeInput.blur();
+                }
+                
+                setTimeout(() => {
+                    if (!document.querySelector('input:focus, textarea:focus')) {
+                        isInputFocused = false;
+                        smartHeaderControl();
+                    }
+                }, 100);
             }
         });
-    });
-    
-    // 5. MODIFICADO - Solo salir si scroll MUY arriba y estaba en modo formulario
+        
+        // INICIALIZACIÓN
+        preventIOSZoom();
+        setDynamicViewport();
+        
+        console.log('✅ Corrección avanzada de formulario inicializada');
+    }
+}
+
+// FUNCIÓN 3: BOTONES DE SCROLL Y EFECTOS
+function initScrollButton() {
+    const scrollBtn = document.getElementById('scrollToTop');
+    if (scrollBtn) {
+        scrollBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+}
+
+function initScrollEffects() {
+    const header = document.querySelector('.header');
+    const scrollBtn = document.getElementById('scrollToTop');
     let lastScrollTop = 0;
+    
     window.addEventListener('scroll', function() {
-        if (!isFormActive || isMenuOpen) return;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        const scrollTop = window.pageYOffset;
+        // Header effects (SOLO si no hay input enfocado y menú cerrado)
+        if (header && !isInputFocused && !isMenuOpen) {
+            if (scrollTop > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        }
         
-        // Solo salir si scroll hacia arriba y está en el TOP de la página
-        if (scrollTop < lastScrollTop && scrollTop < 50) {
-            exitFormMode();
+        // Scroll to top button
+        if (scrollBtn && window.innerWidth <= 768) {
+            if (scrollTop > 300) {
+                scrollBtn.classList.add('show');
+            } else {
+                scrollBtn.classList.remove('show');
+            }
         }
         
         lastScrollTop = scrollTop;
     });
-    
-    console.log('✅ Solución definitiva aplicada');
 }
 
-// FUNCIÓN 3: INICIALIZACIÓN
+// FUNCIÓN 4: SMOOTH SCROLLING
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                const header = document.querySelector('.header');
+                const headerHeight = header ? header.offsetHeight : 0;
+                const targetPosition = targetSection.offsetTop - headerHeight - 20;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
+
+// FUNCIÓN 5: INICIALIZACIÓN PRINCIPAL
 function initAll() {
-    console.log('🚀 Iniciando aplicación con solución definitiva...');
+    console.log('🚀 Iniciando aplicación corregida...');
     
-    initMenu();
-    initFormSolution();
-    
-    console.log('✅ Aplicación inicializada');
+    setTimeout(() => {
+        initMenu();
+        initAdvancedMobileFormFix(); // ← CORRECCIÓN PRINCIPAL
+        initScrollButton();
+        initScrollEffects();
+        initSmoothScroll();
+        
+        console.log('🎉 Aplicación completamente inicializada');
+    }, 100);
 }
 
-// EVENTOS PRINCIPALES
-document.addEventListener('DOMContentLoaded', initAll);
-
-// Reinicializar al cambiar tamaño
+// FUNCIÓN 6: MANEJAR REDIMENSIONAMIENTO
 window.addEventListener('resize', function() {
-    if (window.innerWidth > 768) {
-        // Restaurar todo en desktop
+    // Cerrar menú si se cambia a desktop
+    if (window.innerWidth > 768 && isMenuOpen) {
+        closeMenu();
+    }
+    
+    // Re-inicializar en móviles
+    if (window.innerWidth <= 768) {
+        setTimeout(() => {
+            initAdvancedMobileFormFix();
+        }, 300);
+    } else {
+        // Limpiar estados en desktop
+        isInputFocused = false;
         const header = document.querySelector('.header');
         if (header) {
-            header.style.display = 'block';
-            header.style.visibility = 'visible';
-            header.style.opacity = '1';
+            header.style.transform = 'translateY(0)';
             header.style.zIndex = '1000';
-            header.style.pointerEvents = 'auto';
         }
-        document.body.classList.remove('form-mode-active');
-        isFormActive = false;
-    } else {
-        // Aplicar solución en móvil
-        setTimeout(initFormSolution, 100);
+        document.body.classList.remove('header-hidden', 'form-input-focused');
     }
 });
 
-console.log('🔥 Script de solución DEFINITIVA cargado');
+// ESTILOS DINÁMICOS MEJORADOS
+const enhancedStyles = document.createElement('style');
+enhancedStyles.innerHTML = `
+    /* Estilos para corrección de formulario móvil */
+    @media screen and (max-width: 768px) {
+        .header-hidden {
+            padding-top: 0 !important;
+        }
+        
+        .form-input-focused .header {
+            transform: translateY(-100%) !important;
+            z-index: 1 !important;
+        }
+        
+        .menu-open {
+            overflow: hidden !important;
+        }
+        
+        .menu-open .header {
+            transform: translateY(0) !important;
+            z-index: 1000 !important;
+        }
+        
+        /* Asegurar que inputs sean accesibles */
+        input:focus,
+        textarea:focus {
+            position: relative !important;
+            z-index: 2000 !important;
+            transform: translateZ(0) !important;
+        }
+        
+        /* Prevenir zoom en iOS */
+        input[type="text"],
+        input[type="email"], 
+        input[type="tel"],
+        textarea {
+            font-size: 16px !important;
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+        }
+        
+        /* Mejorar área de toque */
+        .newsletter-form input,
+        .newsletter-form textarea,
+        .contact-form input,
+        .contact-form textarea {
+            min-height: 48px !important;
+            -webkit-appearance: none !important;
+            border-radius: 8px !important;
+        }
+        
+        /* Asegurar visibilidad del formulario */
+        .contact-form-wrapper,
+        .newsletter-form {
+            position: relative !important;
+            z-index: 100 !important;
+        }
+    }
+    
+    /* Animaciones */
+    @keyframes slideMenuIn {
+        from { transform: translateY(-100%); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+    
+    @keyframes slideMenuOut {
+        from { transform: translateY(0); opacity: 1; }
+        to { transform: translateY(-100%); opacity: 0; }
+    }
+`;
+document.head.appendChild(enhancedStyles);
+
+// INICIALIZACIÓN AUTOMÁTICA
+document.addEventListener('DOMContentLoaded', initAll);
+console.log('📜 Script completo cargado - Formulario móvil corregido');
+
