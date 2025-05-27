@@ -1241,8 +1241,8 @@ html {
     
     /* Formulario después */
     .contact-form-wrapper {
-        padding-left: 15px !important; /* Un poquito a la izquierda */
-        max-width: calc(100% - 15px) !important;
+        padding-left: 10px !important; /* Un poquito a la izquierda */
+        max-width: calc(100% - 10px) !important;
     }
     
     .contact-form-wrapper h2 {
