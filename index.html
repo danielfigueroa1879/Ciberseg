@@ -232,17 +232,12 @@
                 <div class="contact-form-wrapper">
                     <h2>Formulario de Inscripción</h2>
                     
-                    <form class="newsletter-form" method="post" data-netlify="true" name="suscripcion" netlify-honeypot="bot-field2">
-                        <!-- Campo oculto anti-spam -->
-                        <div style="display: none;">
-                            <label>No llenes este campo si eres humano: <input name="bot-field2" /></label>
-                        </div>
-                        
-                        <!-- TODOS LOS INPUTS EN VERTICAL (UNO DEBAJO DEL OTRO) -->
+                    <form class="newsletter-form" method="post" action="enviar_correo.php">
                         <input type="text" name="nombre" placeholder="Nombre" maxlength="100" required>
                         <input type="email" name="email" placeholder="Email" required maxlength="100">
                         <input type="tel" name="telefono" placeholder="Teléfono" maxlength="20">
-                        <input type="text" name="asunto" placeholder="Asunto" value="" maxlength="200">                        <textarea name="mensaje" placeholder="Escribe aquí..." rows="5" required maxlength="1000"></textarea>
+                        <input type="text" name="asunto" placeholder="Asunto" value="" maxlength="200">
+                        <textarea name="mensaje" placeholder="Escribe aquí..." rows="5" required maxlength="1000"></textarea>
                         
                         <button type="submit">Suscribirse</button>
                     </form>
@@ -266,7 +261,8 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy;2025 by RECYBERSEG.</p>
+                <!-- The visitor count will be displayed here -->
+                <p>&copy;2025 by RECYBERSEG. | Visitas: <span id="visitor-count">Cargando...</span></p>
                 <div class="signature">
                     <p><strong>Daniel Figueroa Ch.</strong></p>
                     <p>Ingeniero en Informática</p>
@@ -283,13 +279,13 @@
 
     <script src="menu-script.js"></script>
     
-    <!-- Formulario oculto para que Netlify lo detecte correctamente -->
-    <form name="suscripcion" netlify netlify-honeypot="bot-field2" hidden>
-        <input type="text" name="nombre">
-        <input type="email" name="email">
-        <input type="tel" name="telefono">
-        <input type="text" name="asunto">
-        <textarea name="mensaje"></textarea>
-    </form>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+    <!-- Your custom script for the counter -->
+    <script src="firebase-counter.js"></script>
+
 </body>
 </html>
+
