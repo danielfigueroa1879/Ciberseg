@@ -39,19 +39,19 @@
             /* Estilos para el contador */
             .visitor-counter-container {
                 position: absolute; 
-                top: 28px; /* Subido un poco (antes 32px) */
+                top: 24px; /* Subido un poco más (antes 28px) */
                 left: 20px;
                 z-index: 1001;
                 font-size: 12px;
                 padding: 6px 10px;
                 gap: 5px;
                 
-                /* Cambio a fondo negro y texto blanco */
-                background-color: #000000;
-                color: #ffffff;
-                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-                text-shadow: none; /* Quitar sombra de texto */
-                border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil para que no se pierda */
+                /* Cambio a fondo transparente */
+                background-color: transparent;
+                color: #ffffff; /* Letras blancas para contraste */
+                box-shadow: none; /* Sin sombra de caja */
+                text-shadow: 1px 1px 3px rgba(0,0,0,0.7); /* Sombra de texto para legibilidad */
+                border: none; /* Sin borde */
             }
 
             .visitor-counter-container .fa-eye {
@@ -61,7 +61,7 @@
             /* Mover el título a la derecha */
             .nav-logo {
                 /* Al añadir padding a la izquierda, el texto centrado se desplaza a la derecha */
-                padding-left: 80px; /* Ajustado de 70px a 80px */
+                padding-left: 80px; 
                 transition: all 0.3s ease;
             }
         }
@@ -69,7 +69,7 @@
         @media screen and (max-width: 480px) {
             /* Ajuste para que el título no se desplace tanto en pantallas muy pequeñas */
             .nav-logo {
-                padding-left: 50px; /* Ajustado de 40px a 50px */
+                padding-left: 50px; 
             }
         }
     </style>
@@ -359,3 +359,4 @@
 
 </body>
 </html>
+
