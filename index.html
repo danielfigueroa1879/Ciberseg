@@ -35,22 +35,40 @@
         }
 
         /* --- MODIFICACIÓN PARA MÓVILES --- */
-        /* En pantallas de 992px o menos, el contador se posiciona a la izquierda */
         @media screen and (max-width: 992px) {
+            /* Estilos para el contador */
             .visitor-counter-container {
-                position: absolute; /* Lo sacamos del flujo normal del documento */
-                top: 32px;        /* Ajustar la distancia desde arriba (un poco más abajo del borde) */
-                left: 20px;       /* Ajustar la distancia desde la izquierda */
-                z-index: 1001;    /* Asegurarnos que esté por encima de otros elementos del header */
-                
-                /* Hacemos el contador más pequeño para no ser intrusivo */
+                position: absolute; 
+                top: 32px;
+                left: 20px;
+                z-index: 1001;
                 font-size: 12px;
                 padding: 6px 10px;
                 gap: 5px;
+                
+                /* Cambio a fondo blanco y texto negro */
+                background-color: #ffffff;
+                color: #000000;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                text-shadow: none; /* Quitar sombra de texto */
             }
 
             .visitor-counter-container .fa-eye {
                 font-size: 14px;
+            }
+
+            /* Mover el título a la derecha */
+            .nav-logo {
+                /* Al añadir padding a la izquierda, el texto centrado se desplaza a la derecha */
+                padding-left: 70px;
+                transition: all 0.3s ease;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            /* Ajuste para que el título no se desplace tanto en pantallas muy pequeñas */
+            .nav-logo {
+                padding-left: 40px;
             }
         }
     </style>
@@ -91,7 +109,7 @@
                     </button>
                 </div>
 
-                <!-- Contador de Visitas movido aquí -->
+                <!-- Contador de Visitas -->
                 <div class="visitor-counter-container">
                      <i class="fas fa-eye"></i>
                      <span id="visitor-count">Cargando...</span>
