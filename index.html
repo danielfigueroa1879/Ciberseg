@@ -34,40 +34,59 @@
             font-size: 18px;
         }
 
+        /* Estilos para mensajes de confirmación */
+        .success-message {
+            background: linear-gradient(145deg, #28a745, #20c997);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            display: none;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        .error-message {
+            background: linear-gradient(145deg, #dc3545, #e74c3c);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            display: none;
+            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+        }
+
         /* --- MODIFICACIÓN PARA MÓVILES --- */
         @media screen and (max-width: 992px) {
             /* Estilos para el contador */
             .visitor-counter-container {
                 position: absolute; 
-                top: 24px; /* Subido un poco más (antes 28px) */
+                top: 24px;
                 left: 20px;
                 z-index: 1001;
                 font-size: 12px;
                 padding: 6px 10px;
                 gap: 5px;
                 
-                /* Cambio a fondo transparente */
                 background-color: transparent;
-                color: #ffffff; /* Letras blancas para contraste */
-                box-shadow: none; /* Sin sombra de caja */
-                text-shadow: 1px 1px 3px rgba(0,0,0,0.7); /* Sombra de texto para legibilidad */
-                border: none; /* Sin borde */
+                color: #ffffff;
+                box-shadow: none;
+                text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+                border: none;
             }
 
             .visitor-counter-container .fa-eye {
                 font-size: 14px;
             }
 
-            /* Mover el título a la derecha */
             .nav-logo {
-                /* Al añadir padding a la izquierda, el texto centrado se desplaza a la derecha */
                 padding-left: 80px; 
                 transition: all 0.3s ease;
             }
         }
 
         @media screen and (max-width: 480px) {
-            /* Ajuste para que el título no se desplace tanto en pantallas muy pequeñas */
             .nav-logo {
                 padding-left: 50px; 
             }
@@ -303,15 +322,33 @@
                 <div class="contact-form-wrapper">
                     <h2>Formulario de Inscripción</h2>
                     
-                    <form class="newsletter-form" method="post" action="enviar_correo.php">
+                    <!-- FORMULARIO CORREGIDO PARA NETLIFY -->
+                    <form name="contacto" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="newsletter-form">
+                        <!-- Campo oculto para evitar spam -->
+                        <input type="hidden" name="form-name" value="contacto">
+                        <div style="display: none;">
+                            <label>No llenes este campo si eres humano: <input name="bot-field" /></label>
+                        </div>
+                        
                         <input type="text" name="nombre" placeholder="Nombre" maxlength="100" required>
                         <input type="email" name="email" placeholder="Email" required maxlength="100">
                         <input type="tel" name="telefono" placeholder="Teléfono" maxlength="20">
-                        <input type="text" name="asunto" placeholder="Asunto" value="" maxlength="200">
+                        <input type="text" name="asunto" placeholder="Asunto" maxlength="200">
                         <textarea name="mensaje" placeholder="Escribe aquí..." rows="5" required maxlength="1000"></textarea>
                         
                         <button type="submit">Suscribirse</button>
                     </form>
+
+                    <!-- Mensajes de confirmación -->
+                    <div class="success-message" id="success-message">
+                        <h3>¡Mensaje Enviado Correctamente!</h3>
+                        <p>Gracias por contactarnos. Te responderemos a la brevedad.</p>
+                    </div>
+                    
+                    <div class="error-message" id="error-message">
+                        <h3>Error al Enviar</h3>
+                        <p>Lo sentimos, hubo un problema. Por favor, intenta nuevamente.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -332,7 +369,6 @@
             </div>
             
             <div class="footer-bottom">
-                <!-- El contador ya no está aquí -->
                 <p>&copy;2025 by RECYBERSEG.</p>
                 <div class="signature">
                     <p><strong>Daniel Figueroa Ch.</strong></p>
@@ -357,6 +393,28 @@
     <!-- Your custom script for the counter -->
     <script src="firebase-counter.js"></script>
 
+    <!-- Script para manejar la respuesta del formulario -->
+    <script>
+        // Detectar si venimos de una redirección de Netlify
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success') === 'true') {
+            document.getElementById('success-message').style.display = 'block';
+            // Scroll al formulario
+            document.querySelector('#contacto').scrollIntoView({ behavior: 'smooth' });
+            // Limpiar URL
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+
+        // Manejar envío del formulario
+        document.querySelector('form[name="contacto"]').addEventListener('submit', function(e) {
+            // Netlify maneja el envío automáticamente
+            // Solo mostramos un mensaje de "enviando"
+            const button = this.querySelector('button[type="submit"]');
+            const originalText = button.textContent;
+            button.textContent = 'Enviando...';
+            button.disabled = true;
+        });
+    </script>
+
 </body>
 </html>
-
