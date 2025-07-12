@@ -9,11 +9,13 @@
 }
 .iot-image {
     height: 70px;
-}.iot-details p {
+}
+.iot-details p {
     text-align: justify;
     margin-bottom: 15px;
     line-height: 1.5;
-}.iot-details ul {
+}
+.iot-details ul {
     list-style: none;
     text-align: left;
     margin: 0;
@@ -32,6 +34,12 @@ body {
     color: #fff;
     line-height: 1.6;
     overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    /* GPU acceleration */
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 /* Asegurar que todos los textos usen Poppins */
@@ -848,8 +856,6 @@ body {
         transform: translateX(0);
     }
 }
-
-/* IMPORTANTE: ELIMINADO EL CÓDIGO .scroll-to-top DE AQUÍ */
 
 html {
     scroll-behavior: smooth;
@@ -2365,7 +2371,7 @@ html {
         font-size: 22px !important; /* Reducido de 28px a 22px */
         font-weight: 700 !important;
         margin: 0 0 25px 0 !important;
-        text-align: left !important;
+        text-align: center !important; /* Cambiado a centrado */
         line-height: 1.2 !important; /* Mejor espaciado de línea */
         word-spacing: -2px !important; /* Acercar palabras para que quepa en una línea */
     }
@@ -2650,7 +2656,7 @@ html {
 /* 12. DESKTOP GRANDE - AJUSTES FINALES */
 @media screen and (min-width: 1200px) {
     .contact-content-wrapper {
-        gap: 50px !important; /* Más separación en pantallas grandes */
+        gap: 50px !important;
         max-width: 1200px !important;
     }
     
@@ -3326,5 +3332,147 @@ html {
     .contact-info-wrapper h3 {
         text-align: center !important;
         font-size: 24px !important;
+    }
+}
+
+/* ===== SOLUCIÓN DEFINITIVA: BOTÓN FLOTANTE QUE ACOMPAÑA AL SCROLL ===== */
+
+/* ===== ELIMINAR CUALQUIER BOTÓN PREVIO (REGLA DE SEGURIDAD) ===== */
+/* Asegura que no haya otros botones de "volver arriba" que puedan causar conflictos. */
+.scroll-to-top,
+#scrollToTop,
+button[aria-label*="arriba"],
+button[class*="scroll"],
+button[id*="scroll"],
+#ultra-floating-btn {
+    display: none !important;
+}
+
+/* ===== ESTILOS ESPECÍFICOS PARA DISPOSITIVOS MÓVILES (HASTA 768px) ===== */
+@media screen and (max-width: 768px) {
+    
+    /* BOTÓN FLOTANTE FIJO EN LA ESQUINA INFERIOR DERECHA */
+    #dynamic-scroll-btn {
+        /* Propiedad FUNDAMENTAL para que el botón "acompañe" al scroll. */
+        position: fixed !important;
+        bottom: 30px !important; /* Distancia desde la parte inferior. */
+        right: 20px !important;  /* Distancia desde la parte derecha. */
+        
+        /* Dimensiones del botón. */
+        width: 56px !important;
+        height: 56px !important;
+        
+        /* Estilo circular y borde. */
+        border-radius: 50% !important;
+        border: 2px solid rgba(255, 255, 255, 0.3) !important;
+        outline: none !important; /* Elimina el contorno al enfocar. */
+        
+        /* Fondo con un degradado de color verde. */
+        background: linear-gradient(135deg, #E0FD2C 0%, #C7E525 100%) !important;
+        
+        /* Sombra para darle un efecto flotante y de profundidad. */
+        box-shadow: 
+            0 4px 12px rgba(0, 0, 0, 0.3), /* Sombra general. */
+            0 2px 8px rgba(224, 253, 44, 0.4), /* Resplandor verde. */
+            inset 0 1px 2px rgba(255, 255, 255, 0.3) !important; /* Sombra interna para relieve. */
+        
+        /* Usa Flexbox para centrar el icono de la flecha dentro del botón. */
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        
+        /* Z-index alto para asegurar que esté por encima de otros elementos. */
+        z-index: 9999 !important;
+        
+        /* Propiedades de interactividad y usabilidad táctil. */
+        cursor: pointer !important; /* Cambia el cursor al pasar por encima. */
+        touch-action: manipulation !important; /* Optimización para touch. */
+        -webkit-tap-highlight-color: transparent !important; /* Elimina el resplandor al tocar. */
+        user-select: none !important; /* Evita que el texto sea seleccionable. */
+        
+        /* Transiciones suaves para todas las propiedades al cambiar de estado. */
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        
+        /* Estado inicial: oculto y desplazado hacia abajo para la animación de entrada. */
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important; /* No interactuable cuando está oculto. */
+        transform: translateY(100px) !important; /* Desplazado 100px hacia abajo. */
+        
+        /* Reset de propiedades para evitar herencias no deseadas. */
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: 0 !important;
+        overflow: hidden !important;
+    }
+    
+    /* Estado visible del botón: aparece con una animación. */
+    #dynamic-scroll-btn.visible {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        transform: translateY(0) !important; /* Vuelve a su posición original. */
+    }
+    
+    /* Efecto al pasar el ratón por encima (hover). */
+    #dynamic-scroll-btn:hover {
+        background: linear-gradient(135deg, #C7E525 0%, #B8D61F 100%) !important; /* Cambio de degradado. */
+        transform: scale(1.1) !important; /* Ligeramente más grande. */
+        box-shadow: 
+            0 6px 20px rgba(0, 0, 0, 0.4),
+            0 4px 12px rgba(224, 253, 44, 0.6) !important; /* Sombra más pronunciada. */
+    }
+    
+    /* Efecto al hacer clic o tocar (active). */
+    #dynamic-scroll-btn:active {
+        transform: scale(0.95) !important; /* Ligeramente más pequeño. */
+        transition: transform 0.1s ease !important; /* Transición rápida para el clic. */
+    }
+    
+    /* Estilos del icono SVG de la flecha dentro del botón. */
+    #dynamic-scroll-btn svg {
+        width: 24px !important;
+        height: 24px !important;
+        fill: #000 !important; /* Color de relleno negro. */
+        pointer-events: none !important; /* Asegura que el clic se registre en el botón, no en el SVG. */
+    }
+    
+    /* Animación de entrada para el botón cuando se hace visible. */
+    @keyframes slideInUp {
+        from {
+            opacity: 0;
+            transform: translateY(100px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    /* Aplica la animación al botón cuando tiene la clase 'visible'. */
+    #dynamic-scroll-btn.visible {
+        animation: slideInUp 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+    }
+}
+
+/* ===== AJUSTES PARA MÓVILES PEQUEÑOS (HASTA 480px) ===== */
+@media screen and (max-width: 480px) {
+    #dynamic-scroll-btn {
+        width: 50px !important; /* Un poco más pequeño. */
+        height: 50px !important;
+        bottom: 25px !important; /* Ajuste de posición. */
+        right: 15px !important;
+    }
+    
+    #dynamic-scroll-btn svg {
+        width: 20px !important; /* Icono más pequeño. */
+        height: 20px !important;
+    }
+}
+
+/* ===== OCULTAR COMPLETAMENTE EL BOTÓN EN ESCRITORIO (MÁS DE 768px) ===== */
+@media screen and (min-width: 769px) {
+    #dynamic-scroll-btn {
+        display: none !important; /* Asegura que no aparezca en pantallas grandes. */
     }
 }
