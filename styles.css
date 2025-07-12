@@ -3562,7 +3562,7 @@ html {
         position: fixed !important; /* Asegura que flote */
         top: 50vh !important; /* Posición vertical: centro de la pantalla */
         right: 15px !important; /* Distancia desde la derecha */
-        transform: translateY(-50%) !important; /* Centrado vertical */
+        transform: translateY(-50%) translateX(30px) scale(0.8) !important; /* Start position for animation */
         
         width: 60px !important;
         height: 60px !important;
@@ -3577,7 +3577,7 @@ html {
             0 5px 20px rgba(224, 253, 44, 0.8),
             0 3px 12px rgba(0, 0, 0, 0.4) !important;
         
-        display: none !important; /* INICIA OCULTO con display: none */
+        display: flex !important; /* Always flex when potentially visible */
         align-items: center !important;
         justify-content: center !important;
         
@@ -3588,27 +3588,19 @@ html {
         -webkit-tap-highlight-color: transparent !important;
         user-select: none !important;
         
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        pointer-events: none !important; /* No interactuable cuando está oculto */
+        /* Initial hidden state with smooth transition */
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+        transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
     
     /* Estado visible del botón flotante */
     #real-floating-back-btn.floating-visible {
-        display: flex !important; /* MUESTRA el botón con display: flex */
-        pointer-events: auto !important; /* Interactuable cuando está visible */
-        animation: fadeInSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; /* Aplica la animación */
-    }
-
-    /* Animación para la aparición del botón */
-    @keyframes fadeInSlideIn {
-        from {
-            opacity: 0;
-            transform: translateY(-50%) translateX(30px) scale(0.8);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(-50%) translateX(0) scale(1);
-        }
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        transform: translateY(-50%) translateX(0) scale(1) !important; /* Final position */
     }
     
     /* Hover del botón flotante */
