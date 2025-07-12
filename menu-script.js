@@ -3,151 +3,6 @@
 // Mensaje de inicio para depuración.
 console.log('🚀 Iniciando solución de botón flotante dinámico...');
 
-// ===== CSS OPTIMIZADO PARA BOTÓN FLOTANTE =====
-// Este CSS se inyecta directamente en el <head> para asegurar que las reglas se apliquen.
-// Se usan !important para sobrescribir posibles conflictos de estilos.
-const floatingButtonCSS = `
-/* ===== ELIMINAR CUALQUIER BOTÓN PREVIO (REGLA DE SEGURIDAD) ===== */
-/* Asegura que no haya otros botones de "volver arriba" que puedan causar conflictos. */
-.scroll-to-top,
-#scrollToTop,
-button[aria-label*="arriba"],
-button[class*="scroll"],
-button[id*="scroll"],
-#ultra-floating-btn {
-    display: none !important;
-}
-
-/* ===== ESTILOS ESPECÍFICOS PARA DISPOSITIVOS MÓVILES (HASTA 768px) ===== */
-@media screen and (max-width: 768px) {
-    
-    /* BOTÓN FLOTANTE FIJO EN LA ESQUINA INFERIOR DERECHA */
-    #dynamic-scroll-btn {
-        /* Propiedad FUNDAMENTAL para que el botón "acompañe" al scroll. */
-        position: fixed !important;
-        bottom: 30px !important; /* Distancia desde la parte inferior. */
-        right: 20px !important;  /* Distancia desde la parte derecha. */
-        
-        /* Dimensiones del botón. */
-        width: 56px !important;
-        height: 56px !important;
-        
-        /* Estilo circular y borde. */
-        border-radius: 50% !important;
-        border: 2px solid rgba(255, 255, 255, 0.3) !important;
-        outline: none !important; /* Elimina el contorno al enfocar. */
-        
-        /* Fondo con un degradado de color verde. */
-        background: linear-gradient(135deg, #E0FD2C 0%, #C7E525 100%) !important;
-        
-        /* Sombra para darle un efecto flotante y de profundidad. */
-        box-shadow: 
-            0 4px 12px rgba(0, 0, 0, 0.3), /* Sombra general. */
-            0 2px 8px rgba(224, 253, 44, 0.4), /* Resplandor verde. */
-            inset 0 1px 2px rgba(255, 255, 255, 0.3) !important; /* Sombra interna para relieve. */
-        
-        /* Usa Flexbox para centrar el icono de la flecha dentro del botón. */
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        
-        /* Z-index alto para asegurar que esté por encima de otros elementos. */
-        z-index: 9999 !important;
-        
-        /* Propiedades de interactividad y usabilidad táctil. */
-        cursor: pointer !important; /* Cambia el cursor al pasar por encima. */
-        touch-action: manipulation !important; /* Optimización para touch. */
-        -webkit-tap-highlight-color: transparent !important; /* Elimina el resplandor al tocar. */
-        user-select: none !important; /* Evita que el texto sea seleccionable. */
-        
-        /* Transiciones suaves para todas las propiedades al cambiar de estado. */
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        
-        /* Estado inicial: oculto y desplazado hacia abajo para la animación de entrada. */
-        opacity: 0 !important;
-        visibility: hidden !important;
-        pointer-events: none !important; /* No interactuable cuando está oculto. */
-        transform: translateY(100px) !important; /* Desplazado 100px hacia abajo. */
-        
-        /* Reset de propiedades para evitar herencias no deseadas. */
-        margin: 0 !important;
-        padding: 0 !important;
-        font-size: 0 !important;
-        overflow: hidden !important;
-    }
-    
-    /* Estado visible del botón: aparece con una animación. */
-    #dynamic-scroll-btn.visible {
-        opacity: 1 !important;
-        visibility: visible !important;
-        pointer-events: auto !important;
-        transform: translateY(0) !important; /* Vuelve a su posición original. */
-    }
-    
-    /* Efecto al pasar el ratón por encima (hover). */
-    #dynamic-scroll-btn:hover {
-        background: linear-gradient(135deg, #C7E525 0%, #B8D61F 100%) !important; /* Cambio de degradado. */
-        transform: scale(1.1) !important; /* Ligeramente más grande. */
-        box-shadow: 
-            0 6px 20px rgba(0, 0, 0, 0.4),
-            0 4px 12px rgba(224, 253, 44, 0.6) !important; /* Sombra más pronunciada. */
-    }
-    
-    /* Efecto al hacer clic o tocar (active). */
-    #dynamic-scroll-btn:active {
-        transform: scale(0.95) !important; /* Ligeramente más pequeño. */
-        transition: transform 0.1s ease !important; /* Transición rápida para el clic. */
-    }
-    
-    /* Estilos del icono SVG de la flecha dentro del botón. */
-    #dynamic-scroll-btn svg {
-        width: 24px !important;
-        height: 24px !important;
-        fill: #000 !important; /* Color de relleno negro. */
-        pointer-events: none !important; /* Asegura que el clic se registre en el botón, no en el SVG. */
-    }
-    
-    /* Animación de entrada para el botón cuando se hace visible. */
-    @keyframes slideInUp {
-        from {
-            opacity: 0;
-            transform: translateY(100px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    
-    /* Aplica la animación al botón cuando tiene la clase 'visible'. */
-    #dynamic-scroll-btn.visible {
-        animation: slideInUp 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
-    }
-}
-
-/* ===== AJUSTES PARA MÓVILES PEQUEÑOS (HASTA 480px) ===== */
-@media screen and (max-width: 480px) {
-    #dynamic-scroll-btn {
-        width: 50px !important; /* Un poco más pequeño. */
-        height: 50px !important;
-        bottom: 25px !important; /* Ajuste de posición. */
-        right: 15px !important;
-    }
-    
-    #dynamic-scroll-btn svg {
-        width: 20px !important; /* Icono más pequeño. */
-        height: 20px !important;
-    }
-}
-
-/* ===== OCULTAR COMPLETAMENTE EL BOTÓN EN ESCRITORIO (MÁS DE 768px) ===== */
-@media screen and (min-width: 769px) {
-    #dynamic-scroll-btn {
-        display: none !important; /* Asegura que no aparezca en pantallas grandes. */
-    }
-}
-`;
-
 // ===== VARIABLES GLOBALES =====
 let scrollButton = null; // Referencia al elemento del botón.
 let isMenuOpen = false; // Estado del menú móvil.
@@ -361,24 +216,6 @@ function toggleMenu() {
     isMenuOpen ? closeMenu() : openMenu();
 }
 
-// ===== FUNCIÓN: APLICAR EL CSS DEL BOTÓN FLOTANTE =====
-function applyCSS() {
-    // Busca y elimina cualquier estilo inyectado previamente por este script.
-    const oldInjectedStyles = document.getElementById('dynamic-floating-button-css');
-    if (oldInjectedStyles) {
-        oldInjectedStyles.remove();
-        console.log('DEBUG: Removed old injected CSS.');
-    }
-    
-    // Crea un nuevo elemento <style> e inyecta el CSS definido.
-    const style = document.createElement('style');
-    style.id = 'dynamic-floating-button-css';
-    style.innerHTML = floatingButtonCSS;
-    document.head.appendChild(style);
-    
-    console.log('DEBUG: ✅ CSS del botón flotante aplicado.');
-}
-
 // ===== FUNCIÓN: CONFIGURAR LOS EVENTOS DE SCROLL =====
 function setupScrollEvents() {
     // Asigna la función de actualización con "throttle" a la variable global.
@@ -412,19 +249,18 @@ function initFloatingButton() {
     console.log('DEBUG: 🎯 Iniciando sistema de botón flotante...');
     
     try {
-        // 1. Aplica el CSS del botón.
-        applyCSS();
+        // La aplicación del CSS del botón ahora se maneja directamente en styles.css
         
-        // 2. Configura el menú (independiente del botón, pero importante para la UX).
+        // 1. Configura el menú (independiente del botón, pero importante para la UX).
         setupMenu();
         
-        // 3. Crea el botón (la función ya comprueba si es necesario).
+        // 2. Crea el botón (la función ya comprueba si es necesario).
         createScrollButton();
         
-        // 4. Configura los eventos de scroll para controlar la visibilidad.
+        // 3. Configura los eventos de scroll para controlar la visibilidad.
         setupScrollEvents();
         
-        // 5. Inicia el monitoreo del botón para asegurar su persistencia.
+        // 4. Inicia el monitoreo del botón para asegurar su persistencia.
         monitorButton();
         
         console.log('DEBUG: ✅ Sistema de botón flotante inicializado correctamente.');
@@ -501,4 +337,3 @@ window.floatingButtonSystem = {
 console.log('✅ Sistema de botón flotante cargado.');
 console.log('📍 El botón aparecerá después de 300px de scroll.');
 console.log('🔧 Para depurar, abre la consola del navegador en tu móvil y busca los mensajes que empiezan con "DEBUG:".');
-
