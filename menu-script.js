@@ -4,7 +4,7 @@ console.log('🚀 Iniciando solución de botón flotante dinámico...');
 
 // ===== CSS OPTIMIZADO PARA BOTÓN FLOTANTE =====
 const floatingButtonCSS = `
-/* ===== ELIMINAR CUALQUIER BOTÓN PREVIO ===== */
+/* ===== ELIMINAR CUALQUIER BOTÓN PREVIO (REGLA DE SEGURIDAD) ===== */
 .scroll-to-top,
 #scrollToTop,
 button[aria-label*="arriba"],
@@ -151,12 +151,19 @@ let scrollTimeout;
 
 // ===== FUNCIÓN: CREAR BOTÓN FLOTANTE =====
 function createScrollButton() {
+    console.log('Attempting to create scroll button...');
     // Solo crear en móviles
-    if (window.innerWidth > 768) return;
+    if (window.innerWidth > 768) {
+        console.log('Desktop view, not creating scroll button.');
+        return;
+    }
     
-    // Eliminar botones anteriores
+    // Eliminar botones anteriores para evitar duplicados
     const existingButtons = document.querySelectorAll('#dynamic-scroll-btn, #ultra-floating-btn, .scroll-to-top');
-    existingButtons.forEach(btn => btn.remove());
+    existingButtons.forEach(btn => {
+        console.log('Removing existing button:', btn.id || btn.className);
+        btn.remove();
+    });
     
     // Crear nuevo botón
     scrollButton = document.createElement('button');
@@ -172,19 +179,20 @@ function createScrollButton() {
     // Event listeners
     scrollButton.addEventListener('click', scrollToTop);
     scrollButton.addEventListener('touchstart', function(e) {
-        e.preventDefault();
+        e.preventDefault(); // Prevenir el scroll por defecto en touch
         scrollToTop();
     }, { passive: false });
     
     // Añadir al body
     document.body.appendChild(scrollButton);
     
-    console.log('✅ Botón flotante creado');
+    console.log('✅ Botón flotante creado y añadido al DOM.');
     return scrollButton;
 }
 
 // ===== FUNCIÓN: SCROLL AL INICIO =====
 function scrollToTop() {
+    console.log('Scrolling to top...');
     window.scrollTo({
         top: 0,
         behavior: 'smooth'
@@ -193,20 +201,26 @@ function scrollToTop() {
 
 // ===== FUNCIÓN: ACTUALIZAR VISIBILIDAD DEL BOTÓN =====
 function updateButtonVisibility() {
-    if (!scrollButton || window.innerWidth > 768) return;
+    // console.log('updateButtonVisibility called'); // Descomentar para depuración intensiva
+    if (!scrollButton || window.innerWidth > 768) {
+        // console.log('Button not ready or desktop view. scrollButton:', scrollButton, 'innerWidth:', window.innerWidth);
+        return;
+    }
     
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const threshold = 300; // Mostrar después de 300px de scroll
     
+    // console.log('scrollTop:', scrollTop, 'threshold:', threshold); // Descomentar para depuración intensiva
+
     if (scrollTop > threshold) {
         if (!scrollButton.classList.contains('visible')) {
             scrollButton.classList.add('visible');
-            console.log('🔼 Botón visible');
+            console.log('🔼 Botón visible (added class)');
         }
     } else {
         if (scrollButton.classList.contains('visible')) {
             scrollButton.classList.remove('visible');
-            console.log('🔽 Botón oculto');
+            console.log('🔽 Botón oculto (removed class)');
         }
     }
 }
@@ -214,22 +228,46 @@ function updateButtonVisibility() {
 // ===== FUNCIÓN: THROTTLED SCROLL HANDLER =====
 function throttle(func, wait) {
     let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
+    let lastArgs;
+    let lastThis;
+    let lastResult;
+    let lastCallTime = 0;
+
+    const throttled = function(...args) {
+        const now = Date.now();
+        lastArgs = args;
+        lastThis = this;
+
+        if (now - lastCallTime > wait) {
+            lastCallTime = now;
+            lastResult = func.apply(lastThis, lastArgs);
+        } else {
             clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
+            timeout = setTimeout(() => {
+                lastCallTime = Date.now();
+                lastResult = func.apply(lastThis, lastArgs);
+            }, wait - (now - lastCallTime));
+        }
+        return lastResult;
     };
+    
+    throttled.cancel = () => {
+        clearTimeout(timeout);
+    };
+
+    return throttled;
 }
+
 
 // ===== FUNCIÓN: CONFIGURAR MENÚ =====
 function setupMenu() {
     menuButton = document.getElementById('mobile-menu');
     mobileMenu = document.getElementById('nav-menu');
     
-    if (!menuButton || !mobileMenu) return;
+    if (!menuButton || !mobileMenu) {
+        console.warn('⚠️ No se encontraron elementos de menú (mobile-menu o nav-menu).');
+        return;
+    }
     
     // Asegurar estructura del menú
     if (menuButton.children.length === 0) {
@@ -241,10 +279,10 @@ function setupMenu() {
         { text: 'Inicio', target: '#inicio' },
         { text: 'Servicios', target: '#servicios' },
         { text: 'Contacto', target: '#contacto' },
-        { text: 'Suscripción', target: '#contacto' }
+        { text: 'Suscripción', target: '#contacto' } // Se mantiene apuntando a contacto
     ];
     
-    mobileMenu.innerHTML = '';
+    mobileMenu.innerHTML = ''; // Limpiar menú existente
     menuItems.forEach(item => {
         const li = document.createElement('li');
         li.className = 'nav-item';
@@ -272,21 +310,23 @@ function setupMenu() {
         }
     });
     
-    console.log('✅ Menú configurado');
+    console.log('✅ Menú configurado.');
 }
 
 function openMenu() {
     isMenuOpen = true;
     if (menuButton) menuButton.classList.add('active');
     if (mobileMenu) mobileMenu.classList.add('active');
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden'; // Prevenir scroll del body cuando el menú está abierto
+    console.log('Menu opened.');
 }
 
 function closeMenu() {
     isMenuOpen = false;
     if (menuButton) menuButton.classList.remove('active');
     if (mobileMenu) mobileMenu.classList.remove('active');
-    document.body.style.overflow = '';
+    document.body.style.overflow = ''; // Restaurar scroll del body
+    console.log('Menu closed.');
 }
 
 function toggleMenu() {
@@ -295,9 +335,12 @@ function toggleMenu() {
 
 // ===== FUNCIÓN: APLICAR CSS =====
 function applyCSS() {
-    // Eliminar estilos anteriores
-    const oldStyles = document.querySelectorAll('style[id*="floating"], style[id*="scroll"], style[id*="anti-conflict"]');
-    oldStyles.forEach(style => style.remove());
+    // Eliminar estilos anteriores inyectados por este script (si existen)
+    const oldInjectedStyles = document.getElementById('dynamic-floating-button-css');
+    if (oldInjectedStyles) {
+        oldInjectedStyles.remove();
+        console.log('Removed old injected CSS.');
+    }
     
     // Aplicar nuevo CSS
     const style = document.createElement('style');
@@ -305,7 +348,7 @@ function applyCSS() {
     style.innerHTML = floatingButtonCSS;
     document.head.appendChild(style);
     
-    console.log('✅ CSS aplicado');
+    console.log('✅ CSS del botón flotante aplicado.');
 }
 
 // ===== FUNCIÓN: CONFIGURAR EVENTOS DE SCROLL =====
@@ -314,23 +357,23 @@ function setupScrollEvents() {
     
     // Eventos de scroll
     window.addEventListener('scroll', throttledUpdate, { passive: true });
-    window.addEventListener('touchmove', throttledUpdate, { passive: true });
+    window.addEventListener('touchmove', throttledUpdate, { passive: true }); // Para dispositivos táctiles
     
     // Verificación inicial
     setTimeout(updateButtonVisibility, 100);
     
-    console.log('✅ Eventos de scroll configurados');
+    console.log('✅ Eventos de scroll configurados.');
 }
 
 // ===== FUNCIÓN: MONITOREAR Y MANTENER BOTÓN =====
 function monitorButton() {
     setInterval(() => {
         if (window.innerWidth <= 768 && !document.getElementById('dynamic-scroll-btn')) {
-            console.log('⚠️ Botón perdido, recreando...');
+            console.log('⚠️ Botón flotante perdido, recreando...');
             createScrollButton();
             updateButtonVisibility();
         }
-    }, 2000);
+    }, 2000); // Chequear cada 2 segundos
 }
 
 // ===== FUNCIÓN: INICIALIZACIÓN PRINCIPAL =====
@@ -338,77 +381,87 @@ function initFloatingButton() {
     console.log('🎯 Iniciando sistema de botón flotante...');
     
     try {
-        // 1. Aplicar CSS
+        // 1. Aplicar CSS (siempre primero para que las reglas estén disponibles)
         applyCSS();
         
-        // 2. Configurar menú
+        // 2. Configurar menú (independiente del botón, pero importante para la UX)
         setupMenu();
         
-        // 3. Crear botón
+        // 3. Crear botón (solo si es necesario, la función ya lo comprueba)
         createScrollButton();
         
-        // 4. Configurar eventos
+        // 4. Configurar eventos de scroll
         setupScrollEvents();
         
-        // 5. Monitorear
+        // 5. Monitorear el botón (para recrearlo si es eliminado por alguna razón)
         monitorButton();
         
-        console.log('✅ Sistema de botón flotante inicializado correctamente');
+        console.log('✅ Sistema de botón flotante inicializado correctamente.');
         
     } catch (error) {
-        console.error('❌ Error en inicialización:', error);
+        console.error('❌ Error en inicialización del botón flotante:', error);
     }
 }
 
 // ===== EVENTOS DE RESIZE =====
 window.addEventListener('resize', throttle(() => {
+    console.log('Window resized. Inner width:', window.innerWidth);
     if (window.innerWidth > 768) {
         // Eliminar botón en desktop
         if (scrollButton) {
             scrollButton.remove();
             scrollButton = null;
+            console.log('Scroll button removed for desktop view.');
         }
-        if (isMenuOpen) closeMenu();
+        if (isMenuOpen) closeMenu(); // Asegurarse de cerrar el menú en desktop si estaba abierto
     } else {
         // Crear botón si no existe en móvil
         if (!document.getElementById('dynamic-scroll-btn')) {
+            console.log('Detected mobile view, creating scroll button if not exists.');
             createScrollButton();
-            updateButtonVisibility();
         }
+        updateButtonVisibility(); // Asegurarse de que la visibilidad se actualice en el nuevo tamaño
     }
 }, 300));
 
 // ===== INICIALIZACIÓN =====
+// Asegurar que el script se ejecute cuando el DOM esté listo
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initFloatingButton);
 } else {
+    // Si el DOM ya está cargado (ej. script cargado de forma asíncrona)
     initFloatingButton();
 }
 
-// Inicialización adicional después de load
+// Inicialización adicional después de load (como respaldo)
 window.addEventListener('load', () => {
     setTimeout(() => {
         if (!document.getElementById('dynamic-scroll-btn') && window.innerWidth <= 768) {
+            console.log('Window loaded, re-checking for scroll button on mobile.');
             createScrollButton();
             updateButtonVisibility();
         }
-    }, 500);
+    }, 500); // Pequeño retraso para asegurar que todo el contenido se haya renderizado
 });
 
-// ===== API PÚBLICA =====
+// ===== API PÚBLICA (para depuración manual si es necesario) =====
 window.floatingButtonSystem = {
     reinit: initFloatingButton,
     getButton: () => document.getElementById('dynamic-scroll-btn'),
     forceShow: () => {
         const btn = document.getElementById('dynamic-scroll-btn');
         if (btn) btn.classList.add('visible');
+        console.log('Forced scroll button show.');
     },
     forceHide: () => {
         const btn = document.getElementById('dynamic-scroll-btn');
         if (btn) btn.classList.remove('visible');
+        console.log('Forced scroll button hide.');
     }
 };
 
-console.log('✅ Sistema de botón flotante cargado');
-console.log('📍 El botón aparecerá después de 300px de scroll');
-console.log('🔧 Debug: window.floatingButtonSystem');
+console.log('✅ Sistema de botón flotante cargado.');
+console.log('📍 El botón aparecerá después de 300px de scroll.');
+console.log('🔧 Para depurar, abre la consola del navegador en tu móvil y busca los mensajes de "🚀", "✅", "🔼", "🔽", "⚠️".');
+
+
