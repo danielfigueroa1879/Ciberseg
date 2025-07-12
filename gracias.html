@@ -5,58 +5,131 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mensaje Enviado - RECYBERSEG</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        .success-container {
+        /* Estilos específicos para la página de agradecimiento */
+        body {
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+            margin: 0;
             padding: 20px;
+            font-family: 'Poppins', Arial, sans-serif;
         }
-        
-        .success-card {
+
+        .success-container {
             background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-            border: 2px solid #E0FD2C;
+            border: 3px solid #E0FD2C;
             padding: 60px 40px;
-            border-radius: 20px;
+            border-radius: 25px;
             text-align: center;
-            max-width: 500px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 20px 40px rgba(224, 253, 44, 0.2);
+            max-width: 600px;
+            width: 100%;
+            backdrop-filter: blur(20px);
+            box-shadow: 
+                0 25px 50px rgba(224, 253, 44, 0.2),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
         }
-        
+
+        .success-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #E0FD2C, #C7E525, #E0FD2C);
+            border-radius: 25px;
+            z-index: -1;
+            animation: borderGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
         .success-icon {
             color: #E0FD2C;
-            font-size: 80px;
+            font-size: 100px;
             margin-bottom: 30px;
-            animation: bounce 2s infinite;
+            animation: bounce 2s infinite, glow 2s ease-in-out infinite alternate;
+            text-shadow: 0 0 20px rgba(224, 253, 44, 0.5);
         }
-        
+
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-20px); }
-            60% { transform: translateY(-10px); }
+            0%, 20%, 50%, 80%, 100% { 
+                transform: translateY(0); 
+            }
+            40% { 
+                transform: translateY(-20px); 
+            }
+            60% { 
+                transform: translateY(-10px); 
+            }
         }
-        
-        .success-card h2 {
+
+        @keyframes glow {
+            from { 
+                text-shadow: 0 0 20px rgba(224, 253, 44, 0.5); 
+            }
+            to { 
+                text-shadow: 0 0 30px rgba(224, 253, 44, 0.8), 0 0 40px rgba(224, 253, 44, 0.6); 
+            }
+        }
+
+        .success-title {
             color: #E0FD2C;
-            font-size: 32px;
+            font-size: 42px;
             margin-bottom: 20px;
             font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #E0FD2C, #C7E525, #E0FD2C);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textShine 3s ease-in-out infinite;
         }
-        
-        .success-card p {
+
+        @keyframes textShine {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .success-message {
             color: #fff;
-            font-size: 18px;
+            font-size: 20px;
             line-height: 1.6;
-            margin-bottom: 30px;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
-        
-        .btn-home {
-            background: linear-gradient(135deg, #E0FD2C, #C7E525);
-            color: #000;
-            padding: 15px 40px;
+
+        .success-submessage {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-home, .btn-whatsapp {
+            padding: 18px 35px;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
@@ -64,51 +137,605 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             transition: all 0.3s ease;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+            min-width: 180px;
+            justify-content: center;
         }
-        
+
+        .btn-home {
+            background: linear-gradient(135deg, #E0FD2C, #C7E525);
+            color: #000;
+            border: 2px solid transparent;
+        }
+
         .btn-home:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(224, 253, 44, 0.4);
+            box-shadow: 0 15px 35px rgba(224, 253, 44, 0.4);
             background: linear-gradient(135deg, #C7E525, #E0FD2C);
         }
-        
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #20c997);
+            color: white;
+            border: 2px solid #25D366;
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.4);
+            background: linear-gradient(135deg, #20c997, #25D366);
+        }
+
+        .btn-home::before, .btn-whatsapp::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-home:hover::before, .btn-whatsapp:hover::before {
+            left: 100%;
+        }
+
+        .countdown {
+            color: rgba(224, 253, 44, 0.8);
+            font-size: 14px;
+            margin-top: 30px;
+            font-weight: 500;
+        }
+
+        .company-info {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(224, 253, 44, 0.3);
+        }
+
+        .company-name {
+            color: #E0FD2C;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .company-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            font-style: italic;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .success-card {
-                padding: 40px 30px;
-                margin: 20px;
+            .success-container {
+                padding: 40px 25px;
+                margin: 10px;
+                border-radius: 20px;
             }
-            
+
             .success-icon {
-                font-size: 60px;
+                font-size: 80px;
+                margin-bottom: 25px;
             }
-            
-            .success-card h2 {
-                font-size: 26px;
+
+            .success-title {
+                font-size: 32px;
+                margin-bottom: 15px;
             }
-            
-            .success-card p {
+
+            .success-message {
+                font-size: 18px;
+                margin-bottom: 12px;
+            }
+
+            .success-submessage {
+                font-size: 15px;
+                margin-bottom: 30px;
+            }
+
+            .btn-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .btn-home, .btn-whatsapp {
+                width: 100%;
+                max-width: 280px;
+                padding: 15px 25px;
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .success-container {
+                padding: 30px 20px;
+            }
+
+            .success-icon {
+                font-size: 70px;
+            }
+
+            .success-title {
+                font-size: 28px;
+            }
+
+            .success-message {
                 font-size: 16px;
+            }
+
+            .success-submessage {
+                font-size: 14px;
             }
         }
     </style>
 </head>
 <body>
     <div class="success-container">
-        <div class="success-card">
-            <div class="success-icon">✓</div>
-            <h2>¡Mensaje Enviado!</h2>
-            <p>Gracias por contactarnos. Hemos recibido tu mensaje y te responderemos a la brevedad posible.</p>
-            <p>Revisa tu email para confirmación.</p>
-            <a href="index.html" class="btn-home">Volver al Inicio</a>
+        <div class="success-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        
+        <h1 class="success-title">¡Mensaje Enviado!</h1>
+        
+        <p class="success-message">
+            Gracias por contactarnos. Hemos recibido tu mensaje correctamente.
+        </p>
+        
+        <p class="success-submessage">
+            Te responderemos a la brevedad posible en la dirección de email que proporcionaste. 
+            También puedes contactarnos directamente por WhatsApp si tienes alguna consulta urgente.
+        </p>
+        
+        <div class="btn-container">
+            <a href="https://cyberseg.netlify.app/" class="btn-home">
+                <i class="fas fa-home"></i>
+                Volver al Inicio
+            </a>
+            
+            <a href="https://wa.me/qr/KQFJFHZLQRHXE1" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
+                <i class="fab fa-whatsapp"></i>
+                Contactar por WhatsApp
+            </a>
+        </div>
+        
+        <div class="countdown">
+            <span id="countdown-text">Serás redirigido automáticamente en <span id="countdown">15</span> segundos</span>
+        </div>
+        
+        <div class="company-info">
+            <div class="company-name">RECYBERSEG</div>
+            <div class="company-subtitle">Líderes en Ciberseguridad con IA Avanzada</div>
         </div>
     </div>
     
     <script>
-        // Auto-redirección después de 10 segundos
-        setTimeout(function() {
-            window.location.href = 'index.html';
-        }, 10000);
+        // Contador regresivo
+        let timeLeft = 15;
+        const countdownElement = document.getElementById('countdown');
+        const countdownTextElement = document.getElementById('countdown-text');
+        
+        const countdown = setInterval(function() {
+            timeLeft--;
+            countdownElement.textContent = timeLeft;
+            
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                countdownTextElement.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Redirigiendo...';
+                
+                // Redirección después de mostrar el mensaje
+                setTimeout(function() {
+                    window.location.href = 'https://cyberseg.netlify.app/';
+                }, 1000);
+            }
+        }, 1000);
+        
+        // Efecto de partículas simple (opcional)
+        function createFloatingElement() {
+            const element = document.createElement('div');
+            element.innerHTML = '✓';
+            element.style.position = 'fixed';
+            element.style.color = '#E0FD2C';
+            element.style.fontSize = Math.random() * 20 + 10 + 'px';
+            element.style.left = Math.random() * window.innerWidth + 'px';
+            element.style.top = window.innerHeight + 'px';
+            element.style.opacity = '0.7';
+            element.style.pointerEvents = 'none';
+            element.style.zIndex = '-1';
+            document.body.appendChild(element);
+            
+            // Animación
+            let position = window.innerHeight;
+            const animation = setInterval(function() {
+                position -= 2;
+                element.style.top = position + 'px';
+                element.style.opacity = position / window.innerHeight;
+                
+                if (position < -50) {
+                    clearInterval(animation);
+                    document.body.removeChild(element);
+                }
+            }, 50);
+        }
+        
+        // Crear elementos flotantes cada 2 segundos
+        setInterval(createFloatingElement, 2000);
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensaje Enviado - RECYBERSEG</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Estilos específicos para la página de agradecimiento */
+        body {
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+
+        .success-container {
+            background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border: 3px solid #E0FD2C;
+            padding: 60px 40px;
+            border-radius: 25px;
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            backdrop-filter: blur(20px);
+            box-shadow: 
+                0 25px 50px rgba(224, 253, 44, 0.2),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .success-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #E0FD2C, #C7E525, #E0FD2C);
+            border-radius: 25px;
+            z-index: -1;
+            animation: borderGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        .success-icon {
+            color: #E0FD2C;
+            font-size: 100px;
+            margin-bottom: 30px;
+            animation: bounce 2s infinite, glow 2s ease-in-out infinite alternate;
+            text-shadow: 0 0 20px rgba(224, 253, 44, 0.5);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { 
+                transform: translateY(0); 
+            }
+            40% { 
+                transform: translateY(-20px); 
+            }
+            60% { 
+                transform: translateY(-10px); 
+            }
+        }
+
+        @keyframes glow {
+            from { 
+                text-shadow: 0 0 20px rgba(224, 253, 44, 0.5); 
+            }
+            to { 
+                text-shadow: 0 0 30px rgba(224, 253, 44, 0.8), 0 0 40px rgba(224, 253, 44, 0.6); 
+            }
+        }
+
+        .success-title {
+            color: #E0FD2C;
+            font-size: 42px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #E0FD2C, #C7E525, #E0FD2C);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textShine 3s ease-in-out infinite;
+        }
+
+        @keyframes textShine {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .success-message {
+            color: #fff;
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .success-submessage {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-home, .btn-whatsapp {
+            padding: 18px 35px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+            min-width: 180px;
+            justify-content: center;
+        }
+
+        .btn-home {
+            background: linear-gradient(135deg, #E0FD2C, #C7E525);
+            color: #000;
+            border: 2px solid transparent;
+        }
+
+        .btn-home:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(224, 253, 44, 0.4);
+            background: linear-gradient(135deg, #C7E525, #E0FD2C);
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #20c997);
+            color: white;
+            border: 2px solid #25D366;
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.4);
+            background: linear-gradient(135deg, #20c997, #25D366);
+        }
+
+        .btn-home::before, .btn-whatsapp::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-home:hover::before, .btn-whatsapp:hover::before {
+            left: 100%;
+        }
+
+        .countdown {
+            color: rgba(224, 253, 44, 0.8);
+            font-size: 14px;
+            margin-top: 30px;
+            font-weight: 500;
+        }
+
+        .company-info {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(224, 253, 44, 0.3);
+        }
+
+        .company-name {
+            color: #E0FD2C;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .company-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            font-style: italic;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .success-container {
+                padding: 40px 25px;
+                margin: 10px;
+                border-radius: 20px;
+            }
+
+            .success-icon {
+                font-size: 80px;
+                margin-bottom: 25px;
+            }
+
+            .success-title {
+                font-size: 32px;
+                margin-bottom: 15px;
+            }
+
+            .success-message {
+                font-size: 18px;
+                margin-bottom: 12px;
+            }
+
+            .success-submessage {
+                font-size: 15px;
+                margin-bottom: 30px;
+            }
+
+            .btn-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .btn-home, .btn-whatsapp {
+                width: 100%;
+                max-width: 280px;
+                padding: 15px 25px;
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .success-container {
+                padding: 30px 20px;
+            }
+
+            .success-icon {
+                font-size: 70px;
+            }
+
+            .success-title {
+                font-size: 28px;
+            }
+
+            .success-message {
+                font-size: 16px;
+            }
+
+            .success-submessage {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="success-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        
+        <h1 class="success-title">¡Mensaje Enviado!</h1>
+        
+        <p class="success-message">
+            Gracias por contactarnos. Hemos recibido tu mensaje correctamente.
+        </p>
+        
+        <p class="success-submessage">
+            Te responderemos a la brevedad posible en la dirección de email que proporcionaste. 
+            También puedes contactarnos directamente por WhatsApp si tienes alguna consulta urgente.
+        </p>
+        
+        <div class="btn-container">
+            <a href="https://cyberseg.netlify.app/" class="btn-home">
+                <i class="fas fa-home"></i>
+                Volver al Inicio
+            </a>
+            
+            <a href="https://wa.me/qr/KQFJFHZLQRHXE1" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
+                <i class="fab fa-whatsapp"></i>
+                Contactar por WhatsApp
+            </a>
+        </div>
+        
+        <div class="countdown">
+            <span id="countdown-text">Serás redirigido automáticamente en <span id="countdown">15</span> segundos</span>
+        </div>
+        
+        <div class="company-info">
+            <div class="company-name">RECYBERSEG</div>
+            <div class="company-subtitle">Líderes en Ciberseguridad con IA Avanzada</div>
+        </div>
+    </div>
+    
+    <script>
+        // Contador regresivo
+        let timeLeft = 15;
+        const countdownElement = document.getElementById('countdown');
+        const countdownTextElement = document.getElementById('countdown-text');
+        
+        const countdown = setInterval(function() {
+            timeLeft--;
+            countdownElement.textContent = timeLeft;
+            
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                countdownTextElement.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Redirigiendo...';
+                
+                // Redirección después de mostrar el mensaje
+                setTimeout(function() {
+                    window.location.href = 'https://cyberseg.netlify.app/';
+                }, 1000);
+            }
+        }, 1000);
+        
+        // Efecto de partículas simple (opcional)
+        function createFloatingElement() {
+            const element = document.createElement('div');
+            element.innerHTML = '✓';
+            element.style.position = 'fixed';
+            element.style.color = '#E0FD2C';
+            element.style.fontSize = Math.random() * 20 + 10 + 'px';
+            element.style.left = Math.random() * window.innerWidth + 'px';
+            element.style.top = window.innerHeight + 'px';
+            element.style.opacity = '0.7';
+            element.style.pointerEvents = 'none';
+            element.style.zIndex = '-1';
+            document.body.appendChild(element);
+            
+            // Animación
+            let position = window.innerHeight;
+            const animation = setInterval(function() {
+                position -= 2;
+                element.style.top = position + 'px';
+                element.style.opacity = position / window.innerHeight;
+                
+                if (position < -50) {
+                    clearInterval(animation);
+                    document.body.removeChild(element);
+                }
+            }, 50);
+        }
+        
+        // Crear elementos flotantes cada 2 segundos
+        setInterval(createFloatingElement, 2000);
     </script>
 </body>
 </html>
