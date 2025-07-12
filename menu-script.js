@@ -1,172 +1,240 @@
-// ===== MENÚ HAMBURGUESA RÁPIDO Y COMPLETO =====
+// ===== MENÚ HAMBURGUESA - ARREGLO MÓVIL COMPLETO =====
 
-console.log('⚡ Iniciando menú hamburguesa optimizado...');
+console.log('📱 Iniciando corrección específica para móvil...');
 
-// Variables globales optimizadas
+// Variables globales
 let isMenuOpen = false;
-let menuButton, mobileMenu, navLinks;
+let menuButton, mobileMenu;
 
-// ===== FUNCIÓN 1: ESTILOS CRÍTICOS INMEDIATOS =====
-const criticalCSS = `
-/* ===== MENÚ HAMBURGUESA OPTIMIZADO ===== */
+// ===== CSS CORREGIDO PARA MÓVIL =====
+const mobileCorrectedCSS = `
+/* ===== CORRECCIÓN ESPECÍFICA MÓVIL ===== */
 
 @media screen and (max-width: 768px) {
     
-    /* Botón hamburguesa mejorado */
+    /* HEADER: Asegurar que esté arriba y visible */
+    .header {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        z-index: 1500 !important; /* MUY ALTO para estar encima */
+        background-color: rgba(40, 40, 40, 0.98) !important;
+        backdrop-filter: blur(10px) !important;
+        height: auto !important;
+        min-height: 80px !important;
+    }
+    
+    /* NAVBAR: Layout correcto */
+    .navbar {
+        padding: 15px 0 !important;
+        height: 80px !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+    
+    .nav-container {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 0 20px !important;
+        width: 100% !important;
+        height: 100% !important;
+    }
+    
+    /* LOGO: Centrado y visible */
+    .nav-logo {
+        order: 1 !important;
+        flex: 1 !important;
+        text-align: center !important;
+        z-index: 1501 !important;
+    }
+    
+    .nav-logo h2 {
+        color: #c1d72b !important;
+        font-size: 24px !important;
+        font-weight: 700 !important;
+        margin: 0 !important;
+    }
+    
+    /* BOTÓN HAMBURGUESA: Visible y funcional */
     .nav-toggle {
+        order: 2 !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
         align-items: center !important;
         cursor: pointer !important;
-        padding: 6px !important;
+        padding: 8px !important;
         background-color: #000 !important;
-        border: 2px solid rgba(255, 255, 255, 0.3) !important;
+        border: 2px solid rgba(255, 255, 255, 0.4) !important;
         border-radius: 8px !important;
         transition: all 0.2s ease !important;
         position: relative !important;
-        z-index: 1002 !important;
-        min-height: 36px !important;
-        min-width: 36px !important;
+        z-index: 1502 !important; /* MÁS ALTO que todo */
+        min-height: 40px !important;
+        min-width: 40px !important;
+        margin-left: auto !important;
+        flex-shrink: 0 !important;
         touch-action: manipulation !important;
         -webkit-tap-highlight-color: transparent !important;
     }
     
     .nav-toggle:active {
-        transform: scale(0.95) !important;
+        transform: scale(0.9) !important;
         background-color: rgba(0, 0, 0, 0.9) !important;
     }
     
-    /* Barras del hamburguesa */
+    /* BARRAS HAMBURGUESA */
     .bar {
-        width: 18px !important;
+        width: 20px !important;
         height: 2px !important;
         background-color: #fff !important;
-        margin: 2px 0 !important;
+        margin: 2.5px 0 !important;
         transition: all 0.25s ease !important;
         border-radius: 1px !important;
         display: block !important;
     }
     
-    /* Animación X */
+    /* ANIMACIÓN X */
     .nav-toggle.active .bar:nth-child(1) {
-        transform: translateY(4px) rotate(45deg) !important;
+        transform: translateY(4.5px) rotate(45deg) !important;
     }
     
     .nav-toggle.active .bar:nth-child(2) {
         opacity: 0 !important;
+        transform: translateX(10px) !important;
     }
     
     .nav-toggle.active .bar:nth-child(3) {
-        transform: translateY(-4px) rotate(-45deg) !important;
+        transform: translateY(-4.5px) rotate(-45deg) !important;
     }
     
-    /* MENÚ DEBAJO DEL HEADER - NO ENCIMA */
+    /* MENÚ MÓVIL: DEBAJO del header */
     .nav-menu {
         position: fixed !important;
         left: 0 !important;
-        top: 90px !important; /* DEBAJO del header */
+        top: 80px !important; /* EXACTAMENTE debajo del header */
         width: 100% !important;
-        background: rgba(0, 0, 0, 0.98) !important;
-        backdrop-filter: blur(20px) !important;
-        -webkit-backdrop-filter: blur(20px) !important;
-        flex-direction: column !important;
-        text-align: center !important;
-        padding: 20px 0 !important;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4) !important;
-        border-bottom-left-radius: 20px !important;
-        border-bottom-right-radius: 20px !important;
-        border: 1px solid rgba(224, 253, 44, 0.2) !important;
-        z-index: 999 !important; /* MENOR que el header */
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.98), rgba(20, 20, 20, 0.95)) !important;
+        backdrop-filter: blur(15px) !important;
+        -webkit-backdrop-filter: blur(15px) !important;
         
-        /* Estado oculto - RÁPIDO */
+        /* Layout del menú */
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        
+        /* Espaciado y diseño */
+        padding: 25px 20px 30px 20px !important;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6) !important;
+        border-bottom-left-radius: 25px !important;
+        border-bottom-right-radius: 25px !important;
+        border: 2px solid rgba(224, 253, 44, 0.3) !important;
+        border-top: none !important;
+        
+        /* Z-index DEBAJO del header */
+        z-index: 1400 !important; /* MENOR que header (1500) */
+        
+        /* Estados de visibilidad */
         opacity: 0 !important;
         visibility: hidden !important;
-        transform: translateY(-20px) !important;
-        transition: all 0.2s ease !important; /* MÁS RÁPIDO */
+        transform: translateY(-30px) !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        
+        /* Altura automática */
         max-height: 0 !important;
         overflow: hidden !important;
-        
-        /* Flex para contenido */
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
     }
     
-    /* Estado activo - RÁPIDO */
+    /* MENÚ ACTIVO */
     .nav-menu.active {
         opacity: 1 !important;
         visibility: visible !important;
         transform: translateY(0) !important;
-        max-height: 400px !important; /* Altura suficiente para 5 enlaces */
+        max-height: 500px !important; /* Altura suficiente para 5 enlaces */
     }
     
-    /* Items del menú */
+    /* ITEMS DEL MENÚ */
     .nav-menu li {
-        margin: 8px 0 !important;
         width: 100% !important;
+        max-width: 300px !important;
+        margin: 6px 0 !important;
         list-style: none !important;
         padding: 0 !important;
+        display: block !important;
     }
     
-    /* Enlaces optimizados */
+    /* ENLACES DEL MENÚ */
     .nav-link {
-        font-size: 18px !important;
-        color: #fff !important;
-        padding: 12px 20px !important;
         display: block !important;
         width: 100% !important;
-        border-radius: 8px !important;
-        transition: all 0.15s ease !important; /* RÁPIDO */
-        text-decoration: none !important;
+        padding: 15px 25px !important;
+        font-size: 18px !important;
         font-weight: 500 !important;
-        margin: 0 !important;
-    }
-    
-    .nav-link:hover {
-        background-color: rgba(224, 253, 44, 0.15) !important;
-        color: #E0FD2C !important;
-        transform: translateX(3px) !important;
-    }
-    
-    /* Header debe permanecer encima */
-    .header {
-        z-index: 1001 !important; /* MAYOR que el menú */
-        position: fixed !important;
-        top: 0 !important;
-    }
-    
-    /* Navegación container */
-    .nav-container {
-        flex-direction: row !important;
-        justify-content: space-between !important;
-        align-items: center !important;
-        padding: 0 15px !important;
-    }
-    
-    .nav-logo {
-        order: 1 !important;
-        flex: 1 !important;
+        color: #fff !important;
+        text-decoration: none !important;
         text-align: center !important;
+        border-radius: 12px !important;
+        transition: all 0.25s ease !important;
+        background: rgba(255, 255, 255, 0.05) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
     }
     
-    .nav-toggle {
-        order: 2 !important;
-        margin-left: auto !important;
+    .nav-link:hover,
+    .nav-link:active {
+        background: rgba(224, 253, 44, 0.2) !important;
+        color: #E0FD2C !important;
+        transform: translateY(-2px) !important;
+        border-color: rgba(224, 253, 44, 0.4) !important;
+        box-shadow: 0 4px 15px rgba(224, 253, 44, 0.2) !important;
     }
     
-    /* Ocultar búsqueda */
-    .search-container {
+    /* OCULTAR ELEMENTOS NO NECESARIOS */
+    .search-container,
+    .visitor-counter-container {
         display: none !important;
     }
     
-    /* Prevenir scroll cuando menú abierto */
+    /* BODY: Prevenir scroll cuando menú abierto */
     body.menu-open {
         overflow: hidden !important;
+        position: fixed !important;
+        width: 100% !important;
+    }
+    
+    /* HERO: Ajustar padding para header fijo */
+    .hero {
+        padding-top: 120px !important; /* Más espacio para header */
     }
 }
 
-/* Desktop - menú normal */
+/* TABLET Y MÓVIL PEQUEÑO */
+@media screen and (max-width: 480px) {
+    .nav-toggle {
+        min-height: 36px !important;
+        min-width: 36px !important;
+        padding: 6px !important;
+    }
+    
+    .bar {
+        width: 18px !important;
+    }
+    
+    .nav-logo h2 {
+        font-size: 22px !important;
+    }
+    
+    .nav-link {
+        font-size: 16px !important;
+        padding: 12px 20px !important;
+    }
+}
+
+/* DESKTOP: Menú normal horizontal */
 @media screen and (min-width: 769px) {
     .nav-toggle {
         display: none !important;
@@ -192,6 +260,7 @@ const criticalCSS = `
     .nav-menu li {
         margin: 0 15px !important;
         width: auto !important;
+        max-width: none !important;
     }
     
     .nav-link {
@@ -199,43 +268,48 @@ const criticalCSS = `
         padding: 0 !important;
         width: auto !important;
         border-radius: 0 !important;
-        margin: 0 !important;
+        background: transparent !important;
+        border: none !important;
     }
 }
 `;
 
-// ===== FUNCIÓN 2: APLICAR CSS INMEDIATAMENTE =====
-function applyFastCSS() {
+// ===== FUNCIÓN: APLICAR CSS INMEDIATAMENTE =====
+function applyMobileFix() {
     const style = document.createElement('style');
-    style.id = 'fast-hamburger-menu';
-    style.innerHTML = criticalCSS;
+    style.id = 'mobile-menu-fix';
+    style.innerHTML = mobileCorrectedCSS;
     
     // Remover estilo previo
-    const existing = document.getElementById('fast-hamburger-menu');
+    const existing = document.getElementById('mobile-menu-fix');
     if (existing) existing.remove();
     
     document.head.appendChild(style);
+    console.log('🎨 CSS móvil aplicado');
 }
 
-// ===== FUNCIÓN 3: CREAR ENLACES COMPLETOS =====
-function createCompleteMenu() {
+// ===== FUNCIÓN: CREAR MENÚ COMPLETO =====
+function createFullMenu() {
     const menuContainer = document.getElementById('nav-menu');
-    if (!menuContainer) return;
+    if (!menuContainer) {
+        console.error('❌ No se encontró nav-menu');
+        return;
+    }
     
-    // CREAR LOS 5 ENLACES REQUERIDOS
+    // LOS 5 ENLACES REQUERIDOS
     const menuItems = [
         { text: 'Inicio', href: '#inicio' },
         { text: 'Servicios', href: '#servicios' },
-        { text: 'Misión', href: '#mision' }, // NUEVO
+        { text: 'Misión', href: '.mission-vision' }, // Apunta a la sección existente
         { text: 'Contacto', href: '#contacto' },
-        { text: 'Suscripción', href: '#suscripcion' } // NUEVO
+        { text: 'Suscripción', href: '#contacto' } // También va a contacto (formulario)
     ];
     
-    // Limpiar menú actual
+    // Limpiar contenido actual
     menuContainer.innerHTML = '';
     
-    // Crear enlaces completos
-    menuItems.forEach(item => {
+    // Crear cada enlace
+    menuItems.forEach((item, index) => {
         const li = document.createElement('li');
         li.className = 'nav-item';
         
@@ -244,52 +318,61 @@ function createCompleteMenu() {
         a.className = 'nav-link';
         a.textContent = item.text;
         
-        // Event listener para cerrar menú al hacer click
-        a.addEventListener('click', () => {
-            setTimeout(closeMenu, 100);
+        // Click handler para cerrar menú
+        a.addEventListener('click', (e) => {
+            console.log(`🔗 Click en: ${item.text}`);
+            setTimeout(() => {
+                closeMenu();
+            }, 100);
         });
         
         li.appendChild(a);
         menuContainer.appendChild(li);
     });
     
-    console.log('✅ Menú completo creado con 5 enlaces');
+    console.log(`✅ Menú creado con ${menuItems.length} enlaces`);
 }
 
-// ===== FUNCIÓN 4: ABRIR MENÚ RÁPIDO =====
+// ===== FUNCIÓN: ABRIR MENÚ =====
 function openMenu() {
+    if (isMenuOpen) return;
+    
     isMenuOpen = true;
     
-    // Clases activas
-    menuButton.classList.add('active');
-    mobileMenu.classList.add('active');
+    // Activar clases
+    if (menuButton) menuButton.classList.add('active');
+    if (mobileMenu) mobileMenu.classList.add('active');
     
-    // Prevenir scroll
+    // Prevenir scroll del body
     document.body.classList.add('menu-open');
     
     console.log('📂 Menú abierto');
 }
 
-// ===== FUNCIÓN 5: CERRAR MENÚ RÁPIDO =====
+// ===== FUNCIÓN: CERRAR MENÚ =====
 function closeMenu() {
+    if (!isMenuOpen) return;
+    
     isMenuOpen = false;
     
     // Remover clases
     if (menuButton) menuButton.classList.remove('active');
     if (mobileMenu) mobileMenu.classList.remove('active');
     
-    // Restaurar scroll
+    // Restaurar scroll del body
     document.body.classList.remove('menu-open');
     
     console.log('📁 Menú cerrado');
 }
 
-// ===== FUNCIÓN 6: TOGGLE RÁPIDO =====
+// ===== FUNCIÓN: TOGGLE MENÚ =====
 function toggleMenu(e) {
     if (e) {
         e.preventDefault();
         e.stopPropagation();
     }
+    
+    console.log('🔄 Toggle menú');
     
     if (isMenuOpen) {
         closeMenu();
@@ -298,21 +381,26 @@ function toggleMenu(e) {
     }
 }
 
-// ===== FUNCIÓN 7: SETUP RÁPIDO =====
-function fastSetup() {
+// ===== FUNCIÓN: CONFIGURAR EVENTOS =====
+function setupEvents() {
     // Obtener elementos
     menuButton = document.getElementById('mobile-menu');
     mobileMenu = document.getElementById('nav-menu');
     
-    if (!menuButton || !mobileMenu) {
-        console.error('❌ Elementos del menú no encontrados');
+    if (!menuButton) {
+        console.error('❌ No se encontró mobile-menu');
+        return;
+    }
+    
+    if (!mobileMenu) {
+        console.error('❌ No se encontró nav-menu');
         return;
     }
     
     // Crear menú completo
-    createCompleteMenu();
+    createFullMenu();
     
-    // Event listeners optimizados
+    // Event listeners
     menuButton.addEventListener('click', toggleMenu);
     menuButton.addEventListener('touchstart', toggleMenu);
     
@@ -325,84 +413,69 @@ function fastSetup() {
         }
     });
     
-    // Escape key
+    // Tecla Escape
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && isMenuOpen) {
             closeMenu();
         }
     });
     
-    // Resize
+    // Resize de ventana
     window.addEventListener('resize', () => {
         if (window.innerWidth > 768 && isMenuOpen) {
             closeMenu();
         }
     });
     
-    // Estado inicial cerrado
+    // Estado inicial
     closeMenu();
     
-    console.log('⚡ Setup rápido completado');
+    console.log('⚡ Eventos configurados');
 }
 
-// ===== FUNCIÓN 8: INICIALIZACIÓN INMEDIATA =====
-function initFastMenu() {
+// ===== FUNCIÓN: VERIFICAR HTML =====
+function verifyHTML() {
+    // Asegurar que existe la sección misión
+    const missionSection = document.querySelector('.mission-vision');
+    if (missionSection && !missionSection.id) {
+        missionSection.id = 'mision';
+    }
+    
+    console.log('🔍 HTML verificado');
+}
+
+// ===== FUNCIÓN: INICIALIZACIÓN =====
+function initMobileMenu() {
+    console.log('🚀 Iniciando menú móvil corregido...');
+    
     // 1. Aplicar CSS inmediatamente
-    applyFastCSS();
+    applyMobileFix();
     
-    // 2. Setup rápido
+    // 2. Verificar HTML
+    verifyHTML();
+    
+    // 3. Configurar eventos
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', fastSetup);
+        document.addEventListener('DOMContentLoaded', setupEvents);
     } else {
-        fastSetup();
-    }
-}
-
-// ===== ACTUALIZAR HTML DINÁMICAMENTE =====
-function updateMenuHTML() {
-    const navMenu = document.getElementById('nav-menu');
-    if (navMenu) {
-        // Asegurar estructura correcta
-        navMenu.style.display = 'flex';
-        navMenu.style.flexDirection = 'column';
+        setupEvents();
     }
     
-    // Asegurar que el menú tenga la sección de misión
-    const missionSection = document.querySelector('#mision');
-    if (!missionSection) {
-        // Buscar mission-vision section y agregar id
-        const mvSection = document.querySelector('.mission-vision');
-        if (mvSection) {
-            mvSection.id = 'mision';
-        }
-    }
-    
-    // Crear sección de suscripción si no existe
-    let subscriptionSection = document.querySelector('#suscripcion');
-    if (!subscriptionSection) {
-        subscriptionSection = document.querySelector('#contacto');
-        if (subscriptionSection) {
-            // Usar la misma sección de contacto para suscripción
-            const clone = subscriptionSection.cloneNode(false);
-            clone.id = 'suscripcion';
-            subscriptionSection.parentNode.insertBefore(clone, subscriptionSection);
-        }
-    }
+    console.log('✅ Menú móvil inicializado');
 }
 
 // ===== INICIALIZACIÓN AUTOMÁTICA =====
-initFastMenu();
-updateMenuHTML();
+initMobileMenu();
 
 // ===== EXPORTAR FUNCIONES =====
-window.fastMenu = {
-    toggle: toggleMenu,
+window.mobileMenu = {
     open: openMenu,
     close: closeMenu,
+    toggle: toggleMenu,
     isOpen: () => isMenuOpen,
-    recreate: createCompleteMenu
+    recreate: createFullMenu
 };
 
-console.log('🚀 Menú hamburguesa rápido cargado');
-console.log('📱 Aparece DEBAJO del header');
-console.log('📋 Incluye: Inicio, Servicios, Misión, Contacto, Suscripción');
+console.log('📱 Corrección móvil lista');
+console.log('📋 Enlaces: Inicio, Servicios, Misión, Contacto, Suscripción');
+console.log('🔧 Para debug: mobileMenu.toggle()');
