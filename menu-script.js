@@ -156,17 +156,17 @@ let throttledUpdate; // Variable para la función de actualización con "throttl
 
 // ===== FUNCIÓN: CREAR BOTÓN FLOTANTE =====
 function createScrollButton() {
-    console.log('Attempting to create scroll button...');
+    console.log('DEBUG: Attempting to create scroll button...');
     // El botón solo se crea si el ancho de la ventana es de un dispositivo móvil.
     if (window.innerWidth > 768) {
-        console.log('Desktop view, not creating scroll button.');
+        console.log('DEBUG: Desktop view, not creating scroll button.');
         return;
     }
     
     // Elimina cualquier botón existente con el mismo ID o clases para evitar duplicados.
     const existingButtons = document.querySelectorAll('#dynamic-scroll-btn, #ultra-floating-btn, .scroll-to-top');
     existingButtons.forEach(btn => {
-        console.log('Removing existing button:', btn.id || btn.className);
+        console.log('DEBUG: Removing existing button:', btn.id || btn.className);
         btn.remove();
     });
     
@@ -192,13 +192,13 @@ function createScrollButton() {
     // Añade el botón al cuerpo del documento.
     document.body.appendChild(scrollButton);
     
-    console.log('✅ Botón flotante creado y añadido al DOM.');
+    console.log('DEBUG: ✅ Botón flotante creado y añadido al DOM.');
     return scrollButton; // Devuelve la referencia al botón creado.
 }
 
 // ===== FUNCIÓN: SCROLL AL INICIO DE LA PÁGINA =====
 function scrollToTop() {
-    console.log('Scrolling to top...');
+    console.log('DEBUG: Scrolling to top...');
     // Realiza un scroll suave hasta la parte superior de la página.
     window.scrollTo({
         top: 0,
@@ -208,38 +208,42 @@ function scrollToTop() {
 
 // ===== FUNCIÓN: ACTUALIZAR VISIBILIDAD DEL BOTÓN BASADO EN EL SCROLL =====
 function updateButtonVisibility() {
-    // console.log('updateButtonVisibility called'); // Descomentar para depuración intensiva.
-    // Si el botón no existe o no estamos en una vista móvil, sal de la función.
     if (!scrollButton) {
-        console.log('Button element not found, cannot update visibility.');
+        console.log('DEBUG: Button element not found in updateButtonVisibility.');
         return;
     }
     if (window.innerWidth > 768) {
         // Si estamos en escritorio, asegúrate de que el botón esté oculto.
         if (scrollButton.classList.contains('visible')) {
             scrollButton.classList.remove('visible');
-            console.log('🔽 Botón oculto (desktop view)');
+            console.log('DEBUG: 🔽 Botón oculto (desktop view)');
         }
         return;
     }
-    
+
     // Obtiene la posición actual del scroll vertical.
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const threshold = 300; // El botón se mostrará después de 300px de scroll hacia abajo.
-    
-    // console.log('scrollTop:', scrollTop, 'threshold:', threshold); // Descomentar para depuración intensiva.
 
-    // Si el scroll supera el umbral, el botón se hace visible.
-    if (scrollTop > threshold) {
+    // Verifica si hay suficiente contenido para hacer scroll.
+    const scrollHeight = document.documentElement.scrollHeight;
+    const clientHeight = document.documentElement.clientHeight;
+    const hasScrollableContent = scrollHeight > (clientHeight + threshold); // Asegura que haya al menos 300px de scroll disponible.
+
+    console.log(`DEBUG: ScrollTop: ${scrollTop}, Threshold: ${threshold}, Button Visible: ${scrollButton.classList.contains('visible')}`);
+    console.log(`DEBUG: ScrollHeight: ${scrollHeight}, ClientHeight: ${clientHeight}, HasScrollableContent: ${hasScrollableContent}`);
+
+    // Si el scroll supera el umbral Y hay contenido scrollable, el botón se hace visible.
+    if (scrollTop > threshold && hasScrollableContent) {
         if (!scrollButton.classList.contains('visible')) {
             scrollButton.classList.add('visible'); // Añade la clase 'visible'.
-            console.log('🔼 Botón visible (added class)');
+            console.log('DEBUG: 🔼 Botón becoming visible.');
         }
     } else {
-        // Si el scroll está por debajo del umbral, el botón se oculta.
+        // Si el scroll está por debajo del umbral O no hay suficiente contenido scrollable, el botón se oculta.
         if (scrollButton.classList.contains('visible')) {
             scrollButton.classList.remove('visible'); // Remueve la clase 'visible'.
-            console.log('🔽 Botón oculto (removed class)');
+            console.log('DEBUG: 🔽 Botón becoming hidden.');
         }
     }
 }
@@ -286,7 +290,7 @@ function setupMenu() {
     
     // Si no se encuentran los elementos del menú, muestra una advertencia y sal.
     if (!menuButton || !mobileMenu) {
-        console.warn('⚠️ No se encontraron elementos de menú (mobile-menu o nav-menu).');
+        console.warn('DEBUG: ⚠️ No se encontraron elementos de menú (mobile-menu o nav-menu).');
         return;
     }
     
@@ -333,7 +337,7 @@ function setupMenu() {
         }
     });
     
-    console.log('✅ Menú configurado.');
+    console.log('DEBUG: ✅ Menú configurado.');
 }
 
 // Funciones para abrir y cerrar el menú.
@@ -342,7 +346,7 @@ function openMenu() {
     if (menuButton) menuButton.classList.add('active');
     if (mobileMenu) mobileMenu.classList.add('active');
     document.body.style.overflow = 'hidden'; // Evita el scroll del fondo cuando el menú está abierto.
-    console.log('Menu opened.');
+    console.log('DEBUG: Menu opened.');
 }
 
 function closeMenu() {
@@ -350,7 +354,7 @@ function closeMenu() {
     if (menuButton) menuButton.classList.remove('active');
     if (mobileMenu) mobileMenu.classList.remove('active');
     document.body.style.overflow = ''; // Restaura el scroll del fondo.
-    console.log('Menu closed.');
+    console.log('DEBUG: Menu closed.');
 }
 
 function toggleMenu() {
@@ -363,7 +367,7 @@ function applyCSS() {
     const oldInjectedStyles = document.getElementById('dynamic-floating-button-css');
     if (oldInjectedStyles) {
         oldInjectedStyles.remove();
-        console.log('Removed old injected CSS.');
+        console.log('DEBUG: Removed old injected CSS.');
     }
     
     // Crea un nuevo elemento <style> e inyecta el CSS definido.
@@ -372,7 +376,7 @@ function applyCSS() {
     style.innerHTML = floatingButtonCSS;
     document.head.appendChild(style);
     
-    console.log('✅ CSS del botón flotante aplicado.');
+    console.log('DEBUG: ✅ CSS del botón flotante aplicado.');
 }
 
 // ===== FUNCIÓN: CONFIGURAR LOS EVENTOS DE SCROLL =====
@@ -387,7 +391,7 @@ function setupScrollEvents() {
     // Realiza una verificación inicial de la visibilidad del botón poco después de la carga.
     setTimeout(updateButtonVisibility, 100);
     
-    console.log('✅ Eventos de scroll configurados.');
+    console.log('DEBUG: ✅ Eventos de scroll configurados.');
 }
 
 // ===== FUNCIÓN: MONITOREAR Y MANTENER EL BOTÓN FLOTANTE =====
@@ -396,7 +400,7 @@ function monitorButton() {
     setInterval(() => {
         // Si estamos en móvil y el botón no existe, lo recrea y actualiza su visibilidad.
         if (window.innerWidth <= 768 && !document.getElementById('dynamic-scroll-btn')) {
-            console.log('⚠️ Botón flotante perdido, recreando...');
+            console.log('DEBUG: ⚠️ Botón flotante perdido, recreando...');
             createScrollButton();
             updateButtonVisibility();
         }
@@ -405,7 +409,7 @@ function monitorButton() {
 
 // ===== FUNCIÓN: INICIALIZACIÓN PRINCIPAL DEL SISTEMA DEL BOTÓN FLOTANTE =====
 function initFloatingButton() {
-    console.log('🎯 Iniciando sistema de botón flotante...');
+    console.log('DEBUG: 🎯 Iniciando sistema de botón flotante...');
     
     try {
         // 1. Aplica el CSS del botón.
@@ -423,31 +427,31 @@ function initFloatingButton() {
         // 5. Inicia el monitoreo del botón para asegurar su persistencia.
         monitorButton();
         
-        console.log('✅ Sistema de botón flotante inicializado correctamente.');
+        console.log('DEBUG: ✅ Sistema de botón flotante inicializado correctamente.');
         
     } catch (error) {
         // Captura y muestra cualquier error durante la inicialización.
-        console.error('❌ Error en inicialización del botón flotante:', error);
+        console.error('DEBUG: ❌ Error en inicialización del botón flotante:', error);
     }
 }
 
 // ===== EVENTOS DE REDIMENSIONAMIENTO DE LA VENTANA (RESIZE) =====
 // Se usa "throttle" para optimizar la ejecución en el redimensionamiento.
 window.addEventListener('resize', throttle(() => {
-    console.log('Window resized. Inner width:', window.innerWidth);
+    console.log('DEBUG: Window resized. Inner width:', window.innerWidth);
     if (window.innerWidth > 768) {
         // Si la ventana es de escritorio, elimina el botón si existe.
         if (scrollButton) {
             scrollButton.remove();
             scrollButton = null;
-            console.log('Scroll button removed for desktop view.');
+            console.log('DEBUG: Scroll button removed for desktop view.');
         }
         // Asegúrate de cerrar el menú si estaba abierto en escritorio.
         if (isMenuOpen) closeMenu();
     } else {
         // Si la ventana es móvil, crea el botón si no existe.
         if (!document.getElementById('dynamic-scroll-btn')) {
-            console.log('Detected mobile view, creating scroll button if not exists.');
+            console.log('DEBUG: Detected mobile view, creating scroll button if not exists.');
             createScrollButton();
         }
         // Actualiza la visibilidad del botón para el nuevo tamaño.
@@ -470,7 +474,7 @@ window.addEventListener('load', () => {
     setTimeout(() => {
         // Vuelve a verificar y recrear el botón en móvil si por alguna razón no se creó.
         if (!document.getElementById('dynamic-scroll-btn') && window.innerWidth <= 768) {
-            console.log('Window loaded, re-checking for scroll button on mobile.');
+            console.log('DEBUG: Window loaded, re-checking for scroll button on mobile.');
             createScrollButton();
             updateButtonVisibility();
         }
@@ -485,18 +489,16 @@ window.floatingButtonSystem = {
     forceShow: () => { // Fuerza la visibilidad del botón.
         const btn = document.getElementById('dynamic-scroll-btn');
         if (btn) btn.classList.add('visible');
-        console.log('Forced scroll button show.');
+        console.log('DEBUG: Forced scroll button show.');
     },
     forceHide: () => { // Fuerza la ocultación del botón.
         const btn = document.getElementById('dynamic-scroll-btn');
         if (btn) btn.classList.remove('visible');
-        console.log('Forced scroll button hide.');
+        console.log('DEBUG: Forced scroll button hide.');
     }
 };
 
 console.log('✅ Sistema de botón flotante cargado.');
 console.log('📍 El botón aparecerá después de 300px de scroll.');
-console.log('🔧 Para depurar, abre la consola del navegador en tu móvil y busca los mensajes de "🚀", "✅", "🔼", "🔽", "⚠️".');
-
-
+console.log('🔧 Para depurar, abre la consola del navegador en tu móvil y busca los mensajes que empiezan con "DEBUG:".');
 
