@@ -34,9 +34,11 @@ body {
     color: #fff;
     line-height: 1.6;
     overflow-x: hidden;
+    overflow-y: auto; /* Asegura que el body pueda tener su propio scroll si es necesario */
     margin: 0;
     padding: 0;
-    /* Se eliminan las propiedades transform y backface-visibility de aquí */
+    /* SE ELIMINAN LAS PROPIEDADES 'transform' y 'backface-visibility' DE AQUÍ */
+    /* Estas propiedades causaban que position: fixed no funcionara correctamente */
 }
 
 /* Asegurar que todos los textos usen Poppins */
@@ -60,6 +62,11 @@ body {
     backdrop-filter: blur(10px);
     z-index: 1000;
     transition: all 0.3s ease;
+    /* GPU acceleration */
+    will-change: transform, opacity;
+    transform: translateZ(0); /* Este transform en el header es seguro y común */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .navbar {
@@ -217,6 +224,11 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
+    /* GPU acceleration */
+    will-change: transform;
+    transform: translateZ(0); /* Este transform en el hero es seguro y común */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .hero-content {
@@ -2899,10 +2911,8 @@ html {
     
     .contact-info-wrapper,
     .contact-form-wrapper {
-        height: 550px !important;
-        min-height: 550px !important;
-        max-height: 550px !important;
         padding: 45px 35px !important;
+        min-height: 450px !important;
     }
     
     .newsletter-form {
@@ -3557,13 +3567,13 @@ html {
     /* === BOTÓN FLOTANTE === */
     
     #real-floating-back-btn {
-        position: fixed !important; /* Asegura que flote */
-        top: 50vh !important; /* Posición vertical: centro de la pantalla */
-        right: 15px !important; /* Distancia desde la derecha */
-        transform: translateY(-50%) translateX(30px) scale(0.8) !important; /* Start position for animation */
+        position: fixed !important; /* Asegura que flote con el viewport */
+        bottom: 25px !important; /* Posición abajo */
+        right: 15px !important; /* Posición a la derecha */
+        transform: translateX(30px) scale(0.8) !important; /* Posición inicial oculta para animación */
         
-        width: 60px !important;
-        height: 60px !important;
+        width: 50px !important; /* Más pequeño */
+        height: 50px !important; /* Más pequeño */
         border-radius: 50% !important;
         border: 2px solid rgba(255, 255, 255, 0.3) !important;
         outline: none !important;
@@ -3571,11 +3581,11 @@ html {
         background: linear-gradient(135deg, #E0FD2C 0%, #C7E525 100%) !important;
         
         box-shadow: 
-            0 10px 30px rgba(0, 0, 0, 0.6),
-            0 5px 20px rgba(224, 253, 44, 0.8),
-            0 3px 12px rgba(0, 0, 0, 0.4) !important;
+            0 4px 12px rgba(0, 0, 0, 0.2), /* Sombra más suave */
+            0 2px 8px rgba(224, 253, 44, 0.3), /* Resplandor más suave */
+            inset 0 1px 2px rgba(255, 255, 255, 0.2) !important; /* Sombra interna más suave */
         
-        display: flex !important; /* Always flex when potentially visible */
+        display: flex !important; /* Siempre flex para centrar contenido */
         align-items: center !important;
         justify-content: center !important;
         
@@ -3586,8 +3596,8 @@ html {
         -webkit-tap-highlight-color: transparent !important;
         user-select: none !important;
         
-        /* Initial hidden state with smooth transition */
-        opacity: 0 !important;
+        /* Estado inicial oculto con transición suave */
+        opacity: 0.8 !important; /* Transparencia inicial */
         visibility: hidden !important;
         pointer-events: none !important;
         transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
@@ -3595,25 +3605,25 @@ html {
     
     /* Estado visible del botón flotante */
     #real-floating-back-btn.floating-visible {
-        opacity: 1 !important;
+        opacity: 0.8 !important; /* Mantiene transparencia */
         visibility: visible !important;
         pointer-events: auto !important;
-        transform: translateY(-50%) translateX(0) scale(1) !important; /* Final position */
+        transform: translateX(0) scale(1) !important; /* Posición final visible */
     }
     
     /* Hover del botón flotante */
     #real-floating-back-btn:hover {
         background: linear-gradient(135deg, #C7E525 0%, #B8D61F 100%) !important;
-        transform: translateY(-50%) translateX(-8px) scale(1.15) !important;
+        transform: translateX(-5px) scale(1.05) !important; /* Efecto hover más sutil */
         box-shadow: 
-            0 15px 40px rgba(0, 0, 0, 0.7),
-            0 8px 25px rgba(224, 253, 44, 0.9),
-            0 4px 15px rgba(0, 0, 0, 0.5) !important;
+            0 6px 20px rgba(0, 0, 0, 0.3),
+            0 4px 12px rgba(224, 253, 44, 0.4) !important;
+        opacity: 1 !important; /* Se vuelve completamente opaco al hacer hover */
     }
     
     /* Active del botón flotante */
     #real-floating-back-btn:active {
-        transform: translateY(-50%) translateX(-5px) scale(1.1) !important;
+        transform: translateX(-3px) scale(0.98) !important; /* Efecto active más sutil */
         transition: all 0.1s ease !important;
     }
     
@@ -3625,10 +3635,10 @@ html {
         left: 50% !important;
         transform: translate(-50%, -50%) rotate(-45deg) !important;
         
-        width: 14px !important;
-        height: 14px !important;
-        border-top: 3px solid #000 !important;
-        border-right: 3px solid #000 !important;
+        width: 12px !important; /* Flecha más pequeña */
+        height: 12px !important;
+        border-top: 2.5px solid #000 !important; /* Borde más delgado */
+        border-right: 2.5px solid #000 !important; /* Borde más delgado */
         border-left: none !important;
         border-bottom: none !important;
         
@@ -3666,16 +3676,17 @@ html {
     }
     
     #real-floating-back-btn {
-        width: 55px !important;
-        height: 55px !important;
-        right: 12px !important;
+        width: 50px !important; /* Ajuste para móviles aún más pequeños */
+        height: 50px !important;
+        bottom: 20px !important; /* Más abajo en móviles pequeños */
+        right: 10px !important; /* Más a la derecha en móviles pequeños */
     }
     
     #real-floating-back-btn::before {
-        width: 12px !important;
-        height: 12px !important;
-        border-top: 2.5px solid #000 !important;
-        border-right: 2.5px solid #000 !important;
+        width: 10px !important; /* Flecha aún más pequeña */
+        height: 10px !important;
+        border-top: 2px solid #000 !important;
+        border-right: 2px solid #000 !important;
     }
     
     /* Contador de visitas en móviles pequeños */
