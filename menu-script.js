@@ -227,11 +227,12 @@ const completeSolutionCSS = `
         font-size: 18px !important;
     }
     
-    /* === BOTÓN FLOTANTE === */
+    /* === BOTÓN FLOTANTE QUE SIGUE EL SCROLL === */
     
     #real-floating-back-btn {
-        position: fixed !important;
-        top: 50vh !important;
+        /* POSICIÓN ABSOLUTA QUE SE MUEVE CON EL SCROLL */
+        position: absolute !important;
+        top: 50% !important; /* Se calculará dinámicamente */
         right: 15px !important;
         transform: translateY(-50%) !important;
         
@@ -344,6 +345,7 @@ const completeSolutionCSS = `
         width: 55px !important;
         height: 55px !important;
         right: 12px !important;
+        /* Position se actualiza dinámicamente */
     }
     
     #real-floating-back-btn::before {
@@ -579,7 +581,7 @@ function handleFloatingClick(e) {
     });
 }
 
-// ===== FUNCIÓN: MANEJAR SCROLL - CORREGIDA =====
+// ===== FUNCIÓN: MANEJAR SCROLL - CON POSICIÓN DINÁMICA =====
 function handleScroll() {
     if (window.innerWidth > 768) return;
     
@@ -587,17 +589,22 @@ function handleScroll() {
     if (!button) return;
     
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const windowHeight = window.innerHeight;
     const threshold = 200;
     
-    // LÓGICA CORREGIDA: Mostrar cuando BAJAS (scrollTop > threshold)
     if (scrollTop > threshold) {
-        // HAY SCROLL HACIA ABAJO - MOSTRAR BOTÓN
+        // MOSTRAR BOTÓN Y ACTUALIZAR POSICIÓN
         if (!button.classList.contains('floating-visible')) {
             button.classList.add('floating-visible');
             console.log('👁️ Botón flotante mostrado (bajando por la página)');
         }
+        
+        // CALCULAR POSICIÓN QUE SIGUE EL SCROLL
+        const buttonPosition = scrollTop + (windowHeight * 0.5); // Centro de la ventana visible
+        button.style.top = buttonPosition + 'px';
+        
     } else {
-        // CERCA DEL TOP - OCULTAR BOTÓN
+        // OCULTAR BOTÓN CERCA DEL TOP
         if (button.classList.contains('floating-visible')) {
             button.classList.remove('floating-visible');
             console.log('🙈 Botón flotante ocultado (cerca del inicio)');
@@ -686,7 +693,8 @@ window.completeSolution = {
 
 console.log('✅ Solución completa cargada');
 console.log('🍔 Menú hamburguesa: 4 enlaces funcionando');
-console.log('🔴 Botón flotante: Aparece al BAJAR por la página');
+console.log('🔴 Botón flotante: SIGUE EL SCROLL - se mueve contigo');
+console.log('📍 Posición dinámica: Siempre en el centro de tu pantalla visible');
 console.log('👁️ Contador de visitas: Visible en esquina superior izquierda');
 console.log('💻 Desktop: Navegación normal');
 console.log('🔧 Debug: completeSolution.reinit()');
