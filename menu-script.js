@@ -194,10 +194,37 @@ const completeSolutionCSS = `
         border-bottom: none !important;
     }
     
-    /* Ocultar elementos no necesarios */
-    .search-container,
-    .visitor-counter-container {
+    /* Ocultar elementos no necesarios - EXCEPTO CONTADOR DE VISITAS */
+    .search-container {
         display: none !important;
+    }
+    
+    /* MANTENER CONTADOR DE VISITAS VISIBLE */
+    .visitor-counter-container {
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        color: #E0FD2C !important;
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        padding: 8px 15px !important;
+        border-radius: 25px !important;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.5) !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        position: absolute !important;
+        top: 24px !important;
+        left: 20px !important;
+        z-index: 1001 !important;
+    }
+    
+    .visitor-counter-container:hover {
+        background-color: rgba(224, 253, 44, 0.2) !important;
+        transform: scale(1.05) !important;
+    }
+    
+    .visitor-counter-container .fa-eye {
+        font-size: 18px !important;
     }
     
     /* === BOTÓN FLOTANTE === */
@@ -300,6 +327,10 @@ const completeSolutionCSS = `
         padding: 6px !important;
     }
     
+    .nav-logo {
+        padding-left: 80px !important; /* Espacio para contador de visitas */
+    }
+    
     .nav-logo h2 {
         font-size: 22px !important;
     }
@@ -320,6 +351,18 @@ const completeSolutionCSS = `
         height: 12px !important;
         border-top: 2.5px solid #000 !important;
         border-right: 2.5px solid #000 !important;
+    }
+    
+    /* Contador de visitas en móviles pequeños */
+    .visitor-counter-container {
+        font-size: 12px !important;
+        padding: 6px 10px !important;
+        top: 24px !important;
+        left: 15px !important;
+    }
+    
+    .visitor-counter-container .fa-eye {
+        font-size: 14px !important;
     }
 }
 
@@ -536,7 +579,7 @@ function handleFloatingClick(e) {
     });
 }
 
-// ===== FUNCIÓN: MANEJAR SCROLL =====
+// ===== FUNCIÓN: MANEJAR SCROLL - CORREGIDA =====
 function handleScroll() {
     if (window.innerWidth > 768) return;
     
@@ -546,15 +589,18 @@ function handleScroll() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const threshold = 200;
     
+    // LÓGICA CORREGIDA: Mostrar cuando BAJAS (scrollTop > threshold)
     if (scrollTop > threshold) {
+        // HAY SCROLL HACIA ABAJO - MOSTRAR BOTÓN
         if (!button.classList.contains('floating-visible')) {
             button.classList.add('floating-visible');
-            console.log('👁️ Botón flotante mostrado');
+            console.log('👁️ Botón flotante mostrado (bajando por la página)');
         }
     } else {
+        // CERCA DEL TOP - OCULTAR BOTÓN
         if (button.classList.contains('floating-visible')) {
             button.classList.remove('floating-visible');
-            console.log('🙈 Botón flotante ocultado');
+            console.log('🙈 Botón flotante ocultado (cerca del inicio)');
         }
     }
 }
@@ -640,6 +686,7 @@ window.completeSolution = {
 
 console.log('✅ Solución completa cargada');
 console.log('🍔 Menú hamburguesa: 4 enlaces funcionando');
-console.log('🔴 Botón flotante: Aparece con scroll en móviles');
+console.log('🔴 Botón flotante: Aparece al BAJAR por la página');
+console.log('👁️ Contador de visitas: Visible en esquina superior izquierda');
 console.log('💻 Desktop: Navegación normal');
 console.log('🔧 Debug: completeSolution.reinit()');
