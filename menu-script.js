@@ -1,66 +1,96 @@
+// ===== SOLUCIÓN COMPLETA: BOTÓN FLOTANTE + MENÚ HAMBURGUESA =====
 
-// ===== MENÚ HAMBURGUESA - ARREGLO MÓVIL COMPLETO =====
+console.log('🔧 Iniciando corrección completa...');
 
-console.log('📱 Iniciando corrección específica para móvil...');
+// ===== CSS COMPLETO Y CORREGIDO =====
+const completeFixCSS = `
+/* ===== BOTÓN FLOTANTE - FORZADO PARA MÓVILES ===== */
 
-// Variables globales
-let isMenuOpen = false;
-let menuButton, mobileMenu;
+#floating-back-btn {
+    /* Posicionamiento absoluto y fijo */
+    position: fixed !important;
+    bottom: 25px !important;
+    right: 20px !important;
+    
+    /* Tamaño fijo */
+    width: 55px !important;
+    height: 55px !important;
+    
+    /* Diseño circular */
+    border-radius: 50% !important;
+    border: none !important;
+    outline: none !important;
+    
+    /* Fondo verde brillante */
+    background: #E0FD2C !important;
+    
+    /* Sombra pronunciada */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 
+                0 2px 10px rgba(224, 253, 44, 0.6) !important;
+    
+    /* Flexbox para centrar */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    
+    /* Z-index súper alto */
+    z-index: 99999 !important;
+    
+    /* Cursor pointer */
+    cursor: pointer !important;
+    
+    /* Touch optimizado */
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: transparent !important;
+    
+    /* Transición suave */
+    transition: all 0.3s ease !important;
+    
+    /* Estado inicial visible */
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+    
+    /* Asegurar que esté por encima de todo */
+    pointer-events: auto !important;
+    user-select: none !important;
+}
 
-// ===== CSS CORREGIDO PARA MÓVIL =====
-const mobileCorrectedCSS = `
-/* ===== CORRECCIÓN ESPECÍFICA MÓVIL ===== */
+#floating-back-btn:hover {
+    background: #C7E525 !important;
+    transform: translateY(-3px) scale(1.1) !important;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5), 
+                0 3px 15px rgba(224, 253, 44, 0.8) !important;
+}
 
+#floating-back-btn:active {
+    transform: translateY(-1px) scale(1.05) !important;
+}
+
+/* FLECHA TRIANGULAR - SOLO PUNTA */
+#floating-back-btn::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -60%) !important; /* Centrado perfecto */
+    
+    /* Triángulo hacia arriba */
+    width: 0 !important;
+    height: 0 !important;
+    border-left: 10px solid transparent !important;
+    border-right: 10px solid transparent !important;
+    border-bottom: 14px solid #000 !important; /* Flecha negra */
+    
+    /* Sin otros bordes */
+    border-top: none !important;
+}
+
+/* MENÚ HAMBURGUESA - BARRAS CORREGIDAS */
 @media screen and (max-width: 768px) {
     
-    /* HEADER: Asegurar que esté arriba y visible */
-    .header {
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        z-index: 1500 !important; /* MUY ALTO para estar encima */
-        background-color: rgba(40, 40, 40, 0.98) !important;
-        backdrop-filter: blur(10px) !important;
-        height: auto !important;
-        min-height: 80px !important;
-    }
-    
-    /* NAVBAR: Layout correcto */
-    .navbar {
-        padding: 15px 0 !important;
-        height: 80px !important;
-        display: flex !important;
-        align-items: center !important;
-    }
-    
-    .nav-container {
-        display: flex !important;
-        justify-content: space-between !important;
-        align-items: center !important;
-        padding: 0 20px !important;
-        width: 100% !important;
-        height: 100% !important;
-    }
-    
-    /* LOGO: Centrado y visible */
-    .nav-logo {
-        order: 1 !important;
-        flex: 1 !important;
-        text-align: center !important;
-        z-index: 1501 !important;
-    }
-    
-    .nav-logo h2 {
-        color: #c1d72b !important;
-        font-size: 24px !important;
-        font-weight: 700 !important;
-        margin: 0 !important;
-    }
-    
-    /* BOTÓN HAMBURGUESA: Visible y funcional */
+    /* Contenedor del botón hamburguesa */
     .nav-toggle {
-        order: 2 !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
@@ -70,574 +100,354 @@ const mobileCorrectedCSS = `
         background-color: #000 !important;
         border: 2px solid rgba(255, 255, 255, 0.4) !important;
         border-radius: 8px !important;
-        transition: all 0.2s ease !important;
+        transition: all 0.3s ease !important;
         position: relative !important;
-        z-index: 1502 !important; /* MÁS ALTO que todo */
-        min-height: 40px !important;
-        min-width: 40px !important;
+        z-index: 1502 !important;
+        min-height: 44px !important;
+        min-width: 44px !important;
         margin-left: auto !important;
         flex-shrink: 0 !important;
         touch-action: manipulation !important;
         -webkit-tap-highlight-color: transparent !important;
     }
     
-    .nav-toggle:active {
-        transform: scale(0.9) !important;
-        background-color: rgba(0, 0, 0, 0.9) !important;
-    }
-    
-    /* BARRAS HAMBURGUESA */
+    /* Barras del hamburguesa - DIMENSIONES CORRECTAS */
     .bar {
-        width: 20px !important;
-        height: 2px !important;
+        width: 24px !important; /* Más anchas */
+        height: 3px !important; /* Más gruesas */
         background-color: #fff !important;
-        margin: 2.5px 0 !important;
-        transition: all 0.25s ease !important;
-        border-radius: 1px !important;
+        margin: 3px 0 !important; /* Más separación */
+        transition: all 0.4s ease !important; /* Transición más lenta */
+        border-radius: 2px !important;
         display: block !important;
+        transform-origin: center !important; /* Punto de rotación central */
+        position: relative !important;
     }
     
-    /* ANIMACIÓN X */
+    /* ANIMACIÓN X CORREGIDA */
     .nav-toggle.active .bar:nth-child(1) {
-        transform: translateY(4.5px) rotate(45deg) !important;
+        transform: translateY(6px) rotate(45deg) !important; /* Más separación */
     }
     
     .nav-toggle.active .bar:nth-child(2) {
         opacity: 0 !important;
-        transform: translateX(10px) !important;
+        transform: scale(0) !important; /* Desaparece suavemente */
     }
     
     .nav-toggle.active .bar:nth-child(3) {
-        transform: translateY(-4.5px) rotate(-45deg) !important;
+        transform: translateY(-6px) rotate(-45deg) !important; /* Más separación */
     }
     
-    /* MENÚ MÓVIL: DEBAJO del header */
-    .nav-menu {
-        position: fixed !important;
-        left: 0 !important;
-        top: 80px !important; /* EXACTAMENTE debajo del header */
-        width: 100% !important;
-        background: linear-gradient(135deg, rgba(45, 45, 45, 0.95), rgba(60, 60, 60, 0.92)) !important;
-        backdrop-filter: blur(15px) !important;
-        -webkit-backdrop-filter: blur(15px) !important;
-        
-        /* Layout del menú */
+    /* Hover del botón hamburguesa */
+    .nav-toggle:hover {
+        background-color: rgba(0, 0, 0, 0.8) !important;
+        border-color: rgba(255, 255, 255, 0.6) !important;
+    }
+    
+    .nav-toggle:active {
+        transform: scale(0.95) !important;
+    }
+}
+
+/* FORZAR VISIBILIDAD EN TODOS LOS DISPOSITIVOS */
+@media screen and (max-width: 768px) {
+    #floating-back-btn {
         display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: flex-start !important;
-        
-        /* Espaciado y diseño */
-        padding: 25px 20px 30px 20px !important;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4) !important;
-        border-bottom-left-radius: 25px !important;
-        border-bottom-right-radius: 25px !important;
-        border: 2px solid rgba(224, 253, 44, 0.4) !important;
-        border-top: none !important;
-        
-        /* Z-index DEBAJO del header */
-        z-index: 1400 !important; /* MENOR que header (1500) */
-        
-        /* Estados de visibilidad */
-        opacity: 0 !important;
-        visibility: hidden !important;
-        transform: translateY(-30px) !important;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        
-        /* Altura automática */
-        max-height: 0 !important;
-        overflow: hidden !important;
     }
-    
-    /* MENÚ ACTIVO */
-    .nav-menu.active {
-        opacity: 1 !important;
-        visibility: visible !important;
-        transform: translateY(0) !important;
-        max-height: 500px !important; /* Altura suficiente para 5 enlaces */
-    }
-    
-    /* ITEMS DEL MENÚ - SIN ESPACIADO EXTRA */
-    .nav-menu li {
-        width: 100% !important;
-        max-width: 350px !important;
-        margin: 0 !important; /* SIN MARGEN VERTICAL */
-        list-style: none !important;
-        padding: 0 !important;
-        display: block !important;
-    }
-    
-    /* ENLACES DEL MENÚ - SIN BOTONES, SOLO TEXTO */
-    .nav-link {
-        display: block !important;
-        width: 100% !important;
-        padding: 20px 25px !important;
-        font-size: 22px !important; /* MÁS GRANDE */
-        font-weight: 600 !important; /* MÁS GRUESO */
-        color: #fff !important;
-        text-decoration: none !important;
-        text-align: center !important;
-        border-radius: 0 !important; /* SIN BORDES REDONDEADOS */
-        transition: all 0.25s ease !important;
-        background: transparent !important; /* SIN FONDO */
-        border: none !important; /* SIN BORDES */
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important; /* SOLO LÍNEA ABAJO */
-        margin: 0 !important;
-        box-sizing: border-box !important;
-        letter-spacing: 1px !important; /* ESPACIADO DE LETRAS */
-        text-transform: uppercase !important; /* MAYÚSCULAS */
-    }
-    
-    .nav-link:hover,
-    .nav-link:active {
-        background: rgba(224, 253, 44, 0.1) !important; /* HOVER SUTIL */
-        color: #E0FD2C !important;
-        transform: translateX(5px) !important; /* MOVIMIENTO SUTIL */
-        border-bottom-color: #E0FD2C !important; /* LÍNEA VERDE */
-        text-shadow: 0 0 10px rgba(224, 253, 44, 0.5) !important; /* BRILLO */
-    }
-    
-    /* ÚLTIMO ENLACE SIN LÍNEA */
-    .nav-menu li:last-child .nav-link {
-        border-bottom: none !important;
-    }
-    
-    /* BOTÓN FLOTANTE DE REGRESO */
-    .scroll-to-top {
-        position: fixed !important;
-        bottom: 30px !important;
-        right: 20px !important;
+}
+
+@media screen and (max-width: 480px) {
+    #floating-back-btn {
+        bottom: 20px !important;
+        right: 15px !important;
         width: 50px !important;
         height: 50px !important;
-        background: rgba(224, 253, 44, 0.9) !important;
-        border: none !important;
-        border-radius: 50% !important;
-        color: #000 !important;
-        cursor: pointer !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        font-size: 20px !important;
-        z-index: 1600 !important; /* MUY ALTO */
-        transition: all 0.3s ease !important;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
-        backdrop-filter: blur(10px) !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-        transform: translateY(0) !important;
     }
     
-    .scroll-to-top:hover {
-        background: rgba(224, 253, 44, 1) !important;
-        transform: translateY(-2px) scale(1.1) !important;
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4) !important;
-    }
-    
-    .scroll-to-top.show {
-        display: flex !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-    }
-    
-    /* FORZAR VISIBILIDAD EN MÓVILES */
-    @supports (-webkit-touch-callout: none) {
-        .scroll-to-top {
-            display: flex !important;
-            opacity: 1 !important;
-            visibility: visible !important;
-        }
-    }
-    
-    /* OCULTAR ELEMENTOS NO NECESARIOS */
-    .search-container,
-    .visitor-counter-container {
-        display: none !important;
-    }
-    
-    /* BODY: Prevenir scroll cuando menú abierto */
-    body.menu-open {
-        overflow: hidden !important;
-        position: fixed !important;
-        width: 100% !important;
-    }
-    
-    /* HERO: Ajustar padding para header fijo */
-    .hero {
-        padding-top: 120px !important; /* Más espacio para header */
+    #floating-back-btn::before {
+        border-left: 8px solid transparent !important;
+        border-right: 8px solid transparent !important;
+        border-bottom: 12px solid #000 !important;
     }
 }
 
-/* TABLET Y MÓVIL PEQUEÑO */
-@media screen and (max-width: 480px) {
-    .nav-toggle {
-        min-height: 36px !important;
-        min-width: 36px !important;
-        padding: 6px !important;
-    }
-    
-    .bar {
-        width: 18px !important;
-    }
-    
-    .nav-logo h2 {
-        font-size: 22px !important;
-    }
-    
-    .nav-link {
-        font-size: 16px !important;
-        padding: 12px 20px !important;
-    }
-}
-
-/* DESKTOP: Menú normal horizontal */
-@media screen and (min-width: 769px) {
-    .nav-toggle {
-        display: none !important;
-    }
-    
-    .nav-menu {
-        position: static !important;
-        width: auto !important;
-        background: transparent !important;
-        flex-direction: row !important;
-        padding: 0 !important;
-        box-shadow: none !important;
-        border: none !important;
+/* PARA TODOS LOS DISPOSITIVOS APPLE */
+@supports (-webkit-appearance: none) {
+    #floating-back-btn {
+        display: flex !important;
         opacity: 1 !important;
         visibility: visible !important;
-        transform: none !important;
-        max-height: none !important;
-        overflow: visible !important;
-        z-index: auto !important;
-        top: auto !important;
-    }
-    
-    .nav-menu li {
-        margin: 0 15px !important;
-        width: auto !important;
-        max-width: none !important;
-    }
-    
-    .nav-link {
-        font-size: 18px !important;
-        padding: 0 !important;
-        width: auto !important;
-        border-radius: 0 !important;
-        background: transparent !important;
-        border: none !important;
     }
 }
 `;
 
 // ===== FUNCIÓN: APLICAR CSS INMEDIATAMENTE =====
-function applyMobileFix() {
+function applyCompleteFix() {
+    // Remover estilos previos
+    const existingStyles = [
+        'floating-button-styles',
+        'mobile-menu-fix', 
+        'fast-hamburger-menu'
+    ];
+    
+    existingStyles.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) element.remove();
+    });
+    
+    // Aplicar CSS corregido
     const style = document.createElement('style');
-    style.id = 'mobile-menu-fix';
-    style.innerHTML = mobileCorrectedCSS;
-    
-    // Remover estilo previo
-    const existing = document.getElementById('mobile-menu-fix');
-    if (existing) existing.remove();
-    
+    style.id = 'complete-fix-styles';
+    style.innerHTML = completeFixCSS;
     document.head.appendChild(style);
-    console.log('🎨 CSS móvil aplicado');
+    
+    console.log('🎨 CSS completo aplicado');
 }
 
-// ===== FUNCIÓN: CREAR MENÚ COMPLETO =====
-function createFullMenu() {
-    const menuContainer = document.getElementById('nav-menu');
-    if (!menuContainer) {
-        console.error('❌ No se encontró nav-menu');
+// ===== FUNCIÓN: CREAR BOTÓN FLOTANTE FORZADO =====
+function createForcedFloatingButton() {
+    // Remover botones existentes
+    const existingButtons = document.querySelectorAll(
+        '#floating-back-btn, .floating-back-button, #scrollToTop, .scroll-to-top'
+    );
+    existingButtons.forEach(btn => btn.remove());
+    
+    console.log('🗑️ Botones anteriores removidos');
+    
+    // Crear botón nuevo
+    const button = document.createElement('button');
+    button.id = 'floating-back-btn';
+    button.setAttribute('aria-label', 'Volver al inicio');
+    button.setAttribute('title', 'Ir arriba');
+    
+    // Event listeners
+    button.addEventListener('click', handleFloatingClick);
+    button.addEventListener('touchstart', handleFloatingClick);
+    
+    // Agregar al body
+    document.body.appendChild(button);
+    
+    // Forzar estilos inline como backup
+    button.style.cssText = `
+        position: fixed !important;
+        bottom: 25px !important;
+        right: 20px !important;
+        width: 55px !important;
+        height: 55px !important;
+        border-radius: 50% !important;
+        background: #E0FD2C !important;
+        border: none !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        z-index: 99999 !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        cursor: pointer !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+    `;
+    
+    console.log('✅ Botón flotante creado y forzado');
+    return button;
+}
+
+// ===== FUNCIÓN: MANEJAR CLICK FLOTANTE =====
+function handleFloatingClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    console.log('🔼 Botón flotante presionado');
+    
+    // Scroll al inicio
+    window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+    });
+    
+    // Efecto visual
+    const button = e.target.closest('#floating-back-btn');
+    if (button) {
+        button.style.transform = 'translateY(-2px) scale(1.1)';
+        setTimeout(() => {
+            button.style.transform = '';
+        }, 200);
+    }
+}
+
+// ===== FUNCIÓN: ARREGLAR MENÚ HAMBURGUESA =====
+function fixHamburgerMenu() {
+    const menuButton = document.getElementById('mobile-menu');
+    const mobileMenu = document.getElementById('nav-menu');
+    
+    if (!menuButton || !mobileMenu) {
+        console.error('❌ Elementos del menú no encontrados');
         return;
     }
     
-    // LOS 4 ENLACES REQUERIDOS (SIN CONTACTO, CON SUSCRIPCIÓN)
+    // Asegurar estructura HTML correcta del botón
+    if (menuButton.children.length === 0) {
+        menuButton.innerHTML = `
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        `;
+        console.log('🔧 Estructura del menú hamburguesa corregida');
+    }
+    
+    // Event listener para toggle
+    menuButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const isActive = menuButton.classList.contains('active');
+        
+        if (isActive) {
+            // Cerrar menú
+            menuButton.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            console.log('📁 Menú cerrado');
+        } else {
+            // Abrir menú
+            menuButton.classList.add('active');
+            mobileMenu.classList.add('active');
+            document.body.classList.add('menu-open');
+            console.log('📂 Menú abierto');
+        }
+    });
+    
+    console.log('✅ Menú hamburguesa configurado');
+}
+
+// ===== FUNCIÓN: CREAR ENLACES DEL MENÚ =====
+function createMenuLinks() {
+    const mobileMenu = document.getElementById('nav-menu');
+    if (!mobileMenu) return;
+    
     const menuItems = [
-        { text: 'Inicio', href: '#inicio', target: 'hero' },
-        { text: 'Servicios', href: '#servicios', target: 'iot-section' },
-        { text: 'Misión', href: '#mision', target: 'mission-vision' },
-        { text: 'Suscripción', href: '#suscripcion', target: 'contact-section' }
+        { text: 'Inicio', target: '.hero' },
+        { text: 'Servicios', target: '.iot-section' },
+        { text: 'Misión', target: '.mission-vision' },
+        { text: 'Suscripción', target: '.contact-section' }
     ];
     
-    // Limpiar contenido actual
-    menuContainer.innerHTML = '';
+    // Limpiar menú
+    mobileMenu.innerHTML = '';
     
-    // Crear cada enlace
-    menuItems.forEach((item, index) => {
+    // Crear enlaces
+    menuItems.forEach(item => {
         const li = document.createElement('li');
         li.className = 'nav-item';
         
         const a = document.createElement('a');
-        a.href = item.href;
+        a.href = '#';
         a.className = 'nav-link';
         a.textContent = item.text;
         
-        // Click handler con navegación funcional
-        a.addEventListener('click', (e) => {
-            e.preventDefault(); // Prevenir comportamiento por defecto
-            console.log(`🔗 Navegando a: ${item.text}`);
+        a.addEventListener('click', function(e) {
+            e.preventDefault();
             
-            // Cerrar menú primero
-            closeMenu();
+            // Cerrar menú
+            document.getElementById('mobile-menu').classList.remove('active');
+            mobileMenu.classList.remove('active');
+            document.body.classList.remove('menu-open');
             
-            // Navegar a la sección después de cerrar el menú
+            // Navegar a sección
             setTimeout(() => {
-                navigateToSection(item.target, item.href);
+                const target = document.querySelector(item.target);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             }, 300);
         });
         
         li.appendChild(a);
-        menuContainer.appendChild(li);
-        
-        console.log(`📝 Enlace creado: ${item.text} → ${item.target}`);
+        mobileMenu.appendChild(li);
     });
     
-    console.log(`✅ Menú completo creado con ${menuItems.length} enlaces`);
-    console.log('📋 Enlaces: Inicio, Servicios, Misión, Suscripción');
+    console.log('📋 Enlaces del menú creados');
 }
 
-// ===== FUNCIÓN: ABRIR MENÚ =====
-function openMenu() {
-    if (isMenuOpen) return;
-    
-    isMenuOpen = true;
-    
-    // Activar clases
-    if (menuButton) menuButton.classList.add('active');
-    if (mobileMenu) mobileMenu.classList.add('active');
-    
-    // Prevenir scroll del body
-    document.body.classList.add('menu-open');
-    
-    console.log('📂 Menú abierto');
+// ===== FUNCIÓN: VERIFICAR BOTÓN PERIÓDICAMENTE =====
+function monitorFloatingButton() {
+    setInterval(() => {
+        const button = document.getElementById('floating-back-btn');
+        if (!button || !document.body.contains(button)) {
+            console.log('⚠️ Botón flotante perdido, recreando...');
+            createForcedFloatingButton();
+        }
+    }, 2000);
 }
 
-// ===== FUNCIÓN: NAVEGACIÓN A SECCIONES =====
-function navigateToSection(targetClass, fallbackId) {
-    let targetElement = null;
+// ===== FUNCIÓN: INICIALIZACIÓN COMPLETA =====
+function initCompleteFix() {
+    console.log('🚀 Iniciando corrección completa...');
     
-    // 1. Buscar por clase (para secciones existentes)
-    if (targetClass === 'hero') {
-        targetElement = document.querySelector('.hero');
-    } else if (targetClass === 'iot-section') {
-        targetElement = document.querySelector('.iot-section');
-    } else if (targetClass === 'mission-vision') {
-        targetElement = document.querySelector('.mission-vision');
-    } else if (targetClass === 'contact-section') {
-        targetElement = document.querySelector('.contact-section');
-    }
-    
-    // 2. Si no encuentra por clase, buscar por ID
-    if (!targetElement && fallbackId) {
-        const cleanId = fallbackId.replace('#', '');
-        targetElement = document.getElementById(cleanId);
-    }
-    
-    // 3. Ejecutar scroll suave
-    if (targetElement) {
-        console.log(`✅ Navegando a sección: ${targetClass}`);
-        targetElement.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start',
-            inline: 'nearest'
-        });
+    try {
+        // 1. Aplicar CSS
+        applyCompleteFix();
         
-        // Agregar efecto visual temporal
-        targetElement.style.transition = 'all 0.3s ease';
-        targetElement.style.transform = 'scale(1.01)';
-        setTimeout(() => {
-            targetElement.style.transform = 'scale(1)';
-        }, 300);
+        // 2. Crear botón flotante
+        createForcedFloatingButton();
         
-    } else {
-        console.warn(`⚠️ No se encontró la sección: ${targetClass} o ${fallbackId}`);
+        // 3. Arreglar menú hamburguesa
+        fixHamburgerMenu();
         
-        // Fallback: scroll al top si es inicio
-        if (targetClass === 'hero') {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    }
-}
-function closeMenu() {
-    if (!isMenuOpen) return;
-    
-    isMenuOpen = false;
-    
-    // Remover clases
-    if (menuButton) menuButton.classList.remove('active');
-    if (mobileMenu) mobileMenu.classList.remove('active');
-    
-    // Restaurar scroll del body
-    document.body.classList.remove('menu-open');
-    
-    console.log('📁 Menú cerrado');
-}
-
-// ===== FUNCIÓN: TOGGLE MENÚ =====
-function toggleMenu(e) {
-    if (e) {
-        e.preventDefault();
-        e.stopPropagation();
-    }
-    
-    console.log('🔄 Toggle menú');
-    
-    if (isMenuOpen) {
-        closeMenu();
-    } else {
-        openMenu();
+        // 4. Crear enlaces del menú
+        createMenuLinks();
+        
+        // 5. Monitorear botón
+        monitorFloatingButton();
+        
+        console.log('✅ Corrección completa aplicada');
+        
+    } catch (error) {
+        console.error('❌ Error en la corrección:', error);
     }
 }
 
-// ===== FUNCIÓN: CREAR BOTÓN FLOTANTE =====
-function createFloatingButton() {
-    // Esta función ahora está en un archivo separado
-    // Solo verificamos que el otro script esté cargado
-    console.log('🔴 Botón flotante manejado por script separado');
-}
-function setupEvents() {
-    // Obtener elementos
-    menuButton = document.getElementById('mobile-menu');
-    mobileMenu = document.getElementById('nav-menu');
+// ===== FUNCIÓN: REINICIALIZAR TODO =====
+function reinitAll() {
+    console.log('🔄 Reinicializando todo...');
     
-    if (!menuButton) {
-        console.error('❌ No se encontró mobile-menu');
-        return;
-    }
+    // Limpiar elementos existentes
+    const buttons = document.querySelectorAll('#floating-back-btn, .floating-back-button');
+    buttons.forEach(btn => btn.remove());
     
-    if (!mobileMenu) {
-        console.error('❌ No se encontró nav-menu');
-        return;
-    }
+    const styles = document.querySelectorAll('#complete-fix-styles, #floating-button-styles');
+    styles.forEach(style => style.remove());
     
-    // Crear menú completo
-    createFullMenu();
-    
-    // Event listeners
-    menuButton.addEventListener('click', toggleMenu);
-    menuButton.addEventListener('touchstart', toggleMenu);
-    
-    // Click fuera del menú
-    document.addEventListener('click', (e) => {
-        if (isMenuOpen && 
-            !menuButton.contains(e.target) && 
-            !mobileMenu.contains(e.target)) {
-            closeMenu();
-        }
-    });
-    
-    // Tecla Escape
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && isMenuOpen) {
-            closeMenu();
-        }
-    });
-    
-    // Resize de ventana
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 768 && isMenuOpen) {
-            closeMenu();
-        }
-    });
-    
-    // Estado inicial
-    closeMenu();
-    
-    console.log('⚡ Eventos configurados');
-}
-
-// ===== FUNCIÓN: VERIFICAR Y ARREGLAR HTML =====
-function verifyHTML() {
-    // Asegurar que existe la sección misión con ID
-    const missionSection = document.querySelector('.mission-vision');
-    if (missionSection && !missionSection.id) {
-        missionSection.id = 'mision';
-        console.log('✅ ID "mision" agregado a .mission-vision');
-    }
-    
-    // Asegurar que existe sección de servicios con ID
-    const servicesSection = document.querySelector('.iot-section');
-    if (servicesSection && !servicesSection.id) {
-        servicesSection.id = 'servicios';
-        console.log('✅ ID "servicios" agregado a .iot-section');
-    }
-    
-    // Asegurar que existe sección hero con ID
-    const heroSection = document.querySelector('.hero');
-    if (heroSection && !heroSection.id) {
-        heroSection.id = 'inicio';
-        console.log('✅ ID "inicio" agregado a .hero');
-    }
-    
-    // Asegurar que existe sección contacto con ID
-    const contactSection = document.querySelector('.contact-section');
-    if (contactSection && !contactSection.id) {
-        contactSection.id = 'contacto';
-        console.log('✅ ID "contacto" agregado a .contact-section');
-    }
-    
-    // Crear referencia para suscripción (mismo que contacto)
-    if (contactSection && !document.getElementById('suscripcion')) {
-        contactSection.setAttribute('data-suscripcion', 'true');
-        console.log('✅ Referencia "suscripcion" agregada a contacto');
-    }
-    
-    console.log('🔍 HTML verificado y IDs agregados');
-}
-
-// ===== FUNCIÓN: INICIALIZACIÓN =====
-function initMobileMenu() {
-    console.log('🚀 Iniciando menú móvil corregido...');
-    
-    // 1. Aplicar CSS inmediatamente
-    applyMobileFix();
-    
-    // 2. Verificar HTML
-    verifyHTML();
-    
-    // 3. Configurar eventos
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', setupEvents);
-    } else {
-        setupEvents();
-    }
-    
-    console.log('✅ Menú móvil inicializado');
+    // Reinicializar
+    setTimeout(initCompleteFix, 100);
 }
 
 // ===== INICIALIZACIÓN AUTOMÁTICA =====
-initMobileMenu();
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCompleteFix);
+} else {
+    initCompleteFix();
+}
+
+// Backup para asegurar que funcione
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        const button = document.getElementById('floating-back-btn');
+        if (!button) {
+            console.log('🔄 Backup: creando botón flotante...');
+            createForcedFloatingButton();
+        }
+    }, 1000);
+});
 
 // ===== EXPORTAR FUNCIONES =====
-window.mobileMenu = {
-    open: openMenu,
-    close: closeMenu,
-    toggle: toggleMenu,
-    isOpen: () => isMenuOpen,
-    recreate: createFullMenu
+window.completeFix = {
+    reinit: reinitAll,
+    createButton: createForcedFloatingButton,
+    fixMenu: fixHamburgerMenu
 };
 
-console.log('📱 Corrección móvil lista');
-console.log('📋 Enlaces: Inicio, Servicios, Misión, Suscripción (SIN Contacto)');
-console.log('🔧 Para debug: mobileMenu.toggle()');
-console.log('📍 Navegación funcional activada');
-console.log('🔴 Botón flotante de regreso activado');
-
-// ===== DEBUG: VERIFICAR SECCIONES =====
-setTimeout(() => {
-    console.log('🔍 Verificando secciones disponibles:');
-    const sections = [
-        { name: 'Hero (.hero)', element: document.querySelector('.hero') },
-        { name: 'Servicios (.iot-section)', element: document.querySelector('.iot-section') },
-        { name: 'Misión (.mission-vision)', element: document.querySelector('.mission-vision') },
-        { name: 'Contacto (.contact-section)', element: document.querySelector('.contact-section') }
-    ];
-    
-    sections.forEach(section => {
-        if (section.element) {
-            console.log(`✅ ${section.name} - ENCONTRADA`);
-        } else {
-            console.log(`❌ ${section.name} - NO ENCONTRADA`);
-        }
-    });
-}, 1000);
+console.log('🔧 Corrección completa cargada');
+console.log('🔴 Botón flotante: Verde circular con flecha triangular');
+console.log('🍔 Menú hamburguesa: X animada corregida');
+console.log('📱 Para debug: completeFix.reinit()');
