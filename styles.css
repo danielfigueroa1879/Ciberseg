@@ -9,11 +9,13 @@
 }
 .iot-image {
     height: 70px;
-}.iot-details p {
+}
+.iot-details p {
     text-align: justify;
     margin-bottom: 15px;
     line-height: 1.5;
-}.iot-details ul {
+}
+.iot-details ul {
     list-style: none;
     text-align: left;
     margin: 0;
@@ -34,10 +36,7 @@ body {
     overflow-x: hidden;
     margin: 0;
     padding: 0;
-    /* GPU acceleration */
-    transform: translateZ(0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+    /* Se eliminan las propiedades transform y backface-visibility de aquí */
 }
 
 /* Asegurar que todos los textos usen Poppins */
@@ -1636,7 +1635,6 @@ html {
 
     .mv-card {
         padding: 25px 15px;
-        margin: 0 5px;
     }
 
     .mv-card h3 {
