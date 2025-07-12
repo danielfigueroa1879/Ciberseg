@@ -227,45 +227,51 @@ const completeSolutionCSS = `
         font-size: 18px !important;
     }
     
-    /* === BOTÓN FLOTANTE === */
+    /* === BOTÓN FLOTANTE QUE SIGUE EL SCROLL === */
     
     #real-floating-back-btn {
+        /* POSITION FIXED CON TOP DINÁMICO */
         position: fixed !important;
-        top: 50vh !important;
+        top: 50vh !important; /* Se actualiza dinámicamente */
         right: 15px !important;
-        transform: translateY(-50%) !important;
         
+        /* Tamaño */
         width: 60px !important;
         height: 60px !important;
         border-radius: 50% !important;
         border: 2px solid rgba(255, 255, 255, 0.3) !important;
         outline: none !important;
         
+        /* Fondo verde */
         background: linear-gradient(135deg, #E0FD2C 0%, #C7E525 100%) !important;
         
+        /* Sombra flotante */
         box-shadow: 
             0 10px 30px rgba(0, 0, 0, 0.6),
             0 5px 20px rgba(224, 253, 44, 0.8),
             0 3px 12px rgba(0, 0, 0, 0.4) !important;
         
+        /* Centrado */
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
         
+        /* Z-index alto */
         z-index: 999999 !important;
         
+        /* Interactividad */
         cursor: pointer !important;
         touch-action: manipulation !important;
         -webkit-tap-highlight-color: transparent !important;
         user-select: none !important;
         
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        /* Transición RÁPIDA para seguir el scroll */
+        transition: top 0.1s ease-out, opacity 0.3s ease, visibility 0.3s ease !important;
         
         /* Estado inicial oculto */
         opacity: 0 !important;
         visibility: hidden !important;
         pointer-events: none !important;
-        transform: translateY(-50%) translateX(30px) scale(0.8) !important;
     }
     
     /* Estado visible del botón flotante */
@@ -273,13 +279,12 @@ const completeSolutionCSS = `
         opacity: 1 !important;
         visibility: visible !important;
         pointer-events: auto !important;
-        transform: translateY(-50%) translateX(0) scale(1) !important;
     }
     
     /* Hover del botón flotante */
     #real-floating-back-btn:hover {
         background: linear-gradient(135deg, #C7E525 0%, #B8D61F 100%) !important;
-        transform: translateY(-50%) translateX(-8px) scale(1.15) !important;
+        transform: translateX(-8px) scale(1.15) !important;
         box-shadow: 
             0 15px 40px rgba(0, 0, 0, 0.7),
             0 8px 25px rgba(224, 253, 44, 0.9),
@@ -288,11 +293,11 @@ const completeSolutionCSS = `
     
     /* Active del botón flotante */
     #real-floating-back-btn:active {
-        transform: translateY(-50%) translateX(-5px) scale(1.1) !important;
+        transform: translateX(-5px) scale(1.1) !important;
         transition: all 0.1s ease !important;
     }
     
-    /* Flecha del botón flotante */
+    /* Flecha del botón flotante - SOLO DOS LÍNEAS */
     #real-floating-back-btn::before {
         content: '' !important;
         position: absolute !important;
@@ -300,6 +305,7 @@ const completeSolutionCSS = `
         left: 50% !important;
         transform: translate(-50%, -50%) rotate(-45deg) !important;
         
+        /* DOS LÍNEAS FORMANDO PUNTA */
         width: 14px !important;
         height: 14px !important;
         border-top: 3px solid #000 !important;
@@ -328,7 +334,7 @@ const completeSolutionCSS = `
     }
     
     .nav-logo {
-        padding-left: 80px !important; /* Espacio para contador de visitas */
+        padding-left: 80px !important;
     }
     
     .nav-logo h2 {
@@ -353,7 +359,6 @@ const completeSolutionCSS = `
         border-right: 2.5px solid #000 !important;
     }
     
-    /* Contador de visitas en móviles pequeños */
     .visitor-counter-container {
         font-size: 12px !important;
         padding: 6px 10px !important;
@@ -366,7 +371,7 @@ const completeSolutionCSS = `
     }
 }
 
-/* DESKTOP - OCULTAR BOTÓN FLOTANTE */
+/* DESKTOP - MENÚ NORMAL */
 @media screen and (min-width: 769px) {
     #real-floating-back-btn {
         display: none !important;
@@ -418,6 +423,7 @@ let menuButton, mobileMenu;
 function applyCompleteSolutionCSS() {
     // Remover estilos previos
     const existingStyles = [
+        'anti-conflict-floating-css',
         'real-floating-button-css',
         'floating-button-styles',
         'mobile-menu-fix',
@@ -546,7 +552,7 @@ function createFloatingButton() {
     
     // Remover botones existentes
     const existingButtons = document.querySelectorAll(
-        '#real-floating-back-btn, .scroll-to-top, #scrollToTop'
+        '#real-floating-back-btn, .scroll-to-top, #scrollToTop, #ultra-floating-btn'
     );
     existingButtons.forEach(btn => btn.remove());
     
@@ -579,7 +585,7 @@ function handleFloatingClick(e) {
     });
 }
 
-// ===== FUNCIÓN: MANEJAR SCROLL - CORREGIDA =====
+// ===== FUNCIÓN: MANEJAR SCROLL CON POSICIÓN DINÁMICA =====
 function handleScroll() {
     if (window.innerWidth > 768) return;
     
@@ -587,20 +593,25 @@ function handleScroll() {
     if (!button) return;
     
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const windowHeight = window.innerHeight;
     const threshold = 200;
     
-    // LÓGICA CORREGIDA: Mostrar cuando BAJAS (scrollTop > threshold)
     if (scrollTop > threshold) {
-        // HAY SCROLL HACIA ABAJO - MOSTRAR BOTÓN
+        // MOSTRAR BOTÓN
         if (!button.classList.contains('floating-visible')) {
             button.classList.add('floating-visible');
-            console.log('👁️ Botón flotante mostrado (bajando por la página)');
+            console.log('👁️ Botón flotante mostrado');
         }
+        
+        // ACTUALIZAR POSICIÓN PARA QUE SIGA EL SCROLL
+        const centerPosition = (windowHeight / 2) + scrollTop;
+        button.style.top = centerPosition + 'px';
+        
     } else {
-        // CERCA DEL TOP - OCULTAR BOTÓN
+        // OCULTAR BOTÓN
         if (button.classList.contains('floating-visible')) {
             button.classList.remove('floating-visible');
-            console.log('🙈 Botón flotante ocultado (cerca del inicio)');
+            console.log('🙈 Botón flotante ocultado');
         }
     }
 }
@@ -686,7 +697,8 @@ window.completeSolution = {
 
 console.log('✅ Solución completa cargada');
 console.log('🍔 Menú hamburguesa: 4 enlaces funcionando');
-console.log('🔴 Botón flotante: Aparece al BAJAR por la página');
+console.log('🔴 Botón flotante: SE MUEVE CONTIGO mientras haces scroll');
+console.log('📍 Posición dinámica: scrollTop + centro de pantalla');
 console.log('👁️ Contador de visitas: Visible en esquina superior izquierda');
 console.log('💻 Desktop: Navegación normal');
 console.log('🔧 Debug: completeSolution.reinit()');
