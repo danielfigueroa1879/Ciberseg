@@ -266,8 +266,14 @@ function applyCompleteFix() {
     console.log('🎨 CSS completo aplicado');
 }
 
-// ===== FUNCIÓN: CREAR BOTÓN FLOTANTE FORZADO =====
+// ===== FUNCIÓN: CREAR BOTÓN FLOTANTE SOLO PARA MÓVILES =====
 function createForcedFloatingButton() {
+    // Verificar si estamos en móvil
+    if (window.innerWidth > 768) {
+        console.log('💻 Desktop detectado - botón flotante no creado');
+        return null;
+    }
+    
     // Remover botones existentes
     const existingButtons = document.querySelectorAll(
         '#floating-back-btn, .floating-back-button, #scrollToTop, .scroll-to-top'
@@ -289,7 +295,7 @@ function createForcedFloatingButton() {
     // Agregar al body
     document.body.appendChild(button);
     
-    // Forzar estilos inline como backup
+    // Forzar estilos inline como backup SOLO PARA MÓVILES
     button.style.cssText = `
         position: fixed !important;
         bottom: 25px !important;
@@ -310,7 +316,7 @@ function createForcedFloatingButton() {
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     `;
     
-    console.log('✅ Botón flotante creado y forzado');
+    console.log('✅ Botón flotante creado SOLO para móvil');
     return button;
 }
 
@@ -434,13 +440,23 @@ function createMenuLinks() {
     console.log('📋 Enlaces del menú creados');
 }
 
-// ===== FUNCIÓN: VERIFICAR BOTÓN PERIÓDICAMENTE =====
+// ===== FUNCIÓN: VERIFICAR BOTÓN PERIÓDICAMENTE - SOLO MÓVILES =====
 function monitorFloatingButton() {
     setInterval(() => {
-        const button = document.getElementById('floating-back-btn');
-        if (!button || !document.body.contains(button)) {
-            console.log('⚠️ Botón flotante perdido, recreando...');
-            createForcedFloatingButton();
+        // Solo monitorear en móviles
+        if (window.innerWidth <= 768) {
+            const button = document.getElementById('floating-back-btn');
+            if (!button || !document.body.contains(button)) {
+                console.log('⚠️ Botón flotante perdido en móvil, recreando...');
+                createForcedFloatingButton();
+            }
+        } else {
+            // En desktop, asegurar que no exista
+            const button = document.getElementById('floating-back-btn');
+            if (button) {
+                button.remove();
+                console.log('💻 Botón flotante removido en desktop');
+            }
         }
     }, 2000);
 }
@@ -494,15 +510,36 @@ if (document.readyState === 'loading') {
     initCompleteFix();
 }
 
-// Backup para asegurar que funcione
+// Backup para asegurar que funcione SOLO EN MÓVILES
 window.addEventListener('load', () => {
     setTimeout(() => {
-        const button = document.getElementById('floating-back-btn');
-        if (!button) {
-            console.log('🔄 Backup: creando botón flotante...');
-            createForcedFloatingButton();
+        if (window.innerWidth <= 768) { // Solo en móviles
+            const button = document.getElementById('floating-back-btn');
+            if (!button) {
+                console.log('🔄 Backup: creando botón flotante para móvil...');
+                createForcedFloatingButton();
+            }
         }
     }, 1000);
+});
+
+// Event listener para cambios de tamaño de ventana
+window.addEventListener('resize', () => {
+    const button = document.getElementById('floating-back-btn');
+    
+    if (window.innerWidth > 768) {
+        // Desktop: remover botón si existe
+        if (button) {
+            button.remove();
+            console.log('💻 Botón flotante removido al cambiar a desktop');
+        }
+    } else {
+        // Móvil: crear botón si no existe
+        if (!button) {
+            console.log('📱 Creando botón flotante al cambiar a móvil');
+            createForcedFloatingButton();
+        }
+    }
 });
 
 // ===== EXPORTAR FUNCIONES =====
@@ -513,6 +550,7 @@ window.completeFix = {
 };
 
 console.log('🔧 Corrección completa cargada');
-console.log('🔴 Botón flotante: Verde circular con flecha triangular');
+console.log('🔴 Botón flotante: SOLO MÓVILES (≤768px) - Verde circular con flecha triangular');
+console.log('💻 Desktop: Botón flotante OCULTO');
 console.log('🍔 Menú hamburguesa: X animada corregida');
 console.log('📱 Para debug: completeFix.reinit()');
