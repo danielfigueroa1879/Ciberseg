@@ -156,41 +156,95 @@ const mobileCorrectedCSS = `
         max-height: 500px !important; /* Altura suficiente para 5 enlaces */
     }
     
-    /* ITEMS DEL MENÚ */
+    /* ITEMS DEL MENÚ - SIN ESPACIADO EXTRA */
     .nav-menu li {
         width: 100% !important;
-        max-width: 300px !important;
-        margin: 6px 0 !important;
+        max-width: 350px !important;
+        margin: 0 !important; /* SIN MARGEN VERTICAL */
         list-style: none !important;
         padding: 0 !important;
         display: block !important;
     }
     
-    /* ENLACES DEL MENÚ */
+    /* ENLACES DEL MENÚ - SIN BOTONES, SOLO TEXTO */
     .nav-link {
         display: block !important;
         width: 100% !important;
-        padding: 15px 25px !important;
-        font-size: 18px !important;
-        font-weight: 500 !important;
+        padding: 20px 25px !important;
+        font-size: 22px !important; /* MÁS GRANDE */
+        font-weight: 600 !important; /* MÁS GRUESO */
         color: #fff !important;
         text-decoration: none !important;
         text-align: center !important;
-        border-radius: 12px !important;
+        border-radius: 0 !important; /* SIN BORDES REDONDEADOS */
         transition: all 0.25s ease !important;
-        background: rgba(255, 255, 255, 0.08) !important;
-        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        background: transparent !important; /* SIN FONDO */
+        border: none !important; /* SIN BORDES */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important; /* SOLO LÍNEA ABAJO */
         margin: 0 !important;
         box-sizing: border-box !important;
+        letter-spacing: 1px !important; /* ESPACIADO DE LETRAS */
+        text-transform: uppercase !important; /* MAYÚSCULAS */
     }
     
     .nav-link:hover,
     .nav-link:active {
-        background: rgba(224, 253, 44, 0.2) !important;
+        background: rgba(224, 253, 44, 0.1) !important; /* HOVER SUTIL */
         color: #E0FD2C !important;
-        transform: translateY(-2px) !important;
-        border-color: rgba(224, 253, 44, 0.4) !important;
-        box-shadow: 0 4px 15px rgba(224, 253, 44, 0.2) !important;
+        transform: translateX(5px) !important; /* MOVIMIENTO SUTIL */
+        border-bottom-color: #E0FD2C !important; /* LÍNEA VERDE */
+        text-shadow: 0 0 10px rgba(224, 253, 44, 0.5) !important; /* BRILLO */
+    }
+    
+    /* ÚLTIMO ENLACE SIN LÍNEA */
+    .nav-menu li:last-child .nav-link {
+        border-bottom: none !important;
+    }
+    
+    /* BOTÓN FLOTANTE DE REGRESO */
+    .scroll-to-top {
+        position: fixed !important;
+        bottom: 30px !important;
+        right: 20px !important;
+        width: 50px !important;
+        height: 50px !important;
+        background: rgba(224, 253, 44, 0.9) !important;
+        border: none !important;
+        border-radius: 50% !important;
+        color: #000 !important;
+        cursor: pointer !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 20px !important;
+        z-index: 1600 !important; /* MUY ALTO */
+        transition: all 0.3s ease !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+        backdrop-filter: blur(10px) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(0) !important;
+    }
+    
+    .scroll-to-top:hover {
+        background: rgba(224, 253, 44, 1) !important;
+        transform: translateY(-2px) scale(1.1) !important;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4) !important;
+    }
+    
+    .scroll-to-top.show {
+        display: flex !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    /* FORZAR VISIBILIDAD EN MÓVILES */
+    @supports (-webkit-touch-callout: none) {
+        .scroll-to-top {
+            display: flex !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
     }
     
     /* OCULTAR ELEMENTOS NO NECESARIOS */
@@ -296,12 +350,11 @@ function createFullMenu() {
         return;
     }
     
-    // LOS 5 ENLACES REQUERIDOS CON NAVEGACIÓN FUNCIONAL
+    // LOS 4 ENLACES REQUERIDOS (SIN CONTACTO, CON SUSCRIPCIÓN)
     const menuItems = [
         { text: 'Inicio', href: '#inicio', target: 'hero' },
         { text: 'Servicios', href: '#servicios', target: 'iot-section' },
         { text: 'Misión', href: '#mision', target: 'mission-vision' },
-        { text: 'Contacto', href: '#contacto', target: 'contact-section' },
         { text: 'Suscripción', href: '#suscripcion', target: 'contact-section' }
     ];
     
@@ -339,7 +392,7 @@ function createFullMenu() {
     });
     
     console.log(`✅ Menú completo creado con ${menuItems.length} enlaces`);
-    console.log('📋 Enlaces: Inicio, Servicios, Misión, Contacto, Suscripción');
+    console.log('📋 Enlaces: Inicio, Servicios, Misión, Suscripción');
 }
 
 // ===== FUNCIÓN: ABRIR MENÚ =====
@@ -435,7 +488,60 @@ function toggleMenu(e) {
     }
 }
 
-// ===== FUNCIÓN: CONFIGURAR EVENTOS =====
+// ===== FUNCIÓN: CREAR BOTÓN FLOTANTE =====
+function createFloatingButton() {
+    // Verificar si ya existe
+    let floatingBtn = document.getElementById('scrollToTop');
+    
+    if (!floatingBtn) {
+        // Crear botón flotante
+        floatingBtn = document.createElement('button');
+        floatingBtn.id = 'scrollToTop';
+        floatingBtn.className = 'scroll-to-top show';
+        floatingBtn.innerHTML = `
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M12 4L4 12H8V20H16V12H20L12 4Z" fill="currentColor"/>
+            </svg>
+        `;
+        floatingBtn.setAttribute('aria-label', 'Volver arriba');
+        
+        // Event listener
+        floatingBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            console.log('📍 Scroll to top activado');
+        });
+        
+        // Agregar al body
+        document.body.appendChild(floatingBtn);
+        console.log('✅ Botón flotante creado');
+    }
+    
+    // Asegurar visibilidad
+    floatingBtn.style.display = 'flex';
+    floatingBtn.style.opacity = '1';
+    floatingBtn.style.visibility = 'visible';
+    
+    // Mostrar/ocultar según scroll
+    let isScrolling = false;
+    window.addEventListener('scroll', () => {
+        if (!isScrolling) {
+            window.requestAnimationFrame(() => {
+                if (window.pageYOffset > 300) {
+                    floatingBtn.classList.add('show');
+                    floatingBtn.style.display = 'flex';
+                } else {
+                    floatingBtn.classList.remove('show');
+                }
+                isScrolling = false;
+            });
+            isScrolling = true;
+        }
+    }, { passive: true });
+}
 function setupEvents() {
     // Obtener elementos
     menuButton = document.getElementById('mobile-menu');
@@ -536,7 +642,10 @@ function initMobileMenu() {
     // 2. Verificar HTML
     verifyHTML();
     
-    // 3. Configurar eventos
+    // 3. Crear botón flotante
+    createFloatingButton();
+    
+    // 4. Configurar eventos
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', setupEvents);
     } else {
@@ -559,9 +668,10 @@ window.mobileMenu = {
 };
 
 console.log('📱 Corrección móvil lista');
-console.log('📋 Enlaces: Inicio, Servicios, Misión, Contacto, Suscripción');
+console.log('📋 Enlaces: Inicio, Servicios, Misión, Suscripción (SIN Contacto)');
 console.log('🔧 Para debug: mobileMenu.toggle()');
 console.log('📍 Navegación funcional activada');
+console.log('🔴 Botón flotante de regreso activado');
 
 // ===== DEBUG: VERIFICAR SECCIONES =====
 setTimeout(() => {
