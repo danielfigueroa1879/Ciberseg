@@ -3,14 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recyberseg</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <title>Recyberseg - Líderes en Ciberseguridad con IA Avanzada</title>
+    <meta name="description" content="Servicios profesionales de ciberseguridad, auditorías de seguridad, monitoreo de redes y consultoría especializada. Protegemos tu infraestructura digital.">
+    <meta name="keywords" content="ciberseguridad, seguridad informatica, auditoria seguridad, monitoreo redes, IoT security">
+    
+    <!-- Preconnect para recursos externos críticos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+    
+    <!-- DNS Prefetch para Firebase -->
+    <link rel="dns-prefetch" href="//recyberseg-default-rtdb.firebaseio.com">
+    <link rel="dns-prefetch" href="//wa.me">
+    
+    <!-- Preload recursos críticos -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;700&display=swap" as="style">
+    
+    <!-- CSS con optimización de carga -->
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;700&display=swap" rel="stylesheet"></noscript>
+    
+    <!-- Font Awesome con loading optimizado -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
     <style>
-        /* Estilos para el contador de visitas en el header */
+        /* Critical CSS inlined para renderizado inmediato */
+        
+        /* Optimizaciones de rendimiento globales */
+        * {
+            box-sizing: border-box;
+        }
+        
+        html {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            background-color: #0f0f0f;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            /* GPU acceleration */
+            transform: translateZ(0);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+        
+        /* Optimizaciones para el contador de visitas */
         .visitor-counter-container {
             display: flex;
             align-items: center;
@@ -22,55 +71,125 @@
             padding: 8px 15px;
             border-radius: 25px;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            /* GPU acceleration */
+            will-change: transform, background-color;
+            transform: translateZ(0);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
         }
 
         .visitor-counter-container:hover {
             background-color: rgba(224, 253, 44, 0.2);
-            transform: scale(1.05);
+            transform: scale(1.05) translateZ(0);
         }
 
         .visitor-counter-container .fa-eye {
             font-size: 18px;
         }
 
-        /* --- MODIFICACIÓN PARA MÓVILES --- */
+        /* Optimizaciones para móviles */
         @media screen and (max-width: 992px) {
-            /* Estilos para el contador */
             .visitor-counter-container {
                 position: absolute; 
-                top: 24px; /* Subido un poco más (antes 28px) */
+                top: 24px;
                 left: 20px;
                 z-index: 1001;
                 font-size: 12px;
                 padding: 6px 10px;
                 gap: 5px;
-                
-                /* Cambio a fondo transparente */
                 background-color: transparent;
-                color: #ffffff; /* Letras blancas para contraste */
-                box-shadow: none; /* Sin sombra de caja */
-                text-shadow: 1px 1px 3px rgba(0,0,0,0.7); /* Sombra de texto para legibilidad */
-                border: none; /* Sin borde */
+                color: #ffffff;
+                box-shadow: none;
+                text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+                border: none;
+                /* Optimización táctil */
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                user-select: none;
             }
 
             .visitor-counter-container .fa-eye {
                 font-size: 14px;
             }
 
-            /* Mover el título a la derecha */
             .nav-logo {
-                /* Al añadir padding a la izquierda, el texto centrado se desplaza a la derecha */
                 padding-left: 80px; 
-                transition: all 0.3s ease;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             }
         }
 
         @media screen and (max-width: 480px) {
-            /* Ajuste para que el título no se desplace tanto en pantallas muy pequeñas */
             .nav-logo {
                 padding-left: 50px; 
             }
+        }
+        
+        /* Header optimizado */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(40, 40, 40, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            /* GPU acceleration */
+            will-change: transform, opacity;
+            transform: translateZ(0);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+        
+        /* Hero section optimizada */
+        .hero {
+            padding: 140px 20px 80px;
+            text-align: center;
+            background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(42, 42, 42, 0.7)), url('fotos/fondo.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            /* GPU acceleration */
+            will-change: transform;
+            transform: translateZ(0);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+        
+        /* Optimización para dispositivos móviles */
+        @media screen and (max-width: 768px) {
+            .hero {
+                background-attachment: scroll; /* Mejor rendimiento en móviles */
+                min-height: 70vh;
+                padding: 100px 15px 60px;
+            }
+            
+            body {
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+        
+        /* Preload de imágenes críticas */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('fotos/fondo.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            z-index: -1;
+            /* Preload hidden */
         }
     </style>
 </head>
@@ -146,7 +265,7 @@
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">
-                        <img src="fotos/auditorias1.png" alt="Auditorías de Seguridad">
+                        <img src="fotos/auditorias1.png" alt="Auditorías de Seguridad" loading="lazy" width="240" height="240">
                     </div>
                     <h3>1. Auditorías de Seguridad</h3>
                     <p>Evaluación completa de tu infraestructura digital</p>
@@ -155,7 +274,7 @@
                 
                 <div class="service-card">
                     <div class="service-icon">
-                        <img src="fotos/monitoreo2.png" alt="Monitoreo de Redes">
+                        <img src="fotos/monitoreo2.png" alt="Monitoreo de Redes" loading="lazy" width="240" height="240">
                     </div>
                     <h3>2. Monitoreo de Redes</h3>
                     <p>Supervisión 24/7 de tu red corporativa</p>
@@ -164,7 +283,7 @@
                 
                 <div class="service-card">
                     <div class="service-icon">
-                        <img src="fotos/consultoria3.jpg" alt="Consultoría en Ciberseguridad" class="consultoria-img">
+                        <img src="fotos/consultoria3.jpg" alt="Consultoría en Ciberseguridad" class="consultoria-img" loading="lazy" width="280" height="280">
                     </div>
                     <h3>3. Consultoría en Ciberseguridad</h3>
                     <p>Asesoramiento experto personalizado</p>
@@ -173,7 +292,7 @@
                 
                 <div class="service-card">
                     <div class="service-icon">
-                        <img src="fotos/implementacion4.png" alt="Implementación de Sistemas de Seguridad">
+                        <img src="fotos/implementacion4.png" alt="Implementación de Sistemas de Seguridad" loading="lazy" width="240" height="240">
                     </div>
                     <h3>4. Implementación de Sistemas de Seguridad</h3>
                     <p>Configuración de sistemas de seguridad</p>
@@ -369,117 +488,205 @@
         </svg>
     </button>
 
-    <script src="menu-script.js"></script>
-    
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-
-    <!-- Your custom script for the counter -->
-    <script src="firebase-counter.js"></script>
-
-    <!-- Script para manejar el formulario de Netlify -->
+    <!-- Scripts optimizados con carga diferida -->
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('contact-form');
-        const submitBtn = document.getElementById('submit-btn');
-        const formMessages = document.getElementById('form-messages');
-        const successMessage = document.getElementById('success-message');
-        const errorMessage = document.getElementById('error-message');
-        
-        // Detectar si venimos de una redirección de éxito
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('success') === 'true') {
-            showSuccessMessage();
-            // Limpiar la URL
-            window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
+        // Cargar menu-script.js de forma diferida
+        function loadScript(src, callback) {
+            const script = document.createElement('script');
+            script.src = src;
+            script.defer = true;
+            if (callback) script.onload = callback;
+            document.head.appendChild(script);
         }
         
-        // Manejar envío del formulario
-        form.addEventListener('submit', function(e) {
-            // Cambiar texto del botón
-            submitBtn.textContent = 'Enviando...';
-            submitBtn.disabled = true;
-            
-            // Ocultar mensajes anteriores
-            hideMessages();
-            
-            // Netlify manejará el envío automáticamente
-            // Si estamos en modo desarrollo local, simular éxito
-            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-                e.preventDefault();
-                setTimeout(function() {
-                    simulateSuccess();
-                }, 1000);
-            }
-        });
+        // Cargar scripts críticos inmediatamente
+        loadScript('menu-script.js');
         
+        // Cargar Firebase y contador de forma diferida después del load
+        window.addEventListener('load', function() {
+            // Firebase SDK con loading diferido
+            loadScript('https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js', function() {
+                loadScript('https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js', function() {
+                    // Cargar el contador después de Firebase
+                    loadScript('firebase-counter.js');
+                });
+            });
+        });
+    </script>
+
+    <!-- Script optimizado para manejo del formulario -->
+    <script>
+        // Optimización: Variables pre-declaradas
+        let form, submitBtn, formMessages, successMessage, errorMessage;
+        
+        // Función optimizada de inicialización
+        function initFormHandler() {
+            form = document.getElementById('contact-form');
+            submitBtn = document.getElementById('submit-btn');
+            formMessages = document.getElementById('form-messages');
+            successMessage = document.getElementById('success-message');
+            errorMessage = document.getElementById('error-message');
+            
+            if (!form || !submitBtn) return;
+            
+            // Detectar redirección de éxito (optimizado)
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('success') === 'true') {
+                showSuccessMessage();
+                // Limpiar URL sin recargar
+                window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
+            }
+            
+            // Event listener optimizado para el formulario
+            form.addEventListener('submit', function(e) {
+                // Feedback inmediato al usuario
+                submitBtn.textContent = 'Enviando...';
+                submitBtn.disabled = true;
+                submitBtn.style.opacity = '0.7';
+                
+                hideMessages();
+                
+                // Simulación para desarrollo local
+                if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                    e.preventDefault();
+                    setTimeout(simulateSuccess, 1000);
+                }
+            });
+        }
+        
+        // Funciones optimizadas
         function showSuccessMessage() {
+            if (!formMessages || !successMessage) return;
+            
             formMessages.style.display = 'block';
             successMessage.style.display = 'block';
-            errorMessage.style.display = 'none';
+            if (errorMessage) errorMessage.style.display = 'none';
             
-            // Scroll suave al mensaje
-            successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // Scroll suave optimizado
+            requestAnimationFrame(function() {
+                successMessage.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center' 
+                });
+            });
             
-            // Reiniciar formulario
-            form.reset();
+            // Reset form y botón
+            if (form) form.reset();
             resetButton();
             
-            // Ocultar mensaje después de 8 segundos
+            // Auto-hide con timeout optimizado
             setTimeout(hideMessages, 8000);
         }
         
         function showErrorMessage() {
+            if (!formMessages || !errorMessage) return;
+            
             formMessages.style.display = 'block';
-            successMessage.style.display = 'none';
+            if (successMessage) successMessage.style.display = 'none';
             errorMessage.style.display = 'block';
             
-            // Scroll suave al mensaje
-            errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            requestAnimationFrame(function() {
+                errorMessage.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center' 
+                });
+            });
             
             resetButton();
-            
-            // Ocultar mensaje después de 8 segundos
             setTimeout(hideMessages, 8000);
         }
         
         function hideMessages() {
+            if (!formMessages) return;
             formMessages.style.display = 'none';
-            successMessage.style.display = 'none';
-            errorMessage.style.display = 'none';
+            if (successMessage) successMessage.style.display = 'none';
+            if (errorMessage) errorMessage.style.display = 'none';
         }
         
         function resetButton() {
+            if (!submitBtn) return;
             submitBtn.textContent = 'Suscribirse';
             submitBtn.disabled = false;
+            submitBtn.style.opacity = '1';
         }
         
         function simulateSuccess() {
             showSuccessMessage();
         }
         
-        // Función para scroll suave del botón "scroll to top"
-        const scrollToTopBtn = document.getElementById('scrollToTop');
-        
-        // Mostrar/ocultar botón según scroll
-        window.addEventListener('scroll', function() {
-            if (window.pageYOffset > 300) {
-                scrollToTopBtn.classList.add('show');
-            } else {
-                scrollToTopBtn.classList.remove('show');
+        // Scroll to top optimizado
+        function initScrollToTop() {
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            if (!scrollToTopBtn) return;
+            
+            let ticking = false;
+            
+            // Throttled scroll event
+            function updateScrollButton() {
+                if (window.pageYOffset > 300) {
+                    scrollToTopBtn.classList.add('show');
+                } else {
+                    scrollToTopBtn.classList.remove('show');
+                }
+                ticking = false;
             }
-        });
-        
-        // Función de scroll al top
-        scrollToTopBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+            
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    requestAnimationFrame(updateScrollButton);
+                    ticking = true;
+                }
+            }, { passive: true });
+            
+            // Click handler optimizado
+            scrollToTopBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
             });
-        });
-    });
+        }
+        
+        // Inicialización optimizada
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                initFormHandler();
+                initScrollToTop();
+            });
+        } else {
+            initFormHandler();
+            initScrollToTop();
+        }
+        
+        // Preload de recursos importantes
+        function preloadResources() {
+            const resources = [
+                'https://cyberseg.netlify.app/gracias.html',
+                'fotos/fondo.png'
+            ];
+            
+            resources.forEach(function(url) {
+                const link = document.createElement('link');
+                link.rel = 'preload';
+                link.href = url;
+                link.as = url.includes('.html') ? 'document' : 'image';
+                document.head.appendChild(link);
+            });
+        }
+        
+        // Preload después de que la página cargue
+        window.addEventListener('load', preloadResources);
+        
+        // Service Worker registration (opcional para PWA)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                // Solo registrar si existe el service worker
+                fetch('/sw.js', { method: 'HEAD' })
+                    .then(() => navigator.serviceWorker.register('/sw.js'))
+                    .catch(() => {}); // Silencioso si no existe
+            });
+        }
     </script>
 
 </body>
