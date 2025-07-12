@@ -9,13 +9,11 @@
 }
 .iot-image {
     height: 70px;
-}
-.iot-details p {
+}.iot-details p {
     text-align: justify;
     margin-bottom: 15px;
     line-height: 1.5;
-}
-.iot-details ul {
+}.iot-details ul {
     list-style: none;
     text-align: left;
     margin: 0;
@@ -1358,7 +1356,6 @@ html {
         overflow: hidden !important;
     }
     
-    /* Mejorar el efecto hover de los iconos */
     .social-links a::before {
         content: '' !important;
         position: absolute !important;
@@ -3562,7 +3559,7 @@ html {
     /* === BOTÓN FLOTANTE === */
     
     #real-floating-back-btn {
-        position: fixed !important;
+        position: fixed !important; /* Asegura que flote */
         top: 50vh !important; /* Posición vertical: centro de la pantalla */
         right: 15px !important; /* Distancia desde la derecha */
         transform: translateY(-50%) !important; /* Centrado vertical */
@@ -3580,7 +3577,7 @@ html {
             0 5px 20px rgba(224, 253, 44, 0.8),
             0 3px 12px rgba(0, 0, 0, 0.4) !important;
         
-        display: flex !important;
+        display: none !important; /* INICIA OCULTO con display: none */
         align-items: center !important;
         justify-content: center !important;
         
@@ -3592,20 +3589,26 @@ html {
         user-select: none !important;
         
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        
-        /* Estado inicial oculto */
-        opacity: 0 !important;
-        visibility: hidden !important;
-        pointer-events: none !important;
-        transform: translateY(-50%) translateX(30px) scale(0.8) !important;
+        pointer-events: none !important; /* No interactuable cuando está oculto */
     }
     
     /* Estado visible del botón flotante */
     #real-floating-back-btn.floating-visible {
-        opacity: 1 !important;
-        visibility: visible !important;
-        pointer-events: auto !important;
-        transform: translateY(-50%) translateX(0) scale(1) !important;
+        display: flex !important; /* MUESTRA el botón con display: flex */
+        pointer-events: auto !important; /* Interactuable cuando está visible */
+        animation: fadeInSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; /* Aplica la animación */
+    }
+
+    /* Animación para la aparición del botón */
+    @keyframes fadeInSlideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-50%) translateX(30px) scale(0.8);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(-50%) translateX(0) scale(1);
+        }
     }
     
     /* Hover del botón flotante */
