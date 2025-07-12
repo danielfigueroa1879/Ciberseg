@@ -222,9 +222,20 @@ const completeFixCSS = `
     #floating-back-btn {
         top: 50% !important;
         right: 12px !important;
-        transform: translateY(-50%) !important;
         width: 55px !important;
         height: 55px !important;
+        
+        /* ESTADO INICIAL OCULTO */
+        opacity: 0 !important;
+        visibility: hidden !important;
+        transform: translateY(-50%) translateX(20px) !important;
+    }
+    
+    /* ESTADO VISIBLE */
+    #floating-back-btn.show {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(-50%) translateX(0) !important;
     }
     
     #floating-back-btn:hover {
@@ -332,7 +343,56 @@ function createForcedFloatingButton() {
     return button;
 }
 
-// ===== FUNCIÓN: MANEJAR CLICK FLOTANTE =====
+// ===== FUNCIÓN: MANEJAR SCROLL PARA MOSTRAR/OCULTAR BOTÓN =====
+function handleScrollVisibility() {
+    const button = document.getElementById('floating-back-btn');
+    if (!button || window.innerWidth > 768) return;
+    
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollThreshold = 200; // Mostrar después de 200px de scroll
+    
+    if (scrollTop > scrollThreshold) {
+        // MOSTRAR BOTÓN - hay scroll hacia abajo
+        if (!button.classList.contains('show')) {
+            button.classList.add('show');
+            console.log('👁️ Botón flotante mostrado (scroll hacia abajo)');
+        }
+    } else {
+        // OCULTAR BOTÓN - estamos cerca del top
+        if (button.classList.contains('show')) {
+            button.classList.remove('show');
+            console.log('🙈 Botón flotante ocultado (llegamos arriba)');
+        }
+    }
+}
+
+// ===== FUNCIÓN: CONFIGURAR EVENTOS DE SCROLL OPTIMIZADOS =====
+function setupScrollEvents() {
+    let isScrolling = false;
+    let lastScrollTop = 0;
+    
+    // Throttled scroll handler para mejor rendimiento
+    function throttledScrollHandler() {
+        if (!isScrolling) {
+            window.requestAnimationFrame(() => {
+                handleScrollVisibility();
+                isScrolling = false;
+            });
+            isScrolling = true;
+        }
+    }
+    
+    // Event listeners optimizados
+    window.addEventListener('scroll', throttledScrollHandler, { passive: true });
+    window.addEventListener('touchmove', throttledScrollHandler, { passive: true });
+    
+    // Verificación inicial (ocultar al cargar)
+    setTimeout(() => {
+        handleScrollVisibility();
+    }, 100);
+    
+    console.log('📜 Eventos de scroll configurados para mostrar/ocultar botón');
+}
 function handleFloatingClick(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -346,16 +406,41 @@ function handleFloatingClick(e) {
         behavior: 'smooth'
     });
     
+// ===== FUNCIÓN: MANEJAR CLICK FLOTANTE =====
+function handleFloatingClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    console.log('🔼 Botón flotante presionado - navegando al inicio');
+    
+    // Scroll suave al inicio
+    window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+    });
+    
     // Efecto visual más pronunciado - MANTENER CENTRADO
     const button = e.target.closest('#floating-back-btn');
     if (button) {
         button.style.transform = 'translateY(-50%) translateX(-5px) scale(1.15)';
         button.style.boxShadow = '0 12px 35px rgba(0, 0, 0, 0.6), 0 6px 20px rgba(224, 253, 44, 0.8)';
         setTimeout(() => {
-            button.style.transform = 'translateY(-50%)'; // VOLVER AL CENTRO
+            // Verificar si el botón aún debe estar visible
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop <= 200) {
+                // Si llegamos arriba, ocultar el botón
+                button.classList.remove('show');
+                button.style.transform = 'translateY(-50%) translateX(20px)';
+                console.log('🏠 Llegamos arriba - botón flotante ocultado');
+            } else {
+                // Si aún hay scroll, mantener visible
+                button.style.transform = 'translateY(-50%)';
+            }
             button.style.boxShadow = '';
         }, 250);
     }
+}
 }
 
 // ===== FUNCIÓN: ARREGLAR MENÚ HAMBURGUESA =====
@@ -484,7 +569,10 @@ function initCompleteFix() {
         // 2. Crear botón flotante
         createForcedFloatingButton();
         
-        // 3. Arreglar menú hamburguesa
+        // 3. Configurar eventos de scroll para mostrar/ocultar
+        setupScrollEvents();
+        
+        // 4. Arreglar menú hamburguesa
         fixHamburgerMenu();
         
         // 4. Crear enlaces del menú
@@ -562,8 +650,9 @@ window.completeFix = {
 };
 
 console.log('🔧 Corrección completa cargada');
-console.log('🔴 Botón flotante: CENTRO VERTICAL del lado derecho - Solo móviles');
-console.log('📍 Posición: 50% altura, pegado al borde derecho');
+console.log('🔴 Botón flotante: Aparece al hacer SCROLL hacia abajo');
+console.log('🏠 Al llegar arriba: Botón DESAPARECE automáticamente');
+console.log('📍 Posición: Centro vertical del lado derecho');
 console.log('💻 Desktop: Botón flotante OCULTO');
 console.log('🍔 Menú hamburguesa: X animada corregida');
 console.log('📱 Para debug: completeFix.reinit()');
