@@ -34,40 +34,59 @@
             font-size: 18px;
         }
 
+        /* Estilos para mensajes de confirmación */
+        .success-message {
+            background: linear-gradient(145deg, #28a745, #20c997);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            display: none;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        .error-message {
+            background: linear-gradient(145deg, #dc3545, #e74c3c);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            display: none;
+            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+        }
+
         /* --- MODIFICACIÓN PARA MÓVILES --- */
         @media screen and (max-width: 992px) {
             /* Estilos para el contador */
             .visitor-counter-container {
                 position: absolute; 
-                top: 24px; /* Subido un poco más (antes 28px) */
+                top: 24px;
                 left: 20px;
                 z-index: 1001;
                 font-size: 12px;
                 padding: 6px 10px;
                 gap: 5px;
                 
-                /* Cambio a fondo transparente */
                 background-color: transparent;
-                color: #ffffff; /* Letras blancas para contraste */
-                box-shadow: none; /* Sin sombra de caja */
-                text-shadow: 1px 1px 3px rgba(0,0,0,0.7); /* Sombra de texto para legibilidad */
-                border: none; /* Sin borde */
+                color: #ffffff;
+                box-shadow: none;
+                text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+                border: none;
             }
 
             .visitor-counter-container .fa-eye {
                 font-size: 14px;
             }
 
-            /* Mover el título a la derecha */
             .nav-logo {
-                /* Al añadir padding a la izquierda, el texto centrado se desplaza a la derecha */
                 padding-left: 80px; 
                 transition: all 0.3s ease;
             }
         }
 
         @media screen and (max-width: 480px) {
-            /* Ajuste para que el título no se desplace tanto en pantallas muy pequeñas */
             .nav-logo {
                 padding-left: 50px; 
             }
@@ -304,14 +323,12 @@
                     <h2>Formulario de Inscripción</h2>
                     
                     <!-- FORMULARIO CORREGIDO PARA NETLIFY -->
-                    <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" class="newsletter-form" id="contact-form">
-                        <!-- Campo oculto requerido por Netlify -->
-                        <input type="hidden" name="form-name" value="contact" />
-                        
-                        <!-- Campo honeypot oculto para prevenir spam -->
-                        <p style="display: none;">
+                    <form name="contacto" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="newsletter-form">
+                        <!-- Campo oculto para evitar spam -->
+                        <input type="hidden" name="form-name" value="contacto">
+                        <div style="display: none;">
                             <label>No llenes este campo si eres humano: <input name="bot-field" /></label>
-                        </p>
+                        </div>
                         
                         <input type="text" name="nombre" placeholder="Nombre" maxlength="100" required>
                         <input type="email" name="email" placeholder="Email" required maxlength="100">
@@ -319,20 +336,18 @@
                         <input type="text" name="asunto" placeholder="Asunto" maxlength="200">
                         <textarea name="mensaje" placeholder="Escribe aquí..." rows="5" required maxlength="1000"></textarea>
                         
-                        <button type="submit" id="submit-btn">Suscribirse</button>
+                        <button type="submit">Suscribirse</button>
                     </form>
 
-                    <!-- Mensaje de confirmación -->
-                    <div id="form-messages" style="display: none; margin-top: 20px;">
-                        <div id="success-message" style="display: none; background: linear-gradient(145deg, #28a745, #20c997); color: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);">
-                            <h3 style="margin: 0 0 10px 0; color: white;">¡Mensaje Enviado!</h3>
-                            <p style="margin: 0; color: white;">Gracias por contactarnos. Te responderemos pronto.</p>
-                        </div>
-                        
-                        <div id="error-message" style="display: none; background: linear-gradient(145deg, #dc3545, #e74c3c); color: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);">
-                            <h3 style="margin: 0 0 10px 0; color: white;">Error al Enviar</h3>
-                            <p style="margin: 0; color: white;">Hubo un problema. Por favor, intenta nuevamente.</p>
-                        </div>
+                    <!-- Mensajes de confirmación -->
+                    <div class="success-message" id="success-message">
+                        <h3>¡Mensaje Enviado Correctamente!</h3>
+                        <p>Gracias por contactarnos. Te responderemos a la brevedad.</p>
+                    </div>
+                    
+                    <div class="error-message" id="error-message">
+                        <h3>Error al Enviar</h3>
+                        <p>Lo sentimos, hubo un problema. Por favor, intenta nuevamente.</p>
                     </div>
                 </div>
             </div>
@@ -378,108 +393,27 @@
     <!-- Your custom script for the counter -->
     <script src="firebase-counter.js"></script>
 
-    <!-- Script para manejar el formulario de Netlify -->
+    <!-- Script para manejar la respuesta del formulario -->
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('contact-form');
-        const submitBtn = document.getElementById('submit-btn');
-        const formMessages = document.getElementById('form-messages');
-        const successMessage = document.getElementById('success-message');
-        const errorMessage = document.getElementById('error-message');
-        
-        // Detectar si venimos de una redirección de éxito
+        // Detectar si venimos de una redirección de Netlify
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('success') === 'true') {
-            showSuccessMessage();
-            // Limpiar la URL
-            window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
+            document.getElementById('success-message').style.display = 'block';
+            // Scroll al formulario
+            document.querySelector('#contacto').scrollIntoView({ behavior: 'smooth' });
+            // Limpiar URL
+            window.history.replaceState({}, document.title, window.location.pathname);
         }
-        
+
         // Manejar envío del formulario
-        form.addEventListener('submit', function(e) {
-            // Cambiar texto del botón
-            submitBtn.textContent = 'Enviando...';
-            submitBtn.disabled = true;
-            
-            // Ocultar mensajes anteriores
-            hideMessages();
-            
-            // Netlify manejará el envío automáticamente
-            // Si estamos en modo desarrollo local, simular éxito
-            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-                e.preventDefault();
-                setTimeout(function() {
-                    simulateSuccess();
-                }, 1000);
-            }
+        document.querySelector('form[name="contacto"]').addEventListener('submit', function(e) {
+            // Netlify maneja el envío automáticamente
+            // Solo mostramos un mensaje de "enviando"
+            const button = this.querySelector('button[type="submit"]');
+            const originalText = button.textContent;
+            button.textContent = 'Enviando...';
+            button.disabled = true;
         });
-        
-        function showSuccessMessage() {
-            formMessages.style.display = 'block';
-            successMessage.style.display = 'block';
-            errorMessage.style.display = 'none';
-            
-            // Scroll suave al mensaje
-            successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            
-            // Reiniciar formulario
-            form.reset();
-            resetButton();
-            
-            // Ocultar mensaje después de 8 segundos
-            setTimeout(hideMessages, 8000);
-        }
-        
-        function showErrorMessage() {
-            formMessages.style.display = 'block';
-            successMessage.style.display = 'none';
-            errorMessage.style.display = 'block';
-            
-            // Scroll suave al mensaje
-            errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            
-            resetButton();
-            
-            // Ocultar mensaje después de 8 segundos
-            setTimeout(hideMessages, 8000);
-        }
-        
-        function hideMessages() {
-            formMessages.style.display = 'none';
-            successMessage.style.display = 'none';
-            errorMessage.style.display = 'none';
-        }
-        
-        function resetButton() {
-            submitBtn.textContent = 'Suscribirse';
-            submitBtn.disabled = false;
-        }
-        
-        function simulateSuccess() {
-            showSuccessMessage();
-        }
-        
-        // Función para scroll suave del botón "scroll to top"
-        const scrollToTopBtn = document.getElementById('scrollToTop');
-        
-        // Mostrar/ocultar botón según scroll
-        window.addEventListener('scroll', function() {
-            if (window.pageYOffset > 300) {
-                scrollToTopBtn.classList.add('show');
-            } else {
-                scrollToTopBtn.classList.remove('show');
-            }
-        });
-        
-        // Función de scroll al top
-        scrollToTopBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    });
     </script>
 
 </body>
