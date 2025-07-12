@@ -37,12 +37,15 @@
             box-sizing: border-box;
         }
         
+        /* Aseguramos que el scroll sea manejado por el elemento HTML */
         html {
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
+            overflow-x: hidden; /* Previene scroll horizontal */
+            overflow-y: auto;   /* Permite scroll vertical */
         }
         
         body {
@@ -50,13 +53,12 @@
             background-color: #0f0f0f;
             color: #fff;
             line-height: 1.6;
-            overflow-x: hidden;
+            overflow-x: hidden; /* Previene scroll horizontal en body */
+            overflow-y: visible; /* Permite que el contenido del body se desborde y el scroll lo maneje HTML */
             margin: 0;
             padding: 0;
-            /* GPU acceleration */
-            transform: translateZ(0);
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
+            /* SE ELIMINAN LAS PROPIEDADES 'transform' y 'backface-visibility' DE AQUÍ */
+            /* Estas propiedades causaban que position: fixed no funcionara correctamente */
         }
         
         /* Optimizaciones para el contador de visitas */
@@ -72,7 +74,7 @@
             border-radius: 25px;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            /* GPU acceleration */
+            /* GPU acceleration - estas son seguras si no están en un ancestro */
             will-change: transform, background-color;
             transform: translateZ(0);
             -webkit-backface-visibility: hidden;
@@ -138,7 +140,7 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             /* GPU acceleration */
             will-change: transform, opacity;
-            transform: translateZ(0);
+            transform: translateZ(0); /* Este transform en el header es seguro y común */
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
         }
@@ -158,7 +160,7 @@
             width: 100%;
             /* GPU acceleration */
             will-change: transform;
-            transform: translateZ(0);
+            transform: translateZ(0); /* Este transform en el hero es seguro y común */
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
         }
