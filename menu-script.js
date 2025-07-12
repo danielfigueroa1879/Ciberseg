@@ -1,339 +1,692 @@
-// ===== SOLUCIÓN DEFINITIVA: BOTÓN FLOTANTE QUE ACOMPAÑA AL SCROLL =====
+// ===== SOLUCIÓN COMPLETA: MENÚ HAMBURGUESA + BOTÓN FLOTANTE =====
 
-// Mensaje de inicio para depuración.
-console.log('🚀 Iniciando solución de botón flotante dinámico...');
+console.log('🔧 Iniciando solución completa...');
+
+// ===== CSS COMPLETO PARA TODO =====
+const completeSolutionCSS = `
+/* ===== MENÚ HAMBURGUESA + BOTÓN FLOTANTE ===== */
+
+/* OCULTAR BOTONES CONFLICTIVOS EXISTENTES */
+.scroll-to-top:not(#real-floating-back-btn),
+#scrollToTop:not(#real-floating-back-btn) {
+    display: none !important;
+}
+
+@media screen and (max-width: 768px) {
+    
+    /* === MENÚ HAMBURGUESA === */
+    
+    /* Header configuración */
+    .header {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        z-index: 1500 !important;
+        background-color: rgba(40, 40, 40, 0.98) !important;
+        backdrop-filter: blur(10px) !important;
+        height: auto !important;
+        min-height: 80px !important;
+    }
+    
+    .navbar {
+        padding: 15px 0 !important;
+        height: 80px !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+    
+    .nav-container {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 0 20px !important;
+        width: 100% !important;
+        height: 100% !important;
+    }
+    
+    /* Logo centrado */
+    .nav-logo {
+        order: 1 !important;
+        flex: 1 !important;
+        text-align: center !important;
+        z-index: 1501 !important;
+    }
+    
+    .nav-logo h2 {
+        color: #c1d72b !important;
+        font-size: 24px !important;
+        font-weight: 700 !important;
+        margin: 0 !important;
+    }
+    
+    /* Botón hamburguesa */
+    .nav-toggle {
+        order: 2 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        cursor: pointer !important;
+        padding: 8px !important;
+        background-color: #000 !important;
+        border: 2px solid rgba(255, 255, 255, 0.4) !important;
+        border-radius: 8px !important;
+        transition: all 0.3s ease !important;
+        position: relative !important;
+        z-index: 1502 !important;
+        min-height: 44px !important;
+        min-width: 44px !important;
+        margin-left: auto !important;
+        flex-shrink: 0 !important;
+        touch-action: manipulation !important;
+        -webkit-tap-highlight-color: transparent !important;
+    }
+    
+    /* Barras del hamburguesa */
+    .bar {
+        width: 24px !important;
+        height: 3px !important;
+        background-color: #fff !important;
+        margin: 3px 0 !important;
+        transition: all 0.4s ease !important;
+        border-radius: 2px !important;
+        display: block !important;
+        transform-origin: center !important;
+        position: relative !important;
+    }
+    
+    /* Animación X */
+    .nav-toggle.active .bar:nth-child(1) {
+        transform: translateY(6px) rotate(45deg) !important;
+    }
+    
+    .nav-toggle.active .bar:nth-child(2) {
+        opacity: 0 !important;
+        transform: scale(0) !important;
+    }
+    
+    .nav-toggle.active .bar:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg) !important;
+    }
+    
+    /* Menú móvil */
+    .nav-menu {
+        position: fixed !important;
+        left: 0 !important;
+        top: 80px !important;
+        width: 100% !important;
+        background: linear-gradient(135deg, rgba(45, 45, 45, 0.95), rgba(60, 60, 60, 0.92)) !important;
+        backdrop-filter: blur(15px) !important;
+        -webkit-backdrop-filter: blur(15px) !important;
+        
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        
+        padding: 25px 20px 30px 20px !important;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4) !important;
+        border-bottom-left-radius: 25px !important;
+        border-bottom-right-radius: 25px !important;
+        border: 2px solid rgba(224, 253, 44, 0.4) !important;
+        border-top: none !important;
+        
+        z-index: 1400 !important;
+        
+        opacity: 0 !important;
+        visibility: hidden !important;
+        transform: translateY(-30px) !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        
+        max-height: 0 !important;
+        overflow: hidden !important;
+    }
+    
+    .nav-menu.active {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(0) !important;
+        max-height: 400px !important;
+    }
+    
+    /* Items del menú */
+    .nav-menu li {
+        width: 100% !important;
+        max-width: 350px !important;
+        margin: 0 !important;
+        list-style: none !important;
+        padding: 0 !important;
+        display: block !important;
+    }
+    
+    /* Enlaces del menú sin botones */
+    .nav-link {
+        display: block !important;
+        width: 100% !important;
+        padding: 20px 25px !important;
+        font-size: 22px !important;
+        font-weight: 600 !important;
+        color: #fff !important;
+        text-decoration: none !important;
+        text-align: center !important;
+        border-radius: 0 !important;
+        transition: all 0.25s ease !important;
+        background: transparent !important;
+        border: none !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+        letter-spacing: 1px !important;
+        text-transform: uppercase !important;
+    }
+    
+    .nav-link:hover,
+    .nav-link:active {
+        background: rgba(224, 253, 44, 0.1) !important;
+        color: #E0FD2C !important;
+        transform: translateX(5px) !important;
+        border-bottom-color: #E0FD2C !important;
+        text-shadow: 0 0 10px rgba(224, 253, 44, 0.5) !important;
+    }
+    
+    .nav-menu li:last-child .nav-link {
+        border-bottom: none !important;
+    }
+    
+    /* Ocultar elementos no necesarios - EXCEPTO CONTADOR DE VISITAS */
+    .search-container {
+        display: none !important;
+    }
+    
+    /* MANTENER CONTADOR DE VISITAS VISIBLE */
+    .visitor-counter-container {
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        color: #E0FD2C !important;
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        padding: 8px 15px !important;
+        border-radius: 25px !important;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.5) !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        position: absolute !important;
+        top: 24px !important;
+        left: 20px !important;
+        z-index: 1001 !important;
+    }
+    
+    .visitor-counter-container:hover {
+        background-color: rgba(224, 253, 44, 0.2) !important;
+        transform: scale(1.05) !important;
+    }
+    
+    .visitor-counter-container .fa-eye {
+        font-size: 18px !important;
+    }
+    
+    /* === BOTÓN FLOTANTE === */
+    
+    #real-floating-back-btn {
+        position: fixed !important;
+        top: 50vh !important;
+        right: 15px !important;
+        transform: translateY(-50%) !important;
+        
+        width: 60px !important;
+        height: 60px !important;
+        border-radius: 50% !important;
+        border: 2px solid rgba(255, 255, 255, 0.3) !important;
+        outline: none !important;
+        
+        background: linear-gradient(135deg, #E0FD2C 0%, #C7E525 100%) !important;
+        
+        box-shadow: 
+            0 10px 30px rgba(0, 0, 0, 0.6),
+            0 5px 20px rgba(224, 253, 44, 0.8),
+            0 3px 12px rgba(0, 0, 0, 0.4) !important;
+        
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        
+        z-index: 999999 !important;
+        
+        cursor: pointer !important;
+        touch-action: manipulation !important;
+        -webkit-tap-highlight-color: transparent !important;
+        user-select: none !important;
+        
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        
+        /* Estado inicial oculto */
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+        transform: translateY(-50%) translateX(30px) scale(0.8) !important;
+    }
+    
+    /* Estado visible del botón flotante */
+    #real-floating-back-btn.floating-visible {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        transform: translateY(-50%) translateX(0) scale(1) !important;
+    }
+    
+    /* Hover del botón flotante */
+    #real-floating-back-btn:hover {
+        background: linear-gradient(135deg, #C7E525 0%, #B8D61F 100%) !important;
+        transform: translateY(-50%) translateX(-8px) scale(1.15) !important;
+        box-shadow: 
+            0 15px 40px rgba(0, 0, 0, 0.7),
+            0 8px 25px rgba(224, 253, 44, 0.9),
+            0 4px 15px rgba(0, 0, 0, 0.5) !important;
+    }
+    
+    /* Active del botón flotante */
+    #real-floating-back-btn:active {
+        transform: translateY(-50%) translateX(-5px) scale(1.1) !important;
+        transition: all 0.1s ease !important;
+    }
+    
+    /* Flecha del botón flotante */
+    #real-floating-back-btn::before {
+        content: '' !important;
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) rotate(-45deg) !important;
+        
+        width: 14px !important;
+        height: 14px !important;
+        border-top: 3px solid #000 !important;
+        border-right: 3px solid #000 !important;
+        border-left: none !important;
+        border-bottom: none !important;
+        
+        background: transparent !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        pointer-events: none !important;
+    }
+    
+    /* Prevenir scroll cuando menú abierto */
+    body.menu-open {
+        overflow: hidden !important;
+    }
+}
+
+/* MÓVILES PEQUEÑOS */
+@media screen and (max-width: 480px) {
+    .nav-toggle {
+        min-height: 40px !important;
+        min-width: 40px !important;
+        padding: 6px !important;
+    }
+    
+    .nav-logo {
+        padding-left: 80px !important; /* Espacio para contador de visitas */
+    }
+    
+    .nav-logo h2 {
+        font-size: 22px !important;
+    }
+    
+    .nav-link {
+        font-size: 18px !important;
+        padding: 15px 20px !important;
+    }
+    
+    #real-floating-back-btn {
+        width: 55px !important;
+        height: 55px !important;
+        right: 12px !important;
+    }
+    
+    #real-floating-back-btn::before {
+        width: 12px !important;
+        height: 12px !important;
+        border-top: 2.5px solid #000 !important;
+        border-right: 2.5px solid #000 !important;
+    }
+    
+    /* Contador de visitas en móviles pequeños */
+    .visitor-counter-container {
+        font-size: 12px !important;
+        padding: 6px 10px !important;
+        top: 24px !important;
+        left: 15px !important;
+    }
+    
+    .visitor-counter-container .fa-eye {
+        font-size: 14px !important;
+    }
+}
+
+/* DESKTOP - OCULTAR BOTÓN FLOTANTE */
+@media screen and (min-width: 769px) {
+    #real-floating-back-btn {
+        display: none !important;
+    }
+    
+    .nav-toggle {
+        display: none !important;
+    }
+    
+    .nav-menu {
+        position: static !important;
+        width: auto !important;
+        background: transparent !important;
+        flex-direction: row !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+    
+    .nav-menu li {
+        margin: 0 15px !important;
+        width: auto !important;
+        max-width: none !important;
+    }
+    
+    .nav-link {
+        font-size: 18px !important;
+        padding: 0 !important;
+        width: auto !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        border: none !important;
+        text-transform: none !important;
+        letter-spacing: normal !important;
+    }
+}
+`;
 
 // ===== VARIABLES GLOBALES =====
-let scrollButton = null; // Referencia al elemento del botón.
-let isMenuOpen = false; // Estado del menú móvil.
-let menuButton, mobileMenu; // Referencias a elementos del menú.
-let throttledUpdate; // Variable para la función de actualización con "throttle".
+let isMenuOpen = false;
+let menuButton, mobileMenu;
 
-// ===== FUNCIÓN: CREAR BOTÓN FLOTANTE =====
-function createScrollButton() {
-    console.log('DEBUG: Attempting to create scroll button...');
-    // El botón solo se crea si el ancho de la ventana es de un dispositivo móvil.
-    if (window.innerWidth > 768) {
-        console.log('DEBUG: Desktop view, not creating scroll button.');
-        return;
-    }
-    
-    // Elimina cualquier botón existente con el mismo ID o clases para evitar duplicados.
-    const existingButtons = document.querySelectorAll('#dynamic-scroll-btn, #ultra-floating-btn, .scroll-to-top');
-    existingButtons.forEach(btn => {
-        console.log('DEBUG: Removing existing button:', btn.id || btn.className);
-        btn.remove();
-    });
-    
-    // Crea el nuevo elemento <button>.
-    scrollButton = document.createElement('button');
-    scrollButton.id = 'dynamic-scroll-btn'; // Asigna un ID único.
-    scrollButton.type = 'button';
-    scrollButton.setAttribute('aria-label', 'Volver arriba'); // Atributo para accesibilidad.
-    // Inserta el SVG de la flecha dentro del botón.
-    scrollButton.innerHTML = `
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M7 14L12 9L17 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    `;
-    
-    // Añade los "event listeners" para el clic y el toque.
-    scrollButton.addEventListener('click', scrollToTop);
-    scrollButton.addEventListener('touchstart', function(e) {
-        e.preventDefault(); // Previene el comportamiento de scroll por defecto en touch.
-        scrollToTop();
-    }, { passive: false }); // 'passive: false' es importante para 'preventDefault'.
-    
-    // Añade el botón al cuerpo del documento.
-    document.body.appendChild(scrollButton);
-    
-    console.log('DEBUG: ✅ Botón flotante creado y añadido al DOM.');
-    return scrollButton; // Devuelve la referencia al botón creado.
-}
-
-// ===== FUNCIÓN: SCROLL AL INICIO DE LA PÁGINA =====
-function scrollToTop() {
-    console.log('DEBUG: Scrolling to top...');
-    // Realiza un scroll suave hasta la parte superior de la página.
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-}
-
-// ===== FUNCIÓN: ACTUALIZAR VISIBILIDAD DEL BOTÓN BASADO EN EL SCROLL =====
-function updateButtonVisibility() {
-    if (!scrollButton) {
-        console.log('DEBUG: Button element not found in updateButtonVisibility.');
-        return;
-    }
-    if (window.innerWidth > 768) {
-        // Si estamos en escritorio, asegúrate de que el botón esté oculto.
-        if (scrollButton.classList.contains('visible')) {
-            scrollButton.classList.remove('visible');
-            console.log('DEBUG: 🔽 Botón oculto (desktop view)');
-        }
-        return;
-    }
-
-    // Obtiene la posición actual del scroll vertical.
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const threshold = 300; // El botón se mostrará después de 300px de scroll hacia abajo.
-
-    // Verifica si hay suficiente contenido para hacer scroll.
-    const scrollHeight = document.documentElement.scrollHeight;
-    const clientHeight = document.documentElement.clientHeight;
-    const hasScrollableContent = scrollHeight > (clientHeight + threshold); // Asegura que haya al menos 300px de scroll disponible.
-
-    console.log(`DEBUG: ScrollTop: ${scrollTop}, Threshold: ${threshold}, Button Visible: ${scrollButton.classList.contains('visible')}`);
-    console.log(`DEBUG: ScrollHeight: ${scrollHeight}, ClientHeight: ${clientHeight}, HasScrollableContent: ${hasScrollableContent}`);
-
-    // Si el scroll supera el umbral Y hay contenido scrollable, el botón se hace visible.
-    if (scrollTop > threshold && hasScrollableContent) {
-        if (!scrollButton.classList.contains('visible')) {
-            scrollButton.classList.add('visible'); // Añade la clase 'visible'.
-            console.log('DEBUG: 🔼 Botón becoming visible.');
-        }
-    } else {
-        // Si el scroll está por debajo del umbral O no hay suficiente contenido scrollable, el botón se oculta.
-        if (scrollButton.classList.contains('visible')) {
-            scrollButton.classList.remove('visible'); // Remueve la clase 'visible'.
-            console.log('DEBUG: 🔽 Botón becoming hidden.');
-        }
-    }
-}
-
-// ===== FUNCIÓN: THROTTLE PARA OPTIMIZAR EVENTOS DE SCROLL =====
-// Limita la frecuencia con la que se ejecuta una función, mejorando el rendimiento.
-function throttle(func, wait) {
-    let timeout;
-    let lastArgs;
-    let lastThis;
-    let lastResult;
-    let lastCallTime = 0;
-
-    const throttled = function(...args) {
-        const now = Date.now();
-        lastArgs = args;
-        lastThis = this;
-
-        if (now - lastCallTime > wait) {
-            lastCallTime = now;
-            lastResult = func.apply(lastThis, lastArgs);
-        } else {
-            clearTimeout(timeout);
-            timeout = setTimeout(() => {
-                lastCallTime = Date.now();
-                lastResult = func.apply(lastThis, lastArgs);
-            }, wait - (now - lastCallTime));
-        }
-        return lastResult;
-    };
-    
-    throttled.cancel = () => {
-        clearTimeout(timeout);
-    };
-
-    return throttled;
-}
-
-
-// ===== FUNCIÓN: CONFIGURAR EL MENÚ DE NAVEGACIÓN MÓVIL =====
-function setupMenu() {
-    menuButton = document.getElementById('mobile-menu'); // Botón de hamburguesa.
-    mobileMenu = document.getElementById('nav-menu');    // Menú de navegación.
-    
-    // Si no se encuentran los elementos del menú, muestra una advertencia y sal.
-    if (!menuButton || !mobileMenu) {
-        console.warn('DEBUG: ⚠️ No se encontraron elementos de menú (mobile-menu o nav-menu).');
-        return;
-    }
-    
-    // Asegura que el botón de hamburguesa tenga las barras si no las tiene.
-    if (menuButton.children.length === 0) {
-        menuButton.innerHTML = '<span class="bar"></span><span class="bar"></span><span class="bar"></span>';
-    }
-    
-    // Define los ítems del menú.
-    const menuItems = [
-        { text: 'Inicio', target: '#inicio' },
-        { text: 'Servicios', target: '#servicios' },
-        { text: 'Contacto', target: '#contacto' },
-        { text: 'Suscripción', target: '#contacto' } // Apunta a la sección de contacto.
+// ===== FUNCIÓN: APLICAR CSS COMPLETO =====
+function applyCompleteSolutionCSS() {
+    // Remover estilos previos
+    const existingStyles = [
+        'real-floating-button-css',
+        'floating-button-styles',
+        'mobile-menu-fix',
+        'complete-fix-styles'
     ];
     
-    mobileMenu.innerHTML = ''; // Limpia el contenido actual del menú.
-    // Crea y añade cada ítem al menú.
+    existingStyles.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) element.remove();
+    });
+    
+    // Aplicar CSS completo
+    const style = document.createElement('style');
+    style.id = 'complete-solution-css';
+    style.innerHTML = completeSolutionCSS;
+    document.head.appendChild(style);
+    
+    console.log('🎨 CSS completo aplicado');
+}
+
+// ===== FUNCIÓN: CREAR MENÚ HAMBURGUESA =====
+function setupHamburgerMenu() {
+    menuButton = document.getElementById('mobile-menu');
+    mobileMenu = document.getElementById('nav-menu');
+    
+    if (!menuButton || !mobileMenu) {
+        console.error('❌ Elementos del menú no encontrados');
+        return;
+    }
+    
+    // Asegurar estructura del botón
+    if (menuButton.children.length === 0) {
+        menuButton.innerHTML = `
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        `;
+    }
+    
+    // Crear enlaces del menú
+    const menuItems = [
+        { text: 'Inicio', target: '.hero' },
+        { text: 'Servicios', target: '.iot-section' },
+        { text: 'Misión', target: '.mission-vision' },
+        { text: 'Suscripción', target: '.contact-section' }
+    ];
+    
+    // Limpiar y crear menú
+    mobileMenu.innerHTML = '';
+    
     menuItems.forEach(item => {
         const li = document.createElement('li');
         li.className = 'nav-item';
+        
         const a = document.createElement('a');
-        a.href = item.target;
+        a.href = '#';
         a.className = 'nav-link';
         a.textContent = item.text;
-        // Añade un "event listener" para cerrar el menú y hacer scroll al hacer clic.
+        
         a.addEventListener('click', function(e) {
             e.preventDefault();
+            
+            // Cerrar menú
             closeMenu();
-            const target = document.querySelector(item.target);
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
-            }
+            
+            // Navegar a sección
+            setTimeout(() => {
+                const target = document.querySelector(item.target);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }, 300);
         });
+        
         li.appendChild(a);
         mobileMenu.appendChild(li);
     });
     
-    // Añade "event listeners" para abrir/cerrar el menú y cerrarlo al hacer clic fuera.
-    menuButton.addEventListener('click', toggleMenu);
+    // Event listener del botón hamburguesa
+    menuButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleMenu();
+    });
+    
+    // Cerrar menú al hacer click fuera
     document.addEventListener('click', function(e) {
-        if (isMenuOpen && !menuButton.contains(e.target) && !mobileMenu.contains(e.target)) {
+        if (isMenuOpen && 
+            !menuButton.contains(e.target) && 
+            !mobileMenu.contains(e.target)) {
             closeMenu();
         }
     });
     
-    console.log('DEBUG: ✅ Menú configurado.');
+    console.log('🍔 Menú hamburguesa configurado');
 }
 
-// Funciones para abrir y cerrar el menú.
+// ===== FUNCIONES DEL MENÚ =====
 function openMenu() {
     isMenuOpen = true;
-    if (menuButton) menuButton.classList.add('active');
-    if (mobileMenu) mobileMenu.classList.add('active');
-    document.body.style.overflow = 'hidden'; // Evita el scroll del fondo cuando el menú está abierto.
-    console.log('DEBUG: Menu opened.');
+    menuButton.classList.add('active');
+    mobileMenu.classList.add('active');
+    document.body.classList.add('menu-open');
+    console.log('📂 Menú abierto');
 }
 
 function closeMenu() {
     isMenuOpen = false;
     if (menuButton) menuButton.classList.remove('active');
     if (mobileMenu) mobileMenu.classList.remove('active');
-    document.body.style.overflow = ''; // Restaura el scroll del fondo.
-    console.log('DEBUG: Menu closed.');
+    document.body.classList.remove('menu-open');
+    console.log('📁 Menú cerrado');
 }
 
 function toggleMenu() {
-    isMenuOpen ? closeMenu() : openMenu();
+    if (isMenuOpen) {
+        closeMenu();
+    } else {
+        openMenu();
+    }
 }
 
-// ===== FUNCIÓN: CONFIGURAR LOS EVENTOS DE SCROLL =====
-function setupScrollEvents() {
-    // Asigna la función de actualización con "throttle" a la variable global.
-    throttledUpdate = throttle(updateButtonVisibility, 100);
+// ===== FUNCIÓN: CREAR BOTÓN FLOTANTE =====
+function createFloatingButton() {
+    if (window.innerWidth > 768) return;
     
-    // Añade los "event listeners" para el scroll y el touchmove (para dispositivos táctiles).
-    window.addEventListener('scroll', throttledUpdate, { passive: true });
-    window.addEventListener('touchmove', throttledUpdate, { passive: true });
+    // Remover botones existentes
+    const existingButtons = document.querySelectorAll(
+        '#real-floating-back-btn, .scroll-to-top, #scrollToTop'
+    );
+    existingButtons.forEach(btn => btn.remove());
     
-    // Realiza una verificación inicial de la visibilidad del botón poco después de la carga.
-    setTimeout(updateButtonVisibility, 100);
+    // Crear botón
+    const button = document.createElement('button');
+    button.id = 'real-floating-back-btn';
+    button.setAttribute('aria-label', 'Ir al inicio');
     
-    console.log('DEBUG: ✅ Eventos de scroll configurados.');
+    // Event listeners
+    button.addEventListener('click', handleFloatingClick);
+    button.addEventListener('touchstart', handleFloatingClick);
+    
+    document.body.appendChild(button);
+    
+    console.log('🔴 Botón flotante creado');
+    return button;
 }
 
-// ===== FUNCIÓN: MONITOREAR Y MANTENER EL BOTÓN FLOTANTE =====
-// Esta función se ejecuta periódicamente para asegurar que el botón esté presente.
-function monitorButton() {
-    setInterval(() => {
-        // Si estamos en móvil y el botón no existe, lo recrea y actualiza su visibilidad.
-        if (window.innerWidth <= 768 && !document.getElementById('dynamic-scroll-btn')) {
-            console.log('DEBUG: ⚠️ Botón flotante perdido, recreando...');
-            createScrollButton();
-            updateButtonVisibility();
+// ===== FUNCIÓN: MANEJAR CLICK DEL BOTÓN FLOTANTE =====
+function handleFloatingClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    console.log('🔼 Scroll al inicio');
+    
+    window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+    });
+}
+
+// ===== FUNCIÓN: MANEJAR SCROLL - CORREGIDA =====
+function handleScroll() {
+    if (window.innerWidth > 768) return;
+    
+    const button = document.getElementById('real-floating-back-btn');
+    if (!button) return;
+    
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const threshold = 200;
+    
+    // LÓGICA CORREGIDA: Mostrar cuando BAJAS (scrollTop > threshold)
+    if (scrollTop > threshold) {
+        // HAY SCROLL HACIA ABAJO - MOSTRAR BOTÓN
+        if (!button.classList.contains('floating-visible')) {
+            button.classList.add('floating-visible');
+            console.log('👁️ Botón flotante mostrado (bajando por la página)');
         }
-    }, 2000); // Se chequea cada 2 segundos.
+    } else {
+        // CERCA DEL TOP - OCULTAR BOTÓN
+        if (button.classList.contains('floating-visible')) {
+            button.classList.remove('floating-visible');
+            console.log('🙈 Botón flotante ocultado (cerca del inicio)');
+        }
+    }
 }
 
-// ===== FUNCIÓN: INICIALIZACIÓN PRINCIPAL DEL SISTEMA DEL BOTÓN FLOTANTE =====
-function initFloatingButton() {
-    console.log('DEBUG: 🎯 Iniciando sistema de botón flotante...');
+// ===== FUNCIÓN: CONFIGURAR EVENTOS DE SCROLL =====
+function setupScrollEvents() {
+    let isScrolling = false;
+    
+    function throttledScroll() {
+        if (!isScrolling) {
+            window.requestAnimationFrame(() => {
+                handleScroll();
+                isScrolling = false;
+            });
+            isScrolling = true;
+        }
+    }
+    
+    window.addEventListener('scroll', throttledScroll, { passive: true });
+    setTimeout(handleScroll, 100);
+    
+    console.log('📜 Eventos de scroll configurados');
+}
+
+// ===== FUNCIÓN: INICIALIZACIÓN PRINCIPAL =====
+function initCompleteSolution() {
+    console.log('🚀 Iniciando solución completa...');
     
     try {
-        // La aplicación del CSS del botón ahora se maneja directamente en styles.css
+        // 1. Aplicar CSS
+        applyCompleteSolutionCSS();
         
-        // 1. Configura el menú (independiente del botón, pero importante para la UX).
-        setupMenu();
+        // 2. Configurar menú hamburguesa
+        setupHamburgerMenu();
         
-        // 2. Crea el botón (la función ya comprueba si es necesario).
-        createScrollButton();
+        // 3. Crear botón flotante
+        createFloatingButton();
         
-        // 3. Configura los eventos de scroll para controlar la visibilidad.
+        // 4. Configurar scroll
         setupScrollEvents();
         
-        // 4. Inicia el monitoreo del botón para asegurar su persistencia.
-        monitorButton();
-        
-        console.log('DEBUG: ✅ Sistema de botón flotante inicializado correctamente.');
+        console.log('✅ Solución completa inicializada');
         
     } catch (error) {
-        // Captura y muestra cualquier error durante la inicialización.
-        console.error('DEBUG: ❌ Error en inicialización del botón flotante:', error);
+        console.error('❌ Error:', error);
     }
 }
 
-// ===== EVENTOS DE REDIMENSIONAMIENTO DE LA VENTANA (RESIZE) =====
-// Se usa "throttle" para optimizar la ejecución en el redimensionamiento.
-window.addEventListener('resize', throttle(() => {
-    console.log('DEBUG: Window resized. Inner width:', window.innerWidth);
-    if (window.innerWidth > 768) {
-        // Si la ventana es de escritorio, elimina el botón si existe.
-        if (scrollButton) {
-            scrollButton.remove();
-            scrollButton = null;
-            console.log('DEBUG: Scroll button removed for desktop view.');
-        }
-        // Asegúrate de cerrar el menú si estaba abierto en escritorio.
-        if (isMenuOpen) closeMenu();
-    } else {
-        // Si la ventana es móvil, crea el botón si no existe.
-        if (!document.getElementById('dynamic-scroll-btn')) {
-            console.log('DEBUG: Detected mobile view, creating scroll button if not exists.');
-            createScrollButton();
-        }
-        // Actualiza la visibilidad del botón para el nuevo tamaño.
-        updateButtonVisibility();
-    }
-}, 300)); // Se ejecuta como máximo cada 300ms.
-
-// ===== INICIALIZACIÓN DEL SCRIPT AL CARGAR EL DOM =====
-// Asegura que el script se ejecute cuando el DOM (estructura HTML) esté completamente cargado.
+// ===== INICIALIZACIÓN AUTOMÁTICA =====
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initFloatingButton);
+    document.addEventListener('DOMContentLoaded', initCompleteSolution);
 } else {
-    // Si el DOM ya está cargado (por ejemplo, si el script se carga de forma asíncrona),
-    // ejecuta la inicialización inmediatamente.
-    initFloatingButton();
+    initCompleteSolution();
 }
 
-// Inicialización adicional después del evento 'load' (como respaldo).
+// Backup
 window.addEventListener('load', () => {
     setTimeout(() => {
-        // Vuelve a verificar y recrear el botón en móvil si por alguna razón no se creó.
-        if (!document.getElementById('dynamic-scroll-btn') && window.innerWidth <= 768) {
-            console.log('DEBUG: Window loaded, re-checking for scroll button on mobile.');
-            createScrollButton();
-            updateButtonVisibility();
+        if (!document.getElementById('real-floating-back-btn') && window.innerWidth <= 768) {
+            createFloatingButton();
         }
-    }, 500); // Pequeño retraso para asegurar que todo el contenido se haya renderizado.
+    }, 500);
 });
 
-// ===== API PÚBLICA (PARA DEPURACIÓN MANUAL EN LA CONSOLA) =====
-// Permite controlar y depurar el sistema del botón desde la consola del navegador.
-window.floatingButtonSystem = {
-    reinit: initFloatingButton, // Reinicia todo el sistema.
-    getButton: () => document.getElementById('dynamic-scroll-btn'), // Obtiene la referencia al botón.
-    forceShow: () => { // Fuerza la visibilidad del botón.
-        const btn = document.getElementById('dynamic-scroll-btn');
-        if (btn) btn.classList.add('visible');
-        console.log('DEBUG: Forced scroll button show.');
-    },
-    forceHide: () => { // Fuerza la ocultación del botón.
-        const btn = document.getElementById('dynamic-scroll-btn');
-        if (btn) btn.classList.remove('visible');
-        console.log('DEBUG: Forced scroll button hide.');
+// Resize handler
+window.addEventListener('resize', () => {
+    const button = document.getElementById('real-floating-back-btn');
+    
+    if (window.innerWidth > 768) {
+        if (button) button.remove();
+        if (isMenuOpen) closeMenu();
+    } else {
+        if (!button) createFloatingButton();
     }
+});
+
+// ===== EXPORTAR =====
+window.completeSolution = {
+    reinit: initCompleteSolution,
+    toggleMenu: toggleMenu,
+    button: () => document.getElementById('real-floating-back-btn')
 };
 
-console.log('✅ Sistema de botón flotante cargado.');
-console.log('📍 El botón aparecerá después de 300px de scroll.');
-console.log('🔧 Para depurar, abre la consola del navegador en tu móvil y busca los mensajes que empiezan con "DEBUG:".');
+console.log('✅ Solución completa cargada');
+console.log('🍔 Menú hamburguesa: 4 enlaces funcionando');
+console.log('🔴 Botón flotante: Aparece al BAJAR por la página');
+console.log('👁️ Contador de visitas: Visible en esquina superior izquierda');
+console.log('💻 Desktop: Navegación normal');
+console.log('🔧 Debug: completeSolution.reinit()');
