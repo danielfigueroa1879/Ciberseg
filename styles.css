@@ -1473,7 +1473,7 @@ html {
     }
 
     .consultoria-img {
-        width: 250px !important;  /* Más grande que las otras */
+        width: 250px !important;  
         height: 250px !important;
     }
     
@@ -1744,7 +1744,7 @@ html {
     }
 
     .consultoria-img {
-        width: 220px !important;  /* Más grande que las otras */
+        width: 220px !important;  
         height: 220px !important;
     }
     
@@ -3335,144 +3335,408 @@ html {
     }
 }
 
-/* ===== SOLUCIÓN DEFINITIVA: BOTÓN FLOTANTE QUE ACOMPAÑA AL SCROLL ===== */
+/* ===== SOLUCIÓN COMPLETA: MENÚ HAMBURGUESA + BOTÓN FLOTANTE ===== */
 
-/* ===== ELIMINAR CUALQUIER BOTÓN PREVIO (REGLA DE SEGURIDAD) ===== */
-/* Asegura que no haya otros botones de "volver arriba" que puedan causar conflictos. */
-.scroll-to-top,
-#scrollToTop,
-button[aria-label*="arriba"],
-button[class*="scroll"],
-button[id*="scroll"],
-#ultra-floating-btn {
+/* OCULTAR BOTONES CONFLICTIVOS EXISTENTES */
+.scroll-to-top:not(#real-floating-back-btn),
+#scrollToTop:not(#real-floating-back-btn),
+#dynamic-scroll-btn { /* Asegurarse de ocultar el ID anterior */
     display: none !important;
 }
 
-/* ===== ESTILOS ESPECÍFICOS PARA DISPOSITIVOS MÓVILES (HASTA 768px) ===== */
 @media screen and (max-width: 768px) {
     
-    /* BOTÓN FLOTANTE FIJO EN LA ESQUINA INFERIOR DERECHA */
-    #dynamic-scroll-btn {
-        /* Propiedad FUNDAMENTAL para que el botón "acompañe" al scroll. */
+    /* === MENÚ HAMBURGUESA === */
+    
+    /* Header configuración */
+    .header {
         position: fixed !important;
-        bottom: 30px !important; /* Distancia desde la parte inferior. */
-        right: 20px !important;  /* Distancia desde la parte derecha. */
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        z-index: 1500 !important;
+        background-color: rgba(40, 40, 40, 0.98) !important;
+        backdrop-filter: blur(10px) !important;
+        height: auto !important;
+        min-height: 80px !important;
+    }
+    
+    .navbar {
+        padding: 15px 0 !important;
+        height: 80px !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+    
+    .nav-container {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 0 20px !important;
+        width: 100% !important;
+        height: 100% !important;
+    }
+    
+    /* Logo centrado */
+    .nav-logo {
+        order: 1 !important;
+        flex: 1 !important;
+        text-align: center !important;
+        z-index: 1501 !important;
+    }
+    
+    .nav-logo h2 {
+        color: #c1d72b !important;
+        font-size: 24px !important;
+        font-weight: 700 !important;
+        margin: 0 !important;
+    }
+    
+    /* Botón hamburguesa */
+    .nav-toggle {
+        order: 2 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        cursor: pointer !important;
+        padding: 8px !important;
+        background-color: #000 !important;
+        border: 2px solid rgba(255, 255, 255, 0.4) !important;
+        border-radius: 8px !important;
+        transition: all 0.3s ease !important;
+        position: relative !important;
+        z-index: 1502 !important;
+        min-height: 44px !important;
+        min-width: 44px !important;
+        margin-left: auto !important;
+        flex-shrink: 0 !important;
+        touch-action: manipulation !important;
+        -webkit-tap-highlight-color: transparent !important;
+    }
+    
+    /* Barras del hamburguesa */
+    .bar {
+        width: 24px !important;
+        height: 3px !important;
+        background-color: #fff !important;
+        margin: 3px 0 !important;
+        transition: all 0.4s ease !important;
+        border-radius: 2px !important;
+        display: block !important;
+        transform-origin: center !important;
+        position: relative !important;
+    }
+    
+    /* Animación X */
+    .nav-toggle.active .bar:nth-child(1) {
+        transform: translateY(6px) rotate(45deg) !important;
+    }
+    
+    .nav-toggle.active .bar:nth-child(2) {
+        opacity: 0 !important;
+        transform: scale(0) !important;
+    }
+    
+    .nav-toggle.active .bar:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg) !important;
+    }
+    
+    /* Menú móvil */
+    .nav-menu {
+        position: fixed !important;
+        left: 0 !important;
+        top: 80px !important;
+        width: 100% !important;
+        background: linear-gradient(135deg, rgba(45, 45, 45, 0.95), rgba(60, 60, 60, 0.92)) !important;
+        backdrop-filter: blur(15px) !important;
+        -webkit-backdrop-filter: blur(15px) !important;
         
-        /* Dimensiones del botón. */
-        width: 56px !important;
-        height: 56px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
         
-        /* Estilo circular y borde. */
+        padding: 25px 20px 30px 20px !important;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4) !important;
+        border-bottom-left-radius: 25px !important;
+        border-bottom-right-radius: 25px !important;
+        border: 2px solid rgba(224, 253, 44, 0.4) !important;
+        border-top: none !important;
+        
+        z-index: 1400 !important;
+        
+        opacity: 0 !important;
+        visibility: hidden !important;
+        transform: translateY(-30px) !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        
+        max-height: 0 !important;
+        overflow: hidden !important;
+    }
+    
+    .nav-menu.active {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(0) !important;
+        max-height: 400px !important;
+    }
+    
+    /* Items del menú */
+    .nav-menu li {
+        width: 100% !important;
+        max-width: 350px !important;
+        margin: 0 !important;
+        list-style: none !important;
+        padding: 0 !important;
+        display: block !important;
+    }
+    
+    /* Enlaces del menú sin botones */
+    .nav-link {
+        display: block !important;
+        width: 100% !important;
+        padding: 20px 25px !important;
+        font-size: 22px !important;
+        font-weight: 600 !important;
+        color: #fff !important;
+        text-decoration: none !important;
+        text-align: center !important;
+        border-radius: 0 !important;
+        transition: all 0.25s ease !important;
+        background: transparent !important;
+        border: none !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+        letter-spacing: 1px !important;
+        text-transform: uppercase !important;
+    }
+    
+    .nav-link:hover,
+    .nav-link:active {
+        background: rgba(224, 253, 44, 0.1) !important;
+        color: #E0FD2C !important;
+        transform: translateX(5px) !important;
+        border-bottom-color: #E0FD2C !important;
+        text-shadow: 0 0 10px rgba(224, 253, 44, 0.5) !important;
+    }
+    
+    .nav-menu li:last-child .nav-link {
+        border-bottom: none !important;
+    }
+    
+    /* Ocultar elementos no necesarios - EXCEPTO CONTADOR DE VISITAS */
+    .search-container {
+        display: none !important;
+    }
+    
+    /* MANTENER CONTADOR DE VISITAS VISIBLE */
+    .visitor-counter-container {
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        color: #E0FD2C !important;
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        padding: 8px 15px !important;
+        border-radius: 25px !important;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.5) !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        position: absolute !important;
+        top: 24px !important;
+        left: 20px !important;
+        z-index: 1001 !important;
+    }
+    
+    .visitor-counter-container:hover {
+        background-color: rgba(224, 253, 44, 0.2) !important;
+        transform: scale(1.05) !important;
+    }
+    
+    .visitor-counter-container .fa-eye {
+        font-size: 18px !important;
+    }
+    
+    /* === BOTÓN FLOTANTE === */
+    
+    #real-floating-back-btn {
+        position: fixed !important;
+        top: 50vh !important; /* Posición vertical: centro de la pantalla */
+        right: 15px !important; /* Distancia desde la derecha */
+        transform: translateY(-50%) !important; /* Centrado vertical */
+        
+        width: 60px !important;
+        height: 60px !important;
         border-radius: 50% !important;
         border: 2px solid rgba(255, 255, 255, 0.3) !important;
-        outline: none !important; /* Elimina el contorno al enfocar. */
+        outline: none !important;
         
-        /* Fondo con un degradado de color verde. */
         background: linear-gradient(135deg, #E0FD2C 0%, #C7E525 100%) !important;
         
-        /* Sombra para darle un efecto flotante y de profundidad. */
         box-shadow: 
-            0 4px 12px rgba(0, 0, 0, 0.3), /* Sombra general. */
-            0 2px 8px rgba(224, 253, 44, 0.4), /* Resplandor verde. */
-            inset 0 1px 2px rgba(255, 255, 255, 0.3) !important; /* Sombra interna para relieve. */
+            0 10px 30px rgba(0, 0, 0, 0.6),
+            0 5px 20px rgba(224, 253, 44, 0.8),
+            0 3px 12px rgba(0, 0, 0, 0.4) !important;
         
-        /* Usa Flexbox para centrar el icono de la flecha dentro del botón. */
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
         
-        /* Z-index alto para asegurar que esté por encima de otros elementos. */
-        z-index: 9999 !important;
+        z-index: 999999 !important; /* Asegura que esté por encima de todo */
         
-        /* Propiedades de interactividad y usabilidad táctil. */
-        cursor: pointer !important; /* Cambia el cursor al pasar por encima. */
-        touch-action: manipulation !important; /* Optimización para touch. */
-        -webkit-tap-highlight-color: transparent !important; /* Elimina el resplandor al tocar. */
-        user-select: none !important; /* Evita que el texto sea seleccionable. */
+        cursor: pointer !important;
+        touch-action: manipulation !important;
+        -webkit-tap-highlight-color: transparent !important;
+        user-select: none !important;
         
-        /* Transiciones suaves para todas las propiedades al cambiar de estado. */
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
         
-        /* Estado inicial: oculto y desplazado hacia abajo para la animación de entrada. */
+        /* Estado inicial oculto */
         opacity: 0 !important;
         visibility: hidden !important;
-        pointer-events: none !important; /* No interactuable cuando está oculto. */
-        transform: translateY(100px) !important; /* Desplazado 100px hacia abajo. */
-        
-        /* Reset de propiedades para evitar herencias no deseadas. */
-        margin: 0 !important;
-        padding: 0 !important;
-        font-size: 0 !important;
-        overflow: hidden !important;
+        pointer-events: none !important;
+        transform: translateY(-50%) translateX(30px) scale(0.8) !important;
     }
     
-    /* Estado visible del botón: aparece con una animación. */
-    #dynamic-scroll-btn.visible {
+    /* Estado visible del botón flotante */
+    #real-floating-back-btn.floating-visible {
         opacity: 1 !important;
         visibility: visible !important;
         pointer-events: auto !important;
-        transform: translateY(0) !important; /* Vuelve a su posición original. */
+        transform: translateY(-50%) translateX(0) scale(1) !important;
     }
     
-    /* Efecto al pasar el ratón por encima (hover). */
-    #dynamic-scroll-btn:hover {
-        background: linear-gradient(135deg, #C7E525 0%, #B8D61F 100%) !important; /* Cambio de degradado. */
-        transform: scale(1.1) !important; /* Ligeramente más grande. */
+    /* Hover del botón flotante */
+    #real-floating-back-btn:hover {
+        background: linear-gradient(135deg, #C7E525 0%, #B8D61F 100%) !important;
+        transform: translateY(-50%) translateX(-8px) scale(1.15) !important;
         box-shadow: 
-            0 6px 20px rgba(0, 0, 0, 0.4),
-            0 4px 12px rgba(224, 253, 44, 0.6) !important; /* Sombra más pronunciada. */
+            0 15px 40px rgba(0, 0, 0, 0.7),
+            0 8px 25px rgba(224, 253, 44, 0.9),
+            0 4px 15px rgba(0, 0, 0, 0.5) !important;
     }
     
-    /* Efecto al hacer clic o tocar (active). */
-    #dynamic-scroll-btn:active {
-        transform: scale(0.95) !important; /* Ligeramente más pequeño. */
-        transition: transform 0.1s ease !important; /* Transición rápida para el clic. */
+    /* Active del botón flotante */
+    #real-floating-back-btn:active {
+        transform: translateY(-50%) translateX(-5px) scale(1.1) !important;
+        transition: all 0.1s ease !important;
     }
     
-    /* Estilos del icono SVG de la flecha dentro del botón. */
-    #dynamic-scroll-btn svg {
-        width: 24px !important;
-        height: 24px !important;
-        fill: #000 !important; /* Color de relleno negro. */
-        pointer-events: none !important; /* Asegura que el clic se registre en el botón, no en el SVG. */
+    /* Flecha del botón flotante */
+    #real-floating-back-btn::before {
+        content: '' !important;
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) rotate(-45deg) !important;
+        
+        width: 14px !important;
+        height: 14px !important;
+        border-top: 3px solid #000 !important;
+        border-right: 3px solid #000 !important;
+        border-left: none !important;
+        border-bottom: none !important;
+        
+        background: transparent !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        pointer-events: none !important;
     }
     
-    /* Animación de entrada para el botón cuando se hace visible. */
-    @keyframes slideInUp {
-        from {
-            opacity: 0;
-            transform: translateY(100px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    
-    /* Aplica la animación al botón cuando tiene la clase 'visible'. */
-    #dynamic-scroll-btn.visible {
-        animation: slideInUp 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+    /* Prevenir scroll cuando menú abierto */
+    body.menu-open {
+        overflow: hidden !important;
     }
 }
 
-/* ===== AJUSTES PARA MÓVILES PEQUEÑOS (HASTA 480px) ===== */
+/* MÓVILES PEQUEÑOS */
 @media screen and (max-width: 480px) {
-    #dynamic-scroll-btn {
-        width: 50px !important; /* Un poco más pequeño. */
-        height: 50px !important;
-        bottom: 25px !important; /* Ajuste de posición. */
-        right: 15px !important;
+    .nav-toggle {
+        min-height: 40px !important;
+        min-width: 40px !important;
+        padding: 6px !important;
     }
     
-    #dynamic-scroll-btn svg {
-        width: 20px !important; /* Icono más pequeño. */
-        height: 20px !important;
+    .nav-logo {
+        padding-left: 80px !important; /* Espacio para contador de visitas */
+    }
+    
+    .nav-logo h2 {
+        font-size: 22px !important;
+    }
+    
+    .nav-link {
+        font-size: 18px !important;
+        padding: 15px 20px !important;
+    }
+    
+    #real-floating-back-btn {
+        width: 55px !important;
+        height: 55px !important;
+        right: 12px !important;
+    }
+    
+    #real-floating-back-btn::before {
+        width: 12px !important;
+        height: 12px !important;
+        border-top: 2.5px solid #000 !important;
+        border-right: 2.5px solid #000 !important;
+    }
+    
+    /* Contador de visitas en móviles pequeños */
+    .visitor-counter-container {
+        font-size: 12px !important;
+        padding: 6px 10px !important;
+        top: 24px !important;
+        left: 15px !important;
+    }
+    
+    .visitor-counter-container .fa-eye {
+        font-size: 14px !important;
     }
 }
 
-/* ===== OCULTAR COMPLETAMENTE EL BOTÓN EN ESCRITORIO (MÁS DE 768px) ===== */
+/* DESKTOP - OCULTAR BOTÓN FLOTANTE */
 @media screen and (min-width: 769px) {
-    #dynamic-scroll-btn {
-        display: none !important; /* Asegura que no aparezca en pantallas grandes. */
+    #real-floating-back-btn {
+        display: none !important;
+    }
+    
+    .nav-toggle {
+        display: none !important;
+    }
+    
+    .nav-menu {
+        position: static !important;
+        width: auto !important;
+        background: transparent !important;
+        flex-direction: row !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+    
+    .nav-menu li {
+        margin: 0 15px !important;
+        width: auto !important;
+        max-width: none !important;
+    }
+    
+    .nav-link {
+        font-size: 18px !important;
+        padding: 0 !important;
+        width: auto !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        border: none !important;
+        text-transform: none !important;
+        letter-spacing: normal !important;
     }
 }
