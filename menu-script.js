@@ -1,10 +1,14 @@
 // ===== SOLUCIÓN DEFINITIVA: BOTÓN FLOTANTE QUE ACOMPAÑA AL SCROLL =====
 
+// Mensaje de inicio para depuración.
 console.log('🚀 Iniciando solución de botón flotante dinámico...');
 
 // ===== CSS OPTIMIZADO PARA BOTÓN FLOTANTE =====
+// Este CSS se inyecta directamente en el <head> para asegurar que las reglas se apliquen.
+// Se usan !important para sobrescribir posibles conflictos de estilos.
 const floatingButtonCSS = `
 /* ===== ELIMINAR CUALQUIER BOTÓN PREVIO (REGLA DE SEGURIDAD) ===== */
+/* Asegura que no haya otros botones de "volver arriba" que puedan causar conflictos. */
 .scroll-to-top,
 #scrollToTop,
 button[aria-label*="arriba"],
@@ -14,96 +18,96 @@ button[id*="scroll"],
     display: none !important;
 }
 
-/* ===== BOTÓN FLOTANTE MÓVIL ===== */
+/* ===== ESTILOS ESPECÍFICOS PARA DISPOSITIVOS MÓVILES (HASTA 768px) ===== */
 @media screen and (max-width: 768px) {
     
-    /* BOTÓN FLOTANTE FIJO */
+    /* BOTÓN FLOTANTE FIJO EN LA ESQUINA INFERIOR DERECHA */
     #dynamic-scroll-btn {
-        /* POSITION FIXED - FUNDAMENTAL */
+        /* Propiedad FUNDAMENTAL para que el botón "acompañe" al scroll. */
         position: fixed !important;
-        bottom: 30px !important;
-        right: 20px !important;
+        bottom: 30px !important; /* Distancia desde la parte inferior. */
+        right: 20px !important;  /* Distancia desde la parte derecha. */
         
-        /* Tamaño */
+        /* Dimensiones del botón. */
         width: 56px !important;
         height: 56px !important;
         
-        /* Diseño circular */
+        /* Estilo circular y borde. */
         border-radius: 50% !important;
         border: 2px solid rgba(255, 255, 255, 0.3) !important;
-        outline: none !important;
+        outline: none !important; /* Elimina el contorno al enfocar. */
         
-        /* Fondo verde degradado */
+        /* Fondo con un degradado de color verde. */
         background: linear-gradient(135deg, #E0FD2C 0%, #C7E525 100%) !important;
         
-        /* Sombra para efecto flotante */
+        /* Sombra para darle un efecto flotante y de profundidad. */
         box-shadow: 
-            0 4px 12px rgba(0, 0, 0, 0.3),
-            0 2px 8px rgba(224, 253, 44, 0.4),
-            inset 0 1px 2px rgba(255, 255, 255, 0.3) !important;
+            0 4px 12px rgba(0, 0, 0, 0.3), /* Sombra general. */
+            0 2px 8px rgba(224, 253, 44, 0.4), /* Resplandor verde. */
+            inset 0 1px 2px rgba(255, 255, 255, 0.3) !important; /* Sombra interna para relieve. */
         
-        /* Flexbox para centrar contenido */
+        /* Usa Flexbox para centrar el icono de la flecha dentro del botón. */
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
         
-        /* Z-index alto */
+        /* Z-index alto para asegurar que esté por encima de otros elementos. */
         z-index: 9999 !important;
         
-        /* Interactividad */
-        cursor: pointer !important;
-        touch-action: manipulation !important;
-        -webkit-tap-highlight-color: transparent !important;
-        user-select: none !important;
+        /* Propiedades de interactividad y usabilidad táctil. */
+        cursor: pointer !important; /* Cambia el cursor al pasar por encima. */
+        touch-action: manipulation !important; /* Optimización para touch. */
+        -webkit-tap-highlight-color: transparent !important; /* Elimina el resplandor al tocar. */
+        user-select: none !important; /* Evita que el texto sea seleccionable. */
         
-        /* Transiciones suaves */
+        /* Transiciones suaves para todas las propiedades al cambiar de estado. */
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
         
-        /* Estado inicial oculto */
+        /* Estado inicial: oculto y desplazado hacia abajo para la animación de entrada. */
         opacity: 0 !important;
         visibility: hidden !important;
-        pointer-events: none !important;
-        transform: translateY(100px) !important;
+        pointer-events: none !important; /* No interactuable cuando está oculto. */
+        transform: translateY(100px) !important; /* Desplazado 100px hacia abajo. */
         
-        /* Reset */
+        /* Reset de propiedades para evitar herencias no deseadas. */
         margin: 0 !important;
         padding: 0 !important;
         font-size: 0 !important;
         overflow: hidden !important;
     }
     
-    /* Estado visible */
+    /* Estado visible del botón: aparece con una animación. */
     #dynamic-scroll-btn.visible {
         opacity: 1 !important;
         visibility: visible !important;
         pointer-events: auto !important;
-        transform: translateY(0) !important;
+        transform: translateY(0) !important; /* Vuelve a su posición original. */
     }
     
-    /* Hover */
+    /* Efecto al pasar el ratón por encima (hover). */
     #dynamic-scroll-btn:hover {
-        background: linear-gradient(135deg, #C7E525 0%, #B8D61F 100%) !important;
-        transform: scale(1.1) !important;
+        background: linear-gradient(135deg, #C7E525 0%, #B8D61F 100%) !important; /* Cambio de degradado. */
+        transform: scale(1.1) !important; /* Ligeramente más grande. */
         box-shadow: 
             0 6px 20px rgba(0, 0, 0, 0.4),
-            0 4px 12px rgba(224, 253, 44, 0.6) !important;
+            0 4px 12px rgba(224, 253, 44, 0.6) !important; /* Sombra más pronunciada. */
     }
     
-    /* Active */
+    /* Efecto al hacer clic o tocar (active). */
     #dynamic-scroll-btn:active {
-        transform: scale(0.95) !important;
-        transition: transform 0.1s ease !important;
+        transform: scale(0.95) !important; /* Ligeramente más pequeño. */
+        transition: transform 0.1s ease !important; /* Transición rápida para el clic. */
     }
     
-    /* Icono de flecha */
+    /* Estilos del icono SVG de la flecha dentro del botón. */
     #dynamic-scroll-btn svg {
         width: 24px !important;
         height: 24px !important;
-        fill: #000 !important;
-        pointer-events: none !important;
+        fill: #000 !important; /* Color de relleno negro. */
+        pointer-events: none !important; /* Asegura que el clic se registre en el botón, no en el SVG. */
     }
     
-    /* Animación de entrada */
+    /* Animación de entrada para el botón cuando se hace visible. */
     @keyframes slideInUp {
         from {
             opacity: 0;
@@ -115,117 +119,133 @@ button[id*="scroll"],
         }
     }
     
+    /* Aplica la animación al botón cuando tiene la clase 'visible'. */
     #dynamic-scroll-btn.visible {
         animation: slideInUp 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
     }
 }
 
-/* MÓVILES PEQUEÑOS */
+/* ===== AJUSTES PARA MÓVILES PEQUEÑOS (HASTA 480px) ===== */
 @media screen and (max-width: 480px) {
     #dynamic-scroll-btn {
-        width: 50px !important;
+        width: 50px !important; /* Un poco más pequeño. */
         height: 50px !important;
-        bottom: 25px !important;
+        bottom: 25px !important; /* Ajuste de posición. */
         right: 15px !important;
     }
     
     #dynamic-scroll-btn svg {
-        width: 20px !important;
+        width: 20px !important; /* Icono más pequeño. */
         height: 20px !important;
     }
 }
 
-/* DESKTOP - Ocultar completamente */
+/* ===== OCULTAR COMPLETAMENTE EL BOTÓN EN ESCRITORIO (MÁS DE 768px) ===== */
 @media screen and (min-width: 769px) {
     #dynamic-scroll-btn {
-        display: none !important;
+        display: none !important; /* Asegura que no aparezca en pantallas grandes. */
     }
 }
 `;
 
 // ===== VARIABLES GLOBALES =====
-let scrollButton = null;
-let isMenuOpen = false;
-let menuButton, mobileMenu;
-let scrollTimeout;
+let scrollButton = null; // Referencia al elemento del botón.
+let isMenuOpen = false; // Estado del menú móvil.
+let menuButton, mobileMenu; // Referencias a elementos del menú.
+let throttledUpdate; // Variable para la función de actualización con "throttle".
 
 // ===== FUNCIÓN: CREAR BOTÓN FLOTANTE =====
 function createScrollButton() {
     console.log('Attempting to create scroll button...');
-    // Solo crear en móviles
+    // El botón solo se crea si el ancho de la ventana es de un dispositivo móvil.
     if (window.innerWidth > 768) {
         console.log('Desktop view, not creating scroll button.');
         return;
     }
     
-    // Eliminar botones anteriores para evitar duplicados
+    // Elimina cualquier botón existente con el mismo ID o clases para evitar duplicados.
     const existingButtons = document.querySelectorAll('#dynamic-scroll-btn, #ultra-floating-btn, .scroll-to-top');
     existingButtons.forEach(btn => {
         console.log('Removing existing button:', btn.id || btn.className);
         btn.remove();
     });
     
-    // Crear nuevo botón
+    // Crea el nuevo elemento <button>.
     scrollButton = document.createElement('button');
-    scrollButton.id = 'dynamic-scroll-btn';
+    scrollButton.id = 'dynamic-scroll-btn'; // Asigna un ID único.
     scrollButton.type = 'button';
-    scrollButton.setAttribute('aria-label', 'Volver arriba');
+    scrollButton.setAttribute('aria-label', 'Volver arriba'); // Atributo para accesibilidad.
+    // Inserta el SVG de la flecha dentro del botón.
     scrollButton.innerHTML = `
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M7 14L12 9L17 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
     `;
     
-    // Event listeners
+    // Añade los "event listeners" para el clic y el toque.
     scrollButton.addEventListener('click', scrollToTop);
     scrollButton.addEventListener('touchstart', function(e) {
-        e.preventDefault(); // Prevenir el scroll por defecto en touch
+        e.preventDefault(); // Previene el comportamiento de scroll por defecto en touch.
         scrollToTop();
-    }, { passive: false });
+    }, { passive: false }); // 'passive: false' es importante para 'preventDefault'.
     
-    // Añadir al body
+    // Añade el botón al cuerpo del documento.
     document.body.appendChild(scrollButton);
     
     console.log('✅ Botón flotante creado y añadido al DOM.');
-    return scrollButton;
+    return scrollButton; // Devuelve la referencia al botón creado.
 }
 
-// ===== FUNCIÓN: SCROLL AL INICIO =====
+// ===== FUNCIÓN: SCROLL AL INICIO DE LA PÁGINA =====
 function scrollToTop() {
     console.log('Scrolling to top...');
+    // Realiza un scroll suave hasta la parte superior de la página.
     window.scrollTo({
         top: 0,
         behavior: 'smooth'
     });
 }
 
-// ===== FUNCIÓN: ACTUALIZAR VISIBILIDAD DEL BOTÓN =====
+// ===== FUNCIÓN: ACTUALIZAR VISIBILIDAD DEL BOTÓN BASADO EN EL SCROLL =====
 function updateButtonVisibility() {
-    // console.log('updateButtonVisibility called'); // Descomentar para depuración intensiva
-    if (!scrollButton || window.innerWidth > 768) {
-        // console.log('Button not ready or desktop view. scrollButton:', scrollButton, 'innerWidth:', window.innerWidth);
+    // console.log('updateButtonVisibility called'); // Descomentar para depuración intensiva.
+    // Si el botón no existe o no estamos en una vista móvil, sal de la función.
+    if (!scrollButton) {
+        console.log('Button element not found, cannot update visibility.');
+        return;
+    }
+    if (window.innerWidth > 768) {
+        // Si estamos en escritorio, asegúrate de que el botón esté oculto.
+        if (scrollButton.classList.contains('visible')) {
+            scrollButton.classList.remove('visible');
+            console.log('🔽 Botón oculto (desktop view)');
+        }
         return;
     }
     
+    // Obtiene la posición actual del scroll vertical.
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const threshold = 300; // Mostrar después de 300px de scroll
+    const threshold = 300; // El botón se mostrará después de 300px de scroll hacia abajo.
     
-    // console.log('scrollTop:', scrollTop, 'threshold:', threshold); // Descomentar para depuración intensiva
+    // console.log('scrollTop:', scrollTop, 'threshold:', threshold); // Descomentar para depuración intensiva.
 
+    // Si el scroll supera el umbral, el botón se hace visible.
     if (scrollTop > threshold) {
         if (!scrollButton.classList.contains('visible')) {
-            scrollButton.classList.add('visible');
+            scrollButton.classList.add('visible'); // Añade la clase 'visible'.
             console.log('🔼 Botón visible (added class)');
         }
     } else {
+        // Si el scroll está por debajo del umbral, el botón se oculta.
         if (scrollButton.classList.contains('visible')) {
-            scrollButton.classList.remove('visible');
+            scrollButton.classList.remove('visible'); // Remueve la clase 'visible'.
             console.log('🔽 Botón oculto (removed class)');
         }
     }
 }
 
-// ===== FUNCIÓN: THROTTLED SCROLL HANDLER =====
+// ===== FUNCIÓN: THROTTLE PARA OPTIMIZAR EVENTOS DE SCROLL =====
+// Limita la frecuencia con la que se ejecuta una función, mejorando el rendimiento.
 function throttle(func, wait) {
     let timeout;
     let lastArgs;
@@ -259,30 +279,32 @@ function throttle(func, wait) {
 }
 
 
-// ===== FUNCIÓN: CONFIGURAR MENÚ =====
+// ===== FUNCIÓN: CONFIGURAR EL MENÚ DE NAVEGACIÓN MÓVIL =====
 function setupMenu() {
-    menuButton = document.getElementById('mobile-menu');
-    mobileMenu = document.getElementById('nav-menu');
+    menuButton = document.getElementById('mobile-menu'); // Botón de hamburguesa.
+    mobileMenu = document.getElementById('nav-menu');    // Menú de navegación.
     
+    // Si no se encuentran los elementos del menú, muestra una advertencia y sal.
     if (!menuButton || !mobileMenu) {
         console.warn('⚠️ No se encontraron elementos de menú (mobile-menu o nav-menu).');
         return;
     }
     
-    // Asegurar estructura del menú
+    // Asegura que el botón de hamburguesa tenga las barras si no las tiene.
     if (menuButton.children.length === 0) {
         menuButton.innerHTML = '<span class="bar"></span><span class="bar"></span><span class="bar"></span>';
     }
     
-    // Configurar enlaces del menú
+    // Define los ítems del menú.
     const menuItems = [
         { text: 'Inicio', target: '#inicio' },
         { text: 'Servicios', target: '#servicios' },
         { text: 'Contacto', target: '#contacto' },
-        { text: 'Suscripción', target: '#contacto' } // Se mantiene apuntando a contacto
+        { text: 'Suscripción', target: '#contacto' } // Apunta a la sección de contacto.
     ];
     
-    mobileMenu.innerHTML = ''; // Limpiar menú existente
+    mobileMenu.innerHTML = ''; // Limpia el contenido actual del menú.
+    // Crea y añade cada ítem al menú.
     menuItems.forEach(item => {
         const li = document.createElement('li');
         li.className = 'nav-item';
@@ -290,6 +312,7 @@ function setupMenu() {
         a.href = item.target;
         a.className = 'nav-link';
         a.textContent = item.text;
+        // Añade un "event listener" para cerrar el menú y hacer scroll al hacer clic.
         a.addEventListener('click', function(e) {
             e.preventDefault();
             closeMenu();
@@ -302,7 +325,7 @@ function setupMenu() {
         mobileMenu.appendChild(li);
     });
     
-    // Event listeners
+    // Añade "event listeners" para abrir/cerrar el menú y cerrarlo al hacer clic fuera.
     menuButton.addEventListener('click', toggleMenu);
     document.addEventListener('click', function(e) {
         if (isMenuOpen && !menuButton.contains(e.target) && !mobileMenu.contains(e.target)) {
@@ -313,11 +336,12 @@ function setupMenu() {
     console.log('✅ Menú configurado.');
 }
 
+// Funciones para abrir y cerrar el menú.
 function openMenu() {
     isMenuOpen = true;
     if (menuButton) menuButton.classList.add('active');
     if (mobileMenu) mobileMenu.classList.add('active');
-    document.body.style.overflow = 'hidden'; // Prevenir scroll del body cuando el menú está abierto
+    document.body.style.overflow = 'hidden'; // Evita el scroll del fondo cuando el menú está abierto.
     console.log('Menu opened.');
 }
 
@@ -325,7 +349,7 @@ function closeMenu() {
     isMenuOpen = false;
     if (menuButton) menuButton.classList.remove('active');
     if (mobileMenu) mobileMenu.classList.remove('active');
-    document.body.style.overflow = ''; // Restaurar scroll del body
+    document.body.style.overflow = ''; // Restaura el scroll del fondo.
     console.log('Menu closed.');
 }
 
@@ -333,16 +357,16 @@ function toggleMenu() {
     isMenuOpen ? closeMenu() : openMenu();
 }
 
-// ===== FUNCIÓN: APLICAR CSS =====
+// ===== FUNCIÓN: APLICAR EL CSS DEL BOTÓN FLOTANTE =====
 function applyCSS() {
-    // Eliminar estilos anteriores inyectados por este script (si existen)
+    // Busca y elimina cualquier estilo inyectado previamente por este script.
     const oldInjectedStyles = document.getElementById('dynamic-floating-button-css');
     if (oldInjectedStyles) {
         oldInjectedStyles.remove();
         console.log('Removed old injected CSS.');
     }
     
-    // Aplicar nuevo CSS
+    // Crea un nuevo elemento <style> e inyecta el CSS definido.
     const style = document.createElement('style');
     style.id = 'dynamic-floating-button-css';
     style.innerHTML = floatingButtonCSS;
@@ -351,109 +375,119 @@ function applyCSS() {
     console.log('✅ CSS del botón flotante aplicado.');
 }
 
-// ===== FUNCIÓN: CONFIGURAR EVENTOS DE SCROLL =====
+// ===== FUNCIÓN: CONFIGURAR LOS EVENTOS DE SCROLL =====
 function setupScrollEvents() {
-    const throttledUpdate = throttle(updateButtonVisibility, 100);
+    // Asigna la función de actualización con "throttle" a la variable global.
+    throttledUpdate = throttle(updateButtonVisibility, 100);
     
-    // Eventos de scroll
+    // Añade los "event listeners" para el scroll y el touchmove (para dispositivos táctiles).
     window.addEventListener('scroll', throttledUpdate, { passive: true });
-    window.addEventListener('touchmove', throttledUpdate, { passive: true }); // Para dispositivos táctiles
+    window.addEventListener('touchmove', throttledUpdate, { passive: true });
     
-    // Verificación inicial
+    // Realiza una verificación inicial de la visibilidad del botón poco después de la carga.
     setTimeout(updateButtonVisibility, 100);
     
     console.log('✅ Eventos de scroll configurados.');
 }
 
-// ===== FUNCIÓN: MONITOREAR Y MANTENER BOTÓN =====
+// ===== FUNCIÓN: MONITOREAR Y MANTENER EL BOTÓN FLOTANTE =====
+// Esta función se ejecuta periódicamente para asegurar que el botón esté presente.
 function monitorButton() {
     setInterval(() => {
+        // Si estamos en móvil y el botón no existe, lo recrea y actualiza su visibilidad.
         if (window.innerWidth <= 768 && !document.getElementById('dynamic-scroll-btn')) {
             console.log('⚠️ Botón flotante perdido, recreando...');
             createScrollButton();
             updateButtonVisibility();
         }
-    }, 2000); // Chequear cada 2 segundos
+    }, 2000); // Se chequea cada 2 segundos.
 }
 
-// ===== FUNCIÓN: INICIALIZACIÓN PRINCIPAL =====
+// ===== FUNCIÓN: INICIALIZACIÓN PRINCIPAL DEL SISTEMA DEL BOTÓN FLOTANTE =====
 function initFloatingButton() {
     console.log('🎯 Iniciando sistema de botón flotante...');
     
     try {
-        // 1. Aplicar CSS (siempre primero para que las reglas estén disponibles)
+        // 1. Aplica el CSS del botón.
         applyCSS();
         
-        // 2. Configurar menú (independiente del botón, pero importante para la UX)
+        // 2. Configura el menú (independiente del botón, pero importante para la UX).
         setupMenu();
         
-        // 3. Crear botón (solo si es necesario, la función ya lo comprueba)
+        // 3. Crea el botón (la función ya comprueba si es necesario).
         createScrollButton();
         
-        // 4. Configurar eventos de scroll
+        // 4. Configura los eventos de scroll para controlar la visibilidad.
         setupScrollEvents();
         
-        // 5. Monitorear el botón (para recrearlo si es eliminado por alguna razón)
+        // 5. Inicia el monitoreo del botón para asegurar su persistencia.
         monitorButton();
         
         console.log('✅ Sistema de botón flotante inicializado correctamente.');
         
     } catch (error) {
+        // Captura y muestra cualquier error durante la inicialización.
         console.error('❌ Error en inicialización del botón flotante:', error);
     }
 }
 
-// ===== EVENTOS DE RESIZE =====
+// ===== EVENTOS DE REDIMENSIONAMIENTO DE LA VENTANA (RESIZE) =====
+// Se usa "throttle" para optimizar la ejecución en el redimensionamiento.
 window.addEventListener('resize', throttle(() => {
     console.log('Window resized. Inner width:', window.innerWidth);
     if (window.innerWidth > 768) {
-        // Eliminar botón en desktop
+        // Si la ventana es de escritorio, elimina el botón si existe.
         if (scrollButton) {
             scrollButton.remove();
             scrollButton = null;
             console.log('Scroll button removed for desktop view.');
         }
-        if (isMenuOpen) closeMenu(); // Asegurarse de cerrar el menú en desktop si estaba abierto
+        // Asegúrate de cerrar el menú si estaba abierto en escritorio.
+        if (isMenuOpen) closeMenu();
     } else {
-        // Crear botón si no existe en móvil
+        // Si la ventana es móvil, crea el botón si no existe.
         if (!document.getElementById('dynamic-scroll-btn')) {
             console.log('Detected mobile view, creating scroll button if not exists.');
             createScrollButton();
         }
-        updateButtonVisibility(); // Asegurarse de que la visibilidad se actualice en el nuevo tamaño
+        // Actualiza la visibilidad del botón para el nuevo tamaño.
+        updateButtonVisibility();
     }
-}, 300));
+}, 300)); // Se ejecuta como máximo cada 300ms.
 
-// ===== INICIALIZACIÓN =====
-// Asegurar que el script se ejecute cuando el DOM esté listo
+// ===== INICIALIZACIÓN DEL SCRIPT AL CARGAR EL DOM =====
+// Asegura que el script se ejecute cuando el DOM (estructura HTML) esté completamente cargado.
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initFloatingButton);
 } else {
-    // Si el DOM ya está cargado (ej. script cargado de forma asíncrona)
+    // Si el DOM ya está cargado (por ejemplo, si el script se carga de forma asíncrona),
+    // ejecuta la inicialización inmediatamente.
     initFloatingButton();
 }
 
-// Inicialización adicional después de load (como respaldo)
+// Inicialización adicional después del evento 'load' (como respaldo).
 window.addEventListener('load', () => {
     setTimeout(() => {
+        // Vuelve a verificar y recrear el botón en móvil si por alguna razón no se creó.
         if (!document.getElementById('dynamic-scroll-btn') && window.innerWidth <= 768) {
             console.log('Window loaded, re-checking for scroll button on mobile.');
             createScrollButton();
             updateButtonVisibility();
         }
-    }, 500); // Pequeño retraso para asegurar que todo el contenido se haya renderizado
+    }, 500); // Pequeño retraso para asegurar que todo el contenido se haya renderizado.
 });
 
-// ===== API PÚBLICA (para depuración manual si es necesario) =====
+// ===== API PÚBLICA (PARA DEPURACIÓN MANUAL EN LA CONSOLA) =====
+// Permite controlar y depurar el sistema del botón desde la consola del navegador.
 window.floatingButtonSystem = {
-    reinit: initFloatingButton,
-    getButton: () => document.getElementById('dynamic-scroll-btn'),
-    forceShow: () => {
+    reinit: initFloatingButton, // Reinicia todo el sistema.
+    getButton: () => document.getElementById('dynamic-scroll-btn'), // Obtiene la referencia al botón.
+    forceShow: () => { // Fuerza la visibilidad del botón.
         const btn = document.getElementById('dynamic-scroll-btn');
         if (btn) btn.classList.add('visible');
         console.log('Forced scroll button show.');
     },
-    forceHide: () => {
+    forceHide: () => { // Fuerza la ocultación del botón.
         const btn = document.getElementById('dynamic-scroll-btn');
         if (btn) btn.classList.remove('visible');
         console.log('Forced scroll button hide.');
@@ -463,5 +497,6 @@ window.floatingButtonSystem = {
 console.log('✅ Sistema de botón flotante cargado.');
 console.log('📍 El botón aparecerá después de 300px de scroll.');
 console.log('🔧 Para depurar, abre la consola del navegador en tu móvil y busca los mensajes de "🚀", "✅", "🔼", "🔽", "⚠️".');
+
 
 
