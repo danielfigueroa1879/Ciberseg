@@ -610,50 +610,6 @@
             showSuccessMessage();
         }
         
-        // Scroll to top optimizado
-        function initScrollToTop() {
-            const scrollToTopBtn = document.getElementById('scrollToTop');
-            if (!scrollToTopBtn) return;
-            
-            let ticking = false;
-            
-            // Throttled scroll event
-            function updateScrollButton() {
-                if (window.pageYOffset > 300) {
-                    scrollToTopBtn.classList.add('show');
-                } else {
-                    scrollToTopBtn.classList.remove('show');
-                }
-                ticking = false;
-            }
-            
-            window.addEventListener('scroll', function() {
-                if (!ticking) {
-                    requestAnimationFrame(updateScrollButton);
-                    ticking = true;
-                }
-            }, { passive: true });
-            
-            // Click handler optimizado
-            scrollToTopBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-        }
-        
-        // Inicialización optimizada
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', function() {
-                initFormHandler();
-                initScrollToTop();
-            });
-        } else {
-            initFormHandler();
-            initScrollToTop();
-        }
         
         // Preload de recursos importantes
         function preloadResources() {
