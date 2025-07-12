@@ -220,16 +220,27 @@ const completeFixCSS = `
 /* RESPONSIVE PARA MÓVILES PEQUEÑOS */
 @media screen and (max-width: 480px) {
     #floating-back-btn {
-        bottom: 20px !important;
-        right: 15px !important;
+        top: 50% !important;
+        right: 12px !important;
+        transform: translateY(-50%) !important;
         width: 55px !important;
         height: 55px !important;
     }
     
-    #floating-back-btn::before {
-        border-left: 12px solid transparent !important;
-        border-right: 12px solid transparent !important;
-        border-bottom: 16px solid #000 !important;
+    #floating-back-btn:hover {
+        transform: translateY(-50%) translateX(-4px) scale(1.1) !important;
+    }
+    
+    #floating-back-btn:active {
+        transform: translateY(-50%) translateX(-2px) scale(1.05) !important;
+    }
+    
+    /* FLECHA MÁS PEQUEÑA EN MÓVILES PEQUEÑOS */
+    #floating-back-btn::after {
+        width: 10px !important;
+        height: 10px !important;
+        border-top: 2.5px solid #000 !important;
+        border-right: 2.5px solid #000 !important;
     }
 }
 
@@ -298,8 +309,9 @@ function createForcedFloatingButton() {
     // Forzar estilos inline como backup SOLO PARA MÓVILES
     button.style.cssText = `
         position: fixed !important;
-        bottom: 25px !important;
-        right: 20px !important;
+        top: 50% !important;
+        right: 15px !important;
+        transform: translateY(-50%) !important;
         width: 60px !important;
         height: 60px !important;
         border-radius: 50% !important;
@@ -334,13 +346,13 @@ function handleFloatingClick(e) {
         behavior: 'smooth'
     });
     
-    // Efecto visual más pronunciado
+    // Efecto visual más pronunciado - MANTENER CENTRADO
     const button = e.target.closest('#floating-back-btn');
     if (button) {
-        button.style.transform = 'translateY(-4px) scale(1.15)';
+        button.style.transform = 'translateY(-50%) translateX(-5px) scale(1.15)';
         button.style.boxShadow = '0 12px 35px rgba(0, 0, 0, 0.6), 0 6px 20px rgba(224, 253, 44, 0.8)';
         setTimeout(() => {
-            button.style.transform = '';
+            button.style.transform = 'translateY(-50%)'; // VOLVER AL CENTRO
             button.style.boxShadow = '';
         }, 250);
     }
@@ -550,7 +562,8 @@ window.completeFix = {
 };
 
 console.log('🔧 Corrección completa cargada');
-console.log('🔴 Botón flotante: SOLO MÓVILES (≤768px) - Verde circular con flecha triangular');
+console.log('🔴 Botón flotante: CENTRO VERTICAL del lado derecho - Solo móviles');
+console.log('📍 Posición: 50% altura, pegado al borde derecho');
 console.log('💻 Desktop: Botón flotante OCULTO');
 console.log('🍔 Menú hamburguesa: X animada corregida');
 console.log('📱 Para debug: completeFix.reinit()');
