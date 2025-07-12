@@ -67,23 +67,91 @@ const completeFixCSS = `
     transform: translateY(-1px) scale(1.05) !important;
 }
 
-/* FLECHA TRIANGULAR - SOLO PUNTA */
+/* FLECHA TRIANGULAR - PUNTA MÁS GRANDE Y VISIBLE */
 #floating-back-btn::before {
     content: '' !important;
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
-    transform: translate(-50%, -60%) !important; /* Centrado perfecto */
+    transform: translate(-50%, -55%) !important; /* Centrado perfecto */
     
-    /* Triángulo hacia arriba */
+    /* Triángulo más grande hacia arriba */
     width: 0 !important;
     height: 0 !important;
-    border-left: 10px solid transparent !important;
-    border-right: 10px solid transparent !important;
-    border-bottom: 14px solid #000 !important; /* Flecha negra */
+    border-left: 14px solid transparent !important; /* MÁS GRANDE */
+    border-right: 14px solid transparent !important; /* MÁS GRANDE */
+    border-bottom: 18px solid #000 !important; /* FLECHA MÁS ALTA Y NEGRA */
     
     /* Sin otros bordes */
     border-top: none !important;
+}
+
+/* SOMBRA FLOTANTE MÁS PRONUNCIADA */
+#floating-back-btn {
+    /* Posicionamiento absoluto y fijo */
+    position: fixed !important;
+    bottom: 25px !important;
+    right: 20px !important;
+    
+    /* Tamaño fijo */
+    width: 60px !important; /* Un poco más grande */
+    height: 60px !important; /* Un poco más grande */
+    
+    /* Diseño circular */
+    border-radius: 50% !important;
+    border: none !important;
+    outline: none !important;
+    
+    /* Fondo verde brillante */
+    background: linear-gradient(135deg, #E0FD2C 0%, #C7E525 100%) !important;
+    
+    /* Sombra FLOTANTE más pronunciada */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 
+                0 4px 15px rgba(224, 253, 44, 0.7),
+                0 2px 8px rgba(0, 0, 0, 0.3) !important;
+    
+    /* Flexbox para centrar */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    
+    /* Z-index súper alto */
+    z-index: 99999 !important;
+    
+    /* Cursor pointer */
+    cursor: pointer !important;
+    
+    /* Touch optimizado */
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: transparent !important;
+    
+    /* Transición suave */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    
+    /* Estado inicial visible */
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+    
+    /* Asegurar que esté por encima de todo */
+    pointer-events: auto !important;
+    user-select: none !important;
+    
+    /* Borde sutil para definir mejor */
+    border: 2px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+#floating-back-btn:hover {
+    background: linear-gradient(135deg, #C7E525 0%, #B8D61F 100%) !important;
+    transform: translateY(-4px) scale(1.1) !important; /* Más flotación */
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 
+                0 6px 20px rgba(224, 253, 44, 0.8),
+                0 3px 12px rgba(0, 0, 0, 0.4) !important;
+}
+
+#floating-back-btn:active {
+    transform: translateY(-2px) scale(1.05) !important;
+    transition: all 0.1s ease !important;
 }
 
 /* MENÚ HAMBURGUESA - BARRAS CORREGIDAS */
@@ -149,25 +217,19 @@ const completeFixCSS = `
     }
 }
 
-/* FORZAR VISIBILIDAD EN TODOS LOS DISPOSITIVOS */
-@media screen and (max-width: 768px) {
-    #floating-back-btn {
-        display: flex !important;
-    }
-}
-
+/* RESPONSIVE PARA MÓVILES PEQUEÑOS */
 @media screen and (max-width: 480px) {
     #floating-back-btn {
         bottom: 20px !important;
         right: 15px !important;
-        width: 50px !important;
-        height: 50px !important;
+        width: 55px !important;
+        height: 55px !important;
     }
     
     #floating-back-btn::before {
-        border-left: 8px solid transparent !important;
-        border-right: 8px solid transparent !important;
-        border-bottom: 12px solid #000 !important;
+        border-left: 12px solid transparent !important;
+        border-right: 12px solid transparent !important;
+        border-bottom: 16px solid #000 !important;
     }
 }
 
@@ -232,11 +294,11 @@ function createForcedFloatingButton() {
         position: fixed !important;
         bottom: 25px !important;
         right: 20px !important;
-        width: 55px !important;
-        height: 55px !important;
+        width: 60px !important;
+        height: 60px !important;
         border-radius: 50% !important;
-        background: #E0FD2C !important;
-        border: none !important;
+        background: linear-gradient(135deg, #E0FD2C 0%, #C7E525 100%) !important;
+        border: 2px solid rgba(255, 255, 255, 0.2) !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
@@ -244,7 +306,8 @@ function createForcedFloatingButton() {
         opacity: 1 !important;
         visibility: visible !important;
         cursor: pointer !important;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 4px 15px rgba(224, 253, 44, 0.7) !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     `;
     
     console.log('✅ Botón flotante creado y forzado');
@@ -265,13 +328,15 @@ function handleFloatingClick(e) {
         behavior: 'smooth'
     });
     
-    // Efecto visual
+    // Efecto visual más pronunciado
     const button = e.target.closest('#floating-back-btn');
     if (button) {
-        button.style.transform = 'translateY(-2px) scale(1.1)';
+        button.style.transform = 'translateY(-4px) scale(1.15)';
+        button.style.boxShadow = '0 12px 35px rgba(0, 0, 0, 0.6), 0 6px 20px rgba(224, 253, 44, 0.8)';
         setTimeout(() => {
             button.style.transform = '';
-        }, 200);
+            button.style.boxShadow = '';
+        }, 250);
     }
 }
 
