@@ -116,7 +116,7 @@ const mobileCorrectedCSS = `
         left: 0 !important;
         top: 80px !important; /* EXACTAMENTE debajo del header */
         width: 100% !important;
-        background: linear-gradient(135deg, rgba(0, 0, 0, 0.98), rgba(20, 20, 20, 0.95)) !important;
+        background: linear-gradient(135deg, rgba(45, 45, 45, 0.95), rgba(60, 60, 60, 0.92)) !important;
         backdrop-filter: blur(15px) !important;
         -webkit-backdrop-filter: blur(15px) !important;
         
@@ -128,10 +128,10 @@ const mobileCorrectedCSS = `
         
         /* Espaciado y diseño */
         padding: 25px 20px 30px 20px !important;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6) !important;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4) !important;
         border-bottom-left-radius: 25px !important;
         border-bottom-right-radius: 25px !important;
-        border: 2px solid rgba(224, 253, 44, 0.3) !important;
+        border: 2px solid rgba(224, 253, 44, 0.4) !important;
         border-top: none !important;
         
         /* Z-index DEBAJO del header */
@@ -178,8 +178,8 @@ const mobileCorrectedCSS = `
         text-align: center !important;
         border-radius: 12px !important;
         transition: all 0.25s ease !important;
-        background: rgba(255, 255, 255, 0.05) !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        background: rgba(255, 255, 255, 0.08) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
         margin: 0 !important;
         box-sizing: border-box !important;
     }
@@ -296,13 +296,13 @@ function createFullMenu() {
         return;
     }
     
-    // LOS 5 ENLACES REQUERIDOS
+    // LOS 5 ENLACES REQUERIDOS CON NAVEGACIÓN FUNCIONAL
     const menuItems = [
-        { text: 'Inicio', href: '#inicio' },
-        { text: 'Servicios', href: '#servicios' },
-        { text: 'Misión', href: '.mission-vision' }, // Apunta a la sección existente
-        { text: 'Contacto', href: '#contacto' },
-        { text: 'Suscripción', href: '#contacto' } // También va a contacto (formulario)
+        { text: 'Inicio', href: '#inicio', target: 'hero' },
+        { text: 'Servicios', href: '#servicios', target: 'iot-section' },
+        { text: 'Misión', href: '#mision', target: 'mission-vision' },
+        { text: 'Contacto', href: '#contacto', target: 'contact-section' },
+        { text: 'Suscripción', href: '#suscripcion', target: 'contact-section' }
     ];
     
     // Limpiar contenido actual
@@ -318,19 +318,28 @@ function createFullMenu() {
         a.className = 'nav-link';
         a.textContent = item.text;
         
-        // Click handler para cerrar menú
+        // Click handler con navegación funcional
         a.addEventListener('click', (e) => {
-            console.log(`🔗 Click en: ${item.text}`);
+            e.preventDefault(); // Prevenir comportamiento por defecto
+            console.log(`🔗 Navegando a: ${item.text}`);
+            
+            // Cerrar menú primero
+            closeMenu();
+            
+            // Navegar a la sección después de cerrar el menú
             setTimeout(() => {
-                closeMenu();
-            }, 100);
+                navigateToSection(item.target, item.href);
+            }, 300);
         });
         
         li.appendChild(a);
         menuContainer.appendChild(li);
+        
+        console.log(`📝 Enlace creado: ${item.text} → ${item.target}`);
     });
     
-    console.log(`✅ Menú creado con ${menuItems.length} enlaces`);
+    console.log(`✅ Menú completo creado con ${menuItems.length} enlaces`);
+    console.log('📋 Enlaces: Inicio, Servicios, Misión, Contacto, Suscripción');
 }
 
 // ===== FUNCIÓN: ABRIR MENÚ =====
@@ -349,7 +358,52 @@ function openMenu() {
     console.log('📂 Menú abierto');
 }
 
-// ===== FUNCIÓN: CERRAR MENÚ =====
+// ===== FUNCIÓN: NAVEGACIÓN A SECCIONES =====
+function navigateToSection(targetClass, fallbackId) {
+    let targetElement = null;
+    
+    // 1. Buscar por clase (para secciones existentes)
+    if (targetClass === 'hero') {
+        targetElement = document.querySelector('.hero');
+    } else if (targetClass === 'iot-section') {
+        targetElement = document.querySelector('.iot-section');
+    } else if (targetClass === 'mission-vision') {
+        targetElement = document.querySelector('.mission-vision');
+    } else if (targetClass === 'contact-section') {
+        targetElement = document.querySelector('.contact-section');
+    }
+    
+    // 2. Si no encuentra por clase, buscar por ID
+    if (!targetElement && fallbackId) {
+        const cleanId = fallbackId.replace('#', '');
+        targetElement = document.getElementById(cleanId);
+    }
+    
+    // 3. Ejecutar scroll suave
+    if (targetElement) {
+        console.log(`✅ Navegando a sección: ${targetClass}`);
+        targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+            inline: 'nearest'
+        });
+        
+        // Agregar efecto visual temporal
+        targetElement.style.transition = 'all 0.3s ease';
+        targetElement.style.transform = 'scale(1.01)';
+        setTimeout(() => {
+            targetElement.style.transform = 'scale(1)';
+        }, 300);
+        
+    } else {
+        console.warn(`⚠️ No se encontró la sección: ${targetClass} o ${fallbackId}`);
+        
+        // Fallback: scroll al top si es inicio
+        if (targetClass === 'hero') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+}
 function closeMenu() {
     if (!isMenuOpen) return;
     
@@ -433,15 +487,43 @@ function setupEvents() {
     console.log('⚡ Eventos configurados');
 }
 
-// ===== FUNCIÓN: VERIFICAR HTML =====
+// ===== FUNCIÓN: VERIFICAR Y ARREGLAR HTML =====
 function verifyHTML() {
-    // Asegurar que existe la sección misión
+    // Asegurar que existe la sección misión con ID
     const missionSection = document.querySelector('.mission-vision');
     if (missionSection && !missionSection.id) {
         missionSection.id = 'mision';
+        console.log('✅ ID "mision" agregado a .mission-vision');
     }
     
-    console.log('🔍 HTML verificado');
+    // Asegurar que existe sección de servicios con ID
+    const servicesSection = document.querySelector('.iot-section');
+    if (servicesSection && !servicesSection.id) {
+        servicesSection.id = 'servicios';
+        console.log('✅ ID "servicios" agregado a .iot-section');
+    }
+    
+    // Asegurar que existe sección hero con ID
+    const heroSection = document.querySelector('.hero');
+    if (heroSection && !heroSection.id) {
+        heroSection.id = 'inicio';
+        console.log('✅ ID "inicio" agregado a .hero');
+    }
+    
+    // Asegurar que existe sección contacto con ID
+    const contactSection = document.querySelector('.contact-section');
+    if (contactSection && !contactSection.id) {
+        contactSection.id = 'contacto';
+        console.log('✅ ID "contacto" agregado a .contact-section');
+    }
+    
+    // Crear referencia para suscripción (mismo que contacto)
+    if (contactSection && !document.getElementById('suscripcion')) {
+        contactSection.setAttribute('data-suscripcion', 'true');
+        console.log('✅ Referencia "suscripcion" agregada a contacto');
+    }
+    
+    console.log('🔍 HTML verificado y IDs agregados');
 }
 
 // ===== FUNCIÓN: INICIALIZACIÓN =====
@@ -479,3 +561,23 @@ window.mobileMenu = {
 console.log('📱 Corrección móvil lista');
 console.log('📋 Enlaces: Inicio, Servicios, Misión, Contacto, Suscripción');
 console.log('🔧 Para debug: mobileMenu.toggle()');
+console.log('📍 Navegación funcional activada');
+
+// ===== DEBUG: VERIFICAR SECCIONES =====
+setTimeout(() => {
+    console.log('🔍 Verificando secciones disponibles:');
+    const sections = [
+        { name: 'Hero (.hero)', element: document.querySelector('.hero') },
+        { name: 'Servicios (.iot-section)', element: document.querySelector('.iot-section') },
+        { name: 'Misión (.mission-vision)', element: document.querySelector('.mission-vision') },
+        { name: 'Contacto (.contact-section)', element: document.querySelector('.contact-section') }
+    ];
+    
+    sections.forEach(section => {
+        if (section.element) {
+            console.log(`✅ ${section.name} - ENCONTRADA`);
+        } else {
+            console.log(`❌ ${section.name} - NO ENCONTRADA`);
+        }
+    });
+}, 1000);
