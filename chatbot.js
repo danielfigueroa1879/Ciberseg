@@ -22,30 +22,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Alternar la visibilidad del chatbot al hacer clic en el botón flotante
     chatToggleButton.addEventListener('click', () => {
-        console.log("Chat toggle button clicked.");
         chatbotContainer.classList.toggle('active');
     });
 
     // Cerrar el chatbot al hacer clic en el botón de cerrar
     closeChatBtn.addEventListener('click', () => {
-        console.log("Close chat button clicked.");
         chatbotContainer.classList.remove('active');
     });
 
     // Manejar el envío del formulario para enviar un mensaje
     chatbotForm.addEventListener('submit', (e) => {
         e.preventDefault(); // Prevenir que el formulario recargue la página
-        console.log("Chat form submitted.");
         const userInput = chatbotInput.value.trim(); // Obtener la entrada del usuario y eliminar espacios en blanco
 
         if (userInput) {
-            console.log(`User input: ${userInput}`);
             // Si hay entrada, agregar el mensaje del usuario al chat y obtener una respuesta
             addMessage(userInput, 'user');
             chatbotInput.value = ''; // Limpiar el campo de entrada
-            getAIResponse(userInput);
-        } else {
-            console.log("User input is empty.");
+            getFallbackResponse(userInput); // Usar la función de respaldo
         }
     });
 
@@ -57,102 +51,50 @@ document.addEventListener('DOMContentLoaded', () => {
      * @param {string} sender - El remitente del mensaje ('user' o 'bot').
      */
     function addMessage(text, sender) {
-        // Crear un nuevo elemento div para el mensaje
         const messageElement = document.createElement('div');
         messageElement.classList.add('message', `${sender}-message`);
-
-        // Crear un elemento de párrafo para el texto del mensaje
         const p = document.createElement('p');
         p.textContent = text;
         messageElement.appendChild(p);
-        
-        // Agregar el nuevo mensaje a la ventana del chat
         chatbotMessages.appendChild(messageElement);
-        
-        // Desplazarse automáticamente al último mensaje
         chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-        console.log(`Message added: "${text}" from ${sender}`);
     }
-
+    
     /**
-     * Obtiene una respuesta de la IA de Gemini.
+     * Proporciona una respuesta predefinida basada en palabras clave.
+     * Esta es una solución temporal mientras se resuelve el error 403 de la API.
      * @param {string} userInput - El texto de entrada del usuario.
      */
-    async function getAIResponse(userInput) {
-        // Mostrar el indicador de carga mientras se obtiene la respuesta
+    function getFallbackResponse(userInput) {
         loadingIndicator.style.display = 'flex';
         chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-        console.log("Showing loading indicator and fetching AI response...");
 
-        // Este es el contexto y la instrucción para el modelo de IA
-        const prompt = `Eres un asistente virtual para RECYBERSEG, una empresa chilena de ciberseguridad. Tu nombre es 'Cyber Asistente'. Responde a las preguntas de los usuarios sobre nuestros servicios, que incluyen:
-        1.  **Auditorías de Seguridad**: Evaluación completa de infraestructura digital.
-        2.  **Monitoreo de Redes**: Supervisión 24/7.
-        3.  **Consultoría en Ciberseguridad**: Asesoramiento experto y personalizado.
-        4.  **Implementación de Sistemas de Seguridad**: Configuración de firewalls, etc.
-        5.  **Seguridad IoT**: Protección de dispositivos inteligentes.
-        
-        Nuestra misión es proteger el ecosistema digital de nuestros clientes con soluciones innovadoras.
-        Nuestra visión es ser líderes en soluciones tecnológicas de seguridad digital.
-        
-        Sé amable, profesional y conciso. Si no sabes la respuesta, di que consultarás con un especialista. No inventes información. Responde en español.
-        
-        Aquí está la pregunta del usuario: "${userInput}"`;
+        const lowerInput = userInput.toLowerCase();
+        let botResponse = '';
 
-        try {
-            // Preparar el payload para la API de Gemini
-            const payload = {
-                contents: [{
-                    parts: [{
-                        text: prompt
-                    }]
-                }]
-            };
-            
-            // La clave de API es manejada por el entorno de ejecución
-            const apiKey = ""; 
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
-            console.log("Sending request to Gemini API...");
-            // Realizar la llamada a la API
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            });
-
-            if (!response.ok) {
-                // Si la respuesta no es exitosa, lanzar un error con el estado
-                throw new Error(`Error en la API: ${response.status} ${response.statusText}`);
-            }
-
-            const result = await response.json();
-            console.log("API Response received:", result);
-            
-            // Extraer el texto de la respuesta de la API de forma segura
-            let botResponse;
-            if (result.candidates && result.candidates[0] && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts[0]) {
-                botResponse = result.candidates[0].content.parts[0].text;
-            } else {
-                // Mensaje de error si la estructura de la respuesta no es la esperada
-                console.error("Respuesta de la API inesperada:", result);
-                botResponse = 'Lo siento, no pude procesar la respuesta. Inténtalo de nuevo.';
-            }
-            
-            // Agregar la respuesta del bot al chat
-            addMessage(botResponse, 'bot');
-
-        } catch (error) {
-            console.error('Error al contactar la IA:', error);
-            // Mostrar un mensaje de error detallado en el chat
-            addMessage(`Hubo un problema al conectar con el asistente. Por favor, intenta de nuevo más tarde. (Error: ${error.message})`, 'bot');
-        } finally {
-            // Ocultar el indicador de carga independientemente del resultado
-            loadingIndicator.style.display = 'none';
-            console.log("Hiding loading indicator.");
+        // Lógica de respuestas basada en palabras clave
+        if (lowerInput.includes('hola') || lowerInput.includes('saludos')) {
+            botResponse = '¡Hola! Soy Cyber Asistente, tu guía en RECYBERSEG. ¿En qué puedo ayudarte?';
+        } else if (lowerInput.includes('auditoría')) {
+            botResponse = 'Ofrecemos auditorías de seguridad completas para evaluar tu infraestructura digital y encontrar posibles vulnerabilidades.';
+        } else if (lowerInput.includes('monitoreo')) {
+            botResponse = 'Nuestro servicio de monitoreo de redes ofrece supervisión 24/7 para proteger tu red corporativa contra amenazas.';
+        } else if (lowerInput.includes('consultoría') || lowerInput.includes('asesoramiento')) {
+            botResponse = 'Brindamos consultoría experta y personalizada en ciberseguridad para ayudarte a fortalecer tu postura de seguridad.';
+        } else if (lowerInput.includes('iot')) {
+            botResponse = 'Nos especializamos en la seguridad de dispositivos IoT (Internet de las Cosas), protegiendo tus dispositivos inteligentes, redes y datos asociados.';
+        } else if (lowerInput.includes('precio') || lowerInput.includes('costo')) {
+            botResponse = 'Para obtener información sobre precios y cotizaciones personalizadas, por favor completa nuestro formulario de contacto y un especialista se comunicará contigo.';
+        } else if (lowerInput.includes('gracias')) {
+            botResponse = '¡De nada! ¿Hay algo más en lo que pueda ayudarte?';
+        } else {
+            botResponse = 'Gracias por tu pregunta. Para darte la información más precisa, te recomiendo completar nuestro formulario de contacto y uno de nuestros especialistas en ciberseguridad se pondrá en contacto contigo a la brevedad.';
         }
+
+        // Simular un pequeño retraso para que parezca que está "pensando"
+        setTimeout(() => {
+            addMessage(botResponse, 'bot');
+            loadingIndicator.style.display = 'none';
+        }, 1000);
     }
 });
-
