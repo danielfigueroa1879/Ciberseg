@@ -36,10 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const userInput = chatbotInput.value.trim(); // Obtener la entrada del usuario y eliminar espacios en blanco
 
         if (userInput) {
-            // Si hay entrada, agregar el mensaje del usuario al chat y obtener una respuesta
+            // Si hay entrada, agregar el mensaje del usuario al chat y obtener una respuesta de la IA
             addMessage(userInput, 'user');
             chatbotInput.value = ''; // Limpiar el campo de entrada
-            getFallbackResponse(userInput); // Usar la función de respaldo
+            getAIResponse(userInput); // Llamar a la función que usa la API
         }
     });
 
@@ -59,42 +59,78 @@ document.addEventListener('DOMContentLoaded', () => {
         chatbotMessages.appendChild(messageElement);
         chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
     }
-    
+
     /**
-     * Proporciona una respuesta predefinida basada en palabras clave.
-     * Esta es una solución temporal mientras se resuelve el error 403 de la API.
+     * Obtiene una respuesta de la IA de Gemini usando la clave de API proporcionada.
      * @param {string} userInput - El texto de entrada del usuario.
      */
-    function getFallbackResponse(userInput) {
+    async function getAIResponse(userInput) {
         loadingIndicator.style.display = 'flex';
         chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
 
-        const lowerInput = userInput.toLowerCase();
-        let botResponse = '';
+        // Contexto e instrucción para el modelo de IA
+        const prompt = `Eres un asistente virtual para RECYBERSEG, una empresa chilena de ciberseguridad. Tu nombre es 'Cyber Asistente'. Responde a las preguntas de los usuarios sobre nuestros servicios, que incluyen:
+        1.  **Auditorías de Seguridad**: Evaluación completa de infraestructura digital.
+        2.  **Monitoreo de Redes**: Supervisión 24/7.
+        3.  **Consultoría en Ciberseguridad**: Asesoramiento experto y personalizado.
+        4.  **Implementación de Sistemas de Seguridad**: Configuración de firewalls, etc.
+        5.  **Seguridad IoT**: Protección de dispositivos inteligentes.
+        
+        Nuestra misión es proteger el ecosistema digital de nuestros clientes con soluciones innovadoras.
+        Nuestra visión es ser líderes en soluciones tecnológicas de seguridad digital.
+        
+        Sé amable, profesional y conciso. Si no sabes la respuesta, di que consultarás con un especialista. No inventes información. Responde en español.
+        
+        Aquí está la pregunta del usuario: "${userInput}"`;
 
-        // Lógica de respuestas basada en palabras clave
-        if (lowerInput.includes('hola') || lowerInput.includes('saludos')) {
-            botResponse = '¡Hola! Soy Cyber Asistente, tu guía en RECYBERSEG. ¿En qué puedo ayudarte?';
-        } else if (lowerInput.includes('auditoría')) {
-            botResponse = 'Ofrecemos auditorías de seguridad completas para evaluar tu infraestructura digital y encontrar posibles vulnerabilidades.';
-        } else if (lowerInput.includes('monitoreo')) {
-            botResponse = 'Nuestro servicio de monitoreo de redes ofrece supervisión 24/7 para proteger tu red corporativa contra amenazas.';
-        } else if (lowerInput.includes('consultoría') || lowerInput.includes('asesoramiento')) {
-            botResponse = 'Brindamos consultoría experta y personalizada en ciberseguridad para ayudarte a fortalecer tu postura de seguridad.';
-        } else if (lowerInput.includes('iot')) {
-            botResponse = 'Nos especializamos en la seguridad de dispositivos IoT (Internet de las Cosas), protegiendo tus dispositivos inteligentes, redes y datos asociados.';
-        } else if (lowerInput.includes('precio') || lowerInput.includes('costo')) {
-            botResponse = 'Para obtener información sobre precios y cotizaciones personalizadas, por favor completa nuestro formulario de contacto y un especialista se comunicará contigo.';
-        } else if (lowerInput.includes('gracias')) {
-            botResponse = '¡De nada! ¿Hay algo más en lo que pueda ayudarte?';
-        } else {
-            botResponse = 'Gracias por tu pregunta. Para darte la información más precisa, te recomiendo completar nuestro formulario de contacto y uno de nuestros especialistas en ciberseguridad se pondrá en contacto contigo a la brevedad.';
-        }
+        // Clave de API proporcionada por el usuario
+        const apiKey = "AIzaSyB2Gv6BvDX5UpWUMnIsx-CxyL5s8fWezyc";
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
-        // Simular un pequeño retraso para que parezca que está "pensando"
-        setTimeout(() => {
+        try {
+            // Preparar el payload para la API de Gemini
+            const payload = {
+                contents: [{
+                    parts: [{
+                        text: prompt
+                    }]
+                }]
+            };
+
+            // Realizar la llamada a la API
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error en la API: ${response.status} ${response.statusText}`);
+            }
+
+            const result = await response.json();
+            
+            // Extraer el texto de la respuesta de la API de forma segura
+            let botResponse;
+            if (result.candidates && result.candidates[0] && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts[0]) {
+                botResponse = result.candidates[0].content.parts[0].text;
+            } else {
+                console.error("Respuesta de la API inesperada:", result);
+                botResponse = 'Lo siento, no pude procesar la respuesta. Inténtalo de nuevo.';
+            }
+            
+            // Agregar la respuesta del bot al chat
             addMessage(botResponse, 'bot');
+
+        } catch (error) {
+            console.error('Error al contactar la IA:', error);
+            addMessage(`Hubo un problema al conectar con el asistente. Por favor, intenta de nuevo más tarde. (Error: ${error.message})`, 'bot');
+        } finally {
+            // Ocultar el indicador de carga
             loadingIndicator.style.display = 'none';
-        }, 1000);
+        }
     }
 });
+
