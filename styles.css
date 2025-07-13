@@ -544,7 +544,7 @@ body {
 }
 
 .mv-card p {
-    font-size: 16px;
+    font-size: 20px; /* CAMBIO: Aumentado de 16px a 20px */
     line-height: 1.7;
     text-align: justify;
 }
@@ -1344,6 +1344,11 @@ html {
     .mv-card {
         padding: 30px 20px;
     }
+    
+    /* CAMBIO: Añadido para tablets */
+    .mv-card p {
+        font-size: 18px;
+    }
 
     /* Footer responsive */
     .footer-content {
@@ -1666,7 +1671,7 @@ html {
     }
 
     .mv-card p {
-        font-size: 12px;
+        font-size: 16px; /* CAMBIO: Aumentado de 12px a 16px */
         text-align: justify;
     }
 
