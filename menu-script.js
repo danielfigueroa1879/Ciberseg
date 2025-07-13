@@ -111,12 +111,10 @@ function toggleMenu() {
 
 // ===== FUNCIÓN: CREAR BOTÓN FLOTANTE =====
 function createFloatingButton() {
-    if (window.innerWidth > 768) return;
+    // CAMBIO: Se eliminó la condición de ancho de pantalla para que funcione en PC
     
-    // Remover botones existentes
-    const existingButtons = document.querySelectorAll(
-        '#real-floating-back-btn, .scroll-to-top, #scrollToTop, #dynamic-scroll-btn'
-    );
+    // Remover botones existentes para evitar duplicados
+    const existingButtons = document.querySelectorAll('#real-floating-back-btn');
     existingButtons.forEach(btn => btn.remove());
     
     // Crear botón
@@ -124,7 +122,7 @@ function createFloatingButton() {
     button.id = 'real-floating-back-btn';
     button.setAttribute('aria-label', 'Ir al inicio');
     
-    // CAMBIO: Añadir icono en lugar de usar ::before
+    // Añadir icono de Font Awesome
     button.innerHTML = '<i class="fas fa-chevron-up"></i>';
     
     // Event listeners
@@ -133,7 +131,7 @@ function createFloatingButton() {
     
     document.body.appendChild(button);
     
-    console.log('🔴 Botón flotante creado');
+    console.log('🔴 Botón flotante creado para todas las pantallas');
     return button;
 }
 
@@ -153,7 +151,7 @@ function handleFloatingClick(e) {
 
 // ===== FUNCIÓN: MANEJAR SCROLL - CORREGIDA CON TIMER =====
 function handleScroll() {
-    if (window.innerWidth > 768) return;
+    // CAMBIO: Se eliminó la condición de ancho de pantalla
     
     const button = document.getElementById('real-floating-back-btn');
     if (!button) return;
@@ -211,7 +209,7 @@ function initCompleteSolution() {
     console.log('🚀 Iniciando solución completa...');
     
     try {
-        // 1. Configurar menú hamburguesa
+        // 1. Configurar menú hamburguesa (solo se activa en móvil por CSS)
         setupHamburgerMenu();
         
         // 2. Crear botón flotante
@@ -237,7 +235,7 @@ if (document.readyState === 'loading') {
 // Backup para asegurar la creación del botón si se carga tarde
 window.addEventListener('load', () => {
     setTimeout(() => {
-        if (!document.getElementById('real-floating-back-btn') && window.innerWidth <= 768) {
+        if (!document.getElementById('real-floating-back-btn')) {
             createFloatingButton();
             handleScroll(); // Asegurar que la visibilidad se actualice al cargar
         }
@@ -246,14 +244,10 @@ window.addEventListener('load', () => {
 
 // Resize handler para recrear/ocultar el botón en cambios de tamaño de ventana
 window.addEventListener('resize', () => {
-    const button = document.getElementById('real-floating-back-btn');
-    
+    // CAMBIO: La lógica del botón flotante ya no depende del tamaño de la ventana,
+    // pero mantenemos la lógica para cerrar el menú en pantallas grandes.
     if (window.innerWidth > 768) {
-        if (button) button.remove();
         if (isMenuOpen) closeMenu();
-    } else {
-        if (!button) createFloatingButton();
-        handleScroll(); // Actualizar visibilidad al redimensionar
     }
 });
 
@@ -265,3 +259,4 @@ window.completeSolution = {
 };
 
 console.log('✅ Solución completa cargada');
+
