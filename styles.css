@@ -3778,7 +3778,7 @@ html {
     }
 }
 
-/* ===== Estilos del Chatbot de IA ===== */
+/* ===== Estilos del Chatbot de IA (CORREGIDOS) ===== */
 
 .chat-toggle-button {
     position: fixed;
@@ -3796,7 +3796,7 @@ html {
     font-size: 28px;
     cursor: pointer;
     box-shadow: 0 5px 15px rgba(224, 253, 44, 0.4);
-    z-index: 999;
+    z-index: 1600; /* Aumentado para estar sobre el menú móvil */
     transition: all 0.3s ease;
     transform: scale(1);
 }
@@ -3818,7 +3818,7 @@ html {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    z-index: 1000;
+    z-index: 1600; /* Aumentado para estar sobre el menú móvil */
     border: 2px solid #E0FD2C;
     
     opacity: 0;
