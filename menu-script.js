@@ -5,8 +5,7 @@ console.log('🔧 Iniciando solución completa...');
 // ===== VARIABLES GLOBALES =====
 let isMenuOpen = false;
 let menuButton, mobileMenu;
-
-// La función `applyCompleteSolutionCSS` se ha eliminado de aquí porque el CSS ahora está directamente en `styles.css`.
+let scrollTimeout; // Timer para el botón de regreso arriba
 
 // ===== FUNCIÓN: CREAR MENÚ HAMBURGUESA =====
 function setupHamburgerMenu() {
@@ -116,7 +115,7 @@ function createFloatingButton() {
     
     // Remover botones existentes
     const existingButtons = document.querySelectorAll(
-        '#real-floating-back-btn, .scroll-to-top, #scrollToTop, #dynamic-scroll-btn' // Asegurar que el ID anterior también se elimine
+        '#real-floating-back-btn, .scroll-to-top, #scrollToTop, #dynamic-scroll-btn'
     );
     existingButtons.forEach(btn => btn.remove());
     
@@ -124,6 +123,9 @@ function createFloatingButton() {
     const button = document.createElement('button');
     button.id = 'real-floating-back-btn';
     button.setAttribute('aria-label', 'Ir al inicio');
+    
+    // CAMBIO: Añadir icono en lugar de usar ::before
+    button.innerHTML = '<i class="fas fa-chevron-up"></i>';
     
     // Event listeners
     button.addEventListener('click', handleFloatingClick);
@@ -149,7 +151,7 @@ function handleFloatingClick(e) {
     });
 }
 
-// ===== FUNCIÓN: MANEJAR SCROLL - CORREGIDA =====
+// ===== FUNCIÓN: MANEJAR SCROLL - CORREGIDA CON TIMER =====
 function handleScroll() {
     if (window.innerWidth > 768) return;
     
@@ -159,15 +161,24 @@ function handleScroll() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const threshold = 200;
     
-    // LÓGICA CORREGIDA: Mostrar cuando BAJAS (scrollTop > threshold)
+    // Limpiar el timer anterior en cada evento de scroll
+    clearTimeout(scrollTimeout);
+    
     if (scrollTop > threshold) {
-        // HAY SCROLL HACIA ABAJO - MOSTRAR BOTÓN
+        // Mostrar botón si no está visible
         if (!button.classList.contains('floating-visible')) {
             button.classList.add('floating-visible');
-            console.log('👁️ Botón flotante mostrado (bajando por la página)');
+            console.log('👁️ Botón flotante mostrado');
         }
+        
+        // Configurar un nuevo timer para ocultar el botón después de 15 segundos de inactividad
+        scrollTimeout = setTimeout(() => {
+            button.classList.remove('floating-visible');
+            console.log('🙈 Botón flotante ocultado por inactividad');
+        }, 15000); // 15000 milisegundos = 15 segundos
+
     } else {
-        // CERCA DEL TOP - OCULTAR BOTÓN
+        // Ocultar botón si está cerca del top
         if (button.classList.contains('floating-visible')) {
             button.classList.remove('floating-visible');
             console.log('🙈 Botón flotante ocultado (cerca del inicio)');
@@ -200,8 +211,6 @@ function initCompleteSolution() {
     console.log('🚀 Iniciando solución completa...');
     
     try {
-        // La aplicación del CSS ahora se maneja directamente en styles.css
-        
         // 1. Configurar menú hamburguesa
         setupHamburgerMenu();
         
@@ -256,8 +265,3 @@ window.completeSolution = {
 };
 
 console.log('✅ Solución completa cargada');
-console.log('🍔 Menú hamburguesa: 4 enlaces funcionando');
-console.log('🔴 Botón flotante: Aparece al BAJAR por la página');
-console.log('👁️ Contador de visitas: Visible en esquina superior izquierda');
-console.log('💻 Desktop: Navegación normal');
-console.log('🔧 Debug: completeSolution.reinit()');
