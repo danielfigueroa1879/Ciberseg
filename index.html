@@ -537,27 +537,13 @@
 
     <!-- Script optimizado para manejo del formulario -->
     <script>
-        // Optimización: Variables pre-declaradas
-        let form, submitBtn, formMessages, successMessage, errorMessage;
-        
-        // Función optimizada de inicialización
-        function initFormHandler() {
-            form = document.getElementById('contact-form');
-            submitBtn = document.getElementById('submit-btn');
-            formMessages = document.getElementById('form-messages');
-            successMessage = document.getElementById('success-message');
-            errorMessage = document.getElementById('error-message');
+        document.addEventListener('DOMContentLoaded', () => {
+            // Optimización: Variables pre-declaradas
+            let form = document.getElementById('contact-form');
+            let submitBtn = document.getElementById('submit-btn');
             
             if (!form || !submitBtn) return;
-            
-            // Detectar redirección de éxito (optimizado)
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('success') === 'true') {
-                showSuccessMessage();
-                // Limpiar URL sin recargar
-                window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
-            }
-            
+
             // Event listener optimizado para el formulario
             form.addEventListener('submit', function(e) {
                 // Feedback inmediato al usuario
@@ -565,105 +551,19 @@
                 submitBtn.disabled = true;
                 submitBtn.style.opacity = '0.7';
                 
-                hideMessages();
-                
                 // Simulación para desarrollo local
                 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
                     e.preventDefault();
-                    setTimeout(simulateSuccess, 1000);
+                    setTimeout(() => {
+                        alert('Simulación: Formulario enviado con éxito.');
+                        submitBtn.textContent = 'Suscribirse';
+                        submitBtn.disabled = false;
+                        submitBtn.style.opacity = '1';
+                        form.reset();
+                    }, 1000);
                 }
             });
-        }
-        
-        // Funciones optimizadas
-        function showSuccessMessage() {
-            if (!formMessages || !successMessage) return;
-            
-            formMessages.style.display = 'block';
-            successMessage.style.display = 'block';
-            if (errorMessage) errorMessage.style.display = 'none';
-            
-            // Scroll suave optimizado
-            requestAnimationFrame(function() {
-                successMessage.scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'center' 
-                });
-            });
-            
-            // Reset form y botón
-            if (form) form.reset();
-            resetButton();
-            
-            // Auto-hide con timeout optimizado
-            setTimeout(hideMessages, 8000);
-        }
-        
-        function showErrorMessage() {
-            if (!formMessages || !errorMessage) return;
-            
-            formMessages.style.display = 'block';
-            if (successMessage) successMessage.style.display = 'none';
-            errorMessage.style.display = 'block';
-            
-            requestAnimationFrame(function() {
-                errorMessage.scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'center' 
-                });
-            });
-            
-            resetButton();
-            setTimeout(hideMessages, 8000);
-        }
-        
-        function hideMessages() {
-            if (!formMessages) return;
-            formMessages.style.display = 'none';
-            if (successMessage) successMessage.style.display = 'none';
-            if (errorMessage) errorMessage.style.display = 'none';
-        }
-        
-        function resetButton() {
-            if (!submitBtn) return;
-            submitBtn.textContent = 'Suscribirse';
-            submitBtn.disabled = false;
-            submitBtn.style.opacity = '1';
-        }
-        
-        function simulateSuccess() {
-            showSuccessMessage();
-        }
-        
-        
-        // Preload de recursos importantes
-        function preloadResources() {
-            const resources = [
-                'https://cyberseg.netlify.app/gracias.html',
-                'fotos/fondo.png'
-            ];
-            
-            resources.forEach(function(url) {
-                const link = document.createElement('link');
-                link.rel = 'preload';
-                link.href = url;
-                link.as = url.includes('.html') ? 'document' : 'image';
-                document.head.appendChild(link);
-            });
-        }
-        
-        // Preload después de que la página cargue
-        window.addEventListener('load', preloadResources);
-        
-        // Service Worker registration (opcional para PWA)
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                // Solo registrar si existe el service worker
-                fetch('/sw.js', { method: 'HEAD' })
-                    .then(() => navigator.serviceWorker.register('/sw.js'))
-                    .catch(() => {}); // Silencioso si no existe
-            });
-        }
+        });
     </script>
 
 </body>
