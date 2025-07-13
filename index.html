@@ -484,24 +484,47 @@
         </div>
     </footer>
 
-   
+    <!-- ===== Chatbot de IA ===== -->
+    <button id="chat-toggle-button" class="chat-toggle-button">
+        <i class="fas fa-robot"></i>
+    </button>
+    
+    <div id="chatbot-container" class="chatbot-container">
+        <div class="chatbot-header">
+            <h3>Asistente Virtual</h3>
+            <button id="close-chat-btn">&times;</button>
+        </div>
+        <div id="chatbot-messages" class="chatbot-messages">
+             <div class="message bot-message">
+                <p>¡Hola! Soy el asistente virtual de RECYBERSEG. ¿Cómo puedo ayudarte hoy?</p>
+            </div>
+        </div>
+        <div id="chatbot-loading" class="loading-indicator" style="display: none;">
+            <span>.</span><span>.</span><span>.</span>
+        </div>
+        <form id="chatbot-form" class="chatbot-form">
+            <input type="text" id="chatbot-input" placeholder="Escribe tu pregunta..." autocomplete="off" required>
+            <button type="submit">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </form>
+    </div>
+    <!-- ===== Fin Chatbot de IA ===== -->
 
     <!-- Scripts optimizados con carga diferida -->
+    <script src="menu-script.js" defer></script>
+    <script src="chatbot.js" defer></script>
+
+    <!-- Cargar Firebase y contador de forma diferida después del load -->
     <script>
-        // Cargar menu-script.js de forma diferida
-        function loadScript(src, callback) {
-            const script = document.createElement('script');
-            script.src = src;
-            script.defer = true;
-            if (callback) script.onload = callback;
-            document.head.appendChild(script);
-        }
-        
-        // Cargar scripts críticos inmediatamente
-        loadScript('menu-script.js');
-        
-        // Cargar Firebase y contador de forma diferida después del load
         window.addEventListener('load', function() {
+            function loadScript(src, callback) {
+                const script = document.createElement('script');
+                script.src = src;
+                script.defer = true;
+                if (callback) script.onload = callback;
+                document.head.appendChild(script);
+            }
             // Firebase SDK con loading diferido
             loadScript('https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js', function() {
                 loadScript('https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js', function() {
