@@ -28,15 +28,27 @@
     box-sizing: border-box;
 }
 
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden; /* Previene scroll horizontal */
+    overflow-y: auto;   /* Permite scroll vertical */
+    width: 100%; /* Asegura que HTML ocupe el 100% del ancho */
+}
+
 body {
     font-family: 'Poppins', Arial, sans-serif;
     background-color: #0f0f0f;
     color: #fff;
     line-height: 1.6;
-    overflow-x: hidden;
+    overflow-x: hidden; /* Previene scroll horizontal en body */
     overflow-y: auto; /* Asegura que el body pueda tener su propio scroll si es necesario */
     margin: 0;
     padding: 0;
+    width: 100%; /* Asegura que BODY ocupe el 100% del ancho */
     /* SE ELIMINAN LAS PROPIEDADES 'transform' y 'backface-visibility' DE AQUÍ */
     /* Estas propiedades causaban que position: fixed no funcionara correctamente */
 }
@@ -2705,7 +2717,7 @@ html {
         margin: 0 auto !important;
     }
     
-    /* CUADRADO DE INFORMACIÓN DE CONTACTO - IGUALADO AL FORMULARIO */
+    /* Cuadrado para información de contacto */
     .contact-info-wrapper {
         background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)) !important;
         border: 2px solid rgba(224, 253, 44, 0.3) !important;
@@ -2956,9 +2968,18 @@ html {
     .main-services,
     .iot-section,
     .mission-vision,
-    .contact-section {
-        padding: 60px 10px !important; /* Padding fijo de 10px para los lados */
+    .contact-section,
+    .hero { /* También aplica a la sección hero para padding horizontal */
+        padding-left: 10px !important; /* Padding fijo de 10px para los lados */
+        padding-right: 10px !important; /* Padding fijo de 10px para los lados */
+        /* Mantener padding vertical existente */
     }
+    /* Asegurar padding vertical para secciones que pueden no tenerlo explícitamente en móvil */
+    .main-services { padding-top: 80px !important; padding-bottom: 80px !important; }
+    .iot-section { padding-top: 80px !important; padding-bottom: 80px !important; }
+    .mission-vision { padding-top: 80px !important; padding-bottom: 80px !important; }
+    .contact-section { padding-top: 80px !important; padding-bottom: 80px !important; }
+    .footer { padding-top: 60px !important; padding-bottom: 20px !important; } /* Ajuste de footer */
 }
 
 /* 2. CUADRADOS PARA INFORMACIÓN DE CONTACTO Y FORMULARIO EN MÓVILES */
@@ -3183,21 +3204,25 @@ html {
 
 /* 5. MÓVILES PEQUEÑOS - AJUSTES ADICIONALES */
 @media screen and (max-width: 480px) {
+    /* El .container ya tiene 99% y 10px de padding, así que las secciones no necesitan padding horizontal adicional */
     .main-services .container,
     .iot-section .container,
     .mission-vision .container,
-    .contact-section .container {
-        max-width: 95% !important; /* Más ancho en móviles pequeños */
-        padding: 0 10px !important;
+    .contact-section .container,
+    .footer .container {
+        max-width: 98% !important; /* Ajuste a 98% para dejar un poco más de espacio en los bordes */
+        padding: 0 5px !important; /* 5px de padding interno en el contenedor */
     }
-    
+
     .main-services,
     .iot-section,
     .mission-vision,
-    .contact-section {
-        padding: 50px 2.5% !important;
+    .contact-section,
+    .hero {
+        padding-left: 5px !important; /* Ajuste el padding de la sección para que el contenedor de 98% se vea bien */
+        padding-right: 5px !important;
     }
-    
+
     .contact-info-wrapper,
     .contact-form-wrapper {
         padding: 20px 15px !important;
@@ -3747,4 +3772,3 @@ html {
         letter-spacing: normal !important;
     }
 }
-
