@@ -3597,27 +3597,22 @@ html {
         font-size: 18px !important;
     }
     
-    /* === BOTÓN FLOTANTE "REGRESAR ARRIBA" === */
+    /* === BOTÓN FLOTANTE "REGRESAR ARRIBA" (REDiseñado) === */
     
     #real-floating-back-btn {
         position: fixed !important;
-        /* CAMBIO: Subido para no chocar con el chatbot */
         bottom: 95px !important; 
         right: 15px !important;
-        transform: translateX(30px) scale(0.8) !important;
+        
+        /* CAMBIO: Sin fondo, borde o sombra */
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
         
         width: 50px !important;
         height: 50px !important;
-        border-radius: 50% !important;
-        border: 2px solid rgba(255, 255, 255, 0.3) !important;
+        border-radius: 0 !important; /* No necesita ser redondo */
         outline: none !important;
-        
-        background: linear-gradient(135deg, #E0FD2C 0%, #C7E525 100%) !important;
-        
-        box-shadow: 
-            0 4px 12px rgba(0, 0, 0, 0.2),
-            0 2px 8px rgba(224, 253, 44, 0.3),
-            inset 0 1px 2px rgba(255, 255, 255, 0.2) !important;
         
         display: flex !important;
         align-items: center !important;
@@ -3630,51 +3625,36 @@ html {
         -webkit-tap-highlight-color: transparent !important;
         user-select: none !important;
         
-        opacity: 0.8 !important;
+        /* Transición para aparecer/desaparecer */
+        opacity: 0 !important;
         visibility: hidden !important;
-        pointer-events: none !important;
+        transform: translateY(20px) !important;
         transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease !important;
+    }
+
+    /* CAMBIO: Estilo del icono dentro del botón */
+    #real-floating-back-btn i {
+        font-size: 40px !important; /* Más grande */
+        color: #E0FD2C !important; /* Color amarillo */
+        font-weight: bold !important; /* Negrita */
+        text-shadow: 0 0 10px rgba(224, 253, 44, 0.5); /* Resplandor sutil */
+        transition: transform 0.3s ease;
+    }
+
+    #real-floating-back-btn:hover i {
+        transform: scale(1.15);
     }
     
     #real-floating-back-btn.floating-visible {
-        opacity: 0.8 !important;
+        opacity: 1 !important; /* Totalmente visible */
         visibility: visible !important;
         pointer-events: auto !important;
-        transform: translateX(0) scale(1) !important;
+        transform: translateY(0) !important;
     }
     
-    #real-floating-back-btn:hover {
-        background: linear-gradient(135deg, #C7E525 0%, #B8D61F 100%) !important;
-        transform: translateX(-5px) scale(1.05) !important;
-        box-shadow: 
-            0 6px 20px rgba(0, 0, 0, 0.3),
-            0 4px 12px rgba(224, 253, 44, 0.4) !important;
-        opacity: 1 !important;
-    }
-    
-    #real-floating-back-btn:active {
-        transform: translateX(-3px) scale(0.98) !important;
-        transition: all 0.1s ease !important;
-    }
-    
+    /* Eliminar el pseudo-elemento ::before que creaba la flecha anterior */
     #real-floating-back-btn::before {
-        content: '' !important;
-        position: absolute !important;
-        top: 50% !important;
-        left: 50% !important;
-        transform: translate(-50%, -50%) rotate(-45deg) !important;
-        
-        width: 12px !important;
-        height: 12px !important;
-        border-top: 2.5px solid #000 !important;
-        border-right: 2.5px solid #000 !important;
-        border-left: none !important;
-        border-bottom: none !important;
-        
-        background: transparent !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        pointer-events: none !important;
+        display: none !important;
     }
     
     /* Prevenir scroll cuando menú abierto */
@@ -3705,17 +3685,12 @@ html {
     }
     
     #real-floating-back-btn {
-        width: 50px !important;
-        height: 50px !important;
-        bottom: 85px !important; /* Ajuste para móviles aún más pequeños */
+        bottom: 85px !important;
         right: 10px !important;
     }
-    
-    #real-floating-back-btn::before {
-        width: 10px !important;
-        height: 10px !important;
-        border-top: 2px solid #000 !important;
-        border-right: 2px solid #000 !important;
+
+    #real-floating-back-btn i {
+        font-size: 36px !important;
     }
     
     /* Contador de visitas en móviles pequeños */
@@ -3812,14 +3787,18 @@ html {
     right: 25px;
     width: 350px;
     max-width: 90%;
-    background-color: #1e1e1e;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    /* CAMBIO: Fondo moderno con gradiente radial */
+    background: radial-gradient(circle, #2d3436 0%, #1d1d1d 100%);
+    border-radius: 20px; /* Más redondeado */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), inset 0 0 1px 1px rgba(255,255,255,0.1);
     display: flex;
     flex-direction: column;
     overflow: hidden;
     z-index: 1600; /* Aumentado para estar sobre el menú móvil */
-    border: 2px solid #E0FD2C;
+    /* CAMBIO: Borde más sutil y moderno */
+    border: 1px solid rgba(224, 253, 44, 0.3);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     
     opacity: 0;
     transform: translateY(20px);
@@ -3981,9 +3960,12 @@ html {
     .chat-toggle-button {
         width: 50px;
         height: 50px;
-        font-size: 24px;
         right: 15px;
         bottom: 15px;
+    }
+    .chat-toggle-button svg {
+        width: 24px;
+        height: 24px;
     }
     #real-floating-back-btn {
         bottom: 75px; /* Ajuste final para el botón de regreso */
