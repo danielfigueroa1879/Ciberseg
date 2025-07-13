@@ -1238,7 +1238,7 @@ html {
     }
     
     .newsletter-form button[type="submit"] {
-        font-size: 18px !important; /* Más grande en móviles */
+        font-size: 18px !important;
         padding: 18px 40px !important;
         font-weight: 700 !important;
         letter-spacing: 1.5px !important;
@@ -2404,7 +2404,8 @@ html {
         max-width: 100% !important; /* Ocupar todo el ancho disponible */
         display: flex !important;
         flex-direction: column !important;
-        align-items: center !important; /* Centrar contenido */
+        align-items: center !important;
+        /* Centrar contenido */
     }
     
     .newsletter-form {
@@ -2942,19 +2943,21 @@ html {
     .main-services .container,
     .iot-section .container,
     .mission-vision .container,
-    .contact-section .container {
-        max-width: 99% !important; /* Ancho uniforme para todas: 99% */
-        margin: 0 auto !important;
-        padding: 0 1% !important; /* Ajuste de padding para 99% */
+    .contact-section .container,
+    .footer .container { /* Añadido .footer .container para consistencia */
+        width: 99% !important; /* Ancho uniforme para todas: 99% */
+        max-width: 99% !important; /* Asegura que no exceda el 99% */
+        margin: 0 auto !important; /* Centra el contenedor */
+        padding: 0 !important; /* Elimina cualquier padding interno del contenedor */
         box-sizing: border-box !important;
     }
     
-    /* Ajustar padding de las secciones para uniformidad */
+    /* Ajustar padding de las secciones para uniformidad, ahora que el contenedor no tiene padding interno */
     .main-services,
     .iot-section,
     .mission-vision,
     .contact-section {
-        padding: 60px 5% !important; /* Padding uniforme */
+        padding: 60px 10px !important; /* Padding fijo de 10px para los lados */
     }
 }
 
@@ -3744,3 +3747,4 @@ html {
         letter-spacing: normal !important;
     }
 }
+
