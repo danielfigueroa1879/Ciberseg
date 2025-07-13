@@ -3597,16 +3597,17 @@ html {
         font-size: 18px !important;
     }
     
-    /* === BOTÓN FLOTANTE === */
+    /* === BOTÓN FLOTANTE "REGRESAR ARRIBA" === */
     
     #real-floating-back-btn {
-        position: fixed !important; /* Asegura que flote con el viewport */
-        bottom: 25px !important; /* Posición abajo */
-        right: 15px !important; /* Posición a la derecha */
-        transform: translateX(30px) scale(0.8) !important; /* Posición inicial oculta para animación */
+        position: fixed !important;
+        /* CAMBIO: Subido para no chocar con el chatbot */
+        bottom: 95px !important; 
+        right: 15px !important;
+        transform: translateX(30px) scale(0.8) !important;
         
-        width: 50px !important; /* Más pequeño */
-        height: 50px !important; /* Más pequeño */
+        width: 50px !important;
+        height: 50px !important;
         border-radius: 50% !important;
         border: 2px solid rgba(255, 255, 255, 0.3) !important;
         outline: none !important;
@@ -3614,53 +3615,48 @@ html {
         background: linear-gradient(135deg, #E0FD2C 0%, #C7E525 100%) !important;
         
         box-shadow: 
-            0 4px 12px rgba(0, 0, 0, 0.2), /* Sombra más suave */
-            0 2px 8px rgba(224, 253, 44, 0.3), /* Resplandor más suave */
-            inset 0 1px 2px rgba(255, 255, 255, 0.2) !important; /* Sombra interna más suave */
+            0 4px 12px rgba(0, 0, 0, 0.2),
+            0 2px 8px rgba(224, 253, 44, 0.3),
+            inset 0 1px 2px rgba(255, 255, 255, 0.2) !important;
         
-        display: flex !important; /* Siempre flex para centrar contenido */
+        display: flex !important;
         align-items: center !important;
         justify-content: center !important;
         
-        z-index: 999999 !important; /* Asegura que esté por encima de todo */
+        z-index: 1550 !important;
         
         cursor: pointer !important;
         touch-action: manipulation !important;
         -webkit-tap-highlight-color: transparent !important;
         user-select: none !important;
         
-        /* Estado inicial oculto con transición suave */
-        opacity: 0.8 !important; /* Transparencia inicial */
+        opacity: 0.8 !important;
         visibility: hidden !important;
         pointer-events: none !important;
-        transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease !important;
     }
     
-    /* Estado visible del botón flotante */
     #real-floating-back-btn.floating-visible {
-        opacity: 0.8 !important; /* Mantiene transparencia */
+        opacity: 0.8 !important;
         visibility: visible !important;
         pointer-events: auto !important;
-        transform: translateX(0) scale(1) !important; /* Posición final visible */
+        transform: translateX(0) scale(1) !important;
     }
     
-    /* Hover del botón flotante */
     #real-floating-back-btn:hover {
         background: linear-gradient(135deg, #C7E525 0%, #B8D61F 100%) !important;
-        transform: translateX(-5px) scale(1.05) !important; /* Efecto hover más sutil */
+        transform: translateX(-5px) scale(1.05) !important;
         box-shadow: 
             0 6px 20px rgba(0, 0, 0, 0.3),
             0 4px 12px rgba(224, 253, 44, 0.4) !important;
-        opacity: 1 !important; /* Se vuelve completamente opaco al hacer hover */
+        opacity: 1 !important;
     }
     
-    /* Active del botón flotante */
     #real-floating-back-btn:active {
-        transform: translateX(-3px) scale(0.98) !important; /* Efecto active más sutil */
+        transform: translateX(-3px) scale(0.98) !important;
         transition: all 0.1s ease !important;
     }
     
-    /* Flecha del botón flotante */
     #real-floating-back-btn::before {
         content: '' !important;
         position: absolute !important;
@@ -3668,10 +3664,10 @@ html {
         left: 50% !important;
         transform: translate(-50%, -50%) rotate(-45deg) !important;
         
-        width: 12px !important; /* Flecha más pequeña */
+        width: 12px !important;
         height: 12px !important;
-        border-top: 2.5px solid #000 !important; /* Borde más delgado */
-        border-right: 2.5px solid #000 !important; /* Borde más delgado */
+        border-top: 2.5px solid #000 !important;
+        border-right: 2.5px solid #000 !important;
         border-left: none !important;
         border-bottom: none !important;
         
@@ -3709,14 +3705,14 @@ html {
     }
     
     #real-floating-back-btn {
-        width: 50px !important; /* Ajuste para móviles aún más pequeños */
+        width: 50px !important;
         height: 50px !important;
-        bottom: 20px !important; /* Más abajo en móviles pequeños */
-        right: 10px !important; /* Más a la derecha en móviles pequeños */
+        bottom: 85px !important; /* Ajuste para móviles aún más pequeños */
+        right: 10px !important;
     }
     
     #real-floating-back-btn::before {
-        width: 10px !important; /* Flecha aún más pequeña */
+        width: 10px !important;
         height: 10px !important;
         border-top: 2px solid #000 !important;
         border-right: 2px solid #000 !important;
@@ -3786,24 +3782,28 @@ html {
     right: 25px;
     width: 60px;
     height: 60px;
-    background: linear-gradient(45deg, #E0FD2C, #c1d72b);
+    /* CAMBIO: Nuevo color verde fluorescente */
+    background: linear-gradient(45deg, #39FF14, #28b410);
     color: #0f0f0f;
     border-radius: 50%;
     border: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 28px;
     cursor: pointer;
-    box-shadow: 0 5px 15px rgba(224, 253, 44, 0.4);
+    box-shadow: 0 5px 15px rgba(57, 255, 20, 0.4);
     z-index: 1600; /* Aumentado para estar sobre el menú móvil */
     transition: all 0.3s ease;
     transform: scale(1);
 }
 
+.chat-toggle-button svg {
+    stroke: #0f0f0f; /* Color del icono */
+}
+
 .chat-toggle-button:hover {
     transform: scale(1.1);
-    box-shadow: 0 8px 25px rgba(224, 253, 44, 0.6);
+    box-shadow: 0 8px 25px rgba(57, 255, 20, 0.6);
 }
 
 .chatbot-container {
@@ -3949,6 +3949,29 @@ html {
   40% { transform: scale(1.0); }
 }
 
+@media (max-width: 768px) {
+    /* CAMBIO: Estilos del chat para móvil */
+    .chatbot-container {
+        border-color: #39FF14;
+    }
+    .chatbot-header {
+        background-color: #39FF14;
+    }
+    .user-message {
+        background-color: #39FF14;
+    }
+    #chatbot-input:focus {
+        box-shadow: 0 0 0 2px rgba(57, 255, 20, 0.5);
+    }
+    .chatbot-form button {
+        color: #39FF14;
+    }
+    .loading-indicator span {
+        background-color: #39FF14;
+    }
+}
+
+
 @media (max-width: 480px) {
     .chatbot-container {
         width: calc(100% - 20px);
@@ -3961,5 +3984,8 @@ html {
         font-size: 24px;
         right: 15px;
         bottom: 15px;
+    }
+    #real-floating-back-btn {
+        bottom: 75px; /* Ajuste final para el botón de regreso */
     }
 }
