@@ -1341,7 +1341,7 @@ html {
     }
     
     .footer-section {
-        text-align: center;
+    text-align: center;
     }
     
     .social-links {
@@ -2943,9 +2943,9 @@ html {
     .iot-section .container,
     .mission-vision .container,
     .contact-section .container {
-        max-width: 90% !important; /* Ancho uniforme para todas */
+        max-width: 99% !important; /* Ancho uniforme para todas: 99% */
         margin: 0 auto !important;
-        padding: 0 15px !important;
+        padding: 0 1% !important; /* Ajuste de padding para 99% */
         box-sizing: border-box !important;
     }
     
