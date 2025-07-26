@@ -3751,6 +3751,36 @@ html {
 
 /* ===== Estilos del Chatbot de IA (CORREGIDOS) ===== */
 
+.chat-toggle-button {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 60px;
+    height: 60px;
+    /* CAMBIO: Nuevo color verde fluorescente */
+    background: linear-gradient(45deg, #39FF14, #28b410);
+    color: #0f0f0f;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(57, 255, 20, 0.4);
+    z-index: 1600; /* Aumentado para estar sobre el menú móvil */
+    transition: all 0.3s ease;
+    transform: scale(1);
+}
+
+.chat-toggle-button svg {
+    stroke: #0f0f0f; /* Color del icono */
+}
+
+.chat-toggle-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(57, 255, 20, 0.6);
+}
+
 .chatbot-container {
     position: fixed;
     bottom: 100px;
@@ -3933,80 +3963,11 @@ html {
         right: 15px;
         bottom: 15px;
     }
+    .chat-toggle-button svg {
+        width: 24px;
+        height: 24px;
+    }
     #real-floating-back-btn {
         bottom: 75px; /* Ajuste final para el botón de regreso */
-    }
-}
-
-/* ===== Estilos para el nuevo icono de Ejecutivo ===== */
-
-.chat-toggle-button {
-    /* Ajustar tamaño y fondo para el nuevo icono */
-    width: 80px;  /* Más grande para que se vea el ejecutivo */
-    height: 80px;
-    background: linear-gradient(45deg, #2c3e50, #34495e); /* Un fondo más sobrio */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-    /* Asegurarse de que el botón no tenga padding que interfiera con el SVG */
-    padding: 0;
-    overflow: hidden; /* Ocultar partes del SVG que puedan salirse */
-}
-
-.chat-toggle-button:hover {
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
-}
-
-.executive-icon {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end; /* Alinear al fondo para que parezca parado */
-}
-
-.executive-svg {
-    width: 60px; /* Tamaño del SVG dentro del botón */
-    height: auto;
-    overflow: visible;
-}
-
-.executive-arm {
-    transform-origin: 78px 58px; /* Punto de rotación en el hombro */
-    animation: gesticulate 2.5s ease-in-out infinite;
-}
-
-@keyframes gesticulate {
-    0% {
-        transform: rotate(0deg);
-    }
-    20% {
-        transform: rotate(-25deg) translateY(-5px); /* Levanta y gira el brazo */
-    }
-    40% {
-        transform: rotate(10deg); /* Mueve el brazo hacia el otro lado */
-    }
-    60% {
-        transform: rotate(-15deg);
-    }
-    80% {
-        transform: rotate(5deg);
-    }
-    100% {
-        transform: rotate(0deg);
-    }
-}
-
-/* Ocultar el SVG original si todavía existe */
-.chat-toggle-button .feather-message-square {
-    display: none;
-}
-
-/* Ajustes para móvil */
-@media (max-width: 480px) {
-    .chat-toggle-button {
-        width: 70px;
-        height: 70px;
-    }
-    .executive-svg {
-        width: 50px;
     }
 }
