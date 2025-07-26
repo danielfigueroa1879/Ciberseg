@@ -1,61 +1,38 @@
-/* Estilos específicos para el texto hero */
-.hero-description {
-    font-size: 30px !important;
-    font-weight: 200 !important;
-    font-family: 'Poppins', Arial, sans-serif !important;
-    text-align: justify !important;
-    line-height: 1.8 !important;
-    color: #fff !important;
-}
-.iot-image {
-    height: 70px;
-}
-.iot-details p {
-    text-align: justify;
-    margin-bottom: 15px;
-    line-height: 1.5;
-}
-.iot-details ul {
-    list-style: none;
-    text-align: left;
-    margin: 0;
-    padding: 0;
-}
-/* Reset y estilos base */
+/*
+ * RECYBERSEG - Hoja de Estilos Optimizada
+ * Versión: 1.0
+ * Fecha: 26 de Julio de 2025
+ * Descripción: Versión refactorizada y limpiada de styles.css.
+ * Se han eliminado duplicados, consolidado selectores y organizado
+ * para mejorar el mantenimiento y el rendimiento.
+*/
+
+/* ==========================================================================
+   1. Estilos Globales y Reset
+   ========================================================================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', Arial, sans-serif;
 }
 
 html {
+    scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    overflow-x: hidden; /* Previene scroll horizontal */
-    overflow-y: auto;   /* Permite scroll vertical */
-    width: 100%; /* Asegura que HTML ocupe el 100% del ancho */
+    overflow-x: hidden;
+    width: 100%;
 }
 
 body {
-    font-family: 'Poppins', Arial, sans-serif;
     background-color: #0f0f0f;
     color: #fff;
     line-height: 1.6;
-    overflow-x: hidden; /* Previene scroll horizontal en body */
-    overflow-y: auto; /* Asegura que el body pueda tener su propio scroll si es necesario */
-    margin: 0;
-    padding: 0;
-    width: 100%; /* Asegura que BODY ocupe el 100% del ancho */
-    /* SE ELIMINAN LAS PROPIEDADES 'transform' y 'backface-visibility' DE AQUÍ */
-    /* Estas propiedades causaban que position: fixed no funcionara correctamente */
-}
-
-/* Asegurar que todos los textos usen Poppins */
-* {
-    font-family: 'Poppins', Arial, sans-serif;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 .container {
@@ -64,7 +41,9 @@ body {
     padding: 0 20px;
 }
 
-/* Header y Navegación */
+/* ==========================================================================
+   2. Header y Navegación
+   ========================================================================== */
 .header {
     position: fixed;
     top: 0;
@@ -72,13 +51,11 @@ body {
     width: 100%;
     background-color: rgba(40, 40, 40, 0.95);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     z-index: 1000;
     transition: all 0.3s ease;
-    /* GPU acceleration */
     will-change: transform, opacity;
-    transform: translateZ(0); /* Este transform en el header es seguro y común */
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+    transform: translateZ(0);
 }
 
 .navbar {
@@ -86,13 +63,13 @@ body {
 }
 
 .nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .nav-logo h2 {
@@ -106,8 +83,6 @@ body {
     display: flex;
     list-style: none;
     gap: 30px;
-    margin: 0;
-    padding: 0;
 }
 
 .nav-link {
@@ -140,7 +115,6 @@ body {
     width: 100%;
 }
 
-/* Barra de búsqueda */
 .search-container {
     display: flex;
     align-items: center;
@@ -181,52 +155,19 @@ body {
     transform: scale(1.1);
 }
 
-/* Menú hamburguesa */
+/* Menú Hamburguesa (oculto por defecto en desktop) */
 .nav-toggle {
     display: none;
-    flex-direction: column;
-    cursor: pointer;
-    padding: 6px;
-    /* CAMBIO: Fondo negro para el botón de hamburguesa */
-    background-color: #000;
-    border: 2px solid rgba(255, 255, 255, 0.3); /* Borde blanco sutil */
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    position: relative;
-    z-index: 1001;
-    min-height: 40px;
-    min-width: 40px;
-    justify-content: center;
-    align-items: center;
 }
 
-.nav-toggle:hover {
-    /* CAMBIO: Fondo negro más oscuro o con una sutil transparencia al pasar el ratón */
-    background-color: rgba(0, 0, 0, 0.8);
-    border-color: rgba(255, 255, 255, 0.5);
-}
+/* ==========================================================================
+   3. Secciones Principales
+   ========================================================================== */
 
-.nav-toggle:active {
-    transform: scale(0.95);
-}
-
-.bar {
-    width: 22px;
-    height: 2px;
-    /* CAMBIO: Barras blancas */
-    background-color: #fff;
-    margin: 3px 0;
-    transition: all 0.4s ease;
-    border-radius: 2px;
-    display: block;
-    transform-origin: center;
-}
-
-/* Sección Hero */
+/* Hero Section */
 .hero {
     padding: 140px 20px 80px;
     text-align: center;
-    /* CAMBIO: Ruta de la imagen de fondo actualizada */
     background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(42, 42, 42, 0.7)), url('fotos/fondo.png');
     background-size: cover;
     background-position: center;
@@ -235,19 +176,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    /* GPU acceleration */
-    will-change: transform;
-    transform: translateZ(0); /* Este transform en el hero es seguro y común */
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+    transform: translateZ(0);
 }
 
 .hero-content {
-    max-width: none;
-    width: 100%;
-    margin: 0;
-    padding: 0;
+    max-width: 100%;
 }
 
 .hero-title {
@@ -255,43 +188,24 @@ body {
     background: linear-gradient(45deg, #E0FD2C, #d4ff00, #FFD700);
     background-size: 200% 200%;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
+    -webkit-text-fill-color: transparent;
     font-weight: 700;
     margin-bottom: 30px;
     text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
     animation: fadeInUp 1s ease-out, subtleGoldShine 4s ease-in-out infinite;
 }
 
-/* Animación más sutil */
-@keyframes subtleGoldShine {
-    0% {
-        background-position: 0% 50%;
-        text-shadow: 0 0 8px rgba(255, 215, 0, 0.2);
-    }
-    50% {
-        background-position: 100% 50%;
-        text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
-    }
-    100% {
-        background-position: 0% 50%;
-        text-shadow: 0 0 8px rgba(255, 215, 0, 0.2);
-    }
-}
 .hero-description {
-    font-size: 30px !important;
+    font-size: 30px;
     font-weight: 200;
-    max-width: none;
-    width: 100%;
-    margin: 0;
     padding: 0 100px;
     text-align: justify;
     line-height: 1.8;
     animation: fadeInUp 1s ease-out 0.3s both;
-    font-family: 'Poppins', Arial, sans-serif;
 }
 
-/* Servicios principales */
+/* Main Services Section */
 .main-services {
     padding: 80px 20px;
     background-color: #000;
@@ -300,12 +214,11 @@ body {
 
 .main-services h2 {
     font-size: 36px;
-    color: #fff;
     margin-bottom: 20px;
     font-weight: 600;
 }
 
-.main-services p {
+.main-services > .container > p {
     font-size: 20px;
     margin-bottom: 50px;
     max-width: 1400px;
@@ -322,13 +235,14 @@ body {
 }
 
 .service-card {
-    background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-    border: 2px solid rgba(255,255,255,0.2);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border: 2px solid rgba(255, 255, 255, 0.2);
     padding: 40px 30px;
     border-radius: 15px;
     text-align: center;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
+    will-change: transform;
 }
 
 .service-card:hover {
@@ -338,39 +252,33 @@ body {
 }
 
 .service-icon {
-    /* Ya no afecta el tamaño de la imagen directamente, solo el icono de fuente */
-    font-size: 48px; /* Mantener si hay otros iconos en este contenedor */
-    color: #E0FD2C;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
     margin-bottom: 20px;
-    display: flex; /* Añadido para centrar el contenido */
-    justify-content: center; /* Añadido para centrar el contenido */
-    align-items: center; /* Añadido para centrar el contenido */
-    height: 250px; /* Asegura que el contenedor tenga espacio para la imagen de 80px */
 }
 
-/* ---- NUEVA REGLA AGREGADA/MODIFICADA PARA LAS IMÁGENES DENTRO DE service-icon ---- */
 .service-icon img {
-    width: 240px;  /* Tamaño deseado para las imágenes */
-    height: 240px; /* Tamaño deseado para las imágenes */
-    display: block; /* Asegura que la imagen se comporte como un bloque */
-    object-fit: contain; /* Ajusta la imagen sin recortarla, manteniendo su relación de aspecto */
+    width: 240px;
+    height: 240px;
+    object-fit: contain;
 }
 
-.consultoria-img {
-    width: 280px !important;  /* Más grande que las otras */
+.service-icon .consultoria-img {
+    width: 280px !important;
     height: 280px !important;
 }
 
 .service-card h3 {
     font-size: 22px;
-    color: #fff;
     margin-bottom: 15px;
     font-weight: 600;
 }
 
 .service-card p {
     font-size: 12px;
-    color: rgba(255,255,255,0.8);
+    color: rgba(255, 255, 255, 0.8);
     margin-bottom: 20px;
     text-align: justify;
 }
@@ -385,7 +293,7 @@ body {
     font-size: 14px;
 }
 
-/* Sección IoT */
+/* IoT Section */
 .iot-section {
     padding: 80px 20px;
     background-color: #c1d72b;
@@ -426,7 +334,7 @@ body {
     border: 3px solid transparent;
     max-width: 320px;
     width: 100%;
-    margin: 0 auto;
+    will-change: transform;
 }
 
 .iot-card:hover {
@@ -436,7 +344,7 @@ body {
 }
 
 .iot-image {
-    height: 120px;
+    height: 70px;
     background-color: rgba(224, 253, 44, 0.1);
     border: 2px dashed rgba(224, 253, 44, 0.3);
     border-radius: 10px;
@@ -444,8 +352,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgba(224, 253, 44, 0.6);
-    font-size: 14px;
     position: relative;
 }
 
@@ -465,12 +371,21 @@ body {
 
 .iot-details {
     margin-bottom: 20px;
+}
+
+.iot-details p {
     text-align: justify;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.iot-details ul {
+    list-style: none;
+    text-align: left;
 }
 
 .iot-details li {
-    padding: 4px 0;
-    padding-left: 15px;
+    padding: 4px 0 4px 15px;
     position: relative;
     font-size: 12px;
     line-height: 1.3;
@@ -496,6 +411,7 @@ body {
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    will-change: transform, background-color;
 }
 
 .cta-button:hover {
@@ -503,7 +419,7 @@ body {
     transform: scale(1.05);
 }
 
-/* Misión y Visión */
+/* Mission & Vision Section */
 .mission-vision {
     padding: 80px 20px;
     background-color: #1a1a1a;
@@ -524,11 +440,12 @@ body {
 }
 
 .mv-card {
-    background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
     padding: 40px;
     border-radius: 15px;
     border: 2px solid rgba(224, 253, 44, 0.3);
     transition: all 0.3s ease;
+    will-change: transform;
 }
 
 .mv-card:hover {
@@ -544,44 +461,71 @@ body {
 }
 
 .mv-card p {
-    font-size: 20px; /* CAMBIO: Aumentado de 16px a 20px */
+    font-size: 20px;
     line-height: 1.7;
     text-align: justify;
 }
 
-/* Sección de Contacto */
+/* Contact Section */
 .contact-section {
     padding: 80px 20px;
     background-color: #0f0f0f;
 }
 
-.contact-section h2 {
-    text-align: center;
-    font-size: 36px;
-    color: #E0FD2C;
-    margin-bottom: 50px;
-    font-weight: 700;
-}
-
-.contact-content {
+.contact-content-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 60px;
+    gap: 40px;
+    align-items: stretch;
     max-width: 1000px;
     margin: 0 auto;
 }
 
-.contact-info h3 {
+.contact-info-wrapper,
+.contact-form-wrapper {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border: 2px solid rgba(224, 253, 44, 0.3);
+    border-radius: 15px;
+    padding: 40px 30px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-info-wrapper:hover,
+.contact-form-wrapper:hover {
+    border-color: #E0FD2C;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(224, 253, 44, 0.2);
+}
+
+.contact-info-wrapper {
+    justify-content: flex-start;
+}
+
+.contact-info-wrapper h3,
+.contact-form-wrapper h2 {
     color: #E0FD2C;
     font-size: 24px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     font-weight: 600;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.contact-info-items {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
 }
 
 .contact-item {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
     font-size: 16px;
 }
 
@@ -602,119 +546,108 @@ body {
     color: #E0FD2C;
 }
 
-.whatsapp-item a {
-    display: inline-flex;
-    align-items: center;
-    padding: 5px 10px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-}
-
 .whatsapp-item a:hover {
     background-color: rgba(224, 253, 44, 0.1);
     transform: translateX(5px);
 }
 
-.contact-form form {
+/* Form Styles */
+.newsletter-form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
+    flex-grow: 1;
 }
 
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
-.contact-form input,
-.contact-form textarea {
-    padding: 15px;
-    border: 2px solid rgba(255,255,255,0.2);
+.newsletter-form input,
+.newsletter-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
-    background-color: rgba(255,255,255,0.1);
+    background-color: rgba(255, 255, 255, 0.1);
     color: #fff;
-    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
     transition: all 0.3s ease;
 }
 
-.contact-form input:focus,
-.contact-form textarea:focus {
+.newsletter-form textarea {
+    resize: none;
+    height: 80px;
+}
+
+.newsletter-form input:focus,
+.newsletter-form textarea:focus {
     outline: none;
     border-color: #E0FD2C;
-    background-color: rgba(255,255,255,0.15);
+    background-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 10px rgba(224, 253, 44, 0.3);
 }
 
-.contact-form input::placeholder,
-.contact-form textarea::placeholder {
-    color: rgba(255,255,255,0.7);
+.newsletter-form input::placeholder,
+.newsletter-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.7);
 }
 
-.submit-btn {
+.newsletter-form button[type="submit"] {
     background-color: #E0FD2C;
     color: #000;
     border: none;
-    padding: 15px 30px;
-    font-size: 16px;
+    padding: 12px 25px;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     border-radius: 8px;
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 1px;
+    align-self: center;
+    margin-top: auto;
 }
 
-.submit-btn:hover {
+.newsletter-form button[type="submit"]:hover {
     background-color: #C7E525;
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(224, 253, 44, 0.4);
 }
 
-/* Footer */
+#form-messages {
+    display: none;
+    margin-top: 20px;
+}
+
+/* ==========================================================================
+   4. Footer
+   ========================================================================== */
 .footer {
     background-color: #000;
     padding: 60px 20px 20px;
 }
 
 .footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px;
-    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 40px;
 }
 
-.footer-section h3,
-.footer-section h4 {
+.footer-section h3 {
     color: #E0FD2C;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     font-weight: 600;
 }
 
 .footer-section p {
     font-size: 14px;
-    line-height: 1.6;
-    color: rgba(255,255,255,0.8);
-}
-
-.footer-section ul {
-    list-style: none;
-}
-
-.footer-section ul li {
-    margin-bottom: 10px;
-}
-
-.footer-section ul li a {
-    color: rgba(255,255,255,0.8);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-section ul li a:hover {
-    color: #E0FD2C;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 20px;
 }
 
 .social-links {
     display: flex;
+    justify-content: center;
     gap: 15px;
 }
 
@@ -729,87 +662,19 @@ body {
     height: 40px;
     border-radius: 50%;
     position: relative;
-    overflow: hidden;
-}
-
-.social-links a::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(224, 253, 44, 0.1);
-    border-radius: 50%;
-    transform: scale(0);
-    transition: transform 0.3s ease;
-}
-
-.social-links a:hover::before {
-    transform: scale(1);
 }
 
 .social-links a:hover {
-    color: #fff;
     transform: scale(1.2) rotate(5deg);
 }
 
-/* Colores específicos para cada red social */
-.social-links a[aria-label="WhatsApp"]:hover {
-    color: #25D366;
-}
-
-.social-links a[aria-label="LinkedIn"]:hover {
-    color: #0077B5;
-}
-
-.social-links a[aria-label="Imprimir"]:hover {
-    color: #fff;
-}
-
-.newsletter-form {
-    display: flex;
-    gap: 10px;
-}
-
-.newsletter-form input {
-    flex: 1;
-    padding: 10px 15px;
-    border: 2px solid rgba(255,255,255,0.2);
-    border-radius: 5px;
-    background-color: rgba(255,255,255,0.1);
-    color: #fff;
-    font-family: 'Poppins', sans-serif;
-}
-
-.newsletter-form input:focus {
-    outline: none;
-    border-color: #E0FD2C;
-}
-
-.newsletter-form input::placeholder {
-    color: rgba(255,255,255,0.7);
-}
-
-.newsletter-form button {
-    background-color: #E0FD2C;
-    color: #000;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.newsletter-form button:hover {
-    background-color: #C7E525;
-}
+.social-links a[aria-label="WhatsApp"]:hover { color: #25D366; }
+.social-links a[aria-label="LinkedIn"]:hover { color: #0077B5; }
 
 .footer-bottom {
     text-align: center;
     padding-top: 40px;
-    border-top: 1px solid rgba(255,255,255,0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -818,19 +683,14 @@ body {
 }
 
 .footer-bottom p {
-    color: rgba(255,255,255,0.6);
+    color: rgba(255, 255, 255, 0.6);
     font-size: 14px;
-    margin: 0;
-}
-
-.signature {
-    text-align: center;
 }
 
 .signature p {
-    color: #E0FD2C;
-    font-size: 14px;
     margin: 2px 0;
+    font-size: 14px;
+    color: #E0FD2C;
 }
 
 .signature p:first-child {
@@ -844,2920 +704,46 @@ body {
     font-style: italic;
 }
 
-/* Animaciones */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-/* ===== CORRECCIONES Y AJUSTES ESPECÍFICOS ===== */
-
-/* CORRECCIÓN: FORMULARIO VERTICAL EN PC Y MÓVIL */
-.newsletter-form {
-    display: flex !important;
-    flex-direction: column !important; /* SIEMPRE en columna */
-    gap: 20px !important;
-    width: 100% !important;
-    max-width: 500px !important; /* Ancho máximo para PC */
-    margin: 0 auto !important; /* Centrado en PC */
-}
-
-/* INPUTS INDIVIDUALES UNO DEBAJO DEL OTRO */
-.newsletter-form input,
-.newsletter-form textarea {
-    width: 100% !important;
-    padding: 15px !important;
-    border: 2px solid rgba(255,255,255,0.2) !important;
-    border-radius: 8px !important;
-    background-color: rgba(255,255,255,0.1) !important;
-    color: #fff !important;
-    font-family: 'Poppins', sans-serif !important;
-    font-size: 16px !important;
-    transition: all 0.3s ease !important;
-    box-sizing: border-box !important;
-    margin-bottom: 0 !important; /* Sin margen adicional */
-}
-
-.newsletter-form input:focus,
-.newsletter-form textarea:focus {
-    outline: none !important;
-    border-color: #E0FD2C !important;
-    background-color: rgba(255,255,255,0.15) !important;
-    box-shadow: 0 0 10px rgba(224, 253, 44, 0.3) !important;
-}
-
-.newsletter-form input::placeholder,
-.newsletter-form textarea::placeholder {
-    color: rgba(255,255,255,0.7) !important;
-}
-
-/* BOTÓN DE ENVÍO */
-.newsletter-form button[type="submit"] {
-    background-color: #E0FD2C !important;
-    color: #000 !important;
-    border: none !important;
-    padding: 15px 30px !important;
-    font-size: 16px !important;
-    font-weight: 600 !important;
-    cursor: pointer !important;
-    border-radius: 8px !important;
-    transition: all 0.3s ease !important;
-    text-transform: uppercase !important;
-    letter-spacing: 1px !important;
-    margin-top: 10px !important;
-    width: auto !important;
-    align-self: flex-start !important; /* Alineado a la izquierda */
-}
-
-.newsletter-form button[type="submit"]:hover {
-    background-color: #C7E525 !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 4px 12px rgba(224, 253, 44, 0.4) !important;
-}
-
-/* ELIMINAR CUALQUIER GRID EN FORMULARIOS QUE CAUSE LAYOUT HORIZONTAL */
-.form-row {
-    display: flex !important;
-    flex-direction: column !important; /* FORZAR columna */
-    gap: 20px !important;
-    width: 100% !important;
-}
-
-/* Si existe algún form-row, también hacerlo vertical */
-.contact-form .form-row {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 20px !important;
-}
-
-.contact-form .form-row input {
-    width: 100% !important;
-    margin-bottom: 0 !important;
-}
-
-/* ASEGURAR QUE NO HAYA CONFLICTOS CON ESTILOS PREVIOS */
-.contact-form form {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 20px !important;
-}
-
-/* RESPONSIVE DESIGN */
-
-/* General responsive fixes */
-.container {
-    padding: 0 15px;
-}
-
-/* LAYOUT DE CONTACTO EN PC (DESKTOP) */
-@media screen and (min-width: 769px) {
-    .contact-section {
-        padding: 80px 20px !important;
-    }
-    
-    .contact-section .container {
-        max-width: 1000px !important;
-        margin: 0 auto !important;
-    }
-    
-    /* Layout de dos columnas en PC */
-    .contact-content-wrapper {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important;
-        gap: 60px !important;
-        align-items: start !important;
-    }
-    
-    /* Información de contacto a la izquierda */
-    .contact-info-wrapper {
-        grid-column: 1 !important;
-    }
-    
-    .contact-info-wrapper h3 {
-        color: #E0FD2C !important;
-        font-size: 24px !important;
-        margin-bottom: 30px !important;
-        font-weight: 600 !important;
-    }
-    
-    /* Formulario a la derecha */
-    .contact-form-wrapper {
-        grid-column: 2 !important;
-    }
-    
-    .contact-form-wrapper h2 {
-        color: #E0FD2C !important;
-        font-size: 24px !important;
-        margin-bottom: 30px !important;
-        font-weight: 600 !important;
-        text-align: left !important;
-    }
-    
-    /* Formulario vertical en PC */
-    .newsletter-form {
-        max-width: 400px !important; /* Más angosto en PC */
-        margin: 0 !important; /* Sin centrado automático en PC */
-    }
-    
-    .newsletter-form input,
-    .newsletter-form textarea {
-        font-size: 14px !important; /* Texto más pequeño en PC */
-        padding: 12px 15px !important;
-    }
-    
-    .newsletter-form button[type="submit"] {
-        font-size: 14px !important;
-        padding: 12px 25px !important;
-        min-width: 140px !important;
-    }
-}
-
-/* Tablets (768px y menores) */
-@media screen and (max-width: 768px) {
-    /* MENÚ HAMBURGUESA SIEMPRE AL LADO DERECHO */
-    .nav-container {
-        flex-direction: row !important; /* Cambiar de columna a fila */
-        justify-content: space-between !important; /* Espacio entre elementos */
-        align-items: center !important;
-        padding: 0 20px !important;
-    }
-    
-    .nav-logo {
-        order: 1 !important;
-        flex: 1 !important; /* Ocupar espacio disponible */
-        text-align: center !important;
-    }
-    
-    .nav-logo h2 {
-        text-align: center !important;
-        margin: 0 !important;
-        font-size: 28px !important;
-    }
-    
-    .nav-toggle {
-        order: 2 !important;
-        position: relative !important;
-        margin-left: auto !important; /* Empujar al lado derecho */
-        flex-shrink: 0 !important; /* No se encoja */
-    }
-    
-    .search-container {
-        display: none !important;
-    }
-
-    .consultoria-img {
-        width: 350px !important;  /* Más grande que las otras */
-        height: 350px !important;
-    }
-    
-    .service-icon img {
-        width: 250px;  /* Más pequeño en tablets */
-        height: 250px;
-    }
-    
-    .service-icon {
-        height: 250px; /* Ajustar contenedor */
-    }
-
-    /* Ocultar búsqueda en móviles */
-    .search-container {
-        display: none;
-    }
-
-    .nav-menu {
-        position: fixed;
-        left: 0;
-        top: -100vh;
-        flex-direction: column;
-        background: rgba(0, 0, 0, 0.95);
-        width: 100%; /* Ocupa el 100% del ancho de la ventana */
-        height: 50vh;
-        text-align: center;
-        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-        padding: 20px 0;
-        z-index: 1001;
-        overflow-y: auto;
-        border-bottom-left-radius: 40px;
-        border-bottom-right-radius: 40px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        opacity: 0;
-        transform: translateY(-20px);
-        display: flex;
-        padding-top: 20px;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-    }
-
-    .nav-menu.active {
-        top: 120px;
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    .nav-menu li {
-        margin: 10px 0;
-        position: relative;
-        padding-bottom: 10px;
-        width: 100%;
-    }
-
-    .nav-menu li::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 1px;
-        background: rgba(255, 255, 255, 0.4);
-    }
-    
-    .nav-link {
-        font-size: 20px;
-        color: #fff !important;
-        padding: 10px 20px;
-        display: block;
-        width: 100%;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-    }
-    
-    .nav-link:hover {
-        background-color: rgba(224, 253, 44, 0.1) !important;
-        color: #E0FD2C !important;
-    }
-
-    .nav-toggle {
-        display: flex !important;
-        background-color: #000 !important;
-        border: 2px solid rgba(255, 255, 255, 0.2) !important;
-        border-radius: 20px;
-        padding: 8px;
-        cursor: pointer;
-        z-index: 1002;
-        position: relative;
-        user-select: none;
-        -webkit-backdrop-filter: blur(50px);
-        touch-action: manipulation;
-        min-height: 42px;
-        min-width: 42px;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .nav-toggle:hover,
-    .nav-toggle:focus {
-        background-color: rgba(0, 0, 0, 0.8) !important;
-        outline: none;
-    }
-
-    .nav-toggle:active {
-        background-color: rgba(0, 0, 0, 0.85);
-        transform: scale(0.95);
-    }
-
-    .nav-toggle.active {
-        background-color: rgba(0, 0, 0, 0.85);
-        border-color: rgba(255, 255, 255, 0.3);
-    }
-
-    .nav-toggle.active .bar:nth-child(2) {
-        opacity: 0;
-        transform: translateX(15px);
-    }
-
-    .nav-toggle.active .bar:nth-child(1) {
-        transform: translateY(5px) rotate(45deg);
-    }
-
-    .nav-toggle.active .bar:nth-child(3) {
-        transform: translateY(-5px) rotate(-45deg);
-    }
-
-    /* LAYOUT EN MÓVILES */
-    .contact-section {
-        padding: 80px 15px !important;
-    }
-    
-    /* Una sola columna en móviles */
-    .contact-content-wrapper {
-        display: block !important;
-    }
-    
-    /* Información de contacto primero */
-    .contact-info-wrapper {
-        margin-bottom: 40px !important;
-        text-align: left !important;
-    }
-    
-    .contact-info-wrapper h3 {
-        color: #E0FD2C !important;
-        font-size: 24px !important;
-        margin-bottom: 25px !important;
-        font-weight: 600 !important;
-    }
-    
-    /* Formulario después */
-    .contact-form-wrapper {
-        padding-left: 30px !important; /* Un poquito a la izquierda */
-        max-width: calc(100% - 10px) !important;
-    }
-    
-    .contact-form-wrapper h2 {
-        color: #E0FD2C !Important;
-        font-size: 28px !important;
-        font-weight: 700 !important;
-        margin: 0 0 25px 0 !important;
-        text-align: left !important;
-    }
-    
-    /* Formulario vertical en móviles */
-    .newsletter-form {
-        max-width: 95% !important;
-        margin: 0 !important;
-    }
-    
-    .newsletter-form button[type="submit"] {
-        font-size: 18px !important;
-        padding: 18px 40px !important;
-        font-weight: 700 !important;
-        letter-spacing: 1.5px !important;
-        min-width: 180px !important;
-    }
-
-    /* Hero responsive */
-    .hero {
-        padding: 100px 15px 60px;
-        min-height: 70vh;
-        background-attachment: scroll; /* Mejor rendimiento en móviles */
-    }
-
-    .hero-content {
-        max-width: 100%;
-    }
-
-    .hero-title {
-        font-size: 26px;
-        margin-bottom: 25px;
-        line-height: 1.3;
-    }
-
-    .hero-description {
-        font-size: 16px !important; /* Cambiado de 10px a 16px para mejor legibilidad */
-        padding: 0 15px;
-        text-align: justify;
-        line-height: 1.6;
-        max-width: 100%;
-        width: 100%;
-        margin: 0;
-    }
-
-    /* Servicios responsive */
-    .main-services,
-    .iot-section,
-    .mission-vision {
-        padding: 60px 15px;
-    }
-
-    .main-services h2,
-    .iot-section h2,
-    .mission-vision h2 {
-        font-size: 30px;
-    }
-
-    .services-grid {
-        grid-template-columns: 1fr;
-        gap: 25px;
-        margin-top: 40px;
-    }
-
-    .service-card {
-        padding: 30px 20px;
-        margin: 0 auto;
-        max-width: 400px;
-    }
-
-    /* IoT Section responsive */
-    .iot-description {
-        font-size: 19px;
-        text-align: justify;
-        line-height: 1.6;
-        max-width: 100%;
-    }
-
-    .iot-services {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 20px;
-        margin-top: 40px;
-    }
-
-    .iot-card {
-        padding: 20px 15px;
-        margin: 0 auto;
-        max-width: 350px;
-    }
-
-    .iot-image {
-        height: 100px;
-        margin-bottom: 15px;
-    }
-
-    /* Misión y Visión */
-    .mv-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-
-    .mv-card {
-        padding: 30px 20px;
-    }
-    
-    /* CAMBIO: Añadido para tablets */
-    .mv-card p {
-        font-size: 18px;
-    }
-
-    /* Footer responsive */
-    .footer-content {
-        grid-template-columns: 1fr;
-        gap: 30px;
-        text-align: center;
-    }
-    
-    .footer-section {
-    text-align: center;
-    }
-    
-    .social-links {
-        display: flex !important;
-        justify-content: center !important; /* Centrar horizontalmente */
-        align-items: center !important;
-        gap: 20px !important;
-        margin: 20px 0 !important;
-        padding: 0 !important;
-    }
-    
-    .social-links a {
-        color: #E0FD2C !important;
-        font-size: 28px !important; /* Un poco más grandes */
-        transition: all 0.3s ease !important;
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        width: 50px !important;
-        height: 50px !important;
-        border-radius: 50% !important;
-        position: relative !important;
-        overflow: hidden !important;
-    }
-    
-    .social-links a::before {
-        content: '' !important;
-        position: absolute !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        height: 100% !important;
-        background: rgba(224, 253, 44, 0.1) !important;
-        border-radius: 50% !important;
-        transform: scale(0) !important;
-        transition: transform 0.3s ease !important;
-    }
-    
-    .social-links a:hover::before {
-        transform: scale(1) !important;
-    }
-    
-    .social-links a:hover {
-        transform: scale(1.15) !important;
-    }
-
-    .footer-bottom {
-        flex-direction: column;
-        text-align: center;
-        gap: 15px;
-    }
-
-    .signature {
-        text-align: center;
-    }
-
-    .newsletter-form {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    /* AJUSTAR EL HEADER PARA ACOMODAR EL NUEVO LAYOUT */
-    .navbar {
-        padding: 15px 0 !important;
-    }
-    
-    .header {
-        min-height: 100px !important; /* Más alto para acomodar el logo centrado */
-        z-index: 1000 !important; /* Restaurar z-index original */
-    }
-    
-    /* Asegurar que el contenido principal no se superponga */
-    .hero {
-        padding-top: 120px !important; /* Ajustar para el header más alto */
-    }
-
-    /* ITEMS DE CONTACTO MEJORADOS */
-    .contact-item {
-        display: flex !important;
-        align-items: center !important;
-        margin-bottom: 15px !important;
-        font-size: 16px !important;
-        text-align: left !important;
-    }
-    
-    .contact-item i {
-        color: #E0FD2C !important;
-        margin-right: 15px !important;
-        font-size: 20px !important;
-        width: 25px !important;
-        flex-shrink: 0 !important;
-    }
-    
-    .contact-item a {
-        color: #fff !important;
-        text-decoration: none !important;
-        transition: color 0.3s ease !important;
-    }
-    
-    .contact-item a:hover {
-        color: #E0FD2C !important;
-    }
-    
-    .whatsapp-item a {
-        display: inline-flex !important;
-        align-items: center !important;
-        padding: 5px 10px !important;
-        border-radius: 8px !important;
-        transition: all 0.3s ease !important;
-    }
-    
-    .whatsapp-item a:hover {
-        background-color: rgba(224, 253, 44, 0.1) !important;
-        transform: translateX(3px) !important;
-    }
-}
-
-/* Móviles pequeños (480px y menores) */
-@media screen and (max-width: 480px) {
-    /* Navegación móvil */
-    .nav-logo h2 {
-        font-size: 26px;
-    }
-
-    /* Búsqueda oculta en móviles */
-    .search-container {
-        display: none;
-    }
-
-    .service-icon img {
-        width: 220px;  /* Aún más pequeño en móviles */
-        height: 220px;
-    }
-    
-    .service-icon {
-        height: 220px; /* Ajustar contenedor */
-    }
-
-    .consultoria-img {
-        width: 250px !important;  
-        height: 250px !important;
-    }
-    
-    .nav-toggle {
-        background-color: #000 !important;
-        border: 2px solid rgba(255, 255, 255, 0.5) !important;
-        border-radius: 10px;
-        padding: 6px;
-        min-height: 38px;
-        min-width: 38px;
-    }
-
-    .nav-menu {
-        top: 45px; /* Reducido para pantallas más pequeñas */
-        height: 45vh;
-        padding: 15px 0;
-        border-bottom-left-radius: 12px;
-        border-bottom-right-radius: 12px;
-        background-color: rgba(0, 0, 0, 0.9);
-        backdrop-filter: blur(30px);
-        -webkit-backdrop-filter: blur(30px);
-        border: 1px solid rgba(255, 255, 255, 0.4);
-        width: 100%;
-        left: 0;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    }
-
-    .nav-menu.active {
-        top: 80px;
-    }
-
-    .nav-menu li {
-        margin: 6px 0;
-        width: 100%;
-    }
-
-    .nav-link {
-        font-size: 24px;
-        font-weight: 500;
-        padding: 6px 15px;
-        color: #fff !important;
-    }
-
-    .main-services p {
-        font-size: 16px;
-        margin-bottom: 50px;
-        max-width: 1400px;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: justify;
-    }
-    
-    .nav-link:hover {
-        background-color: rgba(255, 255, 255, 0.08);
-        color: #fff !important;
-        transform: translateY(-1px) scale(1.02);
-    }
-
-    /* Hero móvil */
-    .hero {
-        padding: 90px 10px 50px;
-        min-height: 60vh;
-        background-attachment: scroll;
-        background-size: cover;
-    }
-
-    .hero-title {
-        font-size: 24px;
-        line-height: 1.2;
-        margin-bottom: 20px;
-    }
-
-    .hero-description {
-        font-size: 15px !important; /* Tamaño óptimo para móviles pequeños */
-        padding: 0 10px;
-        line-height: 1.5;
-        text-align: justify;
-        width: 100%;
-        margin: 0;
-    }
-
-    /* Secciones móviles */
-    .main-services,
-    .iot-section,
-    .mission-vision,
-    .contact-section {
-        padding: 50px 10px;
-    }
-
-    .main-services h2,
-    .iot-section h2,
-    .mission-vision h2,
-    .contact-section h2 {
-        font-size: 26px;
-        margin-bottom: 20px;
-    }
-
-    /* Servicios móviles */
-    .service-card {
-        padding: 25px 15px;
-        margin: 0 auto;
-        max-width: 100%;
-    }
-
-    .service-card h3 {
-        font-size: 18px;
-    }
-
-    .service-icon {
-        font-size: 36px;
-    }
-
-    .service-card p {
-        font-size: 14px;
-        text-align: justify;
-    }
-
-    /* IoT móvil */
-    .iot-description {
-        font-size: 16px;
-        padding: 0 1px;
-        text-align: justify;
-    }
-
-    .iot-services {
-        grid-template-columns: 1fr;
-        gap: 20px;
-        margin-top: 40px;
-    }
-
-    .iot-card {
-        padding: 18px 12px;
-        margin: 0 auto;
-        max-width: 300px;
-    }
-
-    .iot-card h3 {
-        font-size: 15px;
-    }
-
-    .iot-image {
-        height: 80px; /* Ajuste para que el contenedor de la imagen IoT sea más pequeño en móvil */
-        margin-bottom: 12px;
-    }
-    .iot-image::after {
-        font-size: 10px; /* Reducir tamaño del texto "Espacio para imagen" en móviles */
-    }
-
-    .iot-details li {
-        font-size: 11px;
-    }
-
-    .cta-button {
-        padding: 8px 16px;
-        font-size: 12px;
-    }
-
-    /* Misión y Visión móvil */
-    .mv-grid {
-        grid-template-columns: 1fr;
-        gap: 25px;
-    }
-
-    .mv-card {
-        padding: 25px 15px;
-    }
-
-    .mv-card h3 {
-        font-size: 22px;
-    }
-
-    .mv-card p {
-        font-size: 16px; /* CAMBIO: Aumentado de 12px a 16px */
-        text-align: justify;
-    }
-
-    /* Contacto móvil */
-    .contact-content {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-
-    .form-row {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-
-    .contact-item {
-        font-size: 14px;
-    }
-
-    .contact-item a {
-        font-size: 14px;
-    }
-
-    .social-links a {
-        width: 35px !important;
-        height: 35px !important;
-        font-size: 20px !important;
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-        padding: 12px;
-        font-size: 14px;
-    }
-
-    .submit-btn {
-        padding: 12px 25px;
-        font-size: 14px;
-    }
-
-    /* Footer móvil */
-    .footer {
-        padding: 40px 10px 15px;
-    }
-
-    .footer-content {
-        grid-template-columns: 1fr;
-        gap: 25px;
-        text-align: center;
-    }
-
-    .footer-bottom {
-        flex-direction: column;
-        text-align: center;
-        gap: 15px;
-        padding-top: 30px;
-    }
-
-    .signature {
-        text-align: center;
-    }
-
-    .signature p {
-        font-size: 13px;
-    }
-
-    .newsletter-form {
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .newsletter-form input {
-        padding: 12px;
-    }
-
-    .newsletter-form button {
-        padding: 12px 20px;
-    }
-
-    .social-links {
-        gap: 15px !important;
-    }
-}
-
-/* Móviles muy pequeños (360px y menores) */
-@media screen and (max-width: 360px) {
-    .hero-title {
-        font-size: 20px;
-    }
-
-    .hero-description {
-        font-size: 13px !important; /* Tamaño mínimo para móviles muy pequeños */
-        padding: 0 8px;
-        line-height: 1.4;
-    }
-
-    .consultoria-img {
-        width: 220px !important;  
-        height: 220px !important;
-    }
-    
-    .service-icon img {
-        width: 180px;  /* Muy pequeño en móviles pequeños */
-        height: 180px;
-    }
-    
-    .service-icon {
-        height: 180px; /* Ajustar contenedor */
-    }
-    
-    .search-input {
-        width: 65%;
-        max-width: 180px;
-    }
-
-    /* Búsqueda oculta en móviles pequeños */
-    .search-container {
-        display: none;
-    }
-
-    .service-card,
-    .iot-card,
-    .mv-card {
-        margin: 0;
-        padding: 20px 12px;
-    }
-
-    .main-services h2,
-    .iot-section h2,
-    .mission-vision h2,
-    .contact-section h2 {
-        font-size: 22px;
-    }
-
-    .main-services,
-    .iot-section,
-    .mission-vision,
-    .contact-section {
-        padding: 40px 8px;
-    }
-
-    .iot-image img {
-        height: 120px;
-    }
-
-    .footer-section h3,
-    .footer-section h4 {
-        font-size: 16px;
-    }
-
-    .footer-section p,
-    .footer-section ul li a {
-        font-size: 12px;
-    }
-}
-
-/* Landscape móviles */
-@media screen and (max-height: 500px) and (orientation: landscape) {
-    .hero {
-        min-height: 90vh;
-        padding: 60px 20px 30px;
-    }
-   .main-services p {
-        font-size: 15px;
-        margin-bottom: 50px;
-        max-width: 1400px;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: justify;
-    }
-    .hero-title {
-        font-size: 28px;
-        margin-bottom: 15px;
-    }
-
-    .hero-description {
-        font-size: 1px;
-    }
-
-    .nav-menu {
-        top: 65px;
-    }
-}
-
-/* Tablets en landscape */
-@media screen and (min-width: 769px) and (max-width: 1024px) {
-    .hero-title {
-        font-size: 40px;
-    }
-
-    .hero-description {
-        font-size: 28px !important;
-    }
-    .main-services p {
-        font-size: 16px;
-        margin-bottom: 50px;
-        max-width: 1400px;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: justify;
-    }
-    .services-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 25px;
-    }
-
-    .iot-services {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
-    }
-
-    .mv-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .contact-content {
-        gap: 40px;
-    }
-    
-    .iot-description {
-        box-sizing: border-box;
-    }
-}
+/* ==========================================================================
+   5. Componentes (Chatbot, Botón Flotante, Contador)
+   ========================================================================== */
 
-/* Desktop estándar */
-@media screen and (min-width: 1025px) and (max-width: 1199px) {
-    .hero-description {
-        font-size: 32px !important;
-        padding: 0 80px;
-    }
-    
-    .iot-description {
-        box-sizing: border-box;
-    }
-    
-    .main-services p {
-        font-size: 15px;
-        margin-bottom: 50px;
-        max-width: 1400px;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: justify;
-    }
+/* Visitor Counter */
+.visitor-counter-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #E0FD2C;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 8px 15px;
+    border-radius: 25px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
 }
 
-/* Mejoras adicionales para móviles */
-@media screen and (max-width: 768px) {
-    /* Ocultar búsqueda completamente en móviles */
-    .search-container {
-        display: none !important;
-    }
-
-    /* Prevenir zoom en inputs en iOS */
-    input[type="text"],
-    input[type="email"],
-    input[type="tel"],
-    textarea {
-        font-size: 16px !important;
-    }
-
-    .service-icon img {
-        width: 220px;  
-        height: 220px;
-    }
-
-    .service-icon {
-        height: 220px; 
-    }
-    
-    .consultoria-img {
-        width: 250px !important;  
-        height: 250px !important;
-    }
-    
-    /* Mejorar touch targets */
-    .nav-link,
-    .cta-button,
-    .submit-btn {
-        min-height: 44px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .main-services p {
-        font-size: 18px;
-        margin-bottom: 50px;
-        max-width: 1400px;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: justify;
-    }
-    
-    /* Menú hamburguesa mejorado */
-    .nav-toggle {
-        min-height: 40px;
-        min-width: 40px;
-        display: flex !important;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /* Scroll suave en móviles */
-    html {
-        -webkit-overflow-scrolling: touch;
-    }
-
-    /* Mejorar rendimiento en móviles */
-    .service-card,
-    .iot-card,
-    .mv-card {
-        transform: translateZ(0);
-        -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
-    }
-}
-
-@media screen and (min-width: 1200px) {
-    .container {
-        max-width: 1400px;
-    }
-
-    .hero-title {
-        font-size: 56px;
-    }
-
-    .hero-description {
-        font-size: 22px;
-    }
-    .main-services p {
-        font-size: 26px; /* Aún más grande en pantallas grandes */
-    }
-
-    .services-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-
-    .iot-services {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    
-    .iot-description {
-        box-sizing: border-box;
-    }
-}
-
-/* Accesibilidad y mejoras UX */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-}
-
-/* Alto contraste */
-@media (prefers-contrast: high) {
-    .nav-link,
-    .hero-title,
-    .contact-section h2 {
-        text-shadow: none;
-    }
-
-    .service-card,
-    .iot-card,
-    .mv-card {
-        border-width: 3px;
-    }
-}
-
-/* Tema oscuro del sistema */
-@media (prefers-color-scheme: dark) {
-    /* Los estilos ya están diseñados para tema oscuro */
-}
-
-/* Optimizaciones de rendimiento */
-.service-card,
-.iot-card,
-.mv-card {
-    will-change: transform;
-}
-
-.nav-link,
-.cta-button,
-.submit-btn {
-    will-change: transform, background-color;
-}
-
-/* Print styles */
-@media print {
-    .nav-toggle,
-    .search-container,
-    .cta-button,
-    .submit-btn {
-        display: none;
-    }
-
-    body {
-        background: white;
-        color: black;
-    }
-
-    .hero-title,
-    .nav-link {
-        color: black;
-    }
-}
-
-/* Agregar esta animación al final de tu CSS */
-@keyframes goldShine {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-@keyframes goldShine {
-    0% {
-        background-position: 0% 50%;
-        text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.6);
-    }
-    50% {
-        background-position: 100% 50%;
-        text-shadow: 0 0 30px rgba(255, 215, 0, 1), 0 0 60px rgba(255, 215, 0, 0.8);
-    }
-    100% {
-        background-position: 0% 50%;
-        text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.6);
-    }
-}
-
-/* CSS FORZADO para el formulario de suscripción - Agregar al final de styles.css */
-
-/* Contenedor principal del formulario */
-.footer-section.newsletter-section {
-    max-width: 400px !important;
-    padding: 20px !important;
-}
-
-/* Título del formulario */
-.newsletter-section h4 {
-    margin-bottom: 20px !important;
-    color: #fff !important;
-    font-size: 18px !important;
-}
-
-/* Formulario principal */
-.newsletter-section .newsletter-form {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 15px !important;
-    width: 100% !important;
-}
-
-/* Filas de inputs (2 por fila) */
-.newsletter-section .form-row {
-    display: flex !important;
-    gap: 12px !important;
-    width: 100% !important;
-    margin-bottom: 10px !important;
-}
-
-/* Inputs individuales en las filas */
-.newsletter-section .form-row input {
-    flex: 1 !important;
-    width: calc(50% - 6px) !important;
-    padding: 12px 15px !important;
-    border: 1px solid #ddd !important;
-    border-radius: 6px !important;
-    font-size: 14px !important;
-    font-family: 'Poppins', sans-serif !important;
-    background-color: #fff !important;
-    transition: all 0.3s ease !important;
-    box-sizing: border-box !important;
-    height: 45px !important;
-}
-
-.newsletter-section .form-row input:focus {
-    outline: none !important;
-    border-color: #007bff !important;
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3) !important;
-}
-
-/* Contenedor del área de mensaje */
-.newsletter-section .form-message {
-    width: 100% !important;
-    margin: 10px 0 !important;
-}
-
-/* Área de texto del mensaje */
-.newsletter-section .form-message textarea {
-    width: 100% !important;
-    padding: 15px !important;
-    border: 1px solid #ddd !important;
-    border-radius: 6px !important;
-    font-size: 14px !important;
-    font-family: 'Poppins', sans-serif !important;
-    background-color: #fff !important;
-    resize: vertical !important;
-    min-height: 100px !important;
-    height: 100px !important;
-    transition: all 0.3s ease !important;
-    box-sizing: border-box !important;
-    line-height: 1.4 !important;
-}
-
-.newsletter-section .form-message textarea:focus {
-    outline: none !important;
-    border-color: #007bff !important;
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3) !important;
-}
-
-/* Contenedor del botón */
-.newsletter-section .form-submit {
-    display: flex !important;
-    justify-content: center !important;
-    margin-top: 15px !important;
-    width: 100% !important;
-}
-
-/* Botón de suscripción */
-.newsletter-section .subscribe-btn {
-    background: linear-gradient(135deg, #007bff, #0056b3) !important;
-    color: white !important;
-    padding: 14px 35px !important;
-    border: none !important;
-    border-radius: 25px !important;
-    font-size: 16px !important;
-    font-weight: 600 !important;
-    font-family: 'Poppins', sans-serif !important;
-    cursor: pointer !important;
-    transition: all 0.3s ease !important;
-    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3) !important;
-    text-transform: uppercase !important;
-    letter-spacing: 1px !important;
-}
-
-.newsletter-section .subscribe-btn:hover {
-    background: linear-gradient(135deg, #0056b3, #004494) !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4) !important;
-}
-
-.newsletter-section .subscribe-btn:active {
-    transform: translateY(0) !important;
-}
-
-/* Placeholders */
-.newsletter-section input::placeholder,
-.newsletter-section textarea::placeholder {
-    color: #999 !important;
-    font-style: italic !important;
-    opacity: 1 !important;
-}
-
-/* Responsive para móviles */
-@media (max-width: 768px) {
-    .newsletter-section .form-row {
-        flex-direction: column !important;
-        gap: 12px !important;
-    }
-    
-    .newsletter-section .form-row input {
-        width: 100% !important;
-        margin-bottom: 5px !important;
-    }
-    
-    .footer-section.newsletter-section {
-        max-width: 100% !important;
-        padding: 15px !important;
-    }
-}
-
-/* Sobreescribir cualquier estilo previo del footer */
-.footer .newsletter-section input,
-.footer .newsletter-section textarea,
-.footer .newsletter-section button {
-    margin: 0 !important;
-    display: block !important;
-}
-
-/* Resetear cualquier estilo de grid o flexbox del footer que interfiera */
-.footer-content .newsletter-section * {
-    box-sizing: border-box !important;
-}
-
-/* ===== SOLUCIÓN PARA EL PROBLEMA DEL FORMULARIO EN MÓVILES ===== */
-
-/* Ajustar el z-index del header para que no interfiera con inputs */
-@media screen and (max-width: 768px) {
-    .header {
-        z-index: 999; /* Reducido de 1000 para permitir que inputs tengan mayor prioridad */
-    }
-    
-    /* Asegurar que los inputs del formulario tengan z-index superior */
-    .contact-form input,
-    .contact-form textarea,
-    .newsletter-form input,
-    .newsletter-form textarea {
-        position: relative !important;
-        z-index: 1001 !important; /* Mayor que el header */
-    }
-    
-    /* Ajustar el padding-top de la sección de contacto para compensar el header fijo */
-    .contact-section {
-        padding-top: 120px !important; /* Aumentado para dar más espacio */
-    }
-    
-    /* Crear más espacio entre el header y el formulario */
-    .contact-section h2 {
-        margin-top: 20px !important;
-        margin-bottom: 40px !important;
-    }
-    
-    /* Asegurar que el contenido del formulario tenga suficiente espacio */
-    .contact-content {
-        margin-top: 30px !important;
-    }
-    
-    /* Mejorar la interacción táctil en inputs */
-    .contact-form input:focus,
-    .contact-form textarea:focus,
-    .newsletter-form input:focus,
-    .newsletter-form textarea:focus {
-        transform: scale(1.02) !important;
-        border-color: #E0FD2C !important;
-        background-color: rgba(255,255,255,0.2) !important;
-        box-shadow: 0 0 15px rgba(224, 253, 44, 0.3) !important;
-        z-index: 1002 !important; /* Aún mayor cuando está enfocado */
-    }
-    
-    /* Asegurar que el header se oculte automáticamente al hacer scroll hacia abajo */
-    .header.scrolled {
-        transform: translateY(-100%) !important;
-        transition: transform 0.3s ease !important;
-    }
-    
-    /* Crear un área de "zona segura" para inputs en la parte superior */
-    .contact-form,
-    .newsletter-form {
-        margin-top: 40px !important;
-        position: relative !important;
-        z-index: 1001 !important;
-    }
-    
-    /* Ajuste específico para el formulario del footer */
-    .footer .newsletter-form {
-        margin-top: 20px !important;
-        padding-top: 20px !important;
-    }
-    
-    /* Prevenir que el header interfiera durante el scroll */
-    body.form-focused {
-        overflow-y: auto !important;
-    }
-    
-    body.form-focused .header {
-        transform: translateY(-100%) !important;
-    }
+.visitor-counter-container:hover {
+    background-color: rgba(224, 253, 44, 0.2);
+    transform: scale(1.05);
 }
 
-/* PARA MÓVILES MUY PEQUEÑOS (480px y menores) */
-@media screen and (max-width: 480px) {
-    .contact-section {
-        padding-top: 140px !important; /* Aún más espacio en móviles pequeños */
-    }
-    
-    .contact-form input,
-    .contact-form textarea {
-        font-size: 16px !important; /* Prevenir zoom en iOS */
-        min-height: 48px !important; /* Mejor área de toque */
-    }
-    
-    /* Ocultar el header completamente cuando se enfoque un input */
-    .contact-form input:focus ~ .header,
-    .contact-form textarea:focus ~ .header {
-        opacity: 0 !important;
-        pointer-events: none !important;
-    }
+.visitor-counter-container .fa-eye {
+    font-size: 18px;
 }
 
-/* SOLUCIÓN ALTERNATIVA: Auto-hide del header al enfocar inputs */
-@media screen and (max-width: 768px) {
-    /* Cuando cualquier input esté enfocado, ocultar el header */
-    body:has(input:focus) .header,
-    body:has(textarea:focus) .header {
-        transform: translateY(-100%) !important;
-        transition: transform 0.3s ease !important;
-    }
-    
-    /* Restaurar el header cuando se pierde el foco */
-    body:not(:has(input:focus)):not(:has(textarea:focus)) .header {
-        transform: translateY(0) !important;
-    }
+/* Floating back-to-top button (mobile only) */
+#real-floating-back-btn {
+    display: none; /* Hidden by default, enabled in mobile media query */
 }
-
-/* AJUSTES ADICIONALES PARA MEJORAR LA EXPERIENCIA */
-@media screen and (max-width: 768px) {
-    /* Asegurar que los inputs sean completamente visibles */
-    .contact-form {
-        min-height: calc(100vh - 200px) !important;
-        padding-bottom: 60px !important;
-    }
-    
-    /* Mejorar el espaciado entre elementos del formulario */
-    .contact-form input,
-    .contact-form textarea {
-        margin-bottom: 20px !important;
-    }
-    
-    /* Botón de envío con más espacio */
-    .submit-btn {
-        margin-top: 30px !important;
-        margin-bottom: 40px !important;
-    }
-}
-/* ===== AJUSTES FINALES ESPECÍFICOS ===== */
-
-/* 1. TÍTULO "FORMULARIO DE INSCRIPCIÓN" MÁS PEQUEÑO EN MÓVILES */
-@media screen and (max-width: 768px) {
-    .contact-form-wrapper h2 {
-        color: #E0FD2C !important;
-        font-size: 22px !important; /* Reducido de 28px a 22px */
-        font-weight: 700 !important;
-        margin: 0 0 25px 0 !important;
-        text-align: center !important; /* Cambiado a centrado */
-        line-height: 1.2 !important; /* Mejor espaciado de línea */
-        word-spacing: -2px !important; /* Acercar palabras para que quepa en una línea */
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .contact-form-wrapper h2 {
-        font-size: 20px !important; /* Aún más pequeño en móviles pequeños */
-        word-spacing: -1px !important;
-    }
-}
-
-@media screen and (max-width: 360px) {
-    .contact-form-wrapper h2 {
-        font-size: 18px !important; /* Mínimo para móviles muy pequeños */
-    }
-}
-
-/* 2. FORMULARIO CENTRADO CON MÁRGENES IGUALES EN MÓVILES */
-@media screen and (max-width: 768px) {
-    .contact-form-wrapper {
-        padding-left: 0 !important; /* Eliminar padding izquierdo */
-        max-width: 100% !important; /* Ocupar todo el ancho disponible */
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        /* Centrar contenido */
-    }
-    
-    .newsletter-form {
-        max-width: 90% !important; /* Márgenes iguales a ambos lados */
-        margin: 0 auto !important; /* Centrado */
-        padding: 0 20px !important; /* Padding interno uniforme */
-        box-sizing: border-box !important;
-    }
-    
-    .newsletter-form input,
-    .newsletter-form textarea {
-        width: 100% !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        box-sizing: border-box !important;
-    }
-}
-
-/* 3. BOTÓN SUSCRIBIRSE AL CENTRO EN MÓVILES */
-@media screen and (max-width: 768px) {
-    .newsletter-form button[type="submit"] {
-        align-self: center !important; /* Centrar el botón */
-        margin: 25px auto 0 auto !important; /* Centrado con margen superior */
-        display: block !important;
-    }
-}
-
-/* 4. SUBIR LA SECCIÓN DE INFORMACIÓN DE CONTACTO */
-@media screen and (max-width: 768px) {
-    .contact-section {
-        padding: 60px 15px !important; /* Reducido de 80px a 60px */
-    }
-    
-    .contact-info-wrapper {
-        margin-bottom: 30px !important; /* Reducido de 40px a 30px */
-        margin-top: 0 !important; /* Sin margen superior adicional */
-    }
-    
-    .contact-info-wrapper h3 {
-        margin-bottom: 20px !important; /* Reducido de 25px a 20px */
-        margin-top: 0 !important;
-    }
-}
-
-/* 5. CAMBIAR "BLOG" POR "SUSCRIPCIÓN" Y LETRAS MÁS PEQUEÑAS EN MENÚ */
-/* Esto se hace en HTML, pero aquí ajustamos los estilos */
-@media screen and (max-width: 768px) {
-    .nav-link {
-        font-size: 18px !important; /* Reducido de 20px a 18px */
-        font-weight: 500 !important;
-        padding: 8px 15px !important; /* Más padding para mejor touch */
-        border-radius: 12px !important; /* Más redondeado */
-        transition: all 0.3s ease !important;
-    }
-    
-    .nav-menu {
-        border-radius: 25px !important; /* Menú más redondeado */
-        border-bottom-left-radius: 25px !important;
-        border-bottom-right-radius: 25px !important;
-    }
-    
-    .nav-menu li {
-        margin: 5px 0 !important; /* Menos espaciado entre elementos */
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .nav-link {
-        font-size: 16px !important; /* Aún más pequeño en móviles pequeños */
-        padding: 6px 12px !important;
-    }
-}
-
-/* 6. PC: FOOTER CENTRADO - RECYBERSEG, NÚMERO Y REDES SOCIALES */
-@media screen and (min-width: 769px) {
-    .footer-content {
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-        text-align: center !important;
-        max-width: 600px !important;
-        margin: 0 auto !important;
-    }
-    
-    .footer-section {
-        text-align: center !important;
-        width: 100% !important;
-    }
-    
-    .footer-section h3 {
-        text-align: center !important;
-        margin-bottom: 15px !important;
-    }
-    
-    .footer-section p {
-        text-align: center !important;
-        margin-bottom: 20px !important;
-    }
-    
-    .social-links {
-        justify-content: center !important;
-        margin: 0 auto !important;
-    }
-}
-
-/* 7. PC: CUADRADOS PARA INFORMACIÓN DE CONTACTO Y FORMULARIO */
-@media screen and (min-width: 769px) {
-    .contact-content-wrapper {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important;
-        gap: 40px !important; /* Separación entre cuadrados */
-        align-items: start !important;
-        max-width: 1000px !important;
-        margin: 0 auto !important;
-    }
-    
-    /* Cuadrado para información de contacto */
-    .contact-info-wrapper {
-        background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)) !important;
-        border: 2px solid rgba(224, 253, 44, 0.3) !important;
-        border-radius: 15px !important;
-        padding: 40px 30px !important;
-        backdrop-filter: blur(10px) !important;
-        transition: all 0.3s ease !important;
-        min-height: 400px !important; /* Altura mínima para igualar */
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: flex-start !important;
-    }
-    
-    .contact-info-wrapper:hover {
-        border-color: #E0FD2C !important;
-        transform: translateY(-5px) !important;
-        box-shadow: 0 10px 30px rgba(224, 253, 44, 0.2) !important;
-    }
-    
-    /* Cuadrado para formulario */
-    .contact-form-wrapper {
-        background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)) !important;
-        border: 2px solid rgba(224, 253, 44, 0.3) !important;
-        border-radius: 15px !important;
-        padding: 40px 30px !important;
-        backdrop-filter: blur(10px) !important;
-        transition: all 0.3s ease !important;
-        min-height: 400px !important; /* Altura mínima para igualar */
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: flex-start !important;
-    }
-    
-    .contact-form-wrapper:hover {
-        border-color: #E0FD2C !important;
-        transform: translateY(-5px) !important;
-        box-shadow: 0 10px 30px rgba(224, 253, 44, 0.2) !important;
-    }
-    
-    /* Título del formulario en PC */
-    .contact-form-wrapper h2 {
-        color: #E0FD2C !important;
-        font-size: 24px !important;
-        margin-bottom: 25px !important;
-        font-weight: 600 !important;
-        text-align: center !important; /* Centrado en PC */
-    }
-    
-    /* Título de información de contacto en PC */
-    .contact-info-wrapper h3 {
-        color: #E0FD2C !important;
-        font-size: 24px !important;
-        margin-bottom: 25px !important;
-        font-weight: 600 !important;
-        text-align: center !important; /* Centrado en PC */
-    }
-    
-    /* Formulario centrado en PC */
-    .newsletter-form {
-        max-width: 100% !important;
-        margin: 0 auto !important;
-    }
-    
-    /* Botón centrado en PC */
-    .newsletter-form button[type="submit"] {
-        align-self: center !important;
-        margin: 20px auto 0 auto !important;
-        display: block !important;
-    }
-}
-
-/* 8. AJUSTES ADICIONALES PARA CONSISTENCIA */
-@media screen and (max-width: 768px) {
-    /* Asegurar que el título quede en una línea */
-    .contact-form-wrapper h2 {
-        white-space: nowrap !important; /* Forzar una sola línea */
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
-    }
-    
-    /* Si es demasiado largo, permitir ajuste automático */
-    @media screen and (max-width: 320px) {
-        .contact-form-wrapper h2 {
-            white-space: normal !important;
-            font-size: 16px !important;
-        }
-    }
-}
-
-/* 9. MEJORAS EN EL DISEÑO DEL MENÚ MÓVIL */
-@media screen and (max-width: 768px) {
-    .nav-menu {
-        background: rgba(0, 0, 0, 0.95) !important;
-        backdrop-filter: blur(20px) !important;
-        -webkit-backdrop-filter: blur(20px) !important;
-        border: 2px solid rgba(224, 253, 44, 0.2) !important;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3) !important;
-    }
-    
-    .nav-menu li::after {
-        background: rgba(224, 253, 44, 0.2) !important; /* Líneas más sutiles */
-        height: 1px !important;
-    }
-    
-    .nav-menu li:last-child::after {
-        display: none !important;
-    }
-}
-
-/* 10. ESPACIADO MEJORADO EN MÓVILES */
-@media screen and (max-width: 480px) {
-    .contact-section {
-        padding: 50px 10px !important; /* Más compacto en móviles pequeños */
-    }
-    
-    .contact-info-wrapper {
-        margin-bottom: 25px !important;
-    }
-    
-    .newsletter-form {
-        max-width: 95% !important;
-        padding: 0 15px !important;
-    }
-}
-
-/* 11. TABLET AJUSTES */
-@media screen and (min-width: 769px) and (max-width: 1024px) {
-    .contact-content-wrapper {
-        gap: 30px !important; /* Menos separación en tablets */
-    }
-    
-    .contact-info-wrapper,
-    .contact-form-wrapper {
-        padding: 35px 25px !important; /* Menos padding en tablets */
-        min-height: 350px !important; /* Altura ajustada */
-    }
-}
-
-/* 12. DESKTOP GRANDE - AJUSTES FINALES */
-@media screen and (min-width: 1200px) {
-    .contact-content-wrapper {
-        gap: 50px !important;
-        max-width: 1200px !important;
-    }
-    
-    .contact-info-wrapper,
-    .contact-form-wrapper {
-        padding: 45px 35px !important;
-        min-height: 450px !important;
-    }
-    
-    .newsletter-form {
-        gap: 18px !important;
-    }
-    
-    .newsletter-form input,
-    .newsletter-form textarea {
-        padding: 15px !important;
-        font-size: 15px !important;
-    }
-    
-    .newsletter-form textarea {
-        height: 90px !important;
-    }
-    
-    .newsletter-form button[type="submit"] {
-        padding: 15px 30px !important;
-        font-size: 15px !important;
-    }
-}
-/* ===== CUADRADOS EXACTAMENTE IGUALES EN PC ===== */
-
-@media screen and (min-width: 769px) {
-    .contact-content-wrapper {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important;
-        gap: 40px !important;
-        align-items: stretch !important; /* Forzar misma altura */
-        max-width: 1000px !important;
-        margin: 0 auto !important;
-    }
-    
-    /* Cuadrado para información de contacto */
-    .contact-info-wrapper {
-        background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)) !important;
-        border: 2px solid rgba(224, 253, 44, 0.3) !important;
-        border-radius: 15px !important;
-        padding: 40px 30px !important;
-        backdrop-filter: blur(10px) !important;
-        transition: all 0.3s ease !important;
-        
-        /* FORZAR MISMAS DIMENSIONES QUE EL FORMULARIO */
-        min-height: 500px !important; /* Altura mínima igual */
-        max-height: 500px !important; /* Altura máxima igual */
-        height: 500px !important; /* Altura fija */
-        
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: space-between !important; /* Distribuir contenido uniformemente */
-        
-        /* Asegurar mismo ancho */
-        box-sizing: border-box !important;
-    }
-    
-    .contact-info-wrapper:hover {
-        border-color: #E0FD2C !important;
-        transform: translateY(-5px) !important;
-        box-shadow: 0 10px 30px rgba(224, 253, 44, 0.2) !important;
-    }
-    
-    /* CUADRADO DEL FORMULARIO - DIMENSIONES FIJAS */
-    .contact-form-wrapper {
-        background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)) !important;
-        border: 2px solid rgba(224, 253, 44, 0.3) !important;
-        border-radius: 15px !important;
-        padding: 40px 30px !important;
-        backdrop-filter: blur(10px) !important;
-        transition: all 0.3s ease !important;
-        
-        /* DIMENSIONES EXACTAS */
-        min-height: 500px !important;
-        max-height: 500px !important;
-        height: 500px !important;
-        
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: flex-start !important;
-        
-        /* Asegurar mismo ancho */
-        box-sizing: border-box !important;
-    }
-    
-    .contact-form-wrapper:hover {
-        border-color: #E0FD2C !important;
-        transform: translateY(-5px) !important;
-        box-shadow: 0 10px 30px rgba(224, 253, 44, 0.2) !important;
-    }
-    
-    /* CONTENIDO DE INFORMACIÓN DE CONTACTO - DISTRIBUIDO UNIFORMEMENTE */
-    .contact-info-wrapper h3 {
-        color: #E0FD2C !important;
-        font-size: 24px !important;
-        margin-bottom: 25px !important;
-        font-weight: 600 !important;
-        text-align: center !important;
-        flex-shrink: 0 !important; /* No se encoja */
-    }
-    
-    /* Contenedor para los items de contacto */
-    .contact-info-items {
-        flex: 1 !important; /* Ocupar espacio disponible */
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-        gap: 20px !important; /* Espaciado uniforme entre items */
-    }
-    
-    .contact-item {
-        display: flex !important;
-        align-items: center !important;
-        font-size: 16px !important;
-        padding: 8px 0 !important;
-    }
-    
-    .contact-item i {
-        color: #E0FD2C !important;
-        margin-right: 15px !important;
-        font-size: 20px !important;
-        width: 25px !important;
-        flex-shrink: 0 !important;
-    }
-    
-    .contact-item a {
-        color: #fff !important;
-        text-decoration: none !important;
-        transition: color 0.3s ease !important;
-    }
-    
-    .contact-item a:hover {
-        color: #E0FD2C !important;
-    }
-    
-    .whatsapp-item a {
-        display: inline-flex !important;
-        align-items: center !important;
-        padding: 5px 10px !important;
-        border-radius: 8px !important;
-        transition: all 0.3s ease !important;
-    }
-    
-    .whatsapp-item a:hover {
-        background-color: rgba(224, 253, 44, 0.1) !important;
-        transform: translateX(3px) !important;
-    }
-    
-    /* CONTENIDO DEL FORMULARIO - OPTIMIZADO PARA EL ESPACIO */
-    .contact-form-wrapper h2 {
-        color: #E0FD2C !important;
-        font-size: 24px !important;
-        margin-bottom: 20px !important;
-        font-weight: 600 !important;
-        text-align: center !important;
-        flex-shrink: 0 !important;
-    }
-    
-    /* Formulario optimizado para encajar */
-    .newsletter-form {
-        flex: 1 !important; /* Ocupar espacio disponible */
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: space-between !important;
-        max-width: 100% !important;
-        margin: 0 !important;
-        gap: 15px !important; /* Espaciado más compacto */
-    }
-    
-    .newsletter-form input,
-    .newsletter-form textarea {
-        width: 100% !important;
-        padding: 12px 15px !important; /* Padding más pequeño */
-        border: 2px solid rgba(255,255,255,0.2) !important;
-        border-radius: 8px !important;
-        background-color: rgba(255,255,255,0.1) !important;
-        color: #fff !important;
-        font-family: 'Poppins', sans-serif !important;
-        font-size: 14px !important; /* Texto más pequeño */
-        transition: all 0.3s ease !important;
-        box-sizing: border-box !important;
-        flex-shrink: 0 !important;
-    }
-    
-    .newsletter-form textarea {
-        resize: none !important; /* No redimensionable */
-        height: 80px !important; /* Altura fija más pequeña */
-    }
-    
-    .newsletter-form button[type="submit"] {
-        align-self: center !important;
-        margin: 10px auto 0 auto !important;
-        padding: 12px 25px !important;
-        font-size: 14px !important;
-        background-color: #E0FD2C !important;
-        color: #000 !important;
-        border: none !important;
-        border-radius: 8px !important;
-        font-weight: 600 !important;
-        cursor: pointer !important;
-        transition: all 0.3s ease !important;
-        text-transform: uppercase !important;
-        letter-spacing: 1px !important;
-        min-width: 140px !important;
-        flex-shrink: 0 !important;
-    }
-    
-    .newsletter-form button[type="submit"]:hover {
-        background-color: #C7E525 !important;
-        transform: translateY(-2px) !important;
-        box-shadow: 0 4px 12px rgba(224, 253, 44, 0.4) !important;
-    }
-}
-
-/* TABLETS - AJUSTE PROPORCIONAL */
-@media screen and (min-width: 769px) and (max-width: 1024px) {
-    .contact-info-wrapper,
-    .contact-form-wrapper {
-        height: 450px !important;
-        min-height: 450px !important;
-        max-height: 450px !important;
-        padding: 35px 25px !important;
-    }
-    
-    .newsletter-form {
-        gap: 12px !important;
-    }
-    
-    .newsletter-form textarea {
-        height: 70px !important;
-    }
-}
-
-/* DESKTOP GRANDE - CUADRADOS MÁS GRANDES PERO IGUALES */
-@media screen and (min-width: 1200px) {
-    .contact-content-wrapper {
-        gap: 50px !important;
-        max-width: 1200px !important;
-    }
-    
-    .contact-info-wrapper,
-    .contact-form-wrapper {
-        padding: 45px 35px !important;
-        min-height: 450px !important;
-    }
-    
-    .newsletter-form {
-        gap: 18px !important;
-    }
-    
-    .newsletter-form input,
-    .newsletter-form textarea {
-        padding: 15px !important;
-        font-size: 15px !important;
-    }
-    
-    .newsletter-form textarea {
-        height: 90px !important;
-    }
-    
-    .newsletter-form button[type="submit"] {
-        padding: 15px 30px !important;
-        font-size: 15px !important;
-    }
-}
-/* ===== CUADRADOS Y LAYOUT UNIFORME EN MÓVILES ===== */
-
-/* 1. ANCHO UNIFORME PARA TODAS LAS SECCIONES DESDE "SOLUCIONES DE SEGURIDAD" */
-@media screen and (max-width: 768px) {
-    /* Contenedor uniforme para todas las secciones */
-    .main-services .container,
-    .iot-section .container,
-    .mission-vision .container,
-    .contact-section .container,
-    .footer .container { /* Añadido .footer .container para consistencia */
-        width: 99% !important; /* Ancho uniforme para todas: 99% */
-        max-width: 99% !important; /* Asegura que no exceda el 99% */
-        margin: 0 auto !important; /* Centra el contenedor */
-        padding: 0 !important; /* Elimina cualquier padding interno del contenedor */
-        box-sizing: border-box !important;
-    }
-    
-    /* Ajustar padding de las secciones para uniformidad, ahora que el contenedor no tiene padding interno */
-    .main-services,
-    .iot-section,
-    .mission-vision,
-    .contact-section,
-    .hero { /* También aplica a la sección hero para padding horizontal */
-        padding-left: 10px !important; /* Padding fijo de 10px para los lados */
-        padding-right: 10px !important; /* Padding fijo de 10px para los lados */
-        /* Mantener padding vertical existente */
-    }
-    /* Asegurar padding vertical para secciones que pueden no tenerlo explícitamente en móvil */
-    .main-services { padding-top: 80px !important; padding-bottom: 80px !important; }
-    .iot-section { padding-top: 80px !important; padding-bottom: 80px !important; }
-    .mission-vision { padding-top: 80px !important; padding-bottom: 80px !important; }
-    .contact-section { padding-top: 80px !important; padding-bottom: 80px !important; }
-    .footer { padding-top: 60px !important; padding-bottom: 20px !important; } /* Ajuste de footer */
-}
-
-/* 2. CUADRADOS PARA INFORMACIÓN DE CONTACTO Y FORMULARIO EN MÓVILES */
-@media screen and (max-width: 768px) {
-    .contact-content-wrapper {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 25px !important; /* Separación equitativa */
-        align-items: center !important;
-        width: 100% !important;
-    }
-    
-    /* CUADRADO DE INFORMACIÓN DE CONTACTO */
-    .contact-info-wrapper {
-        background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)) !important;
-        border: 2px solid rgba(224, 253, 44, 0.3) !important;
-        border-radius: 15px !important;
-        padding: 25px 20px !important; /* Padding más compacto */
-        backdrop-filter: blur(10px) !important;
-        transition: all 0.3s ease !important;
-        
-        /* Mismo ancho que otras secciones */
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: 0 auto !important;
-        box-sizing: border-box !important;
-        
-        /* Altura fija para uniformidad */
-        min-height: 200px !important;
-        
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: space-between !important;
-    }
-    
-    .contact-info-wrapper:hover {
-        border-color: #E0FD2C !important;
-        transform: translateY(-3px) !important;
-        box-shadow: 0 8px 25px rgba(224, 253, 44, 0.2) !important;
-    }
-    
-    /* CUADRADO DEL FORMULARIO */
-    .contact-form-wrapper {
-        background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)) !important;
-        border: 2px solid rgba(224, 253, 44, 0.3) !important;
-        border-radius: 15px !important;
-        padding: 25px 20px !important; /* Padding más compacto */
-        backdrop-filter: blur(10px) !important;
-        transition: all 0.3s ease !important;
-        
-        /* Mismo ancho que otras secciones */
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: 0 auto !important;
-        box-sizing: border-box !important;
-        
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: stretch !important;
-    }
-    
-    .contact-form-wrapper:hover {
-        border-color: #E0FD2C !important;
-        transform: translateY(-3px) !important;
-        box-shadow: 0 8px 25px rgba(224, 253, 44, 0.2) !important;
-    }
-    
-    /* Título de información de contacto */
-    .contact-info-wrapper h3 {
-        color: #E0FD2C !important;
-        font-size: 20px !important;
-        margin-bottom: 15px !important;
-        font-weight: 600 !important;
-        text-align: center !important;
-        flex-shrink: 0 !important;
-    }
-    
-    /* Items de contacto más compactos */
-    .contact-info-items {
-        flex: 1 !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-        gap: 12px !important;
-    }
-    
-    .contact-item {
-        display: flex !important;
-        align-items: center !important;
-        font-size: 14px !important;
-        padding: 5px 0 !important;
-    }
-    
-    .contact-item i {
-        color: #E0FD2C !important;
-        margin-right: 12px !important;
-        font-size: 16px !important;
-        width: 20px !important;
-        flex-shrink: 0 !important;
-    }
-}
-
-/* 3. FORMULARIO MÁS DELGADO Y OPTIMIZADO */
-@media screen and (max-width: 768px) {
-    .contact-form-wrapper h2 {
-        color: #E0FD2C !important;
-        font-size: 20px !important; /* Más pequeño */
-        font-weight: 700 !important;
-        margin: 0 0 20px 0 !important;
-        text-align: center !important;
-        line-height: 1.2 !important;
-        word-spacing: -1px !important;
-        flex-shrink: 0 !important;
-    }
-    
-    .newsletter-form {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 15px !important; /* Espaciado más compacto */
-        width: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-    
-    /* INPUTS MÁS DELGADOS */
-    .newsletter-form input,
-    .newsletter-form textarea {
-        width: 100% !important;
-        padding: 12px 15px !important; /* Padding más delgado */
-        border: 2px solid rgba(255,255,255,0.2) !important;
-        border-radius: 8px !important;
-        background-color: rgba(255,255,255,0.1) !important;
-        color: #fff !important;
-        font-family: 'Poppins', sans-serif !important;
-        font-size: 14px !important; /* Texto más pequeño */
-        transition: all 0.3s ease !important;
-        box-sizing: border-box !important;
-        height: 45px !important; /* Altura más delgada */
-    }
-    
-    .newsletter-form textarea {
-        height: 80px !important; /* Textarea más delgada */
-        resize: none !important;
-        line-height: 1.4 !important;
-    }
-    
-    /* BOTÓN SUSCRIBIRSE MÁS PEQUEÑO Y A LA IZQUIERDA */
-    .newsletter-form button[type="submit"] {
-        background-color: #E0FD2C !important;
-        color: #000 !important;
-        border: none !important;
-        padding: 10px 20px !important; /* Más pequeño */
-        font-size: 14px !important; /* Letra más pequeña */
-        font-weight: 600 !important;
-        cursor: pointer !important;
-        border-radius: 8px !important;
-        transition: all 0.3s ease !important;
-        text-transform: uppercase !important;
-        letter-spacing: 0.5px !important; /* Menos espaciado */
-        
-        /* ALINEADO A LA IZQUIERDA */
-        align-self: flex-start !important;
-        margin: 15px 0 0 0 !important;
-        min-width: 120px !important; /* Ancho mínimo más pequeño */
-        max-width: 150px !important; /* Ancho máximo limitado */
-    }
-    
-    .newsletter-form button[type="submit"]:hover {
-        background-color: #C7E525 !important;
-        transform: translateY(-1px) !important;
-        box-shadow: 0 3px 10px rgba(224, 253, 44, 0.3) !important;
-    }
-}
-
-/* 4. AJUSTES PARA OTRAS SECCIONES - MISMO ANCHO */
-@media screen and (max-width: 768px) {
-    /* Tarjetas de servicios con mismo ancho */
-    .services-grid {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 20px !important;
-        align-items: center !important;
-    }
-    
-    .service-card {
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: 0 !important;
-        padding: 25px 20px !important;
-    }
-    
-    /* Tarjetas IoT con mismo ancho */
-    .iot-services {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 20px !important;
-        align-items: center !important;
-    }
-    
-    .iot-card {
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: 0 !important;
-        padding: 20px 15px !important;
-    }
-    
-    /* Tarjetas de Misión y Visión con mismo ancho */
-    .mv-grid {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 20px !important;
-        align-items: center !important;
-    }
-    
-    .mv-card {
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: 0 !important;
-        padding: 25px 20px !important;
-    }
-}
-
-/* 5. MÓVILES PEQUEÑOS - AJUSTES ADICIONALES */
-@media screen and (max-width: 480px) {
-    /* El .container ya tiene 99% y 10px de padding, así que las secciones no necesitan padding horizontal adicional */
-    .main-services .container,
-    .iot-section .container,
-    .mission-vision .container,
-    .contact-section .container,
-    .footer .container {
-        max-width: 98% !important; /* Ajuste a 98% para dejar un poco más de espacio en los bordes */
-        padding: 0 5px !important; /* 5px de padding interno en el contenedor */
-    }
-
-    .main-services,
-    .iot-section,
-    .mission-vision,
-    .contact-section,
-    .hero {
-        padding-left: 5px !important; /* Ajuste el padding de la sección para que el contenedor de 98% se vea bien */
-        padding-right: 5px !important;
-    }
-
-    .contact-info-wrapper,
-    .contact-form-wrapper {
-        padding: 20px 15px !important;
-        min-height: 180px !important;
-    }
-    
-    .contact-info-wrapper h3,
-    .contact-form-wrapper h2 {
-        font-size: 18px !important;
-        margin-bottom: 15px !important;
-    }
-    
-    .newsletter-form input,
-    .newsletter-form textarea {
-        padding: 10px 12px !important;
-        font-size: 13px !important;
-        height: 40px !important;
-    }
-    
-    .newsletter-form textarea {
-        height: 70px !important;
-    }
-    
-    .newsletter-form button[type="submit"] {
-        padding: 8px 16px !important;
-        font-size: 12px !important;
-        min-width: 100px !important;
-        max-width: 130px !important;
-    }
-    
-    .contact-item {
-        font-size: 13px !important;
-    }
-    
-    .contact-item i {
-        font-size: 14px !important;
-        width: 18px !important;
-        margin-right: 10px !important;
-    }
-}
-
-/* 6. MÓVILES MUY PEQUEÑOS - OPTIMIZACIÓN EXTREMA */
-@media screen and (max-width: 360px) {
-    .main-services .container,
-    .iot-section .container,
-    .mission-vision .container,
-    .contact-section .container {
-        max-width: 98% !important;
-        padding: 0 5px !important;
-    }
-    
-    .contact-content-wrapper {
-        gap: 20px !important;
-    }
-    
-    .contact-info-wrapper,
-    .contact-form-wrapper {
-        padding: 18px 12px !important;
-        border-radius: 10px !important;
-    }
-    
-    .newsletter-form {
-        gap: 12px !important;
-    }
-    
-    .newsletter-form button[type="submit"] {
-        font-size: 11px !important;
-        padding: 7px 14px !important;
-        min-width: 90px !important;
-    }
-}
-
-/* 7. ASEGURAR CONSISTENCIA EN TODOS LOS ELEMENTOS */
-@media screen and (max-width: 768px) {
-    /* Todos los contenedores principales */
-    .hero-content,
-    .main-services .container,
-    .iot-section .container,
-    .mission-vision .container,
-    .contact-section .container,
-    .footer .container {
-        box-sizing: border-box !important;
-    }
-    
-    /* Espaciado uniforme entre secciones */
-    .main-services,
-    .iot-section,
-    .mission-vision {
-        margin-bottom: 0 !important;
-    }
-    
-    /* Títulos con mismo ancho */
-    .main-services h2,
-    .iot-section h2,
-    .mission-vision h2 {
-        text-align: center !important;
-        margin-bottom: 30px !important;
-        padding: 0 10px !important;
-    }
-}
-
-/* DESKTOP - Mantener diseño de dos columnas para contacto */
-@media screen and (min-width: 769px) {
-    
-    /* Contacto mantiene su diseño de dos columnas */
-    .contact-content-wrapper {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important;
-        gap: 40px !important;
-        align-items: stretch !important;
-        max-width: 1000px !important;
-        margin: 0 auto !important;
-        margin-top: 0 !important; /* Sin margin-top en desktop */
-    }
-    
-    .contact-info-wrapper,
-    .contact-form-wrapper {
-        /* Mantener el diseño original de desktop */
-        padding: 40px 30px !important;
-        height: 500px !important;
-        min-height: 500px !important;
-        max-height: 500px !important;
-        box-sizing: border-box !important;
-    }
-    
-    /* Limpiar ajustes móviles en desktop */
-    .newsletter-form {
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        max-width: 100% !important;
-    }
-    
-    .contact-form-wrapper h2 {
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        text-align: center !important;
-        font-size: 24px !important;
-    }
-    
-    .contact-info-wrapper h3 {
-        text-align: center !important;
-        font-size: 24px !important;
-    }
-}
-
-/* ===== SOLUCIÓN COMPLETA: MENÚ HAMBURGUESA + BOTÓN FLOTANTE ===== */
-
-/* OCULTAR BOTONES CONFLICTIVOS EXISTENTES */
-.scroll-to-top:not(#real-floating-back-btn),
-#scrollToTop:not(#real-floating-back-btn),
-#dynamic-scroll-btn { /* Asegurarse de ocultar el ID anterior */
-    display: none !important;
-}
-
-@media screen and (max-width: 768px) {
-    
-    /* === MENÚ HAMBURGUESA === */
-    
-    /* Header configuración */
-    .header {
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        z-index: 1500 !important;
-        background-color: rgba(40, 40, 40, 0.98) !important;
-        backdrop-filter: blur(10px) !important;
-        height: auto !important;
-        min-height: 80px !important;
-    }
-    
-    .navbar {
-        padding: 15px 0 !important;
-        height: 80px !important;
-        display: flex !important;
-        align-items: center !important;
-    }
-    
-    .nav-container {
-        display: flex !important;
-        justify-content: space-between !important;
-        align-items: center !important;
-        padding: 0 20px !important;
-        width: 100% !important;
-        height: 100% !important;
-    }
-    
-    /* Logo centrado */
-    .nav-logo {
-        order: 1 !important;
-        flex: 1 !important;
-        text-align: center !important;
-        z-index: 1501 !important;
-    }
-    
-    .nav-logo h2 {
-        color: #c1d72b !important;
-        font-size: 24px !important;
-        font-weight: 700 !important;
-        margin: 0 !important;
-    }
-    
-    /* Botón hamburguesa */
-    .nav-toggle {
-        order: 2 !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-        align-items: center !important;
-        cursor: pointer !important;
-        padding: 8px !important;
-        background-color: #000 !important;
-        border: 2px solid rgba(255, 255, 255, 0.4) !important;
-        border-radius: 8px !important;
-        transition: all 0.3s ease !important;
-        position: relative !important;
-        z-index: 1502 !important;
-        min-height: 44px !important;
-        min-width: 44px !important;
-        margin-left: auto !important;
-        flex-shrink: 0 !important;
-        touch-action: manipulation !important;
-        -webkit-tap-highlight-color: transparent !important;
-    }
-    
-    /* Barras del hamburguesa */
-    .bar {
-        width: 24px !important;
-        height: 3px !important;
-        background-color: #fff !important;
-        margin: 3px 0 !important;
-        transition: all 0.4s ease !important;
-        border-radius: 2px !important;
-        display: block !important;
-        transform-origin: center !important;
-        position: relative !important;
-    }
-    
-    /* Animación X */
-    .nav-toggle.active .bar:nth-child(1) {
-        transform: translateY(6px) rotate(45deg) !important;
-    }
-    
-    .nav-toggle.active .bar:nth-child(2) {
-        opacity: 0 !important;
-        transform: scale(0) !important;
-    }
-    
-    .nav-toggle.active .bar:nth-child(3) {
-        transform: translateY(-6px) rotate(-45deg) !important;
-    }
-    
-    /* Menú móvil */
-    .nav-menu {
-        position: fixed !important;
-        left: 0 !important;
-        top: 80px !important;
-        width: 100% !important;
-        background: linear-gradient(135deg, rgba(45, 45, 45, 0.95), rgba(60, 60, 60, 0.92)) !important;
-        backdrop-filter: blur(15px) !important;
-        -webkit-backdrop-filter: blur(15px) !important;
-        
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: flex-start !important;
-        
-        padding: 25px 20px 30px 20px !important;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4) !important;
-        border-bottom-left-radius: 25px !important;
-        border-bottom-right-radius: 25px !important;
-        border: 2px solid rgba(224, 253, 44, 0.4) !important;
-        border-top: none !important;
-        
-        z-index: 1400 !important;
-        
-        opacity: 0 !important;
-        visibility: hidden !important;
-        transform: translateY(-30px) !important;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        
-        max-height: 0 !important;
-        overflow: hidden !important;
-    }
-    
-    .nav-menu.active {
-        opacity: 1 !important;
-        visibility: visible !important;
-        transform: translateY(0) !important;
-        max-height: 400px !important;
-    }
-    
-    /* Items del menú */
-    .nav-menu li {
-        width: 100% !important;
-        max-width: 350px !important;
-        margin: 0 !important;
-        list-style: none !important;
-        padding: 0 !important;
-        display: block !important;
-    }
-    
-    /* Enlaces del menú sin botones */
-    .nav-link {
-        display: block !important;
-        width: 100% !important;
-        padding: 20px 25px !important;
-        font-size: 22px !important;
-        font-weight: 600 !important;
-        color: #fff !important;
-        text-decoration: none !important;
-        text-align: center !important;
-        border-radius: 0 !important;
-        transition: all 0.25s ease !important;
-        background: transparent !important;
-        border: none !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
-        margin: 0 !important;
-        box-sizing: border-box !important;
-        letter-spacing: 1px !important;
-        text-transform: uppercase !important;
-    }
-    
-    .nav-link:hover,
-    .nav-link:active {
-        background: rgba(224, 253, 44, 0.1) !important;
-        color: #E0FD2C !important;
-        transform: translateX(5px) !important;
-        border-bottom-color: #E0FD2C !important;
-        text-shadow: 0 0 10px rgba(224, 253, 44, 0.5) !important;
-    }
-    
-    .nav-menu li:last-child .nav-link {
-        border-bottom: none !important;
-    }
-    
-    /* Ocultar elementos no necesarios - EXCEPTO CONTADOR DE VISITAS */
-    .search-container {
-        display: none !important;
-    }
-    
-    /* MANTENER CONTADOR DE VISITAS VISIBLE */
-    .visitor-counter-container {
-        display: flex !important;
-        align-items: center !important;
-        gap: 8px !important;
-        color: #E0FD2C !important;
-        font-size: 16px !important;
-        font-weight: 600 !important;
-        background-color: rgba(255, 255, 255, 0.1) !important;
-        padding: 8px 15px !important;
-        border-radius: 25px !important;
-        text-shadow: 1px 1px 3px rgba(0,0,0,0.5) !important;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        position: absolute !important;
-        top: 24px !important;
-        left: 20px !important;
-        z-index: 1001 !important;
-    }
-    
-    .visitor-counter-container:hover {
-        background-color: rgba(224, 253, 44, 0.2) !important;
-        transform: scale(1.05) !important;
-    }
-    
-    .visitor-counter-container .fa-eye {
-        font-size: 18px !important;
-    }
-    
-    /* === BOTÓN FLOTANTE "REGRESAR ARRIBA" (REDiseñado) === */
-    
-    #real-floating-back-btn {
-        position: fixed !important;
-        bottom: 95px !important; 
-        right: 15px !important;
-        
-        /* CAMBIO: Sin fondo, borde o sombra */
-        background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-        
-        width: 50px !important;
-        height: 50px !important;
-        border-radius: 0 !important; /* No necesita ser redondo */
-        outline: none !important;
-        
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        
-        z-index: 1550 !important;
-        
-        cursor: pointer !important;
-        touch-action: manipulation !important;
-        -webkit-tap-highlight-color: transparent !important;
-        user-select: none !important;
-        
-        /* Transición para aparecer/desaparecer */
-        opacity: 0 !important;
-        visibility: hidden !important;
-        transform: translateY(20px) !important;
-        transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease !important;
-    }
-
-    /* CAMBIO: Estilo del icono dentro del botón */
-    #real-floating-back-btn i {
-        font-size: 40px !important; /* Más grande */
-        color: #E0FD2C !important; /* Color amarillo */
-        font-weight: bold !important; /* Negrita */
-        text-shadow: 0 0 10px rgba(224, 253, 44, 0.5); /* Resplandor sutil */
-        transition: transform 0.3s ease;
-    }
-
-    #real-floating-back-btn:hover i {
-        transform: scale(1.15);
-    }
-    
-    #real-floating-back-btn.floating-visible {
-        opacity: 1 !important; /* Totalmente visible */
-        visibility: visible !important;
-        pointer-events: auto !important;
-        transform: translateY(0) !important;
-    }
-    
-    /* Eliminar el pseudo-elemento ::before que creaba la flecha anterior */
-    #real-floating-back-btn::before {
-        display: none !important;
-    }
-    
-    /* Prevenir scroll cuando menú abierto */
-    body.menu-open {
-        overflow: hidden !important;
-    }
-}
-
-/* MÓVILES PEQUEÑOS */
-@media screen and (max-width: 480px) {
-    .nav-toggle {
-        min-height: 40px !important;
-        min-width: 40px !important;
-        padding: 6px !important;
-    }
-    
-    .nav-logo {
-        padding-left: 80px !important; /* Espacio para contador de visitas */
-    }
-    
-    .nav-logo h2 {
-        font-size: 22px !important;
-    }
-    
-    .nav-link {
-        font-size: 18px !important;
-        padding: 15px 20px !important;
-    }
-    
-    #real-floating-back-btn {
-        bottom: 85px !important;
-        right: 10px !important;
-    }
-
-    #real-floating-back-btn i {
-        font-size: 36px !important;
-    }
-    
-    /* Contador de visitas en móviles pequeños */
-    .visitor-counter-container {
-        font-size: 12px !important;
-        padding: 6px 10px !important;
-        top: 24px !important;
-        left: 15px !important;
-    }
-    
-    .visitor-counter-container .fa-eye {
-        font-size: 14px !important;
-    }
-}
-
-/* DESKTOP - OCULTAR BOTÓN FLOTANTE */
-@media screen and (min-width: 769px) {
-    #real-floating-back-btn {
-        display: none !important;
-    }
-    
-    .nav-toggle {
-        display: none !important;
-    }
-    
-    .nav-menu {
-        position: static !important;
-        width: auto !important;
-        background: transparent !important;
-        flex-direction: row !important;
-        padding: 0 !important;
-        box-shadow: none !important;
-        border: none !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-        transform: none !important;
-        max-height: none !important;
-        overflow: visible !important;
-    }
-    
-    .nav-menu li {
-        margin: 0 15px !important;
-        width: auto !important;
-        max-width: none !important;
-    }
-    
-    .nav-link {
-        font-size: 18px !important;
-        padding: 0 !important;
-        width: auto !important;
-        border-radius: 0 !important;
-        background: transparent !important;
-        border: none !important;
-        text-transform: none !important;
-        letter-spacing: normal !important;
-    }
-}
-
-/* ===== Estilos del Chatbot de IA (CORREGIDOS) ===== */
 
+/* Chatbot */
 .chat-toggle-button {
     position: fixed;
     bottom: 25px;
     right: 25px;
     width: 60px;
     height: 60px;
-    /* CAMBIO: Nuevo color verde fluorescente */
     background: linear-gradient(45deg, #39FF14, #28b410);
     color: #0f0f0f;
     border-radius: 50%;
@@ -3767,18 +753,17 @@ html {
     justify-content: center;
     cursor: pointer;
     box-shadow: 0 5px 15px rgba(57, 255, 20, 0.4);
-    z-index: 1600; /* Aumentado para estar sobre el menú móvil */
+    z-index: 1600;
     transition: all 0.3s ease;
-    transform: scale(1);
-}
-
-.chat-toggle-button svg {
-    stroke: #0f0f0f; /* Color del icono */
 }
 
 .chat-toggle-button:hover {
     transform: scale(1.1);
     box-shadow: 0 8px 25px rgba(57, 255, 20, 0.6);
+}
+
+.chat-toggle-button svg {
+    stroke: #0f0f0f;
 }
 
 .chatbot-container {
@@ -3787,19 +772,16 @@ html {
     right: 25px;
     width: 350px;
     max-width: 90%;
-    /* CAMBIO: Fondo moderno con gradiente radial */
     background: radial-gradient(circle, #2d3436 0%, #1d1d1d 100%);
-    border-radius: 20px; /* Más redondeado */
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), inset 0 0 1px 1px rgba(255,255,255,0.1);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), inset 0 0 1px 1px rgba(255, 255, 255, 0.1);
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    z-index: 1600; /* Aumentado para estar sobre el menú móvil */
-    /* CAMBIO: Borde más sutil y moderno */
+    z-index: 1600;
     border: 1px solid rgba(224, 253, 44, 0.3);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
-    
     opacity: 0;
     transform: translateY(20px);
     visibility: hidden;
@@ -3828,7 +810,7 @@ html {
     font-weight: 700;
 }
 
-.chatbot-header #close-chat-btn {
+#close-chat-btn {
     background: none;
     border: none;
     color: #0f0f0f;
@@ -3912,6 +894,7 @@ html {
     justify-content: flex-start;
     padding: 10px 15px;
 }
+
 .loading-indicator span {
     height: 10px;
     width: 10px;
@@ -3921,37 +904,319 @@ html {
     display: inline-block;
     animation: bounce 1.4s infinite ease-in-out both;
 }
+
 .loading-indicator span:nth-child(1) { animation-delay: -0.32s; }
 .loading-indicator span:nth-child(2) { animation-delay: -0.16s; }
-@keyframes bounce {
-  0%, 80%, 100% { transform: scale(0); }
-  40% { transform: scale(1.0); }
+
+/* ==========================================================================
+   6. Animaciones
+   ========================================================================== */
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 768px) {
-    /* CAMBIO: Estilos del chat para móvil */
+@keyframes subtleGoldShine {
+    0%, 100% {
+        background-position: 0% 50%;
+        text-shadow: 0 0 8px rgba(255, 215, 0, 0.2);
+    }
+    50% {
+        background-position: 100% 50%;
+        text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+    }
+}
+
+@keyframes bounce {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1.0); }
+}
+
+/* ==========================================================================
+   7. Media Queries (Diseño Responsivo)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Desktop Grande (1200px y más)
+   -------------------------------------------------------------------------- */
+@media screen and (min-width: 1200px) {
+    .container {
+        max-width: 1400px;
+    }
+    .hero-title {
+        font-size: 56px;
+    }
+    .hero-description {
+        font-size: 22px;
+    }
+    .main-services > .container > p {
+        font-size: 26px;
+    }
+    .services-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .iot-services {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .contact-content-wrapper {
+        max-width: 1200px;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Tablets y Desktops Pequeños (Hasta 1024px)
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 1024px) {
+    .hero-description {
+        font-size: 28px;
+    }
+    .services-grid, .iot-services, .mv-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Móviles y Tablets (768px y menos)
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    /* Layout general */
+    .main-services, .iot-section, .mission-vision, .contact-section {
+        padding: 60px 15px;
+    }
+    .main-services h2, .iot-section h2, .mission-vision h2, .contact-section h2 {
+        font-size: 30px;
+    }
+
+    /* Header y Navegación Móvil */
+    .header {
+        min-height: 80px;
+    }
+    .navbar {
+        padding: 15px 0;
+        height: 80px;
+    }
+    .search-container, .nav-menu .nav-link::after {
+        display: none;
+    }
+    .nav-container {
+        padding: 0 20px;
+    }
+    .nav-logo {
+        flex: 1;
+        text-align: center;
+    }
+    .nav-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        padding: 8px;
+        background-color: #000;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 1502;
+        min-height: 44px;
+        min-width: 44px;
+    }
+    .bar {
+        width: 24px;
+        height: 3px;
+        background-color: #fff;
+        margin: 3px 0;
+        transition: all 0.4s ease;
+        border-radius: 2px;
+    }
+    .nav-toggle.active .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-toggle.active .bar:nth-child(2) { opacity: 0; }
+    .nav-toggle.active .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    .nav-menu {
+        position: fixed;
+        left: 0;
+        top: 80px;
+        width: 100%;
+        background: rgba(45, 45, 45, 0.95);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        flex-direction: column;
+        align-items: center;
+        padding: 25px 20px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+        border: 2px solid rgba(224, 253, 44, 0.4);
+        border-top: none;
+        z-index: 1400;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-30px);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .nav-menu.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    .nav-menu li {
+        width: 100%;
+        max-width: 350px;
+    }
+    .nav-link {
+        display: block;
+        padding: 20px 25px;
+        font-size: 22px;
+        font-weight: 600;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .nav-menu li:last-child .nav-link {
+        border-bottom: none;
+    }
+    .nav-link:hover {
+        background: rgba(224, 253, 44, 0.1);
+        color: #E0FD2C;
+        transform: translateX(5px);
+    }
+    body.menu-open {
+        overflow: hidden;
+    }
+
+    /* Hero Móvil */
+    .hero {
+        padding: 120px 15px 60px;
+        min-height: 70vh;
+        background-attachment: scroll;
+    }
+    .hero-title {
+        font-size: 26px;
+        line-height: 1.3;
+    }
+    .hero-description {
+        font-size: 16px;
+        padding: 0 15px;
+        line-height: 1.6;
+    }
+
+    /* Secciones Móvil */
+    .services-grid, .iot-services, .mv-grid, .contact-content-wrapper, .footer-content {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    .contact-content-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+    .service-card, .iot-card, .mv-card {
+        padding: 30px 20px;
+        margin: 0 auto;
+        max-width: 400px;
+    }
+    .iot-description {
+        font-size: 19px;
+    }
+    .mv-card p {
+        font-size: 18px;
+    }
+    
+    /* Contacto Móvil */
+    .contact-info-wrapper, .contact-form-wrapper {
+        height: auto;
+        min-height: auto;
+        padding: 25px 20px;
+    }
+    .contact-form-wrapper h2 {
+        font-size: 22px;
+        text-align: center;
+    }
+    .newsletter-form {
+        gap: 20px;
+    }
+    .newsletter-form button[type="submit"] {
+        align-self: center;
+        margin-top: 10px;
+    }
+
+    /* Footer Móvil */
+    .footer-content, .signature, .footer-section {
+        text-align: center;
+    }
+    .social-links {
+        justify-content: center;
+    }
+
+    /* Botón flotante y contador */
+    .visitor-counter-container {
+        position: absolute;
+        top: 24px;
+        left: 20px;
+        z-index: 1001;
+        font-size: 12px;
+        padding: 6px 10px;
+        background-color: transparent;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+        border: none;
+    }
+    #real-floating-back-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        bottom: 95px;
+        right: 15px;
+        background: transparent;
+        border: none;
+        width: 50px;
+        height: 50px;
+        z-index: 1550;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(20px);
+        transition: all 0.4s ease;
+    }
+    #real-floating-back-btn i {
+        font-size: 40px;
+        color: #E0FD2C;
+        font-weight: bold;
+        text-shadow: 0 0 10px rgba(224, 253, 44, 0.5);
+    }
+    #real-floating-back-btn.floating-visible {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    /* Chatbot Móvil */
     .chatbot-container {
         border-color: #39FF14;
     }
-    .chatbot-header {
-        background-color: #39FF14;
-    }
-    .user-message {
-        background-color: #39FF14;
-    }
-    #chatbot-input:focus {
-        box-shadow: 0 0 0 2px rgba(57, 255, 20, 0.5);
-    }
-    .chatbot-form button {
-        color: #39FF14;
-    }
-    .loading-indicator span {
-        background-color: #39FF14;
-    }
+    .chatbot-header { background-color: #39FF14; }
+    .user-message { background-color: #39FF14; }
+    #chatbot-input:focus { box-shadow: 0 0 0 2px rgba(57, 255, 20, 0.5); }
+    .chatbot-form button { color: #39FF14; }
+    .loading-indicator span { background-color: #39FF14; }
 }
 
-
-@media (max-width: 480px) {
+/* --------------------------------------------------------------------------
+   Móviles Pequeños (480px y menos)
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 480px) {
+    .nav-logo h2 { font-size: 22px; }
+    .nav-logo { padding-left: 80px; } /* Espacio para contador */
+    .hero-title { font-size: 24px; }
+    .hero-description { font-size: 15px; }
+    .main-services p { font-size: 16px; }
+    .mv-card p { font-size: 16px; }
+    .contact-item, .contact-item a { font-size: 14px; }
+    .contact-form-wrapper h2 { font-size: 20px; }
+    
     .chatbot-container {
         width: calc(100% - 20px);
         right: 10px;
@@ -3963,11 +1228,11 @@ html {
         right: 15px;
         bottom: 15px;
     }
-    .chat-toggle-button svg {
-        width: 24px;
-        height: 24px;
-    }
     #real-floating-back-btn {
-        bottom: 75px; /* Ajuste final para el botón de regreso */
+        bottom: 85px;
+        right: 10px;
+    }
+    #real-floating-back-btn i {
+        font-size: 36px;
     }
 }
