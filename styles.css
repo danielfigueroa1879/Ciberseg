@@ -1,10 +1,11 @@
 /*
  * RECYBERSEG - Hoja de Estilos Optimizada
- * Versión: 1.0
+ * Versión: 1.1
  * Fecha: 26 de Julio de 2025
  * Descripción: Versión refactorizada y limpiada de styles.css.
  * Se han eliminado duplicados, consolidado selectores y organizado
  * para mejorar el mantenimiento y el rendimiento.
+ * v1.1: Ajustado el ancho de los contenedores a 99% en vista móvil.
 */
 
 /* ==========================================================================
@@ -981,12 +982,14 @@ body {
    -------------------------------------------------------------------------- */
 @media screen and (max-width: 768px) {
     .container {
-        padding: 0 15px;
+        width: 99%;
+        margin: 0 auto;
+        padding: 0;
     }
 
     /* Layout general */
     .main-services, .iot-section, .mission-vision, .contact-section {
-        padding: 60px 15px;
+        padding: 60px 0;
     }
     .main-services h2, .iot-section h2, .mission-vision h2, .contact-section h2 {
         font-size: 30px;
@@ -1090,7 +1093,7 @@ body {
 
     /* Hero Móvil */
     .hero {
-        padding: 120px 15px 60px;
+        padding: 120px 0 60px;
         min-height: 70vh;
         background-attachment: scroll;
     }
@@ -1100,7 +1103,7 @@ body {
     }
     .hero-description {
         font-size: 16px;
-        padding: 0 15px;
+        padding: 0;
         line-height: 1.6;
     }
 
@@ -1116,7 +1119,8 @@ body {
     .service-card, .iot-card, .mv-card {
         padding: 30px 20px;
         margin: 0 auto;
-        max-width: 400px;
+        width: 100%;
+        max-width: 100%;
     }
     .iot-description {
         font-size: 19px;
@@ -1130,6 +1134,7 @@ body {
         height: auto;
         min-height: auto;
         padding: 25px 20px;
+        width: 100%;
     }
     .contact-form-wrapper h2 {
         font-size: 22px;
@@ -1236,3 +1241,4 @@ body {
         font-size: 36px;
     }
 }
+
