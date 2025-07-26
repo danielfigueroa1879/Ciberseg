@@ -58,6 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (sender === 'bot') {
             // Para los mensajes del bot, usamos innerHTML para renderizar las etiquetas HTML.
             p.innerHTML = text;
+            // AÑADIDO: Justificar el texto de las respuestas del bot.
+            p.style.textAlign = 'justify';
         } else {
             // Para los mensajes del usuario, usamos textContent para evitar riesgos de seguridad (XSS).
             p.textContent = text;
