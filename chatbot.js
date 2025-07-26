@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Funciones Principales ---
 
     /**
-     * Agrega un mensaje a la ventana del chat.
+     * Agrega un mensaje a la ventana del chat y, opcionalmente, un botón.
      * @param {string} text - El texto del mensaje.
      * @param {string} sender - El remitente del mensaje ('user' o 'bot').
      */
@@ -55,17 +55,63 @@ document.addEventListener('DOMContentLoaded', () => {
         messageElement.classList.add('message', `${sender}-message`);
         const p = document.createElement('p');
         
+        let messageText = text;
+
         if (sender === 'bot') {
-            // Para los mensajes del bot, usamos innerHTML para renderizar las etiquetas HTML.
-            p.innerHTML = text;
-            // AÑADIDO: Justificar el texto de las respuestas del bot.
+            // Revisa si el texto del bot incluye el marcador para el botón
+            if (text.includes('[CONTACT_BUTTON]')) {
+                // Remueve el marcador del texto que se va a mostrar
+                messageText = text.replace('[CONTACT_BUTTON]', '');
+            }
+            p.innerHTML = messageText;
             p.style.textAlign = 'justify';
         } else {
-            // Para los mensajes del usuario, usamos textContent para evitar riesgos de seguridad (XSS).
             p.textContent = text;
         }
 
         messageElement.appendChild(p);
+
+        // Si el marcador estaba presente, crea y añade el botón
+        if (sender === 'bot' && text.includes('[CONTACT_BUTTON]')) {
+            const contactButton = document.createElement('button');
+            contactButton.textContent = 'Ir al Formulario';
+            
+            // Estilos para el botón
+            Object.assign(contactButton.style, {
+                backgroundColor: '#E0FD2C',
+                color: '#0f0f0f',
+                border: 'none',
+                padding: '10px 15px',
+                borderRadius: '20px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                marginTop: '10px',
+                transition: 'background-color 0.3s, transform 0.3s'
+            });
+
+            // Efecto hover
+            contactButton.onmouseover = () => {
+                contactButton.style.backgroundColor = '#C7E525';
+                contactButton.style.transform = 'scale(1.05)';
+            };
+            contactButton.onmouseout = () => {
+                contactButton.style.backgroundColor = '#E0FD2C';
+                contactButton.style.transform = 'scale(1)';
+            };
+
+            // Funcionalidad al hacer clic
+            contactButton.addEventListener('click', () => {
+                const contactSection = document.getElementById('contacto');
+                if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                }
+                // Cierra la ventana del chatbot
+                chatbotContainer.classList.remove('active');
+            });
+
+            messageElement.appendChild(contactButton);
+        }
+
         chatbotMessages.appendChild(messageElement);
         chatbotMessages.scrollTop = chatbotMessages.scrollHeight; // Auto-scroll hacia el último mensaje
     }
@@ -78,10 +124,13 @@ document.addEventListener('DOMContentLoaded', () => {
         loadingIndicator.style.display = 'flex';
         chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
 
-        // Contexto e instrucción para el modelo de IA, indicando el uso de HTML.
+        // Contexto e instrucción para el modelo de IA, indicando el uso de HTML y el botón.
         const prompt = `Eres un asistente virtual para RECYBERSEG, una empresa chilena de ciberseguridad. Tu nombre es 'Cyber Asistente'.
         IMPORTANTE: Debes formatear tus respuestas usando etiquetas HTML. Usa <strong>palabra</strong> para poner texto en negrita y usa <br> para los saltos de línea, especialmente en las listas.
         Cuando listes servicios, usa el formato "1.- <strong>Servicio:</strong> Descripción.<br>".
+
+        Si el usuario pregunta cómo contactar, hablar con alguien, o solicitar una cotización, responde amablemente indicando que pueden usar el formulario de contacto y, al final de tu mensaje, incluye el texto especial [CONTACT_BUTTON] para que se genere un botón.
+        Ejemplo de respuesta de contacto: "¡Por supuesto! Para contactarnos o solicitar una cotización, puedes rellenar nuestro formulario y un especialista se comunicará contigo a la brevedad. También encontrarás nuestros datos de contacto directo en esa sección.<br>[CONTACT_BUTTON]"
 
         Responde a las preguntas de los usuarios sobre nuestros servicios, que incluyen:
         1.- <strong>Auditorías de Seguridad:</strong> Evaluación completa de infraestructura digital.<br>
