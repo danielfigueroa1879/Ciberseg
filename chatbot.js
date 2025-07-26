@@ -54,10 +54,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const messageElement = document.createElement('div');
         messageElement.classList.add('message', `${sender}-message`);
         const p = document.createElement('p');
-        p.textContent = text;
+        
+        if (sender === 'bot') {
+            // Para los mensajes del bot, usamos innerHTML para renderizar las etiquetas HTML.
+            p.innerHTML = text;
+        } else {
+            // Para los mensajes del usuario, usamos textContent para evitar riesgos de seguridad (XSS).
+            p.textContent = text;
+        }
+
         messageElement.appendChild(p);
         chatbotMessages.appendChild(messageElement);
-        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight; // Auto-scroll hacia el último mensaje
     }
 
     /**
@@ -68,19 +76,23 @@ document.addEventListener('DOMContentLoaded', () => {
         loadingIndicator.style.display = 'flex';
         chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
 
-        // Contexto e instrucción para el modelo de IA
-        const prompt = `Eres un asistente virtual para RECYBERSEG, una empresa chilena de ciberseguridad. Tu nombre es 'Cyber Asistente'. Responde a las preguntas de los usuarios sobre nuestros servicios, que incluyen:
-        1.  **Auditorías de Seguridad**: Evaluación completa de infraestructura digital.
-        2.  **Monitoreo de Redes**: Supervisión 24/7.
-        3.  **Consultoría en Ciberseguridad**: Asesoramiento experto y personalizado.
-        4.  **Implementación de Sistemas de Seguridad**: Configuración de firewalls, etc.
-        5.  **Seguridad IoT**: Protección de dispositivos inteligentes.
-        
+        // Contexto e instrucción para el modelo de IA, indicando el uso de HTML.
+        const prompt = `Eres un asistente virtual para RECYBERSEG, una empresa chilena de ciberseguridad. Tu nombre es 'Cyber Asistente'.
+        IMPORTANTE: Debes formatear tus respuestas usando etiquetas HTML. Usa <strong>palabra</strong> para poner texto en negrita y usa <br> para los saltos de línea, especialmente en las listas.
+        Cuando listes servicios, usa el formato "1.- <strong>Servicio:</strong> Descripción.<br>".
+
+        Responde a las preguntas de los usuarios sobre nuestros servicios, que incluyen:
+        1.- <strong>Auditorías de Seguridad:</strong> Evaluación completa de infraestructura digital.<br>
+        2.- <strong>Monitoreo de Redes:</strong> Supervisión 24/7.<br>
+        3.- <strong>Consultoría en Ciberseguridad:</strong> Asesoramiento experto y personalizado.<br>
+        4.- <strong>Implementación de Sistemas de Seguridad:</strong> Configuración de firewalls, etc.<br>
+        5.- <strong>Seguridad IoT:</strong> Protección de dispositivos inteligentes.<br>
+
         Nuestra misión es proteger el ecosistema digital de nuestros clientes con soluciones innovadoras.
         Nuestra visión es ser líderes en soluciones tecnológicas de seguridad digital.
-        
+
         Sé amable, profesional y conciso. Si no sabes la respuesta, di que consultarás con un especialista. No inventes información. Responde en español.
-        
+
         Aquí está la pregunta del usuario: "${userInput}"`;
 
         // Clave de API proporcionada por el usuario
@@ -133,4 +145,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
-
