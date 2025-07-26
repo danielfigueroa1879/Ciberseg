@@ -1,11 +1,9 @@
 /*
  * RECYBERSEG - Hoja de Estilos Optimizada
- * Versión: 1.1
+ * Versión: 1.2
  * Fecha: 26 de Julio de 2025
  * Descripción: Versión refactorizada y limpiada de styles.css.
- * Se han eliminado duplicados, consolidado selectores y organizado
- * para mejorar el mantenimiento y el rendimiento.
- * v1.1: Ajustado el ancho de los contenedores a 99% en vista móvil.
+ * v1.2: Añadido video como icono del chatbot.
 */
 
 /* ==========================================================================
@@ -743,12 +741,11 @@ body {
     position: fixed;
     bottom: 25px;
     right: 25px;
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(45deg, #39FF14, #28b410);
-    color: #0f0f0f;
+    width: 80px;  /* Aumentado para mejor visualización del video */
+    height: 80px; /* Aumentado para mejor visualización del video */
+    background: #0f0f0f;
     border-radius: 50%;
-    border: none;
+    border: 2px solid #39FF14;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -756,6 +753,8 @@ body {
     box-shadow: 0 5px 15px rgba(57, 255, 20, 0.4);
     z-index: 1600;
     transition: all 0.3s ease;
+    padding: 0;
+    overflow: hidden;
 }
 
 .chat-toggle-button:hover {
@@ -763,13 +762,17 @@ body {
     box-shadow: 0 8px 25px rgba(57, 255, 20, 0.6);
 }
 
-.chat-toggle-button svg {
-    stroke: #0f0f0f;
+.chat-toggle-button video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    transform: scale(1.5); /* Ajustar escala para que el video llene el círculo */
 }
 
 .chatbot-container {
     position: fixed;
-    bottom: 100px;
+    bottom: 120px; /* Aumentado para que no se solape con el botón más grande */
     right: 25px;
     width: 350px;
     max-width: 90%;
@@ -1225,16 +1228,16 @@ body {
     .chatbot-container {
         width: calc(100% - 20px);
         right: 10px;
-        bottom: 80px;
+        bottom: 110px; /* Ajustado para el nuevo tamaño del botón */
     }
     .chat-toggle-button {
-        width: 50px;
-        height: 50px;
+        width: 70px; /* Tamaño ajustado para móviles */
+        height: 70px;
         right: 15px;
         bottom: 15px;
     }
     #real-floating-back-btn {
-        bottom: 85px;
+        bottom: 100px; /* Ajustado para el nuevo tamaño del botón del bot */
         right: 10px;
     }
     #real-floating-back-btn i {
