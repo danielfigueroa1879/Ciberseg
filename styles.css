@@ -1227,7 +1227,7 @@ body {
     .contact-form-wrapper h2 { font-size: 20px; }
     
     .chatbot-container {
-        width: calc(100% - 20px);
+        width: calc(97% - 20px);
         right: 10px;
         bottom: 110px; /* Ajustado para el nuevo tamaño del botón */
     }
