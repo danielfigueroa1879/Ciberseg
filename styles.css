@@ -1,13 +1,13 @@
 /*
- * RECYBERSEG - Hoja de Estilos Original
- * Versión: 1.4
- * Fecha: 26 de Julio de 2025
- * Descripción: Versión original sin modificaciones.
- * v1.4: Centrada la posición del video del chatbot.
+ * RECYBERSEG - Hoja de Estilos Optimizada para Scroll Móvil
+ * Versión: 1.6
+ * Fecha: 27 de Julio de 2025
+ * Descripción: Optimizada para mejor scroll en móvil, chatbot y botón flotante INTACTOS
+ * v1.6: Optimizaciones de scroll móvil SIN tocar chatbot ni botón flotante
 */
 
 /* ==========================================================================
-   1. Estilos Globales y Reset
+   1. Estilos Globales y Reset - OPTIMIZADO PARA SCROLL MÓVIL
    ========================================================================== */
 * {
     margin: 0;
@@ -21,7 +21,12 @@ html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    /* OPTIMIZACIÓN MÓVIL: Mejora el scroll momentum */
     -webkit-overflow-scrolling: touch;
+    /* OPTIMIZACIÓN MÓVIL: Evita el overscroll bounce */
+    overscroll-behavior: none;
+    /* OPTIMIZACIÓN MÓVIL: Mejora el rendimiento en móvil */
+    -webkit-text-size-adjust: 100%;
     overflow-x: hidden;
     width: 100%;
 }
@@ -32,6 +37,9 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     width: 100%;
+    /* OPTIMIZACIÓN MÓVIL: Mejora el scroll táctil */
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: none;
 }
 
 .container {
@@ -53,8 +61,11 @@ body {
     -webkit-backdrop-filter: blur(10px);
     z-index: 1000;
     transition: all 0.3s ease;
+    /* OPTIMIZACIÓN MÓVIL: Mejora el header fijo */
     will-change: transform, opacity;
     transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .navbar {
@@ -163,7 +174,7 @@ body {
    3. Secciones Principales
    ========================================================================== */
 
-/* Hero Section */
+/* Hero Section - OPTIMIZADO */
 .hero {
     padding: 140px 20px 80px;
     text-align: center;
@@ -175,11 +186,16 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    /* OPTIMIZACIÓN MÓVIL: Mejora el rendimiento */
     transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .hero-content {
     max-width: 100%;
+    /* OPTIMIZACIÓN MÓVIL: Mejora el renderizado */
+    transform: translateZ(0);
 }
 
 .hero-title {
@@ -193,6 +209,9 @@ body {
     margin-bottom: 30px;
     text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
     animation: fadeInUp 1s ease-out, subtleGoldShine 4s ease-in-out infinite;
+    /* OPTIMIZACIÓN MÓVIL: Mejora el texto */
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
 .hero-description {
@@ -202,13 +221,20 @@ body {
     text-align: justify;
     line-height: 1.8;
     animation: fadeInUp 1s ease-out 0.3s both;
+    /* OPTIMIZACIÓN MÓVIL: Mejora la legibilidad */
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
-/* Main Services Section */
+/* Main Services Section - OPTIMIZADO */
 .main-services {
     padding: 80px 20px;
     background-color: #000;
     text-align: center;
+    /* OPTIMIZACIÓN MÓVIL: Mejora el scroll */
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .main-services h2 {
@@ -231,6 +257,8 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
     margin-top: 50px;
+    /* OPTIMIZACIÓN MÓVIL: Mejora el grid */
+    transform: translateZ(0);
 }
 
 .service-card {
@@ -241,7 +269,11 @@ body {
     text-align: center;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
+    /* OPTIMIZACIÓN MÓVIL: Mejora las animaciones */
     will-change: transform;
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .service-card:hover {
@@ -292,12 +324,16 @@ body {
     font-size: 14px;
 }
 
-/* IoT Section */
+/* IoT Section - OPTIMIZADO */
 .iot-section {
     padding: 80px 20px;
     background-color: #c1d72b;
     color: #000;
     text-align: center;
+    /* OPTIMIZACIÓN MÓVIL: Mejora el scroll */
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .iot-section h2 {
@@ -321,6 +357,8 @@ body {
     gap: 25px;
     margin-top: 50px;
     justify-items: center;
+    /* OPTIMIZACIÓN MÓVIL: Mejora el grid */
+    transform: translateZ(0);
 }
 
 .iot-card {
@@ -333,7 +371,11 @@ body {
     border: 3px solid transparent;
     max-width: 320px;
     width: 100%;
+    /* OPTIMIZACIÓN MÓVIL: Mejora las animaciones */
     will-change: transform;
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .iot-card:hover {
@@ -410,7 +452,9 @@ body {
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    /* OPTIMIZACIÓN MÓVIL: Mejora las animaciones */
     will-change: transform, background-color;
+    transform: translateZ(0);
 }
 
 .cta-button:hover {
@@ -418,10 +462,14 @@ body {
     transform: scale(1.05);
 }
 
-/* Mission & Vision Section */
+/* Mission & Vision Section - OPTIMIZADO */
 .mission-vision {
     padding: 80px 20px;
     background-color: #1a1a1a;
+    /* OPTIMIZACIÓN MÓVIL: Mejora el scroll */
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .mission-vision h2 {
@@ -436,6 +484,8 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 40px;
+    /* OPTIMIZACIÓN MÓVIL: Mejora el grid */
+    transform: translateZ(0);
 }
 
 .mv-card {
@@ -444,7 +494,11 @@ body {
     border-radius: 15px;
     border: 2px solid rgba(224, 253, 44, 0.3);
     transition: all 0.3s ease;
+    /* OPTIMIZACIÓN MÓVIL: Mejora las animaciones */
     will-change: transform;
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .mv-card:hover {
@@ -465,10 +519,14 @@ body {
     text-align: justify;
 }
 
-/* Contact Section */
+/* Contact Section - OPTIMIZADO */
 .contact-section {
     padding: 80px 20px;
     background-color: #0f0f0f;
+    /* OPTIMIZACIÓN MÓVIL: Mejora el scroll */
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .contact-content-wrapper {
@@ -491,6 +549,11 @@ body {
     height: 500px;
     display: flex;
     flex-direction: column;
+    /* OPTIMIZACIÓN MÓVIL: Mejora las animaciones */
+    will-change: transform;
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .contact-info-wrapper:hover,
@@ -550,7 +613,7 @@ body {
     transform: translateX(5px);
 }
 
-/* Form Styles */
+/* Form Styles - OPTIMIZADO */
 .newsletter-form {
     display: flex;
     flex-direction: column;
@@ -568,6 +631,8 @@ body {
     color: #fff;
     font-size: 14px;
     transition: all 0.3s ease;
+    /* OPTIMIZACIÓN MÓVIL: Evita zoom en iOS */
+    font-size: 16px;
 }
 
 .newsletter-form textarea {
@@ -602,6 +667,10 @@ body {
     letter-spacing: 1px;
     align-self: center;
     margin-top: auto;
+    /* OPTIMIZACIÓN MÓVIL: Mejora el botón táctil */
+    touch-action: manipulation;
+    min-height: 44px;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .newsletter-form button[type="submit"]:hover {
@@ -621,6 +690,10 @@ body {
 .footer {
     background-color: #000;
     padding: 60px 20px 20px;
+    /* OPTIMIZACIÓN MÓVIL: Mejora el scroll */
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .footer-content {
@@ -661,6 +734,11 @@ body {
     height: 40px;
     border-radius: 50%;
     position: relative;
+    /* OPTIMIZACIÓN MÓVIL: Mejora el área táctil */
+    min-width: 44px;
+    min-height: 44px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .social-links a:hover {
@@ -720,6 +798,10 @@ body {
     border-radius: 25px;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease;
+    /* OPTIMIZACIÓN MÓVIL: Mejora el renderizado */
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .visitor-counter-container:hover {
@@ -982,18 +1064,44 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   Móviles y Tablets (768px y menos)
+   Móviles y Tablets (768px y menos) - OPTIMIZADO PARA SCROLL SUAVE
    -------------------------------------------------------------------------- */
 @media screen and (max-width: 768px) {
+    /* OPTIMIZACIÓN MÓVIL: Mejoras globales de scroll */
+    html {
+        /* Desactiva smooth scroll en móvil para mejor rendimiento */
+        scroll-behavior: auto;
+        /* Mejora el momentum scrolling */
+        -webkit-overflow-scrolling: touch;
+        /* Evita el overscroll bounce */
+        overscroll-behavior: none;
+    }
+    
+    body {
+        /* OPTIMIZACIÓN MÓVIL: Mejora el scroll táctil */
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-y: none;
+        /* Evita el rubber band effect */
+        -webkit-touch-callout: none;
+        /* Mejora el rendimiento */
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
     .container {
         width: 98%;
         margin: 0 auto;
         padding: 0;
+        /* OPTIMIZACIÓN MÓVIL: Mejora el contenido */
+        contain: layout;
     }
 
-    /* Layout general */
+    /* Layout general optimizado */
     .main-services, .iot-section, .mission-vision, .contact-section {
         padding: 60px 0;
+        /* OPTIMIZACIÓN MÓVIL: Mejora el scroll entre secciones */
+        scroll-margin-top: 80px;
+        contain: layout style;
     }
     .main-services h2, .iot-section h2, .mission-vision h2, .contact-section h2 {
         font-size: 30px;
