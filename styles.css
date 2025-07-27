@@ -1,9 +1,9 @@
 /*
  * RECYBERSEG - Hoja de Estilos Optimizada
- * Versión: 1.5
- * Fecha: 27 de Julio de 2025
- * Descripción: Versión con optimización específica de scroll para móviles
- * v1.5: Optimización ultra suave de scroll en dispositivos móviles
+ * Versión: 1.4
+ * Fecha: 26 de Julio de 2025
+ * Descripción: Versión refactorizada y limpiada de styles.css.
+ * v1.4: Centrada la posición del video del chatbot.
 */
 
 /* ==========================================================================
@@ -731,72 +731,9 @@ body {
     font-size: 18px;
 }
 
-/* ==========================================================================
-   🚀 BOTÓN FLOTANTE - CONFIGURACIÓN GLOBAL FORZADA
-   ========================================================================== */
-
-/* ✨ REGLA GLOBAL - SOBRESCRIBE CUALQUIER BLOQUEO ✨ */
+/* Floating back-to-top button (mobile only) */
 #real-floating-back-btn {
-    /* FORZAR VISIBILIDAD EN MÓVILES */
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    position: fixed !important;
-    bottom: 110px !important;
-    right: 15px !important;
-    background: rgba(224, 253, 44, 0.9) !important;
-    border: 2px solid #E0FD2C !important;
-    border-radius: 50% !important;
-    width: 55px !important;
-    height: 55px !important;
-    z-index: 9999 !important;
-    cursor: pointer !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    transform: translateY(20px) translateZ(0) !important;
-    transition: all 0.4s ease !important;
-    box-shadow: 0 4px 20px rgba(224, 253, 44, 0.4) !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-    -webkit-tap-highlight-color: transparent !important;
-    font-family: inherit !important;
-    font-size: 0 !important;
-    line-height: 1 !important;
-    text-align: center !important;
-    vertical-align: baseline !important;
-    box-sizing: border-box !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-#real-floating-back-btn i {
-    font-size: 24px !important;
-    color: #0f0f0f !important;
-    font-weight: bold !important;
-    transform: translateZ(0) !important;
-    display: inline-block !important;
-    line-height: 1 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-#real-floating-back-btn.floating-visible {
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: translateY(0) translateZ(0) !important;
-}
-
-#real-floating-back-btn:hover {
-    background: rgba(199, 229, 37, 0.9) !important;
-    transform: translateY(0) scale(1.1) translateZ(0) !important;
-    box-shadow: 0 6px 25px rgba(224, 253, 44, 0.6) !important;
-}
-
-/* ✨ OCULTAR SOLO EN DESKTOP GRANDE ✨ */
-@media screen and (min-width: 769px) {
-    #real-floating-back-btn {
-        display: none !important;
-    }
+    display: none; /* Hidden by default, enabled in mobile media query */
 }
 
 /* Chatbot */
@@ -896,10 +833,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    /* ✨ OPTIMIZACIÓN DE SCROLL ULTRA SUAVE PARA MÓVILES ✨ */
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
-    overscroll-behavior: contain;
 }
 
 .message {
@@ -1049,107 +982,41 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   🚀 MÓVILES Y TABLETS - OPTIMIZACIÓN ULTRA SUAVE DE SCROLL 🚀
+   Móviles y Tablets (768px y menos)
    -------------------------------------------------------------------------- */
 @media screen and (max-width: 768px) {
-    /* ✨ OPTIMIZACIONES GLOBALES DE SCROLL PARA MÓVILES ✨ */
-    html {
-        scroll-behavior: smooth;
-        /* Scroll ultra suave en iOS y Android */
-        -webkit-overflow-scrolling: touch;
-        /* Evita el rebote en el scroll */
-        overscroll-behavior: contain;
-        /* Optimización de GPU para scroll */
-        transform: translateZ(0);
-        /* Evita lag en scroll */
-        -webkit-transform: translate3d(0,0,0);
-    }
-    
-    body {
-        /* Scroll momentum nativo en iOS */
-        -webkit-overflow-scrolling: touch;
-        /* Evita rebote al final del scroll */
-        overscroll-behavior-y: contain;
-        /* Optimización GPU */
-        transform: translateZ(0);
-        /* Mejora rendimiento scroll */
-        will-change: scroll-position;
-        /* Scroll suave en toda la página */
-        scroll-behavior: smooth;
-    }
-    
-    /* ✨ OPTIMIZACIÓN ESPECÍFICA PARA TODAS LAS SECCIONES ✨ */
-    .hero,
-    .main-services,
-    .iot-section,
-    .mission-vision,
-    .contact-section,
-    .footer {
-        /* GPU para scroll fluido */
-        transform: translateZ(0);
-        /* Optimización de scroll */
-        -webkit-transform: translate3d(0,0,0);
-        /* Evita repaints durante scroll */
-        will-change: transform;
-        /* Contención de scroll */
-        contain: layout style paint;
-    }
-
     .container {
         width: 98%;
         margin: 0 auto;
         padding: 0;
-        /* Optimización scroll */
-        transform: translateZ(0);
     }
 
-    /* Layout general con optimización scroll */
+    /* Layout general */
     .main-services, .iot-section, .mission-vision, .contact-section {
         padding: 60px 0;
-        /* Scroll suave entre secciones */
-        scroll-margin-top: 80px;
     }
-    
     .main-services h2, .iot-section h2, .mission-vision h2, .contact-section h2 {
         font-size: 30px;
-        /* Optimización GPU */
-        transform: translateZ(0);
     }
 
-    /* Header y Navegación Móvil CON SCROLL OPTIMIZADO */
+    /* Header y Navegación Móvil */
     .header {
         min-height: 80px;
-        /* Scroll suave del header */
-        -webkit-transform: translate3d(0,0,0);
-        transform: translateZ(0);
-        /* Evita jank en scroll */
-        will-change: transform;
     }
-    
     .navbar {
         padding: 15px 0;
         height: 80px;
-        /* Optimización scroll */
-        transform: translateZ(0);
     }
-    
     .search-container, .nav-menu .nav-link::after {
         display: none;
     }
-    
     .nav-container {
         padding: 0 20px;
-        /* Optimización GPU */
-        transform: translateZ(0);
     }
-    
     .nav-logo {
         flex: 1;
         text-align: center;
-        /* Scroll optimizado */
-        transform: translateZ(0);
     }
-    
     .nav-toggle {
         display: flex;
         flex-direction: column;
@@ -1165,11 +1032,7 @@ body {
         z-index: 1502;
         min-height: 44px;
         min-width: 44px;
-        /* Optimización touch y scroll */
-        -webkit-tap-highlight-color: transparent;
-        transform: translateZ(0);
     }
-    
     .bar {
         width: 24px;
         height: 3px;
@@ -1177,21 +1040,10 @@ body {
         margin: 3px 0;
         transition: all 0.4s ease;
         border-radius: 2px;
-        /* Optimización GPU */
-        transform: translateZ(0);
     }
-    
-    .nav-toggle.active .bar:nth-child(1) { 
-        transform: translateY(6px) rotate(45deg) translateZ(0); 
-    }
-    .nav-toggle.active .bar:nth-child(2) { 
-        opacity: 0; 
-        transform: translateZ(0);
-    }
-    .nav-toggle.active .bar:nth-child(3) { 
-        transform: translateY(-6px) rotate(-45deg) translateZ(0); 
-    }
-    
+    .nav-toggle.active .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-toggle.active .bar:nth-child(2) { opacity: 0; }
+    .nav-toggle.active .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
     .nav-menu {
         position: fixed;
         left: 0;
@@ -1211,26 +1063,18 @@ body {
         z-index: 1400;
         opacity: 0;
         visibility: hidden;
-        transform: translateY(-30px) translateZ(0);
+        transform: translateY(-30px);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        /* Scroll optimizado en menú */
-        -webkit-overflow-scrolling: touch;
-        overscroll-behavior: contain;
     }
-    
     .nav-menu.active {
         opacity: 1;
         visibility: visible;
-        transform: translateY(0) translateZ(0);
+        transform: translateY(0);
     }
-    
     .nav-menu li {
         width: 100%;
         max-width: 350px;
-        /* Optimización scroll */
-        transform: translateZ(0);
     }
-    
     .nav-link {
         display: block;
         padding: 20px 25px;
@@ -1238,165 +1082,89 @@ body {
         font-weight: 600;
         text-align: center;
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        /* Optimización touch */
-        -webkit-tap-highlight-color: transparent;
-        transform: translateZ(0);
-        /* Scroll suave a secciones */
-        scroll-behavior: smooth;
     }
-    
     .nav-menu li:last-child .nav-link {
         border-bottom: none;
     }
-    
     .nav-link:hover {
         background: rgba(224, 253, 44, 0.1);
         color: #E0FD2C;
-        transform: translateX(5px) translateZ(0);
+        transform: translateX(5px);
     }
-    
     body.menu-open {
         overflow: hidden;
-        /* Evita scroll cuando menú está abierto */
-        position: fixed;
-        width: 100%;
-        -webkit-overflow-scrolling: touch;
     }
 
-    /* ✨ HERO MÓVIL CON SCROLL ULTRA OPTIMIZADO ✨ */
+    /* Hero Móvil */
     .hero {
         padding: 120px 0 60px;
         min-height: 70vh;
         background-attachment: scroll;
-        /* Optimizaciones críticas de scroll */
-        transform: translateZ(0);
-        -webkit-transform: translate3d(0,0,0);
-        will-change: transform;
-        /* Scroll suave hacia esta sección */
-        scroll-margin-top: 0;
-        /* Evita lag en scroll */
-        contain: layout style paint;
     }
-    
     .hero-title {
         font-size: 26px;
         line-height: 1.3;
-        /* Optimización scroll */
-        transform: translateZ(0);
-        will-change: auto;
     }
    
-    .hero-description {
+      .hero-description {
         font-size: 16px;
         padding: 0;
         line-height: 1.6;
+        /* CAMBIO SOLICITADO: Ancho del 97% y centrado */
         width: 96%;
         margin: 0 auto;
-        /* Optimización scroll */
-        transform: translateZ(0);
-        will-change: auto;
     }
 
-    /* ✨ SECCIONES MÓVIL CON SCROLL SUAVE ✨ */
+    /* Secciones Móvil */
     .services-grid, .iot-services, .mv-grid, .contact-content-wrapper, .footer-content {
         grid-template-columns: 1fr;
         gap: 25px;
-        /* Optimización scroll entre elementos */
-        scroll-margin: 20px;
     }
-    
     .contact-content-wrapper {
         display: flex;
         flex-direction: column;
-        /* Scroll optimizado */
-        scroll-margin-top: 100px;
     }
-    
     .service-card, .iot-card, .mv-card {
         padding: 30px 20px;
         margin: 0 auto;
         width: 100%;
         max-width: 100%;
-        /* Optimización scroll y touch */
-        transform: translateZ(0);
-        -webkit-transform: translate3d(0,0,0);
-        will-change: transform;
-        /* Scroll suave a cada card */
-        scroll-margin-top: 120px;
     }
-    
     .iot-description {
         font-size: 19px;
-        /* Optimización scroll */
-        transform: translateZ(0);
     }
-    
     .mv-card p {
         font-size: 18px;
-        /* Optimización scroll */
-        transform: translateZ(0);
     }
     
-    /* ✨ CONTACTO MÓVIL CON SCROLL OPTIMIZADO ✨ */
+    /* Contacto Móvil */
     .contact-info-wrapper, .contact-form-wrapper {
         height: auto;
         min-height: auto;
         padding: 25px 20px;
         width: 100%;
-        /* Scroll suave en formularios */
-        transform: translateZ(0);
-        scroll-margin-top: 100px;
     }
-    
     .contact-form-wrapper h2 {
         font-size: 22px;
         text-align: center;
-        transform: translateZ(0);
     }
-    
     .newsletter-form {
         gap: 20px;
-        /* Optimización scroll en formulario */
-        scroll-behavior: smooth;
     }
-    
-    .newsletter-form input,
-    .newsletter-form textarea {
-        /* Scroll suave en campos de entrada */
-        scroll-margin-top: 120px;
-        /* Optimización touch */
-        -webkit-tap-highlight-color: transparent;
-        transform: translateZ(0);
-    }
-    
     .newsletter-form button[type="submit"] {
         align-self: center;
         margin-top: 10px;
-        /* Optimización touch */
-        -webkit-tap-highlight-color: transparent;
-        transform: translateZ(0);
     }
 
-    /* ✨ FOOTER MÓVIL CON SCROLL OPTIMIZADO ✨ */
+    /* Footer Móvil */
     .footer-content, .signature, .footer-section {
         text-align: center;
-        /* Optimización scroll */
-        transform: translateZ(0);
     }
-    
     .social-links {
         justify-content: center;
-        /* Optimización scroll */
-        transform: translateZ(0);
-    }
-    
-    .social-links a {
-        /* Optimización touch */
-        -webkit-tap-highlight-color: transparent;
-        transform: translateZ(0);
     }
 
-    /* ✨ CONTADOR Y BOTÓN FLOTANTE ULTRA OPTIMIZADOS ✨ */
+    /* Botón flotante y contador */
     .visitor-counter-container {
         position: absolute;
         top: 24px;
@@ -1407,380 +1175,77 @@ body {
         background-color: transparent;
         text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
         border: none;
-        /* Optimización scroll y touch */
-        transform: translateZ(0);
-        -webkit-tap-highlight-color: transparent;
-        will-change: transform;
     }
-    
     #real-floating-back-btn {
         display: flex;
         align-items: center;
         justify-content: center;
         position: fixed;
-        /* 🎯 POSICIÓN FLOTANTE AL MEDIO DERECHA 🎯 */
-        top: 50%;
+        bottom: 95px;
         right: 15px;
-        /* Centrar verticalmente */
-        transform: translateY(-50%) translateZ(0);
-        background: rgba(224, 253, 44, 0.9);
-        border: 2px solid #E0FD2C;
-        border-radius: 50%;
-        width: 55px;
-        height: 55px;
+        background: transparent;
+        border: none;
+        width: 50px;
+        height: 50px;
         z-index: 1550;
         cursor: pointer;
         opacity: 0;
         visibility: hidden;
+        transform: translateY(20px);
         transition: all 0.4s ease;
-        /* Optimización scroll suave */
-        scroll-behavior: smooth;
-        -webkit-tap-highlight-color: transparent;
-        will-change: opacity, visibility, transform;
-        /* Sombra para mejor visibilidad */
-        box-shadow: 0 4px 20px rgba(224, 253, 44, 0.4);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
     }
-    
     #real-floating-back-btn i {
-        font-size: 24px;
-        color: #0f0f0f;
+        font-size: 40px;
+        color: #E0FD2C;
         font-weight: bold;
-        /* Optimización GPU */
-        transform: translateZ(0);
+        text-shadow: 0 0 10px rgba(224, 253, 44, 0.5);
     }
-    
     #real-floating-back-btn.floating-visible {
         opacity: 1;
         visibility: visible;
-        /* Mantener posición centrada cuando es visible */
-        transform: translateY(-50%) translateZ(0);
-    }
-    
-    /* Efecto hover para el botón flotante */
-    #real-floating-back-btn:hover {
-        background: rgba(199, 229, 37, 0.9);
-        transform: translateY(-50%) scale(1.1) translateZ(0);
-        box-shadow: 0 6px 25px rgba(224, 253, 44, 0.6);
+        transform: translateY(0);
     }
 
-    /* ✨ CHATBOT MÓVIL ULTRA OPTIMIZADO ✨ */
+    /* Chatbot Móvil */
     .chatbot-container {
         border-color: #39FF14;
-        width: calc(100% - 20px);
-        right: 10px;
-        bottom: 110px;
-        /* Scroll ultra optimizado */
-        -webkit-overflow-scrolling: touch;
-        overscroll-behavior: contain;
-        transform: translateZ(0);
-        will-change: opacity, transform, visibility;
     }
-    
-    .chatbot-header { 
-        background-color: #39FF14;
-        /* Optimización GPU */
-        transform: translateZ(0);
-    }
-    
-    .user-message { 
-        background-color: #39FF14;
-        transform: translateZ(0);
-    }
-    
-    #chatbot-input {
-        /* Optimización touch y scroll */
-        -webkit-tap-highlight-color: transparent;
-        transform: translateZ(0);
-        scroll-margin-top: 20px;
-    }
-    
-    #chatbot-input:focus { 
-        box-shadow: 0 0 0 2px rgba(57, 255, 20, 0.5);
-        /* Scroll suave al enfocar */
-        scroll-behavior: smooth;
-    }
-    
-    .chatbot-form button { 
-        color: #39FF14;
-        /* Optimización touch */
-        -webkit-tap-highlight-color: transparent;
-        transform: translateZ(0);
-    }
-    
-    .loading-indicator span { 
-        background-color: #39FF14;
-        transform: translateZ(0);
-    }
-    
-    .chat-toggle-button {
-        width: 70px;
-        height: 70px;
-        right: 15px;
-        bottom: 15px;
-        /* Optimización touch y scroll */
-        -webkit-tap-highlight-color: transparent;
-        transform: translateZ(0);
-        will-change: transform, box-shadow;
-    }
-    
-    .chat-toggle-button video {
-        /* Optimización rendimiento video en móvil */
-        transform: scale(1.2) translateZ(0);
-        will-change: auto;
-    }
+    .chatbot-header { background-color: #39FF14; }
+    .user-message { background-color: #39FF14; }
+    #chatbot-input:focus { box-shadow: 0 0 0 2px rgba(57, 255, 20, 0.5); }
+    .chatbot-form button { color: #39FF14; }
+    .loading-indicator span { background-color: #39FF14; }
 }
 
 /* --------------------------------------------------------------------------
-   🚀 MÓVILES PEQUEÑOS - MÁXIMA OPTIMIZACIÓN DE SCROLL 🚀
+   Móviles Pequeños (480px y menos)
    -------------------------------------------------------------------------- */
 @media screen and (max-width: 480px) {
-    /* ✨ OPTIMIZACIONES EXTREMAS PARA MÓVILES PEQUEÑOS ✨ */
-    html, body {
-        /* Scroll ultra suave */
-        -webkit-overflow-scrolling: touch;
-        scroll-behavior: smooth;
-        overscroll-behavior-y: contain;
-        /* GPU optimización */
-        transform: translateZ(0);
-        -webkit-transform: translate3d(0,0,0);
-    }
-    
-    .nav-logo h2 { 
-        font-size: 22px;
-        transform: translateZ(0);
-    }
-    
-    .nav-logo { 
-        padding-left: 80px;
-        transform: translateZ(0);
-    }
-    
-    .hero-title { 
-        font-size: 24px;
-        transform: translateZ(0);
-        /* Scroll suave al título */
-        scroll-margin-top: 100px;
-    }
-    
-    .hero-description { 
-        font-size: 15px;
-        transform: translateZ(0);
-    }
-    
-    .main-services p { 
-        font-size: 16px;
-        transform: translateZ(0);
-    }
-    
-    .mv-card p { 
-        font-size: 16px;
-        transform: translateZ(0);
-    }
-    
-    .contact-item, .contact-item a { 
-        font-size: 14px;
-        transform: translateZ(0);
-        /* Optimización touch */
-        -webkit-tap-highlight-color: transparent;
-    }
-    
-    .contact-form-wrapper h2 { 
-        font-size: 20px;
-        transform: translateZ(0);
-    }
+    .nav-logo h2 { font-size: 22px; }
+    .nav-logo { padding-left: 80px; } /* Espacio para contador */
+    .hero-title { font-size: 24px; }
+    .hero-description { font-size: 15px; }
+    .main-services p { font-size: 16px; }
+    .mv-card p { font-size: 16px; }
+    .contact-item, .contact-item a { font-size: 14px; }
+    .contact-form-wrapper h2 { font-size: 20px; }
     
     .chatbot-container {
         width: calc(100% - 20px);
         right: 10px;
-        bottom: 100px;
-        /* Scroll ultra optimizado */
-        -webkit-overflow-scrolling: touch;
-        scroll-behavior: smooth;
+        bottom: 110px; /* Ajustado para el nuevo tamaño del botón */
     }
-    
     .chat-toggle-button {
-        width: 60px;
-        height: 60px;
-        right: 10px;
-        bottom: 10px;
-        /* Optimización máxima */
-        transform: translateZ(0);
-        -webkit-tap-highlight-color: transparent;
+        width: 70px; /* Tamaño ajustado para móviles */
+        height: 70px;
+        right: 15px;
+        bottom: 15px;
     }
-    
     #real-floating-back-btn {
-        /* 🎯 AJUSTE PARA MÓVILES PEQUEÑOS - ARRIBA DEL CHATBOT 🎯 */
-        bottom: 105px;
+        bottom: 100px; /* Ajustado para el nuevo tamaño del botón del bot */
         right: 10px;
-        width: 50px;
-        height: 50px;
-        /* Animación de entrada desde abajo */
-        transform: translateY(20px) translateZ(0);
-        background: rgba(224, 253, 44, 0.9);
-        border: 2px solid #E0FD2C;
-        border-radius: 50%;
-        box-shadow: 0 4px 15px rgba(224, 253, 44, 0.4);
     }
-    
     #real-floating-back-btn i {
-        font-size: 20px;
-        color: #0f0f0f;
-        transform: translateZ(0);
-    }
-    
-    #real-floating-back-btn.floating-visible {
-        opacity: 1;
-        visibility: visible;
-        /* Posición normal cuando es visible */
-        transform: translateY(0) translateZ(0);
-    }
-    
-    #real-floating-back-btn:hover {
-        transform: translateY(0) scale(1.1) translateZ(0);
-    }
-    
-    .chatbot-container {
-        width: calc(100% - 20px);
-        right: 10px;
-        /* 🤖 CHATBOT FLOTANTE ABAJO DERECHA 🤖 */
-        bottom: 20px;
-        max-width: 300px;
-    }
-    
-    .chat-toggle-button {
-        width: 60px;
-        height: 60px;
-        right: 10px;
-        /* 🤖 BOTÓN CHATBOT FLOTANTE 🤖 */
-        bottom: 20px;
-    }
-    
-    /* ✨ OPTIMIZACIÓN FINAL DE SCROLL PARA ELEMENTOS INTERACTIVOS ✨ */
-    .service-card, .iot-card, .mv-card {
-        /* Scroll suave optimizado */
-        scroll-margin-top: 120px;
-        transform: translateZ(0);
-        -webkit-transform: translate3d(0,0,0);
-    }
-    
-    .cta-button, .newsletter-form button, .social-links a {
-        /* Optimización touch final */
-        -webkit-tap-highlight-color: transparent;
-        transform: translateZ(0);
-        /* Scroll suave a botones */
-        scroll-margin-top: 100px;
-    }
-}
-
-/* ==========================================================================
-   🚀 OPTIMIZACIONES FINALES DE SCROLL PARA MÁXIMO RENDIMIENTO 🚀
-   ========================================================================== */
-
-/* Optimización para dispositivos con movimiento reducido */
-@media (prefers-reduced-motion: reduce) {
-    html, body {
-        scroll-behavior: auto;
-    }
-    
-    * {
-        scroll-behavior: auto !important;
-        -webkit-overflow-scrolling: auto;
-    }
-}
-
-/* Optimización para pantallas de alta densidad */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    html, body {
-        /* Scroll ultra suave en pantallas retina */
-        -webkit-overflow-scrolling: touch;
-        transform: translateZ(0);
-    }
-}
-
-/* Optimización para orientación landscape en móviles */
-@media screen and (max-width: 768px) and (orientation: landscape) {
-    .hero {
-        min-height: 60vh;
-        padding: 100px 0 40px;
-        /* Scroll optimizado en landscape */
-        scroll-margin-top: 60px;
-    }
-    
-    .nav-menu {
-        padding: 15px 20px;
-        /* Scroll en menú landscape */
-        -webkit-overflow-scrolling: touch;
-        max-height: 60vh;
-        overflow-y: auto;
-    }
-    
-    .nav-link {
-        padding: 15px 25px;
-        font-size: 18px;
-        /* Scroll suave en landscape */
-        scroll-behavior: smooth;
-    }
-}
-
-/* ✨ SCROLL SNAP PARA NAVEGACIÓN ULTRA SUAVE (OPCIONAL) ✨ */
-@media screen and (max-width: 768px) {
-    /* Activar solo si se desea scroll snap entre secciones */
-    /*
-    body {
-        scroll-snap-type: y proximity;
-    }
-    
-    .hero,
-    .main-services,
-    .iot-section,
-    .mission-vision,
-    .contact-section {
-        scroll-snap-align: start;
-        scroll-snap-stop: normal;
-    }
-    */
-}
-
-/* ✨ OPTIMIZACIONES CRÍTICAS FINALES ✨ */
-/* Aceleración GPU para todos los elementos principales en móvil */
-@media screen and (max-width: 768px) {
-    .container,
-    .service-card,
-    .iot-card,
-    .mv-card,
-    .contact-info-wrapper,
-    .contact-form-wrapper,
-    .chatbot-container,
-    .nav-menu,
-    .hero-content {
-        /* GPU para scroll ultra fluido */
-        transform: translateZ(0);
-        -webkit-transform: translate3d(0,0,0);
-        /* Evita repaints durante scroll */
-        will-change: transform;
-        /* Contención de scroll */
-        contain: layout style paint;
-    }
-    
-    /* Optimización para input fields */
-    input, textarea, button {
-        /* Scroll suave en formularios */
-        scroll-margin-top: 120px;
-        /* Optimización touch */
-        -webkit-tap-highlight-color: transparent;
-        /* GPU optimización */
-        transform: translateZ(0);
-    }
-    
-    /* Optimización final para enlaces */
-    a, .nav-link, .cta-button {
-        /* Scroll suave en navegación */
-        scroll-behavior: smooth;
-        /* Touch optimizado */
-        -webkit-tap-highlight-color: transparent;
-        /* GPU */
-        transform: translateZ(0);
+        font-size: 36px;
     }
 }
