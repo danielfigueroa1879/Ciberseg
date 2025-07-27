@@ -1,17 +1,19 @@
 /*
- * RECYBERSEG - Hoja de Estilos Ultra Optimizada
- * Versión: 2.0
- * Fecha: 27 de Julio de 2025
- * Optimizaciones: Rendimiento móvil, reducción de repaints, lazy loading
- */
+ * RECYBERSEG - Hoja de Estilos Optimizada
+ * Versión: 1.4
+ * Fecha: 26 de Julio de 2025
+ * Descripción: Versión refactorizada y limpiada de styles.css.
+ * v1.4: Centrada la posición del video del chatbot.
+*/
 
 /* ==========================================================================
-   1. Estilos Globales y Reset Optimizado
+   1. Estilos Globales y Reset
    ========================================================================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', Arial, sans-serif;
 }
 
 html {
@@ -22,7 +24,6 @@ html {
     -webkit-overflow-scrolling: touch;
     overflow-x: hidden;
     width: 100%;
-    height: 100%;
 }
 
 body {
@@ -31,11 +32,6 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     width: 100%;
-    font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    /* Optimización GPU */
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    perspective: 1000px;
 }
 
 .container {
@@ -45,7 +41,7 @@ body {
 }
 
 /* ==========================================================================
-   2. Header y Navegación Optimizada
+   2. Header y Navegación
    ========================================================================== */
 .header {
     position: fixed;
@@ -56,15 +52,13 @@ body {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     z-index: 1000;
-    /* Optimización: Reducir repaints */
-    will-change: transform;
+    transition: all 0.3s ease;
+    will-change: transform, opacity;
     transform: translateZ(0);
-    contain: layout style paint;
 }
 
 .navbar {
     padding: 20px 0;
-    height: 80px;
 }
 
 .nav-container {
@@ -75,7 +69,6 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-    height: 100%;
 }
 
 .nav-logo h2 {
@@ -83,16 +76,12 @@ body {
     font-size: 30px;
     font-weight: 700;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    /* Optimización GPU */
-    transform: translateZ(0);
 }
 
 .nav-menu {
     display: flex;
     list-style: none;
     gap: 30px;
-    /* Optimización contenido */
-    contain: layout style;
 }
 
 .nav-link {
@@ -100,17 +89,14 @@ body {
     text-decoration: none;
     font-size: 18px;
     font-weight: 400;
-    transition: color 0.2s ease, transform 0.2s ease;
+    transition: all 0.3s ease;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
     position: relative;
-    /* Optimización GPU */
-    will-change: transform;
-    transform: translateZ(0);
 }
 
 .nav-link:hover {
     color: #fff;
-    transform: translateY(-2px) translateZ(0);
+    transform: translateY(-2px);
 }
 
 .nav-link::after {
@@ -122,7 +108,6 @@ body {
     height: 2px;
     background-color: #E0FD2C;
     transition: width 0.3s ease;
-    will-change: width;
 }
 
 .nav-link:hover::after {
@@ -133,7 +118,6 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    contain: layout style;
 }
 
 .search-input {
@@ -143,14 +127,13 @@ body {
     background-color: rgba(255, 255, 255, 0.1);
     color: #fff;
     width: 200px;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-    will-change: transform, background-color;
+    transition: all 0.3s ease;
 }
 
 .search-input:focus {
     outline: none;
     background-color: rgba(255, 255, 255, 0.2);
-    transform: scale(1.05) translateZ(0);
+    transform: scale(1.05);
 }
 
 .search-input::placeholder {
@@ -162,43 +145,41 @@ body {
     padding: 10px 15px;
     cursor: pointer;
     border-radius: 50%;
-    transition: background-color 0.2s ease, transform 0.2s ease;
+    transition: all 0.3s ease;
     color: #000;
-    background-color: #E0FD2C;
-    will-change: transform, background-color;
 }
 
 .search-btn:hover {
     background-color: #C7E525;
-    transform: scale(1.1) translateZ(0);
+    transform: scale(1.1);
 }
 
+/* Menú Hamburguesa (oculto por defecto en desktop) */
 .nav-toggle {
     display: none;
 }
 
 /* ==========================================================================
-   3. Secciones Principales Optimizadas
+   3. Secciones Principales
    ========================================================================== */
 
-/* Hero Section Optimizada */
+/* Hero Section */
 .hero {
     padding: 140px 20px 80px;
     text-align: center;
-    background-color: #1a1a1a;
+    background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(42, 42, 42, 0.7)), url('fotos/fondo.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Optimización GPU */
     transform: translateZ(0);
-    contain: layout style paint;
 }
 
 .hero-content {
     max-width: 100%;
-    /* Optimización contenido */
-    contain: layout style;
 }
 
 .hero-title {
@@ -212,9 +193,6 @@ body {
     margin-bottom: 30px;
     text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
     animation: fadeInUp 1s ease-out, subtleGoldShine 4s ease-in-out infinite;
-    /* Optimización GPU */
-    will-change: background-position;
-    transform: translateZ(0);
 }
 
 .hero-description {
@@ -224,24 +202,19 @@ body {
     text-align: justify;
     line-height: 1.8;
     animation: fadeInUp 1s ease-out 0.3s both;
-    /* Optimización GPU */
-    transform: translateZ(0);
 }
 
-/* Main Services Section Optimizada */
+/* Main Services Section */
 .main-services {
     padding: 80px 20px;
     background-color: #000;
     text-align: center;
-    /* Optimización contenido */
-    contain: layout style paint;
 }
 
 .main-services h2 {
     font-size: 36px;
     margin-bottom: 20px;
     font-weight: 600;
-    transform: translateZ(0);
 }
 
 .main-services > .container > p {
@@ -251,7 +224,6 @@ body {
     margin-left: auto;
     margin-right: auto;
     text-align: justify;
-    transform: translateZ(0);
 }
 
 .services-grid {
@@ -259,8 +231,6 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
     margin-top: 50px;
-    /* Optimización grid */
-    contain: layout style;
 }
 
 .service-card {
@@ -269,16 +239,13 @@ body {
     padding: 40px 30px;
     border-radius: 15px;
     text-align: center;
-    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
     backdrop-filter: blur(10px);
-    /* Optimización hover */
-    will-change: transform, border-color, box-shadow;
-    transform: translateZ(0);
-    contain: layout style paint;
+    will-change: transform;
 }
 
 .service-card:hover {
-    transform: translateY(-10px) translateZ(0);
+    transform: translateY(-10px);
     border-color: #E0FD2C;
     box-shadow: 0 20px 40px rgba(224, 253, 44, 0.2);
 }
@@ -289,16 +256,12 @@ body {
     align-items: center;
     height: 250px;
     margin-bottom: 20px;
-    /* Optimización contenido */
-    contain: layout style;
 }
 
 .service-icon img {
     width: 240px;
     height: 240px;
     object-fit: contain;
-    /* Optimización imagen */
-    transform: translateZ(0);
 }
 
 .service-icon .consultoria-img {
@@ -310,7 +273,6 @@ body {
     font-size: 22px;
     margin-bottom: 15px;
     font-weight: 600;
-    transform: translateZ(0);
 }
 
 .service-card p {
@@ -318,7 +280,6 @@ body {
     color: rgba(255, 255, 255, 0.8);
     margin-bottom: 20px;
     text-align: justify;
-    transform: translateZ(0);
 }
 
 .service-price {
@@ -329,17 +290,14 @@ body {
     border-radius: 20px;
     font-weight: 600;
     font-size: 14px;
-    transform: translateZ(0);
 }
 
-/* IoT Section Optimizada */
+/* IoT Section */
 .iot-section {
     padding: 80px 20px;
     background-color: #c1d72b;
     color: #000;
     text-align: center;
-    /* Optimización contenido */
-    contain: layout style paint;
 }
 
 .iot-section h2 {
@@ -347,7 +305,6 @@ body {
     margin-bottom: 30px;
     font-weight: 700;
     text-shadow: 3px 4px 8px rgba(0, 0, 0, 0.35);
-    transform: translateZ(0);
 }
 
 .iot-description {
@@ -356,7 +313,6 @@ body {
     text-align: justify;
     line-height: 1.5;
     text-shadow: 3px 4px 8px rgba(0, 0, 0, 0.35);
-    transform: translateZ(0);
 }
 
 .iot-services {
@@ -365,8 +321,6 @@ body {
     gap: 25px;
     margin-top: 50px;
     justify-items: center;
-    /* Optimización grid */
-    contain: layout style;
 }
 
 .iot-card {
@@ -375,18 +329,15 @@ body {
     padding: 25px 20px;
     border-radius: 15px;
     text-align: center;
-    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
     border: 3px solid transparent;
     max-width: 320px;
     width: 100%;
-    /* Optimización hover */
-    will-change: transform, border-color, box-shadow;
-    transform: translateZ(0);
-    contain: layout style paint;
+    will-change: transform;
 }
 
 .iot-card:hover {
-    transform: translateY(-5px) translateZ(0);
+    transform: translateY(-5px);
     border-color: #E0FD2C;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
 }
@@ -401,7 +352,6 @@ body {
     align-items: center;
     justify-content: center;
     position: relative;
-    transform: translateZ(0);
 }
 
 .iot-image::after {
@@ -416,25 +366,21 @@ body {
     margin-bottom: 15px;
     font-weight: 600;
     line-height: 1.3;
-    transform: translateZ(0);
 }
 
 .iot-details {
     margin-bottom: 20px;
-    contain: layout style;
 }
 
 .iot-details p {
     text-align: justify;
     margin-bottom: 15px;
     line-height: 1.5;
-    transform: translateZ(0);
 }
 
 .iot-details ul {
     list-style: none;
     text-align: left;
-    contain: layout style;
 }
 
 .iot-details li {
@@ -442,7 +388,6 @@ body {
     position: relative;
     font-size: 12px;
     line-height: 1.3;
-    transform: translateZ(0);
 }
 
 .iot-details li::before {
@@ -462,24 +407,21 @@ body {
     font-weight: 600;
     cursor: pointer;
     border-radius: 20px;
-    transition: background-color 0.2s ease, transform 0.2s ease;
+    transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    /* Optimización botón */
     will-change: transform, background-color;
-    transform: translateZ(0);
 }
 
 .cta-button:hover {
     background-color: #C7E525;
-    transform: scale(1.05) translateZ(0);
+    transform: scale(1.05);
 }
 
-/* Mission & Vision Section Optimizada */
+/* Mission & Vision Section */
 .mission-vision {
     padding: 80px 20px;
     background-color: #1a1a1a;
-    contain: layout style paint;
 }
 
 .mission-vision h2 {
@@ -488,14 +430,12 @@ body {
     color: #E0FD2C;
     margin-bottom: 50px;
     font-weight: 700;
-    transform: translateZ(0);
 }
 
 .mv-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 40px;
-    contain: layout style;
 }
 
 .mv-card {
@@ -503,16 +443,13 @@ body {
     padding: 40px;
     border-radius: 15px;
     border: 2px solid rgba(224, 253, 44, 0.3);
-    transition: border-color 0.3s ease, transform 0.3s ease;
-    /* Optimización hover */
-    will-change: transform, border-color;
-    transform: translateZ(0);
-    contain: layout style paint;
+    transition: all 0.3s ease;
+    will-change: transform;
 }
 
 .mv-card:hover {
     border-color: #E0FD2C;
-    transform: translateY(-5px) translateZ(0);
+    transform: translateY(-5px);
 }
 
 .mv-card h3 {
@@ -520,21 +457,18 @@ body {
     font-size: 28px;
     margin-bottom: 20px;
     font-weight: 600;
-    transform: translateZ(0);
 }
 
 .mv-card p {
     font-size: 20px;
     line-height: 1.7;
     text-align: justify;
-    transform: translateZ(0);
 }
 
-/* Contact Section Optimizada */
+/* Contact Section */
 .contact-section {
     padding: 80px 20px;
     background-color: #0f0f0f;
-    contain: layout style paint;
 }
 
 .contact-content-wrapper {
@@ -544,7 +478,6 @@ body {
     align-items: stretch;
     max-width: 1000px;
     margin: 0 auto;
-    contain: layout style;
 }
 
 .contact-info-wrapper,
@@ -554,20 +487,16 @@ body {
     border-radius: 15px;
     padding: 40px 30px;
     backdrop-filter: blur(10px);
-    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
     height: 500px;
     display: flex;
     flex-direction: column;
-    /* Optimización hover */
-    will-change: transform, border-color, box-shadow;
-    transform: translateZ(0);
-    contain: layout style paint;
 }
 
 .contact-info-wrapper:hover,
 .contact-form-wrapper:hover {
     border-color: #E0FD2C;
-    transform: translateY(-5px) translateZ(0);
+    transform: translateY(-5px);
     box-shadow: 0 10px 30px rgba(224, 253, 44, 0.2);
 }
 
@@ -583,7 +512,6 @@ body {
     font-weight: 600;
     text-align: center;
     flex-shrink: 0;
-    transform: translateZ(0);
 }
 
 .contact-info-items {
@@ -592,14 +520,12 @@ body {
     flex-direction: column;
     justify-content: center;
     gap: 20px;
-    contain: layout style;
 }
 
 .contact-item {
     display: flex;
     align-items: center;
     font-size: 16px;
-    transform: translateZ(0);
 }
 
 .contact-item i {
@@ -607,14 +533,12 @@ body {
     margin-right: 15px;
     font-size: 20px;
     width: 25px;
-    transform: translateZ(0);
 }
 
 .contact-item a {
     color: #fff;
     text-decoration: none;
     transition: color 0.3s ease;
-    transform: translateZ(0);
 }
 
 .contact-item a:hover {
@@ -623,16 +547,15 @@ body {
 
 .whatsapp-item a:hover {
     background-color: rgba(224, 253, 44, 0.1);
-    transform: translateX(5px) translateZ(0);
+    transform: translateX(5px);
 }
 
-/* Form Styles Optimizado */
+/* Form Styles */
 .newsletter-form {
     display: flex;
     flex-direction: column;
     gap: 15px;
     flex-grow: 1;
-    contain: layout style;
 }
 
 .newsletter-form input,
@@ -644,9 +567,7 @@ body {
     background-color: rgba(255, 255, 255, 0.1);
     color: #fff;
     font-size: 14px;
-    transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-    will-change: border-color, background-color, box-shadow;
-    transform: translateZ(0);
+    transition: all 0.3s ease;
 }
 
 .newsletter-form textarea {
@@ -676,18 +597,16 @@ body {
     font-weight: 600;
     cursor: pointer;
     border-radius: 8px;
-    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 1px;
     align-self: center;
     margin-top: auto;
-    will-change: transform, background-color, box-shadow;
-    transform: translateZ(0);
 }
 
 .newsletter-form button[type="submit"]:hover {
     background-color: #C7E525;
-    transform: translateY(-2px) translateZ(0);
+    transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(224, 253, 44, 0.4);
 }
 
@@ -697,12 +616,11 @@ body {
 }
 
 /* ==========================================================================
-   4. Footer Optimizado
+   4. Footer
    ========================================================================== */
 .footer {
     background-color: #000;
     padding: 60px 20px 20px;
-    contain: layout style paint;
 }
 
 .footer-content {
@@ -712,34 +630,30 @@ body {
     text-align: center;
     max-width: 600px;
     margin: 0 auto 40px;
-    contain: layout style;
 }
 
 .footer-section h3 {
     color: #E0FD2C;
     margin-bottom: 15px;
     font-weight: 600;
-    transform: translateZ(0);
 }
 
 .footer-section p {
     font-size: 14px;
     color: rgba(255, 255, 255, 0.8);
     margin-bottom: 20px;
-    transform: translateZ(0);
 }
 
 .social-links {
     display: flex;
     justify-content: center;
     gap: 15px;
-    contain: layout style;
 }
 
 .social-links a {
     color: #E0FD2C;
     font-size: 24px;
-    transition: color 0.2s ease, transform 0.2s ease;
+    transition: all 0.3s ease;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -747,12 +661,10 @@ body {
     height: 40px;
     border-radius: 50%;
     position: relative;
-    will-change: transform, color;
-    transform: translateZ(0);
 }
 
 .social-links a:hover {
-    transform: scale(1.2) rotate(5deg) translateZ(0);
+    transform: scale(1.2) rotate(5deg);
 }
 
 .social-links a[aria-label="WhatsApp"]:hover { color: #25D366; }
@@ -767,20 +679,17 @@ body {
     align-items: center;
     flex-direction: column;
     gap: 15px;
-    contain: layout style;
 }
 
 .footer-bottom p {
     color: rgba(255, 255, 255, 0.6);
     font-size: 14px;
-    transform: translateZ(0);
 }
 
 .signature p {
     margin: 2px 0;
     font-size: 14px;
     color: #E0FD2C;
-    transform: translateZ(0);
 }
 
 .signature p:first-child {
@@ -795,10 +704,10 @@ body {
 }
 
 /* ==========================================================================
-   5. Componentes Optimizados (Chatbot, Botón Flotante, Contador)
+   5. Componentes (Chatbot, Botón Flotante, Contador)
    ========================================================================== */
 
-/* Visitor Counter Optimizado */
+/* Visitor Counter */
 .visitor-counter-container {
     display: flex;
     align-items: center;
@@ -810,28 +719,24 @@ body {
     padding: 8px 15px;
     border-radius: 25px;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-    transition: background-color 0.2s ease, transform 0.2s ease;
-    will-change: transform, background-color;
-    transform: translateZ(0);
-    contain: layout style paint;
+    transition: all 0.3s ease;
 }
 
 .visitor-counter-container:hover {
     background-color: rgba(224, 253, 44, 0.2);
-    transform: scale(1.05) translateZ(0);
+    transform: scale(1.05);
 }
 
 .visitor-counter-container .fa-eye {
     font-size: 18px;
-    transform: translateZ(0);
 }
 
-/* Floating back-to-top button optimizado */
+/* Floating back-to-top button (mobile only) */
 #real-floating-back-btn {
-    display: none;
+    display: none; /* Hidden by default, enabled in mobile media query */
 }
 
-/* Chatbot Optimizado */
+/* Chatbot */
 .chat-toggle-button {
     position: fixed;
     bottom: 25px;
@@ -847,16 +752,13 @@ body {
     cursor: pointer;
     box-shadow: 0 5px 15px rgba(57, 255, 20, 0.4);
     z-index: 1600;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: all 0.3s ease;
     padding: 0;
     overflow: hidden;
-    will-change: transform, box-shadow;
-    transform: translateZ(0);
-    contain: layout style paint;
 }
 
 .chat-toggle-button:hover {
-    transform: scale(1.1) translateZ(0);
+    transform: scale(1.1);
     box-shadow: 0 8px 25px rgba(57, 255, 20, 0.6);
 }
 
@@ -865,8 +767,8 @@ body {
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
-    transform: scale(1.2) translateZ(0);
-    object-position: 65% 50%;
+    transform: scale(1.2);
+    object-position: 65% 50%; /* Desplaza el contenido del video. Mayor % mueve a la izquierda */
 }
 
 .chatbot-container {
@@ -886,16 +788,14 @@ body {
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     opacity: 0;
-    transform: translateY(20px) translateZ(0);
+    transform: translateY(20px);
     visibility: hidden;
     transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-    will-change: opacity, transform, visibility;
-    contain: layout style paint;
 }
 
 .chatbot-container.active {
     opacity: 1;
-    transform: translateY(0) translateZ(0);
+    transform: translateY(0);
     visibility: visible;
 }
 
@@ -907,14 +807,12 @@ body {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #333;
-    contain: layout style;
 }
 
 .chatbot-header h3 {
     margin: 0;
     font-size: 16px;
     font-weight: 700;
-    transform: translateZ(0);
 }
 
 #close-chat-btn {
@@ -925,7 +823,6 @@ body {
     cursor: pointer;
     padding: 0;
     line-height: 1;
-    transform: translateZ(0);
 }
 
 .chatbot-messages {
@@ -936,9 +833,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    /* Optimización scroll */
-    -webkit-overflow-scrolling: touch;
-    contain: layout style;
 }
 
 .message {
@@ -947,14 +841,11 @@ body {
     border-radius: 20px;
     line-height: 1.4;
     word-wrap: break-word;
-    transform: translateZ(0);
-    contain: layout style paint;
 }
 
 .message p {
     margin: 0;
     font-size: 14px;
-    transform: translateZ(0);
 }
 
 .bot-message {
@@ -976,7 +867,6 @@ body {
     padding: 10px;
     border-top: 1px solid #333;
     background-color: #2a2a2a;
-    contain: layout style;
 }
 
 #chatbot-input {
@@ -987,7 +877,6 @@ body {
     background-color: #333;
     color: #fff;
     font-size: 14px;
-    transform: translateZ(0);
 }
 
 #chatbot-input:focus {
@@ -1003,14 +892,12 @@ body {
     cursor: pointer;
     margin-left: 10px;
     padding: 5px;
-    transform: translateZ(0);
 }
 
 .loading-indicator {
     display: flex;
     justify-content: flex-start;
     padding: 10px 15px;
-    contain: layout style;
 }
 
 .loading-indicator span {
@@ -1021,25 +908,18 @@ body {
     border-radius: 50%;
     display: inline-block;
     animation: bounce 1.4s infinite ease-in-out both;
-    will-change: transform;
 }
 
 .loading-indicator span:nth-child(1) { animation-delay: -0.32s; }
 .loading-indicator span:nth-child(2) { animation-delay: -0.16s; }
 
 /* ==========================================================================
-   6. Animaciones Optimizadas
+   6. Animaciones
    ========================================================================== */
 
 @keyframes fadeInUp {
-    from { 
-        opacity: 0; 
-        transform: translateY(30px) translateZ(0); 
-    }
-    to { 
-        opacity: 1; 
-        transform: translateY(0) translateZ(0); 
-    }
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes subtleGoldShine {
@@ -1054,19 +934,17 @@ body {
 }
 
 @keyframes bounce {
-    0%, 80%, 100% { 
-        transform: scale(0) translateZ(0); 
-    }
-    40% { 
-        transform: scale(1.0) translateZ(0); 
-    }
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1.0); }
 }
 
 /* ==========================================================================
-   7. Media Queries Optimizadas (Diseño Responsivo)
+   7. Media Queries (Diseño Responsivo)
    ========================================================================== */
 
-/* Desktop Grande (1200px y más) */
+/* --------------------------------------------------------------------------
+   Desktop Grande (1200px y más)
+   -------------------------------------------------------------------------- */
 @media screen and (min-width: 1200px) {
     .container {
         max-width: 1400px;
@@ -1091,7 +969,9 @@ body {
     }
 }
 
-/* Tablets y Desktops Pequeños (Hasta 1024px) */
+/* --------------------------------------------------------------------------
+   Tablets y Desktops Pequeños (Hasta 1024px)
+   -------------------------------------------------------------------------- */
 @media screen and (max-width: 1024px) {
     .hero-description {
         font-size: 28px;
@@ -1101,58 +981,42 @@ body {
     }
 }
 
-/* Móviles y Tablets (768px y menos) - ULTRA OPTIMIZADO */
+/* --------------------------------------------------------------------------
+   Móviles y Tablets (768px y menos)
+   -------------------------------------------------------------------------- */
 @media screen and (max-width: 768px) {
-    /* Optimización general para móvil */
-    * {
-        /* Reducir repaints en móvil */
-        -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
-    }
-    
     .container {
         width: 98%;
         margin: 0 auto;
         padding: 0;
     }
 
-    /* Layout general optimizado */
+    /* Layout general */
     .main-services, .iot-section, .mission-vision, .contact-section {
         padding: 60px 0;
-        /* Contenido optimizado */
-        contain: layout style paint;
     }
-    
     .main-services h2, .iot-section h2, .mission-vision h2, .contact-section h2 {
         font-size: 30px;
-        transform: translateZ(0);
     }
 
-    /* Header y Navegación Móvil Ultra Optimizada */
+    /* Header y Navegación Móvil */
     .header {
         min-height: 80px;
-        /* Optimización móvil */
-        contain: layout style paint;
     }
-    
     .navbar {
         padding: 15px 0;
         height: 80px;
     }
-    
     .search-container, .nav-menu .nav-link::after {
         display: none;
     }
-    
     .nav-container {
         padding: 0 20px;
     }
-    
     .nav-logo {
         flex: 1;
         text-align: center;
     }
-    
     .nav-toggle {
         display: flex;
         flex-direction: column;
@@ -1163,38 +1027,23 @@ body {
         background-color: #000;
         border: 2px solid rgba(255, 255, 255, 0.4);
         border-radius: 8px;
-        transition: all 0.2s ease;
+        transition: all 0.3s ease;
         position: relative;
         z-index: 1502;
         min-height: 44px;
         min-width: 44px;
-        /* Optimización touch */
-        -webkit-tap-highlight-color: transparent;
-        will-change: transform;
-        transform: translateZ(0);
     }
-    
     .bar {
         width: 24px;
         height: 3px;
         background-color: #fff;
         margin: 3px 0;
-        transition: all 0.3s ease;
+        transition: all 0.4s ease;
         border-radius: 2px;
-        will-change: transform, opacity;
-        transform: translateZ(0);
     }
-    
-    .nav-toggle.active .bar:nth-child(1) { 
-        transform: translateY(6px) rotate(45deg) translateZ(0); 
-    }
-    .nav-toggle.active .bar:nth-child(2) { 
-        opacity: 0; 
-    }
-    .nav-toggle.active .bar:nth-child(3) { 
-        transform: translateY(-6px) rotate(-45deg) translateZ(0); 
-    }
-    
+    .nav-toggle.active .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-toggle.active .bar:nth-child(2) { opacity: 0; }
+    .nav-toggle.active .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
     .nav-menu {
         position: fixed;
         left: 0;
@@ -1214,23 +1063,18 @@ body {
         z-index: 1400;
         opacity: 0;
         visibility: hidden;
-        transform: translateY(-30px) translateZ(0);
+        transform: translateY(-30px);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        will-change: opacity, transform, visibility;
-        contain: layout style paint;
     }
-    
     .nav-menu.active {
         opacity: 1;
         visibility: visible;
-        transform: translateY(0) translateZ(0);
+        transform: translateY(0);
     }
-    
     .nav-menu li {
         width: 100%;
         max-width: 350px;
     }
-    
     .nav-link {
         display: block;
         padding: 20px 25px;
@@ -1238,118 +1082,89 @@ body {
         font-weight: 600;
         text-align: center;
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
-        will-change: background-color, color, transform;
-        transform: translateZ(0);
     }
-    
     .nav-menu li:last-child .nav-link {
         border-bottom: none;
     }
-    
     .nav-link:hover {
         background: rgba(224, 253, 44, 0.1);
         color: #E0FD2C;
-        transform: translateX(5px) translateZ(0);
+        transform: translateX(5px);
     }
-    
     body.menu-open {
         overflow: hidden;
-        position: fixed;
-        width: 100%;
     }
 
-    /* Hero Móvil Ultra Optimizado */
+    /* Hero Móvil */
     .hero {
         padding: 120px 0 60px;
         min-height: 70vh;
         background-attachment: scroll;
-        /* Optimización móvil crítica */
-        will-change: auto;
-        transform: translateZ(0);
     }
-    
     .hero-title {
         font-size: 26px;
         line-height: 1.3;
-        /* Optimización animación en móvil */
-        animation: fadeInUp 0.8s ease-out;
     }
    
-    .hero-description {
+      .hero-description {
         font-size: 16px;
         padding: 0;
         line-height: 1.6;
+        /* CAMBIO SOLICITADO: Ancho del 97% y centrado */
         width: 96%;
         margin: 0 auto;
-        /* Optimización animación en móvil */
-        animation: fadeInUp 0.8s ease-out 0.2s both;
     }
 
-    /* Secciones Móvil Ultra Optimizadas */
+    /* Secciones Móvil */
     .services-grid, .iot-services, .mv-grid, .contact-content-wrapper, .footer-content {
         grid-template-columns: 1fr;
         gap: 25px;
     }
-    
     .contact-content-wrapper {
         display: flex;
         flex-direction: column;
     }
-    
     .service-card, .iot-card, .mv-card {
         padding: 30px 20px;
         margin: 0 auto;
         width: 100%;
         max-width: 100%;
-        /* Optimización hover en móvil */
-        transition: transform 0.2s ease, border-color 0.2s ease;
     }
-    
     .iot-description {
         font-size: 19px;
     }
-    
     .mv-card p {
         font-size: 18px;
     }
     
-    /* Contacto Móvil Optimizado */
+    /* Contacto Móvil */
     .contact-info-wrapper, .contact-form-wrapper {
         height: auto;
         min-height: auto;
         padding: 25px 20px;
         width: 100%;
-        /* Optimización móvil */
-        transition: border-color 0.2s ease, transform 0.2s ease;
     }
-    
     .contact-form-wrapper h2 {
         font-size: 22px;
         text-align: center;
     }
-    
     .newsletter-form {
         gap: 20px;
     }
-    
     .newsletter-form button[type="submit"] {
         align-self: center;
         margin-top: 10px;
-        /* Optimización touch */
-        -webkit-tap-highlight-color: transparent;
     }
 
-    /* Footer Móvil Optimizado */
+    /* Footer Móvil */
     .footer-content, .signature, .footer-section {
         text-align: center;
     }
-    
     .social-links {
         justify-content: center;
     }
 
-    /* Contador y Botón Flotante Ultra Optimizados */
+    /* Botón flotante y contador */
     .visitor-counter-container {
         position: absolute;
         top: 24px;
@@ -1360,11 +1175,7 @@ body {
         background-color: transparent;
         text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
         border: none;
-        /* Optimización móvil */
-        transition: transform 0.2s ease;
-        -webkit-tap-highlight-color: transparent;
     }
-    
     #real-floating-back-btn {
         display: flex;
         align-items: center;
@@ -1380,212 +1191,61 @@ body {
         cursor: pointer;
         opacity: 0;
         visibility: hidden;
-        transform: translateY(20px) translateZ(0);
-        transition: all 0.3s ease;
-        will-change: opacity, visibility, transform;
-        /* Optimización touch */
-        -webkit-tap-highlight-color: transparent;
+        transform: translateY(20px);
+        transition: all 0.4s ease;
     }
-    
     #real-floating-back-btn i {
         font-size: 40px;
         color: #E0FD2C;
         font-weight: bold;
         text-shadow: 0 0 10px rgba(224, 253, 44, 0.5);
-        transform: translateZ(0);
     }
-    
     #real-floating-back-btn.floating-visible {
         opacity: 1;
         visibility: visible;
-        transform: translateY(0) translateZ(0);
+        transform: translateY(0);
     }
 
-    /* Chatbot Móvil Ultra Optimizado */
+    /* Chatbot Móvil */
     .chatbot-container {
         border-color: #39FF14;
+    }
+    .chatbot-header { background-color: #39FF14; }
+    .user-message { background-color: #39FF14; }
+    #chatbot-input:focus { box-shadow: 0 0 0 2px rgba(57, 255, 20, 0.5); }
+    .chatbot-form button { color: #39FF14; }
+    .loading-indicator span { background-color: #39FF14; }
+}
+
+/* --------------------------------------------------------------------------
+   Móviles Pequeños (480px y menos)
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 480px) {
+    .nav-logo h2 { font-size: 22px; }
+    .nav-logo { padding-left: 80px; } /* Espacio para contador */
+    .hero-title { font-size: 24px; }
+    .hero-description { font-size: 15px; }
+    .main-services p { font-size: 16px; }
+    .mv-card p { font-size: 16px; }
+    .contact-item, .contact-item a { font-size: 14px; }
+    .contact-form-wrapper h2 { font-size: 20px; }
+    
+    .chatbot-container {
         width: calc(100% - 20px);
         right: 10px;
-        bottom: 110px;
-        /* Optimización móvil crítica */
-        -webkit-overflow-scrolling: touch;
+        bottom: 110px; /* Ajustado para el nuevo tamaño del botón */
     }
-    
-    .chatbot-header { 
-        background-color: #39FF14; 
-    }
-    
-    .user-message { 
-        background-color: #39FF14; 
-    }
-    
-    #chatbot-input:focus { 
-        box-shadow: 0 0 0 2px rgba(57, 255, 20, 0.5); 
-    }
-    
-    .chatbot-form button { 
-        color: #39FF14;
-        /* Optimización touch */
-        -webkit-tap-highlight-color: transparent;
-    }
-    
-    .loading-indicator span { 
-        background-color: #39FF14; 
-    }
-    
     .chat-toggle-button {
-        width: 70px;
+        width: 70px; /* Tamaño ajustado para móviles */
         height: 70px;
         right: 15px;
         bottom: 15px;
-        /* Optimización touch móvil */
-        -webkit-tap-highlight-color: transparent;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-}
-
-/* Móviles Pequeños (480px y menos) - MÁXIMA OPTIMIZACIÓN */
-@media screen and (max-width: 480px) {
-    /* Optimización extrema para móviles pequeños */
-    .nav-logo h2 { 
-        font-size: 22px;
-        transform: translateZ(0);
-    }
-    
-    .nav-logo { 
-        padding-left: 80px; 
-    }
-    
-    .hero-title { 
-        font-size: 24px;
-        /* Reducir animaciones en móviles pequeños */
-        animation: none;
-        transform: translateZ(0);
-    }
-    
-    .hero-description { 
-        font-size: 15px;
-        animation: none;
-        transform: translateZ(0);
-    }
-    
-    .main-services p { 
-        font-size: 16px;
-        transform: translateZ(0);
-    }
-    
-    .mv-card p { 
-        font-size: 16px;
-        transform: translateZ(0);
-    }
-    
-    .contact-item, .contact-item a { 
-        font-size: 14px;
-        transform: translateZ(0);
-    }
-    
-    .contact-form-wrapper h2 { 
-        font-size: 20px;
-        transform: translateZ(0);
-    }
-    
-    .chatbot-container {
-        width: calc(100% - 20px);
-        right: 10px;
-        bottom: 100px;
-    }
-    
-    .chat-toggle-button {
-        width: 60px;
-        height: 60px;
-        right: 10px;
-        bottom: 10px;
-    }
-    
     #real-floating-back-btn {
-        bottom: 85px;
+        bottom: 100px; /* Ajustado para el nuevo tamaño del botón del bot */
         right: 10px;
-        width: 45px;
-        height: 45px;
     }
-    
     #real-floating-back-btn i {
-        font-size: 32px;
+        font-size: 36px;
     }
-    
-    /* Optimizaciones críticas para móviles muy pequeños */
-    .service-card, .iot-card, .mv-card {
-        /* Simplificar transiciones */
-        transition: border-color 0.2s ease;
-    }
-    
-    .service-card:hover, .iot-card:hover, .mv-card:hover {
-        /* Reducir efectos hover en móviles pequeños */
-        transform: none;
-    }
-}
-
-/* ==========================================================================
-   8. Optimizaciones Adicionales para Rendimiento
-   ========================================================================== */
-
-/* Optimización para dispositivos con conexión lenta */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation: none !important;
-        transition: none !important;
-    }
-    
-    .hero-title {
-        animation: none;
-    }
-    
-    .hero-description {
-        animation: none;
-    }
-}
-
-/* Optimización para pantallas de alta densidad */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    .hero-title {
-        text-rendering: optimizeLegibility;
-    }
-}
-
-/* Optimización para modo oscuro del sistema */
-@media (prefers-color-scheme: dark) {
-    /* Los estilos ya están optimizados para modo oscuro */
-}
-
-/* Optimización para orientación landscape en móviles */
-@media screen and (max-width: 768px) and (orientation: landscape) {
-    .hero {
-        min-height: 60vh;
-        padding: 100px 0 40px;
-    }
-    
-    .nav-menu {
-        padding: 15px 20px;
-    }
-    
-    .nav-link {
-        padding: 15px 25px;
-        font-size: 18px;
-    }
-}
-
-/* Optimizaciones finales para máximo rendimiento */
-.service-card, .iot-card, .mv-card, .contact-info-wrapper, .contact-form-wrapper {
-    /* Forzar aceleración hardware solo donde es necesario */
-    will-change: auto;
-}
-
-.service-card:hover, .iot-card:hover, .mv-card:hover, 
-.contact-info-wrapper:hover, .contact-form-wrapper:hover {
-    will-change: transform, border-color, box-shadow;
-}
-
-/* Contenido crítico above-the-fold */
-.hero, .header {
-    contain: layout style paint;
 }
