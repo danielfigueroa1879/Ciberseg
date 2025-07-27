@@ -1548,13 +1548,13 @@ body {
     }
     
     #real-floating-back-btn {
-        /* 🎯 AJUSTE PARA MÓVILES PEQUEÑOS - MEDIO DERECHA 🎯 */
-        top: 50%;
+        /* 🎯 AJUSTE PARA MÓVILES PEQUEÑOS - ARRIBA DEL CHATBOT 🎯 */
+        bottom: 105px;
         right: 10px;
         width: 50px;
         height: 50px;
-        /* Centrar verticalmente siempre */
-        transform: translateY(-50%) translateZ(0);
+        /* Animación de entrada desde abajo */
+        transform: translateY(20px) translateZ(0);
         background: rgba(224, 253, 44, 0.9);
         border: 2px solid #E0FD2C;
         border-radius: 50%;
@@ -1570,12 +1570,28 @@ body {
     #real-floating-back-btn.floating-visible {
         opacity: 1;
         visibility: visible;
-        /* Mantener centrado verticalmente cuando es visible */
-        transform: translateY(-50%) translateZ(0);
+        /* Posición normal cuando es visible */
+        transform: translateY(0) translateZ(0);
     }
     
     #real-floating-back-btn:hover {
-        transform: translateY(-50%) scale(1.1) translateZ(0);
+        transform: translateY(0) scale(1.1) translateZ(0);
+    }
+    
+    .chatbot-container {
+        width: calc(100% - 20px);
+        right: 10px;
+        /* 🤖 CHATBOT FLOTANTE ABAJO DERECHA 🤖 */
+        bottom: 15px;
+        max-width: 300px;
+    }
+    
+    .chat-toggle-button {
+        width: 60px;
+        height: 60px;
+        right: 10px;
+        /* 🤖 BOTÓN CHATBOT FLOTANTE 🤖 */
+        bottom: 15px;
     }
     
     /* ✨ OPTIMIZACIÓN FINAL DE SCROLL PARA ELEMENTOS INTERACTIVOS ✨ */
