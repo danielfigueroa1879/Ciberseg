@@ -286,14 +286,12 @@ function handleScroll() {
     clearTimeout(scrollTimeout);
     
     if (scrollTop > threshold) {
-        // Mostrar botón con animación optimizada - CENTRADO VERTICALMENTE
+        // Mostrar botón con animación optimizada - ARRIBA DEL CHATBOT
         if (!button.classList.contains('floating-visible')) {
             requestAnimationFrame(() => {
                 button.classList.add('floating-visible');
-                // Asegurar que se mantenga centrado verticalmente
-                button.style.transform = 'translateY(-50%) translateZ(0)';
             });
-            console.log('👁️ Botón flotante mostrado en el centro derecha');
+            console.log('👁️ Botón flotante mostrado arriba del chatbot');
         }
         
         // Timer para auto-ocultar optimizado
