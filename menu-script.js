@@ -205,28 +205,80 @@ function toggleMenu() {
     }
 }
 
-// ===== FUNCIÓN: CREAR BOTÓN FLOTANTE =====
+// ===== FUNCIÓN: CREAR BOTÓN FLOTANTE FORZADO =====
 function createFloatingButton() {
+    console.log('🔍 Creando botón flotante...');
+    
     // Remover botones existentes para evitar duplicados
     const existingButtons = document.querySelectorAll('#real-floating-back-btn');
-    existingButtons.forEach(btn => btn.remove());
+    existingButtons.forEach(btn => {
+        console.log('🗑️ Removiendo botón existente');
+        btn.remove();
+    });
     
-    // Crear botón
-    const button = document.createElement('button');
-    button.id = 'real-floating-back-btn';
-    button.setAttribute('aria-label', 'Ir al inicio');
-    
-    // Añadir icono de Font Awesome
-    button.innerHTML = '<i class="fas fa-chevron-up"></i>';
-    
-    // ✨ EVENT LISTENERS CON SCROLL ULTRA OPTIMIZADO ✨
-    button.addEventListener('click', handleFloatingClick, { passive: false });
-    button.addEventListener('touchstart', handleFloatingClick, { passive: true });
-    
-    document.body.appendChild(button);
-    
-    console.log('🔴 Botón flotante con scroll optimizado creado');
-    return button;
+    // ✨ FORZAR CREACIÓN EN MÓVILES ✨
+    if (window.innerWidth <= 768) {
+        // Crear botón
+        const button = document.createElement('button');
+        button.id = 'real-floating-back-btn';
+        button.setAttribute('aria-label', 'Ir al inicio');
+        
+        // ✨ ESTILOS FORZADOS INLINE PARA EVITAR BLOQUEOS CSS ✨
+        button.style.cssText = `
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            position: fixed !important;
+            bottom: 110px !important;
+            right: 15px !important;
+            background: rgba(224, 253, 44, 0.9) !important;
+            border: 2px solid #E0FD2C !important;
+            border-radius: 50% !important;
+            width: 55px !important;
+            height: 55px !important;
+            z-index: 1550 !important;
+            cursor: pointer !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            transform: translateY(20px) translateZ(0) !important;
+            transition: all 0.4s ease !important;
+            box-shadow: 0 4px 20px rgba(224, 253, 44, 0.4) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+            -webkit-tap-highlight-color: transparent !important;
+            font-family: inherit !important;
+        `;
+        
+        // Añadir icono de Font Awesome con estilos forzados
+        button.innerHTML = '<i class="fas fa-chevron-up" style="font-size: 24px !important; color: #0f0f0f !important; font-weight: bold !important;"></i>';
+        
+        // ✨ EVENT LISTENERS CON SCROLL ULTRA OPTIMIZADO ✨
+        button.addEventListener('click', handleFloatingClick, { passive: false });
+        button.addEventListener('touchstart', handleFloatingClick, { passive: true });
+        
+        document.body.appendChild(button);
+        
+        console.log('✅ Botón flotante creado y forzado en móvil');
+        
+        // Verificar que se creó correctamente
+        setTimeout(() => {
+            const createdButton = document.getElementById('real-floating-back-btn');
+            if (createdButton) {
+                console.log('✅ Botón verificado en DOM');
+                console.log('📍 Posición:', createdButton.style.position);
+                console.log('📍 Bottom:', createdButton.style.bottom);
+                console.log('📍 Right:', createdButton.style.right);
+                console.log('📍 Display:', createdButton.style.display);
+            } else {
+                console.error('❌ Botón no encontrado después de creación');
+            }
+        }, 100);
+        
+        return button;
+    } else {
+        console.log('🖥️ Desktop detectado - botón no creado');
+        return null;
+    }
 }
 
 // ===== FUNCIÓN: MANEJAR CLICK DEL BOTÓN FLOTANTE OPTIMIZADO =====
@@ -270,13 +322,19 @@ function handleFloatingClick(e) {
     }
 }
 
-// ===== FUNCIÓN: MANEJAR SCROLL ULTRA OPTIMIZADA =====
+// ===== FUNCIÓN: MANEJAR SCROLL ULTRA OPTIMIZADA CON DEBUG =====
 function handleScroll() {
     const button = document.getElementById('real-floating-back-btn');
-    if (!button) return;
+    
+    if (!button) {
+        console.log('❌ Botón no encontrado en handleScroll');
+        return;
+    }
     
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const threshold = 200;
+    
+    console.log(`📜 Scroll: ${scrollTop}px, Threshold: ${threshold}px`);
     
     // ✨ OPTIMIZACIÓN: Solo procesar cambios significativos ✨
     if (Math.abs(scrollTop - (handleScroll.lastScrollY || 0)) < 5) return;
@@ -286,27 +344,43 @@ function handleScroll() {
     clearTimeout(scrollTimeout);
     
     if (scrollTop > threshold) {
-        // Mostrar botón con animación optimizada - ARRIBA DEL CHATBOT
+        // Mostrar botón con estilos forzados
         if (!button.classList.contains('floating-visible')) {
             requestAnimationFrame(() => {
                 button.classList.add('floating-visible');
+                // ✨ FORZAR ESTILOS DE VISIBILIDAD ✨
+                button.style.opacity = '1';
+                button.style.visibility = 'visible';
+                button.style.transform = 'translateY(0) translateZ(0)';
+                
+                console.log('👁️ Botón flotante mostrado arriba del chatbot');
+                console.log('📍 Estilos aplicados:', {
+                    opacity: button.style.opacity,
+                    visibility: button.style.visibility,
+                    transform: button.style.transform
+                });
             });
-            console.log('👁️ Botón flotante mostrado arriba del chatbot');
         }
         
         // Timer para auto-ocultar optimizado
         scrollTimeout = setTimeout(() => {
             requestAnimationFrame(() => {
                 button.classList.remove('floating-visible');
+                button.style.opacity = '0';
+                button.style.visibility = 'hidden';
+                button.style.transform = 'translateY(20px) translateZ(0)';
             });
             console.log('🙈 Botón flotante ocultado por inactividad');
         }, 15000);
         
     } else {
-        // Ocultar botón con animación optimizada
+        // Ocultar botón con estilos forzados
         if (button.classList.contains('floating-visible')) {
             requestAnimationFrame(() => {
                 button.classList.remove('floating-visible');
+                button.style.opacity = '0';
+                button.style.visibility = 'hidden';
+                button.style.transform = 'translateY(20px) translateZ(0)';
             });
             console.log('🙈 Botón flotante ocultado (cerca del inicio)');
         }
@@ -469,9 +543,11 @@ function setupIntelligentSectionScrolling() {
     console.log('🎯 Scroll inteligente entre secciones configurado');
 }
 
-// ===== FUNCIÓN: INICIALIZACIÓN PRINCIPAL OPTIMIZADA =====
+// ===== FUNCIÓN: INICIALIZACIÓN PRINCIPAL OPTIMIZADA CON DEBUG =====
 function initCompleteSolution() {
     console.log('🚀 Iniciando solución con scroll ultra optimizado...');
+    console.log('📱 Ancho de pantalla:', window.innerWidth);
+    console.log('📱 Es móvil:', window.innerWidth <= 768);
     
     try {
         // Detectar dispositivo
@@ -480,25 +556,48 @@ function initCompleteSolution() {
         // 1. Configurar menú hamburguesa
         setupHamburgerMenu();
         
-        // 2. Crear botón flotante
-        createFloatingButton();
+        // 2. Crear botón flotante FORZADO
+        const button = createFloatingButton();
         
-        // 3. Configurar scroll optimizado
+        if (button) {
+            console.log('✅ Botón creado exitosamente');
+            
+            // 3. Verificar que el botón esté en el DOM
+            setTimeout(() => {
+                const buttonCheck = document.getElementById('real-floating-back-btn');
+                if (buttonCheck) {
+                    console.log('✅ Botón confirmado en DOM');
+                    console.log('📍 Computed styles:', {
+                        display: getComputedStyle(buttonCheck).display,
+                        position: getComputedStyle(buttonCheck).position,
+                        bottom: getComputedStyle(buttonCheck).bottom,
+                        right: getComputedStyle(buttonCheck).right,
+                        zIndex: getComputedStyle(buttonCheck).zIndex
+                    });
+                } else {
+                    console.error('❌ Botón NO encontrado en verificación');
+                }
+            }, 500);
+        } else {
+            console.log('ℹ️ Botón no creado (desktop o error)');
+        }
+        
+        // 4. Configurar scroll optimizado
         setupScrollEvents();
         
-        // 4. Optimizar enlaces existentes
+        // 5. Optimizar enlaces existentes
         optimizeExistingLinks();
         
-        // 5. Optimizar scroll en formularios
+        // 6. Optimizar scroll en formularios
         optimizeFormScrolling();
         
-        // 6. Configurar scroll inteligente entre secciones
+        // 7. Configurar scroll inteligente entre secciones
         setupIntelligentSectionScrolling();
         
         console.log('✅ Solución con scroll ultra optimizado inicializada');
         
     } catch (error) {
-        console.error('❌ Error:', error);
+        console.error('❌ Error en inicialización:', error);
     }
 }
 
@@ -617,12 +716,49 @@ window.completeSolution = {
 
 console.log('✅ Solución completa con scroll ultra optimizado cargada');
 
-// ===== FUNCIÓN DE DEBUG PARA SCROLL =====
-window.debugScroll = function() {
-    console.log('🔍 Debug de scroll:', {
-        isMobile: isMobile,
-        scrollY: window.scrollY,
-        isMenuOpen: isMenuOpen,
-        buttonVisible: document.getElementById('real-floating-back-btn')?.classList.contains('floating-visible')
-    });
+// ===== FUNCIÓN DE DEBUG PARA DIAGNÓSTICO =====
+window.debugFloatingButton = function() {
+    console.log('🔍 === DEBUG BOTÓN FLOTANTE ===');
+    console.log('📱 Ancho de pantalla:', window.innerWidth);
+    console.log('📱 Es móvil:', window.innerWidth <= 768);
+    
+    const button = document.getElementById('real-floating-back-btn');
+    if (button) {
+        console.log('✅ Botón encontrado en DOM');
+        console.log('📍 Estilos inline:', {
+            display: button.style.display,
+            position: button.style.position,
+            bottom: button.style.bottom,
+            right: button.style.right,
+            opacity: button.style.opacity,
+            visibility: button.style.visibility,
+            zIndex: button.style.zIndex
+        });
+        console.log('📍 Computed styles:', {
+            display: getComputedStyle(button).display,
+            position: getComputedStyle(button).position,
+            bottom: getComputedStyle(button).bottom,
+            right: getComputedStyle(button).right,
+            opacity: getComputedStyle(button).opacity,
+            visibility: getComputedStyle(button).visibility,
+            zIndex: getComputedStyle(button).zIndex
+        });
+        console.log('📍 Classes:', button.className);
+        console.log('📍 Parent:', button.parentElement);
+        
+        // Forzar mostrar el botón para test
+        button.style.opacity = '1';
+        button.style.visibility = 'visible';
+        button.style.transform = 'translateY(0) translateZ(0)';
+        console.log('🔧 Forzando visibilidad para test...');
+        
+    } else {
+        console.error('❌ Botón NO encontrado en DOM');
+        console.log('🔧 Intentando crear botón...');
+        if (window.innerWidth <= 768) {
+            createFloatingButton();
+        }
+    }
+    
+    console.log('🔍 === FIN DEBUG ===');
 };
