@@ -829,22 +829,14 @@ body {
     justify-content: center;
     cursor: pointer;
     box-shadow: 0 5px 15px rgba(57, 255, 20, 0.4);
-    z-index: 9999;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1600;
+    transition: all 0.3s ease;
     padding: 0;
     overflow: hidden;
-    /* OPTIMIZACIÓN MÓVIL: Mejora el botón táctil */
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-    /* CORRECCIÓN: Aislamos el contexto de apilamiento */
-    isolation: isolate;
-    /* CORRECCIÓN: Forzamos el layer compuesto sin interferencia */
-    will-change: transform;
-    transform: translate3d(0, 0, 0);
 }
 
 .chat-toggle-button:hover {
-    transform: scale(1.1) translate3d(0, 0, 0);
+    transform: scale(1.1);
     box-shadow: 0 8px 25px rgba(57, 255, 20, 0.6);
 }
 
@@ -853,10 +845,8 @@ body {
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
-    transform: scale(1.2) translate3d(0, 0, 0);
+    transform: scale(1.2);
     object-position: 65% 50%;
-    /* OPTIMIZACIÓN MÓVIL: Mejora la reproducción de video */
-    will-change: transform;
 }
 
 .chatbot-container {
@@ -871,25 +861,19 @@ body {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    z-index: 9998;
+    z-index: 1600;
     border: 1px solid rgba(224, 253, 44, 0.3);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     opacity: 0;
-    transform: translateY(20px) translate3d(0, 0, 0);
+    transform: translateY(20px);
     visibility: hidden;
-    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.3s;
-    /* OPTIMIZACIÓN MÓVIL: Mejora el renderizado */
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    /* CORRECCIÓN: Aislamos el contexto de apilamiento */
-    isolation: isolate;
-    will-change: transform, opacity;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
 }
 
 .chatbot-container.active {
     opacity: 1;
-    transform: translateY(0) translate3d(0, 0, 0);
+    transform: translateY(0);
     visibility: visible;
 }
 
@@ -1111,8 +1095,6 @@ body {
 @media screen and (max-width: 768px) {
     /* OPTIMIZACIÓN MÓVIL: Mejora global del scroll */
     html {
-        /* Desactiva el scroll behavior smooth en móvil para mejor rendimiento */
-        scroll-behavior: auto;
         /* Mejora el momentum scrolling */
         -webkit-overflow-scrolling: touch;
         /* Evita el overscroll bounce */
@@ -1123,30 +1105,17 @@ body {
         /* OPTIMIZACIÓN MÓVIL: Mejora el scroll táctil */
         -webkit-overflow-scrolling: touch;
         overscroll-behavior-y: none;
-        /* Evita el rubber band effect */
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        user-select: none;
-        /* Mejora la aceleración de hardware */
-        transform: translateZ(0);
-        -webkit-transform: translateZ(0);
     }
 
     .container {
         width: 98%;
         margin: 0 auto;
         padding: 0;
-        /* OPTIMIZACIÓN MÓVIL: Evita layout shifts */
-        contain: layout;
     }
 
     /* Layout general optimizado */
     .main-services, .iot-section, .mission-vision, .contact-section {
         padding: 60px 0;
-        /* OPTIMIZACIÓN MÓVIL: Mejora el scroll entre secciones */
-        scroll-margin-top: 80px;
-        transform: translateZ(0);
-        -webkit-transform: translateZ(0);
     }
     
     .main-services h2, .iot-section h2, .mission-vision h2, .contact-section h2 {
@@ -1156,11 +1125,6 @@ body {
     /* Header y Navegación Móvil - OPTIMIZADO */
     .header {
         min-height: 80px;
-        /* OPTIMIZACIÓN MÓVIL: Mejora el header fijo */
-        -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
-        /* Mejora el z-index stacking */
-        isolation: isolate;
     }
     
     .navbar {
@@ -1420,18 +1384,12 @@ body {
         border: none;
         width: 50px;
         height: 50px;
-        z-index: 9997;
+        z-index: 1550;
         cursor: pointer;
         opacity: 0;
         visibility: hidden;
-        transform: translateY(20px) translate3d(0, 0, 0);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        /* OPTIMIZACIÓN MÓVIL: Mejora el botón flotante */
-        touch-action: manipulation;
-        -webkit-tap-highlight-color: transparent;
-        will-change: transform, opacity;
-        /* CORRECCIÓN: Aislamos el contexto de apilamiento */
-        isolation: isolate;
+        transform: translateY(20px);
+        transition: all 0.4s ease;
     }
     
     #real-floating-back-btn i {
@@ -1439,43 +1397,22 @@ body {
         color: #E0FD2C;
         font-weight: bold;
         text-shadow: 0 0 10px rgba(224, 253, 44, 0.5);
-        /* OPTIMIZACIÓN MÓVIL: Mejora el icono */
-        transform: translate3d(0, 0, 0);
     }
     
     #real-floating-back-btn.floating-visible {
         opacity: 1;
         visibility: visible;
-        transform: translateY(0) translate3d(0, 0, 0);
+        transform: translateY(0);
     }
 
-    /* Chatbot Móvil - OPTIMIZADO */
     .chatbot-container {
         border-color: #39FF14;
-        /* OPTIMIZACIÓN MÓVIL: Mejora el chatbot */
-        -webkit-overflow-scrolling: touch;
-        contain: layout style paint;
     }
-    
-    .chatbot-header { 
-        background-color: #39FF14; 
-    }
-    
-    .user-message { 
-        background-color: #39FF14; 
-    }
-    
-    #chatbot-input:focus { 
-        box-shadow: 0 0 0 2px rgba(57, 255, 20, 0.5); 
-    }
-    
-    .chatbot-form button { 
-        color: #39FF14; 
-    }
-    
-    .loading-indicator span { 
-        background-color: #39FF14; 
-    }
+    .chatbot-header { background-color: #39FF14; }
+    .user-message { background-color: #39FF14; }
+    #chatbot-input:focus { box-shadow: 0 0 0 2px rgba(57, 255, 20, 0.5); }
+    .chatbot-form button { color: #39FF14; }
+    .loading-indicator span { background-color: #39FF14; }
 }
 
 /* --------------------------------------------------------------------------
@@ -1546,35 +1483,16 @@ body {
         width: calc(100% - 20px);
         right: 10px;
         bottom: 110px;
-        /* OPTIMIZACIÓN MÓVIL: Mejora el chatbot en pantallas pequeñas */
-        max-height: 60vh;
-        -webkit-overflow-scrolling: touch;
-        contain: layout style paint;
     }
-    
     .chat-toggle-button {
         width: 70px;
         height: 70px;
         right: 15px;
         bottom: 15px;
-        z-index: 9999;
-        /* OPTIMIZACIÓN MÓVIL: Mejora el botón de chat */
-        touch-action: manipulation;
-        -webkit-tap-highlight-color: transparent;
-        /* CORRECCIÓN: Mantiene el aislamiento en pantallas pequeñas */
-        isolation: isolate;
-        transform: translate3d(0, 0, 0);
     }
-    
     #real-floating-back-btn {
         bottom: 100px;
         right: 10px;
-        z-index: 9997;
-        /* OPTIMIZACIÓN MÓVIL: Mejora el botón flotante */
-        touch-action: manipulation;
-        -webkit-tap-highlight-color: transparent;
-        /* CORRECCIÓN: Mantiene el aislamiento en pantallas pequeñas */
-        isolation: isolate;
     }
     
     #real-floating-back-btn i {
