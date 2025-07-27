@@ -829,18 +829,22 @@ body {
     justify-content: center;
     cursor: pointer;
     box-shadow: 0 5px 15px rgba(57, 255, 20, 0.4);
-    z-index: 1600;
+    z-index: 9999;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     padding: 0;
     overflow: hidden;
     /* OPTIMIZACIÓN MÓVIL: Mejora el botón táctil */
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
-    transform: translateZ(0);
+    /* CORRECCIÓN: Aislamos el contexto de apilamiento */
+    isolation: isolate;
+    /* CORRECCIÓN: Forzamos el layer compuesto sin interferencia */
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
 }
 
 .chat-toggle-button:hover {
-    transform: scale(1.1) translateZ(0);
+    transform: scale(1.1) translate3d(0, 0, 0);
     box-shadow: 0 8px 25px rgba(57, 255, 20, 0.6);
 }
 
@@ -849,7 +853,7 @@ body {
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
-    transform: scale(1.2) translateZ(0);
+    transform: scale(1.2) translate3d(0, 0, 0);
     object-position: 65% 50%;
     /* OPTIMIZACIÓN MÓVIL: Mejora la reproducción de video */
     will-change: transform;
@@ -867,22 +871,25 @@ body {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    z-index: 1600;
+    z-index: 9998;
     border: 1px solid rgba(224, 253, 44, 0.3);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     opacity: 0;
-    transform: translateY(20px) translateZ(0);
+    transform: translateY(20px) translate3d(0, 0, 0);
     visibility: hidden;
     transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.3s;
     /* OPTIMIZACIÓN MÓVIL: Mejora el renderizado */
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+    /* CORRECCIÓN: Aislamos el contexto de apilamiento */
+    isolation: isolate;
+    will-change: transform, opacity;
 }
 
 .chatbot-container.active {
     opacity: 1;
-    transform: translateY(0) translateZ(0);
+    transform: translateY(0) translate3d(0, 0, 0);
     visibility: visible;
 }
 
@@ -1413,16 +1420,18 @@ body {
         border: none;
         width: 50px;
         height: 50px;
-        z-index: 1550;
+        z-index: 9997;
         cursor: pointer;
         opacity: 0;
         visibility: hidden;
-        transform: translateY(20px) translateZ(0);
+        transform: translateY(20px) translate3d(0, 0, 0);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         /* OPTIMIZACIÓN MÓVIL: Mejora el botón flotante */
         touch-action: manipulation;
         -webkit-tap-highlight-color: transparent;
         will-change: transform, opacity;
+        /* CORRECCIÓN: Aislamos el contexto de apilamiento */
+        isolation: isolate;
     }
     
     #real-floating-back-btn i {
@@ -1431,13 +1440,13 @@ body {
         font-weight: bold;
         text-shadow: 0 0 10px rgba(224, 253, 44, 0.5);
         /* OPTIMIZACIÓN MÓVIL: Mejora el icono */
-        transform: translateZ(0);
+        transform: translate3d(0, 0, 0);
     }
     
     #real-floating-back-btn.floating-visible {
         opacity: 1;
         visibility: visible;
-        transform: translateY(0) translateZ(0);
+        transform: translateY(0) translate3d(0, 0, 0);
     }
 
     /* Chatbot Móvil - OPTIMIZADO */
@@ -1548,17 +1557,24 @@ body {
         height: 70px;
         right: 15px;
         bottom: 15px;
+        z-index: 9999;
         /* OPTIMIZACIÓN MÓVIL: Mejora el botón de chat */
         touch-action: manipulation;
         -webkit-tap-highlight-color: transparent;
+        /* CORRECCIÓN: Mantiene el aislamiento en pantallas pequeñas */
+        isolation: isolate;
+        transform: translate3d(0, 0, 0);
     }
     
     #real-floating-back-btn {
         bottom: 100px;
         right: 10px;
+        z-index: 9997;
         /* OPTIMIZACIÓN MÓVIL: Mejora el botón flotante */
         touch-action: manipulation;
         -webkit-tap-highlight-color: transparent;
+        /* CORRECCIÓN: Mantiene el aislamiento en pantallas pequeñas */
+        isolation: isolate;
     }
     
     #real-floating-back-btn i {
