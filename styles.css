@@ -1582,7 +1582,7 @@ body {
         width: calc(100% - 20px);
         right: 10px;
         /* 🤖 CHATBOT FLOTANTE ABAJO DERECHA 🤖 */
-        bottom: 15px;
+        bottom: 20px;
         max-width: 300px;
     }
     
@@ -1591,7 +1591,7 @@ body {
         height: 60px;
         right: 10px;
         /* 🤖 BOTÓN CHATBOT FLOTANTE 🤖 */
-        bottom: 15px;
+        bottom: 20px;
     }
     
     /* ✨ OPTIMIZACIÓN FINAL DE SCROLL PARA ELEMENTOS INTERACTIVOS ✨ */
