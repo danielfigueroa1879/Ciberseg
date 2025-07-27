@@ -1072,7 +1072,7 @@ body {
         transform: translateY(0);
     }
     .nav-menu li {
-        width: 100%;
+        width: 97%;
         max-width: 350px;
     }
     .nav-link {
