@@ -936,7 +936,7 @@ body {
 
 @media screen and (max-width: 768px) {
     .container {
-        width: 100%;
+        width: 98%;
         padding: 0 15px;
     }
 
@@ -1071,7 +1071,7 @@ body {
         padding: 0;
         line-height: 1.6;
         /* CAMBIO SOLICITADO: Ancho del 97% y centrado */
-        width: 97%;
+        width: 98%;
         margin: 0 auto;
     }
 
