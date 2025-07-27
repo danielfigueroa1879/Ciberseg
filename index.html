@@ -7,68 +7,24 @@
     <meta name="description" content="Servicios profesionales de ciberseguridad, auditorías de seguridad, monitoreo de redes y consultoría especializada. Protegemos tu infraestructura digital.">
     <meta name="keywords" content="ciberseguridad, seguridad informatica, auditoria seguridad, monitoreo redes, IoT security">
     
-    <!-- Critical CSS inline para evitar FOUC -->
-    <style>
-        /* CSS crítico para primera carga */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
-        body { 
-            background-color: #0f0f0f; 
-            color: #fff; 
-            line-height: 1.6; 
-            overflow-x: hidden; 
-            width: 100%; 
-            font-family: system-ui, -apple-system, sans-serif;
-        }
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(40, 40, 40, 0.95);
-            z-index: 1000;
-            height: 80px;
-        }
-        .hero {
-            padding: 140px 20px 80px;
-            text-align: center;
-            background-color: #1a1a1a;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .hero-title {
-            font-size: 48px;
-            background: linear-gradient(45deg, #E0FD2C, #d4ff00);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 700;
-            margin-bottom: 30px;
-        }
-        @media (max-width: 768px) {
-            .hero-title { font-size: 26px; }
-            .hero { padding: 120px 0 60px; min-height: 70vh; }
-        }
-    </style>
-    
-    <!-- Preconnect optimizado -->
+    <!-- Preconnect para recursos externos críticos -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
     
-    <!-- DNS Prefetch -->
+    <!-- DNS Prefetch para recursos que se usarán más tarde -->
     <link rel="dns-prefetch" href="//recyberseg-default-rtdb.firebaseio.com">
     <link rel="dns-prefetch" href="//wa.me">
     
-    <!-- Carga asíncrona de recursos no críticos -->
-    <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="styles.css"></noscript>
+    <!-- OPTIMIZACIÓN: Carga asíncrona de CSS para no bloquear el renderizado -->
+    <link rel="stylesheet" href="styles.css">
     
+    <!-- OPTIMIZACIÓN: Carga asíncrona de la fuente para no bloquear el renderizado -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;700&display=swap" rel="stylesheet"></noscript>
     
+    <!-- OPTIMIZACIÓN: Carga asíncrona de Font Awesome -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
 </head>
@@ -111,7 +67,7 @@
                 <!-- Contador de Visitas -->
                 <div class="visitor-counter-container">
                      <i class="fas fa-eye"></i>
-                     <span id="visitor-count">...</span>
+                     <span id="visitor-count"></span>
                 </div>
 
             </div>
@@ -145,8 +101,8 @@
                 <div class="services-grid">
                     <div class="service-card">
                         <div class="service-icon">
-                            <!-- Placeholder que se reemplaza por lazy loading -->
-                            <div class="img-placeholder" data-src="fotos/auditorias1.png" data-alt="Auditorías de Seguridad"></div>
+                            <!-- OPTIMIZACIÓN: Carga diferida y dimensiones para evitar saltos de layout -->
+                            <img src="fotos/auditorias1.png" alt="Auditorías de Seguridad" loading="lazy" width="240" height="240">
                         </div>
                         <h3>1. Auditorías de Seguridad</h3>
                         <p>Evaluación completa de tu infraestructura digital</p>
@@ -155,7 +111,8 @@
                     
                     <div class="service-card">
                         <div class="service-icon">
-                            <div class="img-placeholder" data-src="fotos/monitoreo2.png" data-alt="Monitoreo de Redes"></div>
+                            <!-- OPTIMIZACIÓN: Carga diferida y dimensiones para evitar saltos de layout -->
+                            <img src="fotos/monitoreo2.png" alt="Monitoreo de Redes" loading="lazy" width="240" height="240">
                         </div>
                         <h3>2. Monitoreo de Redes</h3>
                         <p>Supervisión 24/7 de tu red corporativa</p>
@@ -164,7 +121,8 @@
                     
                     <div class="service-card">
                         <div class="service-icon">
-                            <div class="img-placeholder consultoria-img" data-src="fotos/consultoria3.jpg" data-alt="Consultoría en Ciberseguridad"></div>
+                            <!-- OPTIMIZACIÓN: Carga diferida y dimensiones para evitar saltos de layout -->
+                            <img src="fotos/consultoria3.jpg" alt="Consultoría en Ciberseguridad" class="consultoria-img" loading="lazy" width="280" height="158">
                         </div>
                         <h3>3. Consultoría en Ciberseguridad</h3>
                         <p>Asesoramiento experto personalizado</p>
@@ -173,7 +131,8 @@
                     
                     <div class="service-card">
                         <div class="service-icon">
-                            <div class="img-placeholder" data-src="fotos/implementacion4.png" data-alt="Implementación de Sistemas de Seguridad"></div>
+                            <!-- OPTIMIZACIÓN: Carga diferida y dimensiones para evitar saltos de layout -->
+                            <img src="fotos/implementacion4.png" alt="Implementación de Sistemas de Seguridad" loading="lazy" width="240" height="240">
                         </div>
                         <h3>4. Implementación de Sistemas de Seguridad</h3>
                         <p>Configuración de sistemas de seguridad</p>
@@ -274,7 +233,7 @@
         <section id="contacto" class="contact-section">
             <div class="container">
                 <div class="contact-content-wrapper">
-                    <!-- Información de contacto -->
+                    <!-- Información de contacto (izquierda en PC, arriba en móvil) -->
                     <div class="contact-info-wrapper">
                         <h3>Información de Contacto</h3>
                         <div class="contact-info-items">
@@ -299,13 +258,15 @@
                         </div>
                     </div>
                     
-                    <!-- Formulario -->
+                    <!-- Formulario (derecha en PC, abajo en móvil) -->
                     <div class="contact-form-wrapper">
                         <h2>Formulario de Inscripción</h2>
                         
                         <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="https://cyberseg.netlify.app/gracias.html" class="newsletter-form" id="contact-form">
+                            <!-- Campo oculto requerido por Netlify -->
                             <input type="hidden" name="form-name" value="contact" />
                             
+                            <!-- Campo honeypot oculto para prevenir spam -->
                             <p style="display: none;">
                                 <label>No llenes este campo si eres humano: <input name="bot-field" /></label>
                             </p>
@@ -348,9 +309,9 @@
         </div>
     </footer>
 
-    <!-- Chatbot de IA -->
+    <!-- ===== Chatbot de IA ===== -->
     <button id="chat-toggle-button" class="chat-toggle-button" aria-label="Abrir asistente virtual">
-        <video autoplay loop muted playsinline preload="none">
+        <video autoplay loop muted playsinline>
             <source src="fotos/bots1.mp4" type="video/mp4">
             Tu navegador no soporta el tag de video.
         </video>
@@ -376,76 +337,32 @@
             </button>
         </form>
     </div>
+    <!-- ===== Fin Chatbot de IA ===== -->
 
-    <!-- Scripts optimizados -->
+    <!-- OPTIMIZACIÓN: Scripts con 'defer' para que no bloqueen la carga del contenido -->
+    <script src="menu-script.js" defer></script>
+    <script src="chatbot.js" defer></script>
+
+    <!-- OPTIMIZACIÓN: Cargar Firebase y contador después de que todo lo demás haya cargado -->
     <script>
-        // Lazy loading optimizado para imágenes
-        const observerOptions = {
-            root: null,
-            rootMargin: '50px',
-            threshold: 0.1
-        };
-
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const placeholder = entry.target;
-                    const img = document.createElement('img');
-                    
-                    img.src = placeholder.dataset.src;
-                    img.alt = placeholder.dataset.alt;
-                    img.loading = 'lazy';
-                    img.style.width = '240px';
-                    img.style.height = '240px';
-                    img.style.objectFit = 'contain';
-                    
-                    if (placeholder.classList.contains('consultoria-img')) {
-                        img.style.width = '280px';
-                        img.style.height = '280px';
-                    }
-                    
-                    placeholder.replaceWith(img);
-                    observer.unobserve(placeholder);
-                }
+        window.addEventListener('load', function() {
+            function loadScript(src, callback) {
+                const script = document.createElement('script');
+                script.src = src;
+                script.defer = true;
+                if (callback) script.onload = callback;
+                document.head.appendChild(script);
+            }
+            loadScript('https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js', function() {
+                loadScript('https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js', function() {
+                    loadScript('firebase-counter.js');
+                });
             });
-        }, observerOptions);
+        });
+    </script>
 
-        // Inicializar lazy loading cuando el DOM esté listo
-        function initLazyLoading() {
-            const placeholders = document.querySelectorAll('.img-placeholder');
-            placeholders.forEach(placeholder => {
-                // Añadir estilos de placeholder
-                placeholder.style.width = '240px';
-                placeholder.style.height = '240px';
-                placeholder.style.backgroundColor = 'rgba(224, 253, 44, 0.1)';
-                placeholder.style.display = 'flex';
-                placeholder.style.alignItems = 'center';
-                placeholder.style.justifyContent = 'center';
-                placeholder.style.borderRadius = '8px';
-                placeholder.style.color = 'rgba(224, 253, 44, 0.5)';
-                placeholder.style.fontSize = '12px';
-                placeholder.textContent = 'Cargando...';
-                
-                if (placeholder.classList.contains('consultoria-img')) {
-                    placeholder.style.width = '280px';
-                    placeholder.style.height = '280px';
-                }
-                
-                imageObserver.observe(placeholder);
-            });
-        }
-
-        // Función para cargar scripts de manera diferida
-        function loadScript(src, callback) {
-            const script = document.createElement('script');
-            script.src = src;
-            script.defer = true;
-            if (callback) script.onload = callback;
-            document.head.appendChild(script);
-        }
-
-        // Optimización del formulario
-        function optimizeForm() {
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
             const form = document.getElementById('contact-form');
             if (!form) return;
 
@@ -457,40 +374,7 @@
                     submitBtn.style.opacity = '0.7';
                 }
             });
-        }
-
-        // Inicialización cuando el DOM esté listo
-        document.addEventListener('DOMContentLoaded', function() {
-            initLazyLoading();
-            optimizeForm();
-            
-            // Cargar scripts no críticos después de un breve delay
-            setTimeout(() => {
-                loadScript('menu-script.js');
-                loadScript('chatbot.js');
-            }, 100);
         });
-
-        // Cargar Firebase solo después de que todo lo demás haya cargado
-        window.addEventListener('load', function() {
-            setTimeout(() => {
-                loadScript('https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js', function() {
-                    loadScript('https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js', function() {
-                        loadScript('firebase-counter.js');
-                    });
-                });
-            }, 500);
-        });
-
-        // Precargar imagen de fondo del hero de manera optimizada
-        const heroImg = new Image();
-        heroImg.onload = function() {
-            document.querySelector('.hero').style.backgroundImage = 
-                "linear-gradient(rgba(26, 26, 26, 0.7), rgba(42, 42, 42, 0.7)), url('fotos/fondo.png')";
-            document.querySelector('.hero').style.backgroundSize = 'cover';
-            document.querySelector('.hero').style.backgroundPosition = 'center';
-        };
-        heroImg.src = 'fotos/fondo.png';
     </script>
 
 </body>
