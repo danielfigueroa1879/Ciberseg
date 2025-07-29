@@ -853,7 +853,7 @@ body {
     /* Se aumentó la escala para alejar la imagen (hacer zoom) */
     /* Se aumentó la posición horizontal para mover el video más a la izquierda */
     transform: scale(1.0); 
-    object-position: 75% 90%; 
+    object-position: 75% 100%; 
 }
 
 .chatbot-container {
