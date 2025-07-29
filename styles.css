@@ -852,8 +852,8 @@ body {
     /* ===== CAMBIO REALIZADO ===== */
     /* Se mantuvo la escala para alejar la imagen */
     /* Se aumentó la posición horizontal para mover el video más a la izquierda */
-    transform: scale(1.2); 
-    object-position: 100% 50%; 
+    transform: scale(1.0); 
+    object-position: 50% 100%; 
 }
 
 .chatbot-container {
