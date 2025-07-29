@@ -1,9 +1,9 @@
 /*
  * RECYBERSEG - Hoja de Estilos Optimizada para Scroll Móvil
- * Versión: 1.6
- * Fecha: 27 de Julio de 2025
- * Descripción: Optimizada para mejor scroll en móvil, chatbot y botón flotante INTACTOS
- * v1.6: Optimizaciones de scroll móvil SIN tocar chatbot ni botón flotante
+ * Versión: 1.7
+ * Fecha: 29 de Julio de 2025
+ * Descripción: Ajuste en el video del chatbot para alejar la imagen y moverla a la izquierda.
+ * v1.7: Ajustes de video del chatbot.
 */
 
 /* ==========================================================================
@@ -849,8 +849,11 @@ body {
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
-    transform: scale(1.2);
-    object-position: 65% 50%; /* Desplaza el contenido del video. Mayor % mueve a la izquierda */
+    /* ===== CAMBIO REALIZADO ===== */
+    /* Se aumentó la escala para alejar la imagen (hacer zoom) */
+    /* Se aumentó la posición horizontal para mover el video más a la izquierda */
+    transform: scale(1.5); 
+    object-position: 75% 50%; 
 }
 
 .chatbot-container {
