@@ -1004,7 +1004,7 @@ body {
     font-size: 18px;
 }
 
-/* Floating back-to-top button (mobile only) - OPTIMIZADO */
+/* Floating back-to-top button (mobile only) */
 #real-floating-back-btn {
     display: none; /* Hidden by default, enabled in mobile media query */
 }
@@ -1546,47 +1546,30 @@ body {
         cursor: pointer;
         opacity: 0;
         visibility: hidden;
-        transform: translateY(20px) translateZ(0);
+        transform: translateY(20px);
         transition: all 0.4s ease;
-        /* GPU acceleration */
-        will-change: opacity, visibility, transform;
-        /* Mejora área táctil */
-        touch-action: manipulation;
-        -webkit-tap-highlight-color: transparent;
     }
     #real-floating-back-btn i {
         font-size: 40px;
-        color: var(--primary-color);
+        color: #E0FD2C;
         font-weight: bold;
         text-shadow: 0 0 10px rgba(224, 253, 44, 0.5);
-        /* GPU acceleration */
-        transform: translateZ(0);
     }
     #real-floating-back-btn.floating-visible {
         opacity: 1;
         visibility: visible;
-        transform: translateY(0) translateZ(0);
+        transform: translateY(0);
     }
 
-    /* Chatbot Móvil - OPTIMIZADO */
+    /* Chatbot Móvil */
     .chatbot-container {
-        border-color: var(--chatbot-primary);
+        border-color: #39FF14;
     }
-    .chatbot-header { 
-        background-color: var(--chatbot-primary); 
-    }
-    .user-message { 
-        background-color: var(--chatbot-primary); 
-    }
-    #chatbot-input:focus { 
-        box-shadow: 0 0 0 2px rgba(57, 255, 20, 0.5); 
-    }
-    .chatbot-form button { 
-        color: var(--chatbot-primary); 
-    }
-    .loading-indicator span { 
-        background-color: var(--chatbot-primary); 
-    }
+    .chatbot-header { background-color: #39FF14; }
+    .user-message { background-color: #39FF14; }
+    #chatbot-input:focus { box-shadow: 0 0 0 2px rgba(57, 255, 20, 0.5); }
+    .chatbot-form button { color: #39FF14; }
+    .loading-indicator span { background-color: #39FF14; }
 }
 
 /* --------------------------------------------------------------------------
