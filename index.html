@@ -22,7 +22,7 @@
     <!-- OPTIMIZACIÓN: Carga asíncrona de Font Awesome -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <!-- Precarga del archivo JavaScript principal -->
-    <link rel="preload" href="main.js" as="script">
+    <link rel="preload" href="menu-script.js" as="script">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
 </head>
 <body>
@@ -289,8 +289,9 @@
         </div>
     </footer>
 
-    <!-- ===== Chatbot de IA ===== -->
+    <!-- ===== Chatbot de IA (Video Restaurado) ===== -->
     <button id="chat-toggle-button" class="chat-toggle-button" aria-label="Abrir asistente virtual">
+        <!-- CAMBIO: Se restauró el video original -->
         <video autoplay loop muted playsinline>
             <source src="fotos/bots1.mp4" type="video/mp4">
             Tu navegador no soporta el tag de video.
@@ -318,9 +319,16 @@
         </form>
     </div>
     <!-- ===== Fin Chatbot de IA ===== -->
+
+    <!-- Botón para regresar arriba (controlado por JS y CSS) -->
+    <button id="real-floating-back-btn" aria-label="Ir al inicio">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
     <!-- OPTIMIZACIÓN: Scripts con 'defer' para que no bloqueen la carga del contenido -->
     <script src="menu-script.js" defer></script>
     <script src="chatbot.js" defer></script>
+    
     <!-- OPTIMIZACIÓN: Cargar Firebase y contador después de que todo lo demás haya cargado -->
     <script>
         window.addEventListener('load', function() {
