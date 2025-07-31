@@ -1,8 +1,8 @@
 /*
  * RECYBERSEG - Hoja de Estilos Optimizada
- * Versión: 2.3 CORREGIDA
+ * Versión: 2.4 OPTIMIZADA MÓVIL
  * Fecha: 31 de Julio de 2025
- * Descripción: Corregido el problema de posicionamiento flotante del chatbot.
+ * Descripción: Optimizaciones de rendimiento para una experiencia más fluida en celulares.
 */
 
 /* ==========================================================================
@@ -56,7 +56,6 @@ html {
     -webkit-text-size-adjust: 100%;
     overflow-x: hidden;
     width: 100%;
-    /* CORRECCIÓN: Se eliminó 'transform: translateZ(0);' para permitir position:fixed */
 }
 
 body {
@@ -67,7 +66,6 @@ body {
     width: 100%;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-y: none;
-    /* CORRECCIÓN: Se eliminó 'transform: translateZ(0);' para permitir position:fixed */
     will-change: scroll-position;
 }
 
@@ -862,7 +860,6 @@ body {
     font-size: 18px;
 }
 
-/* ===== Botón Flotante de Regreso Arriba (SOLO MÓVIL) ===== */
 #real-floating-back-btn {
     display: none;
 }
@@ -873,11 +870,20 @@ body {
     transform: translateY(0);
 }
 
-/* ===== Chatbot (Video Restaurado) ===== */
+/* OPTIMIZACIÓN MÓVIL: Animación de pulso más eficiente */
 @keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(57, 255, 20, 0.7); }
-  70% { box-shadow: 0 0 0 15px rgba(57, 255, 20, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(57, 255, 20, 0); }
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(57, 255, 20, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 15px rgba(57, 255, 20, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(57, 255, 20, 0);
+  }
 }
 
 .chat-toggle-button {
@@ -899,6 +905,9 @@ body {
     padding: 0;
     overflow: hidden;
     animation: pulse 2.5s infinite;
+    /* OPTIMIZACIÓN MÓVIL: Mejorar respuesta táctil y avisar al navegador de cambios */
+    touch-action: manipulation;
+    will-change: transform, box-shadow;
 }
 
 .chat-toggle-button:hover {
@@ -915,7 +924,6 @@ body {
     transform: scale(1.0); 
     object-position: 45% 100%; 
 }
-
 
 .chatbot-container {
     position: fixed;
@@ -938,6 +946,8 @@ body {
     visibility: hidden;
     transform-origin: bottom right;
     transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    /* OPTIMIZACIÓN MÓVIL: Avisar al navegador que este elemento cambiará */
+    will-change: transform, opacity;
 }
 
 .chatbot-container.active {
@@ -1086,7 +1096,7 @@ body {
 }
 
 /* ==========================================================================
-   7. Media Queries (Diseño Responsivo)
+   7. Media Queries (Diseño Responsivo y Optimización Móvil)
    ========================================================================== */
 @media screen and (max-width: 1024px) {
     .hero-description {
@@ -1096,20 +1106,17 @@ body {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     }
     .hero {
+        /* OPTIMIZACIÓN: Parallax es costoso en tablets, se desactiva */
         background-attachment: scroll;
     }
 }
 
+/* --- INICIO DE OPTIMIZACIONES PARA MÓVIL --- */
 @media screen and (max-width: 768px) {
     html {
-        scroll-behavior: auto;
-        -webkit-overflow-scrolling: touch;
-        overscroll-behavior: none;
+        scroll-behavior: auto; /* Scroll suave es mejor gestionado por el navegador móvil */
     }
-    body {
-        -webkit-overflow-scrolling: touch;
-        overscroll-behavior-y: none;
-    }
+    
     .container {
         width: 98%;
         margin: 0 auto;
@@ -1335,6 +1342,9 @@ body {
         visibility: hidden;
         transform: translateY(20px);
         transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease;
+        /* OPTIMIZACIÓN MÓVIL: Mejorar respuesta táctil y avisar al navegador de cambios */
+        touch-action: manipulation;
+        will-change: transform, opacity;
     }
     #real-floating-back-btn i {
         font-size: 40px;
