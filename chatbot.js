@@ -196,3 +196,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+// CORRECCIÓN: Se eliminó una llave de cierre '}' extra que causaba un error de sintaxis.
