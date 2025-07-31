@@ -1,8 +1,8 @@
 /*
  * RECYBERSEG - Hoja de Estilos Optimizada
- * Versión: 2.2 CORREGIDA
+ * Versión: 2.3 CORREGIDA
  * Fecha: 31 de Julio de 2025
- * Descripción: Restaurado video del chatbot y botón de regreso visible solo en móvil.
+ * Descripción: Corregido el problema de posicionamiento flotante del chatbot.
 */
 
 /* ==========================================================================
@@ -56,7 +56,7 @@ html {
     -webkit-text-size-adjust: 100%;
     overflow-x: hidden;
     width: 100%;
-    transform: translateZ(0);
+    /* CORRECCIÓN: Se eliminó 'transform: translateZ(0);' para permitir position:fixed */
 }
 
 body {
@@ -67,7 +67,7 @@ body {
     width: 100%;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-y: none;
-    transform: translateZ(0);
+    /* CORRECCIÓN: Se eliminó 'transform: translateZ(0);' para permitir position:fixed */
     will-change: scroll-position;
 }
 
@@ -863,12 +863,10 @@ body {
 }
 
 /* ===== Botón Flotante de Regreso Arriba (SOLO MÓVIL) ===== */
-/* CAMBIO: Oculto por defecto en todas las pantallas */
 #real-floating-back-btn {
     display: none;
 }
 
-/* Clase que añade el JS para mostrar el botón */
 #real-floating-back-btn.floating-visible {
     opacity: 1;
     visibility: visible;
@@ -899,7 +897,7 @@ body {
     z-index: 1600;
     transition: all 0.3s ease;
     padding: 0;
-    overflow: hidden; /* Asegura que el video no se salga del borde */
+    overflow: hidden;
     animation: pulse 2.5s infinite;
 }
 
@@ -909,7 +907,6 @@ body {
     animation-play-state: paused;
 }
 
-/* CAMBIO: Estilos para el video restaurado */
 .chat-toggle-button video {
     width: 100%;
     height: 100%;
@@ -922,7 +919,7 @@ body {
 
 .chatbot-container {
     position: fixed;
-    bottom: 120px; /* Elevado para no chocar con el botón */
+    bottom: 120px;
     right: 25px;
     width: 350px;
     max-width: 90%;
@@ -1321,13 +1318,12 @@ body {
     .chatbot-form button { color: var(--chatbot-primary); }
     .loading-indicator span { background-color: var(--chatbot-primary); }
 
-    /* CAMBIO: Estilos para mostrar el botón de regreso solo en móvil */
     #real-floating-back-btn {
         display: flex;
         align-items: center;
         justify-content: center;
         position: fixed;
-        bottom: 110px; /* Espacio para el botón del chatbot */
+        bottom: 110px;
         right: 25px;
         background: transparent;
         border: none;
