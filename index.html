@@ -2,731 +2,363 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    
-    <!-- Meta Tags Principales y de PWA -->
-    <title>Directivas de Funcionamiento OS10</title>
-    <meta name="description" content="Requisitos e información para Directivas de Funcionamiento de Seguridad Privada OS10.">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#ffffff"/>
-    <meta name="application-name" content="Directivas OS10">
-    <meta name="mobile-web-app-capable" content="yes">
-    <!-- <link rel="manifest" href="manifest.json"> -->
-
-    <!-- Configuración para iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Directivas OS10">
-
-    <!-- Favicons y Iconos Estándar -->
-    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" href="assets/images/icon-192x192.png">
-    
-    <!-- Dependencias y Estilos -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recyberseg - Líderes en Ciberseguridad con IA Avanzada</title>
+    <meta name="description" content="Servicios profesionales de ciberseguridad, auditorías de seguridad, monitoreo de redes y consultoría especializada. Protegemos tu infraestructura digital.">
+    <meta name="keywords" content="ciberseguridad, seguridad informatica, auditoria seguridad, monitoreo redes, IoT security">
+    <!-- Preconnect para recursos externos críticos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
-    <!-- Estilos personalizados -->
-    <style>
-        body { 
-            font-family: 'Poppins', sans-serif; 
-            background-image: url('assets/images/101.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-        .card-container { 
-            max-width: 600px; 
-            width: 90%; 
-            margin: 2rem auto; 
-        }
-        .logo-os10-container { 
-            position: absolute;
-            top: 1.5rem;
-            left: 1.5rem;
-            height: 60px;
-            z-index: 10;
-        }
-        .section-card { 
-            border-left-width: 4px; 
-            padding: 1rem; 
-            border-radius: 0.5rem; 
-        }
-        
-        .voice-button { transition: all 0.3s ease; }
-        .voice-button:hover { transform: scale(1.05); }
-        .voice-button:active { transform: scale(0.95); }
-        .voice-button.animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
-        
-        .response-button { transition: all 0.2s ease; }
-        .response-button:hover { transform: translateX(4px); }
-
-        /* Estilos Chatbot */
-        #chat-widget-container { 
-            position: fixed; 
-            bottom: 6rem; /* Elevado para no tapar el QR */
-            right: 1.5rem;
-            z-index: 1000; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: flex-end;
-        }
-        #chat-popup { 
-            width: 450px; 
-            height: 600px; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
-        }
-        #chat-toggle-button { 
-            width: 80px;
-            height: 80px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
-        }
-        .chat-messages-container { 
-            scroll-behavior: smooth; 
-        }
-        .typing-indicator {
-            display: flex;
-            align-items: center;
-            padding: 8px 12px;
-        }
-        .typing-indicator span {
-            height: 8px;
-            width: 8px;
-            margin: 0 2px;
-            background-color: #9ca3af;
-            border-radius: 50%;
-            display: inline-block;
-            animation: bounce 1.4s infinite ease-in-out both;
-        }
-        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
-        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
-        @keyframes bounce {
-            0%, 80%, 100% { transform: scale(0); }
-            40% { transform: scale(1.0); }
-        }
-
-
-        /* Ajuste para pantallas más grandes (PC) */
-        @media (min-width: 1024px) {
-            /* Mueve el widget del chat más a la izquierda en pantallas grandes */
-            #chat-widget-container {
-                right: 33rem; 
-            }
-            #chat-toggle-button {
-                width: 90px;
-                height: 90px;
-            }
-        }
-        
-        /* Ajuste para pantallas pequeñas (Celular) */
-        @media (max-width: 767px) {
-            .card-container {
-                width: 98%;
-            }
-            #chat-popup {
-                width: calc(100vw - 3rem); /* Ancho completo menos los márgenes */
-            }
-        }
-    </style>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>    
+    <!-- DNS Prefetch para recursos que se usarán más tarde -->
+    <link rel="dns-prefetch" href="//recyberseg-default-rtdb.firebaseio.com">
+    <link rel="dns-prefetch" href="//wa.me">  
+    <!-- OPTIMIZACIÓN: Carga asíncrona de CSS para no bloquear el renderizado -->
+    <link rel="stylesheet" href="styles.css">  
+    <!-- OPTIMIZACIÓN: Carga asíncrona de la fuente para no bloquear el renderizado -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;700&display=swap" rel="stylesheet"></noscript>
+    <!-- OPTIMIZACIÓN: Carga asíncrona de Font Awesome -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <!-- Precarga del archivo JavaScript principal -->
+    <link rel="preload" href="menu-script.js" as="script">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
 </head>
 <body>
-    
-    <!-- Contenido de la página -->
-    <div class="card-container bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-xl shadow-lg space-y-6 relative p-6">
-        <!-- Logo dentro del contenedor -->
-        <a href="https://www.zosepcar.cl/OS10.php" target="_blank" aria-label="Visitar página de ZOSEPCAR" class="logo-os10-container">
-            <img src="assets/images/logo-os10.png" alt="Logo OS10" class="h-full" loading="lazy">
-        </a>
-
-        <div id="visitor-counter-container" class="absolute top-5 right-6 text-xs text-gray-500 dark:text-gray-400">
-            <p class="flex items-center">
-                <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                <span>Visitas: <span id="visit-counter" class="font-bold">--</span></span>
-            </p>
-        </div>
-        
-        <header class="text-center pt-8">
-            <h1 class="text-2xl font-bold text-gray-800 dark:text-white">DIRECTIVA DE FUNCIONAMIENTO</h1>
-            <h2 class="text-lg font-semibold text-gray-600 dark:text-gray-300">Instalación - Eventos - Partidos de Fútbol Profesional</h2>
-        </header>
-        
-        <main class="space-y-4">
-            <section class="section-card border-blue-500 bg-blue-100/80 dark:bg-blue-900/50">
-                <h3 class="font-bold text-blue-800 dark:text-blue-300">1️⃣ Presentar Directiva DD.FF.</h3>
-                <ul class="list-disc pl-5 text-sm text-gray-700 dark:text-gray-300">
-                    <li>Vigencia 03 años en instalación.</li>
-                    <li>Presentar con 15 días hábiles de anticipación.</li>
-                    <li>
-                        <a href="https://www.bcn.cl/leychile/navegar?idNorma=9081" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">Dec. 93/1985</a>,
-                        <a href="https://www.zosepcar.cl/content/OS10/Decreto-261.pdf" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">Dec. 261</a>,
-                        <a href="https://www.bcn.cl/leychile/navegar?idNorma=1200633" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">Dec. 32/2024</a>.
-                   </li>
-               </ul>
-            </section>
-            
-            <section class="section-card border-green-500 bg-green-100/80 dark:bg-green-900/50">
-                <h3 class="font-bold text-green-800 dark:text-green-300">2️⃣ Documentación</h3>
-                <ul class="space-y-4 text-sm text-gray-700 dark:text-gray-300">
-                    <li>
-                        <p>02 Solicitudes Simple.</p>
-                        <a href="https://dal5.short.gy/Solic" target="_blank" class="inline-block mt-1 w-32 text-center px-4 py-1 text-sm font-medium text-white bg-green-500 rounded-md hover:bg-green-600 transition-colors" title="Descargar Solicitud">Descargar</a>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h2>RECYBERSEG</h2>
+                </div>    
+                <div class="nav-toggle" id="mobile-menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>           
+                <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item">
+                        <a href="#inicio" class="nav-link">Inicio</a>
                     </li>
-                    <li>
-                        <p>01 copia DD.FF. completa.</p>
-                        <a href="https://dal5.short.gy/D" target="_blank" class="inline-block mt-1 w-32 text-center px-4 py-1 text-sm font-medium text-white bg-green-500 rounded-md hover:bg-green-600 transition-colors" title="Descargar Word">Descargar</a>
+                    <li class="nav-item">
+                        <a href="#servicios" class="nav-link">Servicios</a>
                     </li>
-                    <li>
-                        <p>Requisitos según tipo.</p>
-                        <a href="https://dal5.short.gy/Re24" target="_blank" class="inline-block mt-1 w-32 text-center px-4 py-1 text-sm font-medium text-white bg-green-500 rounded-md hover:bg-green-600 transition-colors" title="Descargar Requisi.">Descargar</a>
+                    <li class="nav-item">
+                        <a href="#contacto" class="nav-link">Contacto</a>
                     </li>
-                    <li>
-                        <p>Uniforme Decreto 32/2024.</p>
-                        <a href="https://dal5.short.gy/0u" target="_blank" class="inline-block mt-1 w-32 text-center px-4 py-1 text-sm font-medium text-white bg-green-500 rounded-md hover:bg-green-600 transition-colors" title="Ejemplo Uniforme">Ejemplo</a>
-                    </li>
-                    <li>
-                        <p>Análisis de Vulnerabilidades.</p>
-                        <a href="https://dal5.short.gy/6ydn" target="_blank" class="inline-block mt-1 w-32 text-center px-4 py-1 text-sm font-medium text-white bg-green-500 rounded-md hover:bg-green-600 transition-colors" title="Descargar Análisis">Descargar</a>
-                    </li>
-                    <li>
-                        <p>Solicitud Uniforme Distinto.</p>
-                        <a href="https://d6.short.gy/G8" target="_blank" class="inline-block mt-1 w-32 text-center px-4 py-1 text-sm font-medium text-white bg-green-500 rounded-md hover:bg-green-600 transition-colors" title="Descargar Word">Descargar</a>
+                    <li class="nav-item">
+                        <a href="#contacto" class="nav-link">Suscripción</a>
                     </li>
                 </ul>
-            </section>
-            
-            <section class="section-card border-red-500 bg-red-100/80 dark:bg-red-900/50">
-                <h3 class="font-bold text-red-800 dark:text-red-300">3️⃣ Todo escaneado en Digital.</h3>
-                <ul class="space-y-4 text-sm text-gray-700 dark:text-gray-300">
-                    <li>
-                        <p>Escanear en 01 archivo PDF.</p>
-                        <a href="https://dal5.short.gy/I" target="_blank" class="inline-block mt-1 w-32 text-center px-4 py-1 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600 transition-colors" title="Herramienta para unir PDF">Herramienta</a>
-                    </li>
-                </ul>
-            </section>
-            
-            <section class="section-card border-yellow-500 bg-yellow-100/80 dark:bg-yellow-900/50">
-                <h3 class="font-bold text-yellow-800 dark:text-yellow-300">4️⃣ Tramitar Credenciales</h3>
-                <ul class="space-y-4 text-sm text-gray-700 dark:text-gray-300">
-                    <li>
-                        <p>Resol. 1480 (10.04.2025).</p>
-                        <a href="https://d6.short.gy/dsds" target="_blank" class="inline-block mt-1 w-32 text-center px-4 py-1 text-sm font-medium text-white bg-yellow-500 rounded-md hover:bg-yellow-600 transition-colors" title="Descargar Documentos">Descargar</a>
-                    </li>
-                    <li>
-                        <p>Tramitar credenciales.</p>
-                        <a href="credenciales.html" class="inline-block mt-1 w-32 text-center px-4 py-1 text-sm font-medium text-white bg-yellow-500 rounded-md hover:bg-yellow-600 transition-colors" id="tramitarCredencialesBtn" title="Tramitar Credenciales">Tramitar</a>
-                    </li>
-                </ul>
-            </section>
-        </main>
-        
-        <footer class="relative mt-6 border-t border-gray-200 dark:border-gray-700 pt-4">
-            <div class="text-center text-sm text-gray-600 dark:text-gray-400 leading-tight pr-16">
-                <span>Haga clic para descargar.</span><br>
-                <span>©2025 - Daniel Figueroa Ch.</span><br>
-                <span>Ingeniero en Informática.</span>
-            </div>
-            <img src="assets/images/qr.png" alt="Código QR" class="absolute right-4 bottom-4 w-11 h-11 md:w-14 md:h-14" title="Más información" loading="lazy">
-        </footer>
-   </div>
-
-    <!-- ===== CHATBOT FLOTANTE CON VOZ ===== -->
-    <div id="chat-widget-container">
-        <div id="chat-popup" class="hidden flex flex-col bg-white/[.95] dark:bg-gray-800/[.95] backdrop-blur-lg border border-green-500/50 rounded-2xl">
-            <!-- Header -->
-            <header class="p-3 border-b border-green-500/30 flex items-center justify-between text-gray-800 dark:text-white">
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-full bg-white border-2 border-green-400/80 flex items-center justify-center flex-shrink-0 p-1">
-                        <img src="assets/images/poli.png" alt="Bot Icon" class="h-full w-full object-contain">
-                    </div>
-                    <div>
-                        <h1 class="text-base font-bold">Asistente OS10 🎤</h1>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">Con funciones de voz</p>
-                    </div>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <button id="speak-btn" class="voice-button bg-green-500 hover:bg-green-600 rounded-lg p-2 text-white" title="🔊 Leer último mensaje"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg></button>
-                    <button id="chat-close-btn-internal" class="text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
-                </div>
-            </header>
-            <main id="chat-messages" class="chat-messages-container flex-1 p-4 overflow-y-auto space-y-4"></main>
-            <footer class="p-3 border-t border-green-500/30">
-                <div class="mb-2 text-xs text-center text-gray-500 dark:text-gray-400"><span>Alt+V para micrófono</span></div>
-                <div class="flex items-center space-x-2 bg-gray-200 dark:bg-gray-700 rounded-xl p-2">
-                    <button id="toggle-speak-btn" class="voice-button bg-yellow-500 hover:bg-yellow-600 rounded-lg p-2 text-white" title="Activar/Desactivar Auto-Lectura">
-                        <!-- Speaker On Icon -->
-                        <svg id="speaker-on-icon" class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z" />
-                        </svg>
-                        <!-- Speaker Off Icon (hidden by default) -->
-                        <svg id="speaker-off-icon" class="w-5 h-5 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 9.75 19.5 12m0 0 2.25 2.25M19.5 12l-2.25 2.25M19.5 12l2.25-2.25M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z" />
-                        </svg>
+                
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Buscar...">
+                    <button class="search-btn" aria-label="Buscar">
+                        <i class="fas fa-search"></i>
                     </button>
-                    <button id="voice-btn" class="voice-button bg-blue-500 hover:bg-blue-600 rounded-lg p-2 text-white" title="🎤 Hablar"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="23"/><line x1="8" x2="16" y1="23" y2="23"/></svg></button>
-                    <input type="text" id="user-input" placeholder="Escribe o usa el micrófono..." class="flex-1 w-full bg-transparent text-gray-800 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none px-2 text-base">
-                    <button id="send-button" class="flex-shrink-0 bg-green-500 hover:bg-green-600 transition-colors rounded-lg p-2 text-white"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg></button>
                 </div>
-            </footer>
+                <!-- Contador de Visitas -->
+                <div class="visitor-counter-container">
+                     <i class="fas fa-eye"></i>
+                     <span id="visitor-count"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section id="inicio" class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    LÍDERES EN CIBERSEGURIDAD CON IA<br>
+                    AVANZADA Y DISEÑO WEB.
+                </h1>
+                <p class="hero-description">
+                    En un mundo cada vez más conectado, garantizar la seguridad digital y tecnológica es crucial. 
+                    Nuestro conjunto integral de servicios, que abarca desde auditorías de seguridad y monitoreo 
+                    de redes hasta consultoría especializada en ciberseguridad, está diseñado para proteger tus 
+                    activos más valiosos. Con experiencia en ingeniería informática y soluciones innovadoras en 
+                    IoT e inteligencia artificial, ofrecemos herramientas y estrategias personalizadas que 
+                    fortalecen la protección de tu infraestructura digital, reducen riesgos y aseguran el 
+                    cumplimiento de los estándares más exigentes. Tu seguridad es nuestra prioridad.
+                </p>
+            </div>
+        </section>
+        <section class="main-services">
+            <div class="container">
+                <h2>Soluciones de Seguridad</h2>
+                <p>Implementamos estrategias robustas para mitigar riesgos cibernéticos, protegiendo datos y redes contra amenazas avanzadas.</p>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <!-- OPTIMIZACIÓN: Carga diferida y dimensiones para evitar saltos de layout -->
+                            <img src="fotos/auditorias1.png" alt="Auditorías de Seguridad" loading="lazy" width="240" height="240">
+                        </div>
+                        <h3>1. Auditorías de Seguridad</h3>
+                        <p>Evaluación completa de tu infraestructura digital</p>
+                        <span class="service-price">$0</span>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <!-- OPTIMIZACIÓN: Carga diferida y dimensiones para evitar saltos de layout -->
+                            <img src="fotos/monitoreo2.png" alt="Monitoreo de Redes" loading="lazy" width="240" height="240">
+                        </div>
+                        <h3>2. Monitoreo de Redes</h3>
+                        <p>Supervisión 24/7 de tu red corporativa</p>
+                        <span class="service-price">$0</span>
+                    </div>            
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <!-- OPTIMIZACIÓN: Carga diferida y dimensiones para evitar saltos de layout -->
+                            <img src="fotos/consultoria3.jpg" alt="Consultoría en Ciberseguridad" class="consultoria-img" loading="lazy" width="280" height="158">
+                        </div>
+                        <h3>3. Consultoría en Ciberseguridad</h3>
+                        <p>Asesoramiento experto personalizado</p>
+                        <span class="service-price">$0</span>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <!-- OPTIMIZACIÓN: Carga diferida y dimensiones para evitar saltos de layout -->
+                            <img src="fotos/implementacion4.png" alt="Implementación de Sistemas de Seguridad" loading="lazy" width="240" height="240">
+                        </div>
+                        <h3>4. Implementación de Sistemas de Seguridad</h3>
+                        <p>Configuración de sistemas de seguridad</p>
+                        <span class="service-price">$0</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="servicios" class="iot-section">
+            <div class="container">
+                <h2>Servicios de Seguridad IoT</h2>
+                <p class="iot-description">
+                    Los dispositivos IoT conectan el mundo físico y digital, pero también abren nuevas puertas para los atacantes. 
+                    Este servicio asegura la protección de dispositivos inteligentes, redes y datos asociados a través de soluciones 
+                    personalizadas para entornos IoT. Esto incluye dispositivos industriales, domésticos, de salud, transporte y más.
+                </p>   
+                <div class="iot-services">
+                    <div class="iot-card">
+                        <div class="iot-image">
+                            </div>
+                        <h3>1. Evaluación de Vulnerabilidades IoT</h3>
+                        <div class="iot-details">
+                            <p><strong>Identificación de posibles brechas en dispositivos, firmware y protocolos de comunicación.</strong></p>
+                            <ul>
+                                <li>Pruebas de penetración específicas para dispositivos IoT</li>
+                                <li><strong>Beneficios:</strong></li>
+                                <li>Identificación proactiva de riesgos antes de que sean explotados</li>
+                                <li>Informes detallados con soluciones recomendadas</li>
+                            </ul>
+                        </div>
+                        <button class="cta-button">Elegir Producto</button>
+                    </div>
+                    <div class="iot-card">
+                        <div class="iot-image">
+                            </div>
+                        <h3>2. Implementación de Sistemas de Seguridad IoT</h3>
+                        <div class="iot-details">
+                            <p><strong>Configuración de firewalls, cifrado de datos y herramientas de autenticación para dispositivos conectados.</strong></p>
+                            <ul>
+                                <li>Segmentación de redes para aislar dispositivos IoT vulnerables</li>
+                                <li><strong>Beneficios:</strong></li>
+                                <li>Reducción de superficies de ataque en la red IoT</li>
+                                <li>Protección robusta contra accesos no autorizados y ataques DDoS</li>
+                            </ul>
+                        </div>
+                        <button class="cta-button">Elegir Producto</button>
+                    </div>
+                    <div class="iot-card">
+                        <div class="iot-image">
+                            </div>
+                        <h3>3. Monitoreo y Respuesta en Tiempo Real</h3>
+                        <div class="iot-details">
+                            <p><strong>Supervisión constante del tráfico y comportamiento de los dispositivos IoT. Detección y mitigación de amenazas en tiempo real.</strong></p>
+                            <ul>
+                                <li><strong>Beneficios:</strong></li>
+                                <li>Minimización de interrupciones en el funcionamiento de dispositivos críticos</li>
+                                <li>Respuesta inmediata a intentos de explotación de vulnerabilidades</li>
+                            </ul>
+                        </div>
+                        <button class="cta-button">Elegir Producto</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="mission-vision">
+            <div class="container">
+                <h2>Lineamientos y Directrices</h2>
+                
+                <div class="mv-grid">
+                    <div class="mv-card">
+                        <h3>Misión</h3>
+                        <p>
+                            Proteger y fortalecer el ecosistema digital de nuestros clientes mediante soluciones innovadoras, 
+                            confiables y personalizadas en ciberseguridad, ingeniería informática y tecnología IoT. 
+                            Nos comprometemos a garantizar la integridad, disponibilidad y confidencialidad de sus datos, 
+                            impulsando un entorno más seguro y preparado para enfrentar los desafíos del mundo digital.
+                        </p>
+                    </div> 
+                    <div class="mv-card">
+                        <h3>Visión</h3>
+                        <p>
+                            Ser reconocidos como líderes en soluciones tecnológicas de seguridad digital, destacándonos por 
+                            nuestra innovación, profesionalismo y capacidad de adaptación a las necesidades cambiantes del mercado. 
+                            Aspiramos a construir un mundo digital más seguro, donde la tecnología y la confianza vayan de la mano, 
+                            y donde las organizaciones y personas puedan prosperar sin preocuparse por amenazas tecnológicas.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="contacto" class="contact-section">
+            <div class="container">
+                <div class="contact-content-wrapper">
+                    <!-- Información de contacto (izquierda en PC, arriba en móvil) -->
+                    <div class="contact-info-wrapper">
+                        <h3>Información de Contacto</h3>
+                        <div class="contact-info-items">
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>La Serena, Chile</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>danielfigueroa1879@gmail.com</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <span>959978963</span>
+                            </div>
+                            <div class="contact-item whatsapp-item">
+                                <i class="fab fa-whatsapp"></i>
+                                <a href="https://wa.me/qr/KQFJFHZLQRHXE1" target="_blank" rel="noopener noreferrer">
+                                    <span>WhatsApp</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>     
+                    <!-- Formulario (derecha en PC, abajo en móvil) -->
+                    <div class="contact-form-wrapper">
+                        <h2>Formulario de Inscripción</h2>
+                        
+                        <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="https://cyberseg.netlify.app/gracias.html" class="newsletter-form" id="contact-form">
+                            <!-- Campo oculto requerido por Netlify -->
+                            <input type="hidden" name="form-name" value="contact" />
+                            
+                            <!-- Campo honeypot oculto para prevenir spam -->
+                            <p style="display: none;">
+                                <label>No llenes este campo si eres humano: <input name="bot-field" /></label>
+                            </p>
+                            
+                            <input type="text" name="nombre" placeholder="Nombre" maxlength="100" required>
+                            <input type="email" name="email" placeholder="Email" required maxlength="100">
+                            <input type="tel" name="telefono" placeholder="Teléfono" maxlength="20">
+                            <input type="text" name="asunto" placeholder="Asunto" maxlength="200">
+                            <textarea name="mensaje" placeholder="Escribe aquí..." rows="5" required maxlength="1000"></textarea>
+                            
+                            <button type="submit" id="submit-btn">Suscribirse</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>RECYBERSEG</h3>
+                    <p>+569 59978963</p>
+                    <div class="social-links">
+                        <a href="https://wa.me/qr/KQFJFHZLQRHXE1" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.linkedin.com/in/danieleliasfigueroachacama/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" onclick="window.print(); return false;" aria-label="Imprimir"><i class="fas fa-print"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy;2025 by RECYBERSEG.</p>
+                <div class="signature">
+                    <p><strong>Daniel Figueroa Ch.</strong></p>
+                    <p>Ingeniero en Informática</p>
+                </div>
+            </div>
         </div>
-        <button id="chat-toggle-button" class="bg-white dark:bg-gray-800 rounded-2xl flex items-center justify-center p-1 mt-4" title="Abrir Asistente Virtual con Voz">
-            <img src="assets/images/poli.png" alt="Icono del Chatbot" class="h-full w-full object-contain">
-        </button>
-    </div>
-    <div id="chat-backdrop" class="hidden fixed inset-0 bg-black/60 z-40"></div>
+    </footer>
 
-    <!-- Scripts -->
-    <script type="module">
-        // SCRIPT FIREBASE (Contador de visitas)
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getFirestore, doc, runTransaction } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-
-        const firebaseConfig = {
-          apiKey: "AIzaSyBB2AegLOQ-b6ZGI_cuPycSFJFuRsUlu5U",
-          authDomain: "cuenta-946e2.firebaseapp.com",
-          projectId: "cuenta-946e2",
-          storageBucket: "cuenta-946e2.firebasestorage.app",
-          messagingSenderId: "816979648502",
-          appId: "1:816979648502:web:809beffeea8ba7968031d7",
-          measurementId: "G-RX9KZSC0F4"
-        };
-        
-        async function runCounter() {
-            const counterSpan = document.getElementById('visit-counter');
-            try {
-                const app = initializeApp(firebaseConfig);
-                const db = getFirestore(app);
-                const auth = getAuth(app);
-                await signInAnonymously(auth);
-                const counterRef = doc(db, `page-visits/${firebaseConfig.projectId}/visits/counter`);
-                const newCount = await runTransaction(db, async (transaction) => {
-                    const counterDoc = await transaction.get(counterRef);
-                    let count = 1;
-                    if (counterDoc.exists()) {
-                        count = counterDoc.data().count + 1;
-                        transaction.update(counterRef, { count: count });
-                    } else {
-                        transaction.set(counterRef, { count: count });
-                    }
-                    return count;
-                });
-                if (counterSpan) counterSpan.textContent = newCount.toLocaleString('es-CL');
-            } catch (error) {
-                console.error("ERROR: Falló el proceso del contador.", error);
-                if (counterSpan) counterSpan.textContent = "Error";
-            }
-        }
-        runCounter();
-    </script>
+    <!-- ===== Chatbot de IA (Video Restaurado) ===== -->
+    <button id="chat-toggle-button" class="chat-toggle-button" aria-label="Abrir asistente virtual">
+        <!-- CAMBIO: Se restauró el video original -->
+        <video autoplay loop muted playsinline>
+            <source src="fotos/bots1.mp4" type="video/mp4">
+            Tu navegador no soporta el tag de video.
+        </video>
+    </button>
     
-    <!-- Cargar las reglas desde un solo archivo para evitar errores de ruta -->
-    <script src="rules/chatbot-rules.js"></script>
-    <script src="rules/chatbot-rules2.js"></script>
+    <div id="chatbot-container" class="chatbot-container">
+        <div class="chatbot-header">
+            <h3>Asistente Virtual</h3>
+            <button id="close-chat-btn" aria-label="Cerrar asistente virtual">&times;</button>
+        </div>
+        <div id="chatbot-messages" class="chatbot-messages">
+             <div class="message bot-message">
+                <p>¡Hola! Soy el asistente virtual de RECYBERSEG. ¿Cómo puedo ayudarte hoy?</p>
+            </div>
+        </div>
+        <div id="chatbot-loading" class="loading-indicator" style="display: none;">
+            <span>.</span><span>.</span><span>.</span>
+        </div>
+        <form id="chatbot-form" class="chatbot-form">
+            <input type="text" id="chatbot-input" placeholder="Escribe tu pregunta..." autocomplete="off" required>
+            <button type="submit" aria-label="Enviar mensaje">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </form>
+    </div>
+    <!-- ===== Fin Chatbot de IA ===== -->
 
+    <!-- Botón para regresar arriba (controlado por JS y CSS) -->
+    <button id="real-floating-back-btn" aria-label="Ir al inicio">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- OPTIMIZACIÓN: Scripts con 'defer' para que no bloqueen la carga del contenido -->
+    <script src="menu-script.js" defer></script>
+    <script src="chatbot.js" defer></script>
+    
+    <!-- OPTIMIZACIÓN: Cargar Firebase y contador después de que todo lo demás haya cargado -->
     <script>
-        // SCRIPT DEL CHATBOT Y LÓGICA PRINCIPAL
-        document.addEventListener('DOMContentLoaded', function() {
-
-            // Lógica para detectar preferencia de modo oscuro del sistema
-            if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                document.documentElement.classList.add('dark')
-            } else {
-                document.documentElement.classList.remove('dark')
+        window.addEventListener('load', function() {
+            function loadScript(src, callback) {
+                const script = document.createElement('script');
+                script.src = src;
+                script.defer = true;
+                if (callback) script.onload = callback;
+                document.head.appendChild(script);
             }
+            loadScript('https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js', function() {
+                loadScript('https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js', function() {
+                    loadScript('firebase-counter.js');
+                });
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('contact-form');
+            if (!form) return;
 
-            // --- Lógica del Chatbot ---
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            const speechSynth = window.speechSynthesis;
-            let recognition;
-            let isListening = false;
-            let availableVoices = [];
-            let isAutoReadEnabled = true;
-
-            function loadVoices() {
-                availableVoices = speechSynth.getVoices();
-                if (availableVoices.length > 0) {
-                     console.log("Voces cargadas.");
-                }
-            }
-
-            loadVoices();
-            if (speechSynth.onvoiceschanged !== undefined) {
-                speechSynth.onvoiceschanged = loadVoices;
-            }
-
-
-            if (SpeechRecognition) {
-                recognition = new SpeechRecognition();
-                recognition.lang = 'es-CL';
-                recognition.continuous = false;
-                recognition.interimResults = false;
-            } else {
-                console.warn("El reconocimiento de voz no es compatible con este navegador.");
-                document.getElementById('voice-btn').style.display = 'none';
-            }
-
-            function speakText(text) {
-                const urlRegex = /(https?:\/\/[^\s]+)/g;
-                const emojiRegex = /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g;
-                const cleanText = text
-                    .replace(urlRegex, '')
-                    .replace(emojiRegex, '')
-                    .replace(/<br>/g, '. ')
-                    .replace(/<strong>/g, '')
-                    .replace(/<\/strong/g, '')
-                    .replace(/\n/g, '. ')
-                    .replace(/\*/g, '');
-                
-                if (!cleanText.trim() || !speechSynth) return;
-
-                speechSynth.cancel();
-                const utterance = new SpeechSynthesisUtterance(cleanText);
-
-                // Lógica mejorada para seleccionar la voz de Diego o una voz masculina
-                let selectedVoice = null;
-
-                if (availableVoices.length > 0) {
-                    // Prioridad 1: Buscar "Diego"
-                    selectedVoice = availableVoices.find(voice => voice.name.toLowerCase().includes('diego') && voice.lang.startsWith('es'));
-
-                    // Prioridad 2: Buscar otras voces masculinas comunes si no se encuentra a Diego
-                    if (!selectedVoice) {
-                        selectedVoice = availableVoices.find(voice => (voice.name.toLowerCase().includes('jorge') || voice.name.toLowerCase().includes('carlos')) && voice.lang.startsWith('es'));
-                    }
-
-                    // Prioridad 3: Buscar cualquier voz en español que no parezca femenina
-                    if (!selectedVoice) {
-                        const femaleNames = /laura|helena|paulina|isabelle|sofia|camila|elena|isabel/i;
-                        selectedVoice = availableVoices.find(voice => voice.lang.startsWith('es') && !femaleNames.test(voice.name));
-                    }
-
-                    // Prioridad 4: Como último recurso, tomar la primera voz en español
-                    if (!selectedVoice) {
-                        selectedVoice = availableVoices.find(voice => voice.lang.startsWith('es'));
-                    }
-                }
-
-                if (selectedVoice) {
-                    utterance.voice = selectedVoice;
-                    console.log('Usando voz:', selectedVoice.name);
-                } else {
-                    console.warn('No se encontró una voz en español preferida. Se usará la voz por defecto del sistema.');
-                }
-
-                utterance.lang = 'es-CL';
-                utterance.rate = 1.1;
-                utterance.pitch = 0.8; // Tono más bajo para sonar más masculino
-                speechSynth.speak(utterance);
-            }
-
-            function toggleChat() {
-                const popup = document.getElementById('chat-popup');
-                const backdrop = document.getElementById('chat-backdrop');
-                const button = document.getElementById('chat-toggle-button');
-                
-                const isHidden = popup.classList.contains('hidden');
-                popup.classList.toggle('hidden');
-                backdrop.classList.toggle('hidden');
-                button.classList.toggle('hidden', isHidden);
-            }
-
-            function addMessage(sender, text, buttons = []) {
-                const chatMessages = document.getElementById('chat-messages');
-                const messageDiv = document.createElement('div');
-                
-                let content = '';
-                if (sender === 'user') {
-                    messageDiv.className = 'flex items-start space-x-2 mb-3 justify-end';
-                    content = `
-                        <div class="bg-blue-500 text-white p-3 rounded-lg max-w-xs">${text}</div>
-                        <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">U</div>
-                    `;
-                } else {
-                    messageDiv.className = 'flex items-start space-x-2 mb-3';
-                    
-                    // =================================================================
-                    // INICIO DE LA CORRECCIÓN: Expresión regular más precisa para convertir URLs a botones
-                    // =================================================================
-                    
-                    // Esta regex es más específica sobre los caracteres permitidos en una URL
-                    // para evitar que capture etiquetas HTML como <br> al final.
-                    const urlRegex = /(\b(?:https?:\/\/)?(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(?:\/[a-zA-Z0-9\-_./?=&%#]*)?)/g;
-
-                    let formattedText = text
-                        .replace(/\n/g, '<br>')
-                        .replace(/\*(.*?)\*/g, '<strong>$1</strong>');
-
-                    // En lugar de convertir URLs a enlaces, las convertimos a botones
-                    formattedText = formattedText.replace(urlRegex, (url) => {
-                        const cleanedUrl = url.replace(/[.,!?)\]]*$/, '');
-                        let fullUrl = cleanedUrl;
-                        if (!/^https?:\/\//i.test(fullUrl)) {
-                            fullUrl = 'https://' + fullUrl;
-                        }
-                        // Crear un texto descriptivo para el botón basado en la URL
-                        let buttonText = "Abrir enlace";
-                        if (cleanedUrl.includes('dal5.short.gy') || cleanedUrl.includes('os10.short.gy') || cleanedUrl.includes('d6.short.gy')) {
-                            buttonText = "📄 Descargar";
-                        } else if (cleanedUrl.includes('bcn.cl')) {
-                            buttonText = "⚖️ Ver ley";
-                        } else if (cleanedUrl.includes('zosepcar.cl')) {
-                            buttonText = "🏢 Ver OS10";
-                        } else if (cleanedUrl.includes('maps.app.goo.gl')) {
-                            buttonText = "📍 Ver mapa";
-                        } else if (cleanedUrl.includes('bit.ly')) {
-                            buttonText = "🔗 Abrir enlace";
-                        } else if (cleanedUrl.includes('drive.google.com')) {
-                            buttonText = "📁 Ver documento";
-                        } else if (cleanedUrl.includes('netlify.app')) {
-                            buttonText = "🚀 Ir a aplicación";
-                        }
-                        
-                        return `<br><button onclick="window.open('${fullUrl}', '_blank')" class="inline-block mt-2 mx-1 px-3 py-1.5 text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 rounded-lg transition-colors cursor-pointer shadow-sm">${buttonText}</button>`;
-                    });
-                    
-                    // =================================================================
-                    // FIN DE LA CORRECCIÓN
-                    // =================================================================
-
-                    const buttonsHtml = buttons.length > 0 ? '<div class="mt-2 space-y-1">' + buttons.map(btn => 
-                        `<button class="response-button block w-full text-left bg-green-100 hover:bg-green-200 dark:bg-gray-700 dark:hover:bg-gray-600 border border-green-500/50 dark:border-green-700 text-green-800 dark:text-green-300 text-xs py-1.5 px-3 rounded-lg transition-all font-medium" onclick="window.handleUserButtonClick('${btn}')">${btn}</button>`
-                    ).join('') + '</div>' : '';
-                    
-                    content = `
-                        <div class="w-8 h-8 rounded-full bg-white border-2 border-yellow-400 flex items-center justify-center flex-shrink-0 p-1">
-                            <img src="assets/images/poli.png" alt="Bot Icon" class="h-full w-full object-contain">
-                        </div>
-                        <div class="bg-gray-100 dark:bg-gray-700 p-3 rounded-lg max-w-sm text-gray-800 dark:text-gray-200">
-                            ${formattedText}
-                            ${buttonsHtml}
-                        </div>
-                    `;
-                    if (isAutoReadEnabled) {
-                        setTimeout(() => speakText(text), 300);
-                    }
-                }
-                messageDiv.innerHTML = content;
-                chatMessages.appendChild(messageDiv);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
-            
-            window.handleUserButtonClick = (text) => {
-                 document.getElementById('user-input').value = text;
-                 handleMessage();
-            }
-
-            async function handleMessage() {
-                const input = document.getElementById('user-input');
-                const text = input.value.trim();
-                const lowerText = text.toLowerCase();
-                
-                if (!text) return;
-                
-                addMessage('user', text);
-                input.value = '';
-                
-                let response = null;
-                let matchedRule = null;
-
-                for (const ruleKey in responses) {
-                    const rule = responses[ruleKey];
-                    for (const keyword of rule.keywords) {
-                        const cleanedKeyword = keyword.replace(/\*/g, '');
-                        if (lowerText.includes(cleanedKeyword)) {
-                            response = rule.response;
-                            matchedRule = rule;
-                            break;
-                        }
-                    }
-                    if (response) break;
-                }
-                
-                addTypingIndicator();
-                const callApiWithBackoff = async (prompt, retries = 3, delay = 1000) => {
-                    try {
-                        let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
-                        const payload = { contents: chatHistory };
-                        const apiUrl = '/api/gemini';
-                        
-                        const apiResponse = await fetch(apiUrl, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(payload)
-                        });
-
-                        if ((apiResponse.status === 429 || apiResponse.status >= 500) && retries > 0) {
-                            console.log(`Retrying API call... ${retries} retries left.`);
-                            await new Promise(resolve => setTimeout(resolve, delay));
-                            return callApiWithBackoff(prompt, retries - 1, delay * 2);
-                        }
-
-                        if (!apiResponse.ok) {
-                            throw new Error(`API request failed with status ${apiResponse.status}`);
-                        }
-
-                        const result = await apiResponse.json();
-                        removeTypingIndicator();
-
-                        if (result.candidates && result.candidates.length > 0 &&
-                            result.candidates[0].content && result.candidates[0].content.parts &&
-                            result.candidates[0].content.parts.length > 0) {
-                            const apiText = result.candidates[0].content.parts[0].text;
-                            addMessage('bot', apiText);
-                        } else {
-                            addMessage('bot', 'No pude generar una respuesta. Por favor, reformula tu pregunta.');
-                        }
-                    } catch (error) {
-                         if (retries > 0) {
-                            console.log(`Retrying API call due to error... ${retries} retries left.`);
-                            await new Promise(resolve => setTimeout(resolve, delay));
-                            return callApiWithBackoff(prompt, retries - 1, delay * 2);
-                        } else {
-                            console.error("Error calling Gemini API after retries:", error);
-                            removeTypingIndicator();
-                            addMessage('bot', 'Hubo un problema al conectar con el asistente. Por favor, intenta de nuevo más tarde.');
-                        }
-                    }
-                };
-                
-                let finalPrompt;
-                const brevityInstruction = `**Regla Importante:** Sé conciso y directo. Da respuestas cortas por defecto. Solo proporciona respuestas largas y detalladas si el usuario pide explícitamente "explica", "detalla", "profundiza" o si la pregunta es inherentemente compleja y requiere una explicación exhaustiva.`;
-
-                if (response) {
-                    finalPrompt = `Eres un asistente experto de la Oficina de Seguridad Privada OS10 de Coquimbo, Chile. Un usuario preguntó sobre "${text}". La información relevante encontrada en nuestra base de datos es: "${response}".
-Analiza esta información y úsala para darle al usuario una respuesta completa y amigable.
-**REGLAS DE FORMATO MUY IMPORTANTES:**
-1.  ${brevityInstruction}
-2.  Cuando la información contenga un texto seguido de una URL (como "1.- CREDENCIAL \\n https://dal5.short.gy/val"), **NO uses formato Markdown como [texto](url).**
-3.  En su lugar, presenta la información como una lista clara, manteniendo el texto original. Por ejemplo, si la base de datos dice "*1.- CREDENCIAL* \\n https://...", tu respuesta debe ser similar a "Aquí tienes los valores: \\n *1.- CREDENCIAL* \\n https://dal5.short.gy/val".
-4.  El sistema se encargará de hacer los enlaces clickeables. Tu única tarea es presentar el texto y la URL de forma limpia, sin añadir formato de enlace.`;
-                } else {
-                    const rulesAsText = Object.values(responses).map(r => `Si el usuario pregunta por "${r.keywords.join(', ')}", responde: "${r.response}"`).join('\n');
-                    finalPrompt = `Eres un asistente experto de la Oficina de Seguridad Privada OS10 de Coquimbo, Chile. Responde la siguiente consulta del usuario basándote únicamente en la base de conocimiento proporcionada.
-**REGLAS DE FORMATO MUY IMPORTANTES:**
-1.  ${brevityInstruction}
-2.  **NO uses formato Markdown para los enlaces como [texto](url).** Simplemente presenta la URL como texto plano. El sistema se encargará de hacer los enlaces clickeables.
-3.  Si la respuesta no se encuentra en la base de conocimiento, indica amablemente que no tienes información sobre ese tema y sugiere que intente con otra pregunta o escriba "menú".
-
-**Base de conocimiento:**
-${rulesAsText}
-
-**Consulta del usuario:** "${text}"`;
-                }
-                
-                callApiWithBackoff(finalPrompt);
-            }
-            
-            function addTypingIndicator() {
-                const chatMessages = document.getElementById('chat-messages');
-                const typingDiv = document.createElement('div');
-                typingDiv.id = 'typing-indicator';
-                typingDiv.className = 'flex items-start space-x-2 mb-3';
-                typingDiv.innerHTML = `
-                    <div class="w-8 h-8 rounded-full bg-white border-2 border-yellow-400 flex items-center justify-center flex-shrink-0 p-1">
-                        <img src="assets/images/poli.png" alt="Icono del Chatbot" class="h-full w-full object-contain">
-                    </div>
-                    <div class="bg-gray-100 dark:bg-gray-700 p-3 rounded-lg">
-                        <div class="typing-indicator">
-                            <span></span><span></span><span></span>
-                        </div>
-                    </div>
-                `;
-                chatMessages.appendChild(typingDiv);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
-
-            function removeTypingIndicator() {
-                const indicator = document.getElementById('typing-indicator');
-                if (indicator) {
-                    indicator.remove();
-                }
-            }
-
-
-            function startVoiceInput() {
-                if (!recognition) return;
-
-                const voiceBtn = document.getElementById('voice-btn');
-                if (isListening) {
-                    recognition.stop();
-                    return;
-                }
-
-                isListening = true;
-                voiceBtn.classList.add('animate-pulse');
-                recognition.start();
-
-                recognition.onresult = function(event) {
-                    const transcript = event.results[0][0].transcript;
-                    document.getElementById('user-input').value = transcript;
-                    handleMessage();
-                };
-
-                recognition.onerror = function(event) {
-                    console.error("Error en reconocimiento de voz:", event.error);
-                };
-
-                recognition.onend = function() {
-                    isListening = false;
-                    voiceBtn.classList.remove('animate-pulse');
-                };
-            }
-
-            function readLastMessage() {
-                const messages = document.querySelectorAll('#chat-messages .dark\\:text-gray-200');
-                if (messages.length > 0) {
-                    const lastMessage = messages[messages.length - 1];
-                    const text = lastMessage.innerText;
-                    speakText(text);
-                }
-            }
-            
-            // --- Asignación de Eventos ---
-            document.getElementById('chat-toggle-button').addEventListener('click', toggleChat);
-            document.getElementById('chat-close-btn-internal').addEventListener('click', toggleChat);
-            document.getElementById('chat-backdrop').addEventListener('click', toggleChat);
-            document.getElementById('send-button').addEventListener('click', handleMessage);
-            document.getElementById('user-input').addEventListener('keypress', e => e.key === 'Enter' && handleMessage());
-            
-            const toggleSpeakBtn = document.getElementById('toggle-speak-btn');
-            const speakerOnIcon = document.getElementById('speaker-on-icon');
-            const speakerOffIcon = document.getElementById('speaker-off-icon');
-
-            toggleSpeakBtn.addEventListener('click', () => {
-                isAutoReadEnabled = !isAutoReadEnabled;
-                if (!isAutoReadEnabled) {
-                    speechSynth.cancel(); // Stop any current speech
-                    toggleSpeakBtn.classList.remove('bg-yellow-500', 'hover:bg-yellow-600');
-                    toggleSpeakBtn.classList.add('bg-gray-500', 'hover:bg-gray-600');
-                    speakerOnIcon.classList.add('hidden');
-                    speakerOffIcon.classList.remove('hidden');
-                } else {
-                    toggleSpeakBtn.classList.add('bg-yellow-500', 'hover:bg-yellow-600');
-                    toggleSpeakBtn.classList.remove('bg-gray-500', 'hover:bg-gray-600');
-                    speakerOnIcon.classList.remove('hidden');
-                    speakerOffIcon.classList.add('hidden');
+            form.addEventListener('submit', function() {
+                const submitBtn = document.getElementById('submit-btn');
+                if(submitBtn) {
+                    submitBtn.textContent = 'Enviando...';
+                    submitBtn.disabled = true;
+                    submitBtn.style.opacity = '0.7';
                 }
             });
-
-            if (recognition) {
-                document.getElementById('voice-btn').addEventListener('click', startVoiceInput);
-            }
-            document.getElementById('speak-btn').addEventListener('click', readLastMessage);
-
-            document.addEventListener('keydown', e => {
-                if (e.altKey && e.key === 'v') {
-                    e.preventDefault();
-                    startVoiceInput();
-                }
-            });
-
-            // Mensaje de bienvenida
-            setTimeout(() => {
-                const welcomeButtons = ['Menú', 'Menú OS10', 'Valores', 'Horario'];
-                addMessage('bot', '¡Hola! Soy tu asistente virtual de la oficina OS10 Coquimbo. ¿En qué puedo ayudarte hoy?', welcomeButtons);
-            }, 1000);
         });
     </script>
 </body>
