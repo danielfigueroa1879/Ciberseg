@@ -300,9 +300,12 @@
     
     <div id="chatbot-container" class="chatbot-container">
         <div class="chatbot-header">
-            <h3>Asistente Virtual</h3>
-            <button id="close-chat-btn" aria-label="Cerrar asistente virtual">&times;</button>
-        </div>
+    <h3>Asistente Virtual</h3>
+    <div id="voice-controls" style="display: flex; gap: 8px; align-items: center; margin: 0 10px;">
+        <button id="auto-read-btn" title="Activar lectura automática">🔊</button>
+    </div>
+    <button id="close-chat-btn" aria-label="Cerrar asistente virtual">&times;</button>
+</div>
         <div id="chatbot-messages" class="chatbot-messages">
              <div class="message bot-message">
                 <p>¡Hola! Soy el asistente virtual de RECYBERSEG. ¿Cómo puedo ayudarte hoy?</p>
