@@ -643,7 +643,7 @@ Responde de forma ENERGÉTICA y PROFESIONAL siempre.`;
 
 
 
-        console.log('🎤 Sistema de controles de voz creado');
+        
     }
 
     // === EVENT LISTENERS PRINCIPALES ===
