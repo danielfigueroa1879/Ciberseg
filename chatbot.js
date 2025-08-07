@@ -242,9 +242,9 @@ Responde de forma ENERGÉTICA y PROFESIONAL siempre.`;
     function showListeningState() {
         const micBtn = document.getElementById('chat-mic-btn');
         
-        // Actualizar micrófono del chat
+        // Actualizar micrófono verde
         if (micBtn) {
-            micBtn.innerHTML = '🔴';
+            micBtn.innerHTML = '<i class="fas fa-microphone-slash"></i>';
             micBtn.style.background = '#ef4444';
             micBtn.style.animation = 'pulse 1s infinite';
             micBtn.title = 'Escuchando... (Suelta para enviar)';
@@ -258,16 +258,16 @@ Responde de forma ENERGÉTICA y PROFESIONAL siempre.`;
             chatbotInput.style.boxShadow = '0 0 0 2px rgba(239, 68, 68, 0.2)';
         }
         
-        console.log('🎤 Estado de escucha activado');
+        console.log('🎤 Estado de escucha activado - Micrófono rojo');
     }
     
     function hideListeningState() {
         const micBtn = document.getElementById('chat-mic-btn');
         
-        // Restaurar micrófono del chat
+        // Restaurar micrófono verde
         if (micBtn) {
-            micBtn.innerHTML = '🎤';
-            micBtn.style.background = 'var(--primary-color)';
+            micBtn.innerHTML = '<i class="fas fa-microphone"></i>';
+            micBtn.style.background = '#22c55e';
             micBtn.style.animation = 'none';
             micBtn.title = 'Mantén presionado para hablar';
             micBtn.style.boxShadow = '';
@@ -280,7 +280,7 @@ Responde de forma ENERGÉTICA y PROFESIONAL siempre.`;
             chatbotInput.style.boxShadow = '';
         }
         
-        console.log('🎤 Estado de escucha desactivado');
+        console.log('🎤 Estado de escucha desactivado - Micrófono verde');
     }
 
     // === MANEJO DE MENSAJES ===
@@ -542,28 +542,28 @@ Responde de forma ENERGÉTICA y PROFESIONAL siempre.`;
         controlsContainer.appendChild(autoReadBtn);
         header.appendChild(controlsContainer);
 
-        // === MICRÓFONO AL LADO DEL INPUT ===
+        // === MICRÓFONO AL LADO IZQUIERDO DEL INPUT ===
         if (chatForm && !document.getElementById('chat-mic-btn')) {
-            // Encontrar el botón de enviar existente
-            const sendButton = chatForm.querySelector('button[type="submit"]');
+            // Encontrar el input
+            const inputElement = chatForm.querySelector('#chatbot-input');
             
-            if (sendButton) {
+            if (inputElement) {
                 // Crear botón de micrófono
                 const micBtn = document.createElement('button');
                 micBtn.id = 'chat-mic-btn';
                 micBtn.type = 'button'; // Importante: no submit
-                micBtn.innerHTML = '🎤';
+                micBtn.innerHTML = '<i class="fas fa-microphone"></i>';
                 micBtn.title = 'Mantén presionado para hablar';
                 micBtn.style.cssText = `
-                    background: var(--primary-color);
+                    background: #22c55e;
                     border: none;
                     color: white;
-                    font-size: 20px;
+                    font-size: 16px;
                     cursor: pointer;
-                    padding: 10px;
+                    padding: 12px;
                     border-radius: 50%;
                     transition: all 0.3s ease;
-                    margin-left: 8px;
+                    margin-right: 8px;
                     min-width: 44px;
                     min-height: 44px;
                     display: flex;
@@ -572,12 +572,18 @@ Responde de forma ENERGÉTICA y PROFESIONAL siempre.`;
                     flex-shrink: 0;
                     touch-action: manipulation;
                     -webkit-tap-highlight-color: transparent;
+                    order: -1;
                 `;
 
-                // Insertar el micrófono después del input, antes del botón de enviar
-                sendButton.parentNode.insertBefore(micBtn, sendButton);
+                // Insertar el micrófono al inicio del formulario (lado izquierdo)
+                chatForm.insertBefore(micBtn, inputElement);
 
-                // === EVENTOS DEL MICRÓFONO PRINCIPAL ===
+                // Ajustar el estilo del formulario para que el micrófono esté a la izquierda
+                chatForm.style.display = 'flex';
+                chatForm.style.alignItems = 'center';
+                chatForm.style.gap = '8px';
+
+                // === EVENTOS DEL MICRÓFONO VERDE ===
                 
                 // Eventos de mouse
                 micBtn.addEventListener('mousedown', (e) => {
@@ -619,19 +625,19 @@ Responde de forma ENERGÉTICA y PROFESIONAL siempre.`;
                 // Efecto hover
                 micBtn.addEventListener('mouseenter', () => {
                     if (!isListening) {
-                        micBtn.style.backgroundColor = 'var(--primary-hover)';
+                        micBtn.style.backgroundColor = '#16a34a';
                         micBtn.style.transform = 'scale(1.05)';
                     }
                 });
 
                 micBtn.addEventListener('mouseleave', () => {
                     if (!isListening) {
-                        micBtn.style.backgroundColor = 'var(--primary-color)';
+                        micBtn.style.backgroundColor = '#22c55e';
                         micBtn.style.transform = 'scale(1)';
                     }
                 });
 
-                console.log('🎤 Micrófono agregado al lado del input');
+                console.log('🎤 Micrófono verde agregado al lado izquierdo del input');
             }
         }
 
