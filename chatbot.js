@@ -344,4 +344,348 @@ class ChatbotVoice {
         stopButton.style.display = 'none';
 
         // Estilos para ambos botones
-        [voiceButton, stopButton].forEach(
+        [voiceButton, stopButton].forEach(btn => {
+            btn.style.cssText = `
+                background: none;
+                border: none;
+                color: white;
+                font-size: 16px;
+                cursor: pointer;
+                padding: 8px;
+                border-radius: 50%;
+                transition: all 0.3s ease;
+                min-width: 32px;
+                min-height: 32px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            `;
+            
+            // Efectos hover
+            btn.addEventListener('mouseenter', () => {
+                btn.style.backgroundColor = 'rgba(255,255,255,0.2)';
+                btn.style.transform = 'scale(1.1)';
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.backgroundColor = 'transparent';
+                btn.style.transform = 'scale(1)';
+            });
+        });
+
+        // Eventos
+        voiceButton.addEventListener('click', () => this.toggleVoice(voiceButton));
+        stopButton.addEventListener('click', () => this.stopSpeaking(stopButton));
+
+        voiceControls.appendChild(voiceButton);
+        voiceControls.appendChild(stopButton);
+        chatbotHeader.appendChild(voiceControls);
+
+        console.log('🎤 Controles de voz agregados al header');
+    }
+
+    toggleVoice(button) {
+        this.isEnabled = !this.isEnabled;
+        localStorage.setItem('chatbot-voice-enabled', this.isEnabled);
+        
+        button.innerHTML = this.isEnabled ? 
+            '<i class="fas fa-volume-up"></i>' : 
+            '<i class="fas fa-volume-mute"></i>';
+        button.title = this.isEnabled ? 'Desactivar voz' : 'Activar voz';
+
+        // Feedback visual
+        button.style.backgroundColor = this.isEnabled ? 
+            'rgba(0,255,0,0.3)' : 'rgba(255,0,0,0.3)';
+        setTimeout(() => {
+            button.style.backgroundColor = 'transparent';
+        }, 1000);
+
+        if (!this.isEnabled && this.isSpeaking) {
+            this.stopSpeaking();
+        }
+
+        console.log(`🔊 Voz ${this.isEnabled ? 'activada' : 'desactivada'}`);
+    }
+
+    speak(text) {
+        if (!this.isEnabled || !this.synth || this.isSpeaking) return;
+
+        // Limpiar texto para mejor pronunciación
+        const cleanText = this.cleanTextForSpeech(text);
+        if (!cleanText.trim()) return;
+
+        // Parar cualquier speech anterior
+        this.synth.cancel();
+
+        // Crear nueva utterance
+        this.currentUtterance = new SpeechSynthesisUtterance(cleanText);
+        
+        // Configurar voz masculina
+        if (this.selectedVoice) {
+            this.currentUtterance.voice = this.selectedVoice;
+        }
+        
+        // Aplicar configuración optimizada para voz masculina
+        Object.assign(this.currentUtterance, this.voiceConfig);
+
+        // Event listeners
+        this.currentUtterance.onstart = () => {
+            this.isSpeaking = true;
+            this.showStopButton();
+            console.log('🗣️ Reproduciendo con voz masculina:', cleanText.substring(0, 50) + '...');
+        };
+
+        this.currentUtterance.onend = () => {
+            this.isSpeaking = false;
+            this.hideStopButton();
+            console.log('✅ Voz terminada');
+        };
+
+        this.currentUtterance.onerror = (event) => {
+            this.isSpeaking = false;
+            this.hideStopButton();
+            console.error('❌ Error de voz:', event.error);
+        };
+
+        // Reproducir con voz masculina
+        this.synth.speak(this.currentUtterance);
+    }
+
+    stopSpeaking(button = null) {
+        if (this.synth) {
+            this.synth.cancel();
+        }
+        this.isSpeaking = false;
+        this.currentUtterance = null;
+        this.hideStopButton();
+        
+        if (button) {
+            button.style.backgroundColor = 'rgba(255,0,0,0.3)';
+            setTimeout(() => {
+                button.style.backgroundColor = 'transparent';
+            }, 500);
+        }
+        
+        console.log('⏹️ Voz detenida');
+    }
+
+    showStopButton() {
+        const stopBtn = document.getElementById('voice-stop-btn');
+        const voiceBtn = document.getElementById('voice-toggle-btn');
+        if (stopBtn && voiceBtn) {
+            stopBtn.style.display = 'flex';
+            voiceBtn.style.opacity = '0.5';
+        }
+    }
+
+    hideStopButton() {
+        const stopBtn = document.getElementById('voice-stop-btn');
+        const voiceBtn = document.getElementById('voice-toggle-btn');
+        if (stopBtn && voiceBtn) {
+            stopBtn.style.display = 'none';
+            voiceBtn.style.opacity = '1';
+        }
+    }
+
+    cleanTextForSpeech(text) {
+        return text
+            // Remover HTML tags
+            .replace(/<[^>]*>/g, ' ')
+            // Remover marcadores especiales
+            .replace(/\[CONTACT_BUTTON\]/g, '')
+            // Convertir entidades HTML
+            .replace(/&nbsp;/g, ' ')
+            .replace(/&amp;/g, ' y ')
+            .replace(/&lt;/g, ' menor que ')
+            .replace(/&gt;/g, ' mayor que ')
+            // Mejorar pronunciación para voz masculina
+            .replace(/RECYBERSEG/gi, 'Reci-Ber-Seg')
+            .replace(/IoT/g, 'Internet de las Cosas')
+            .replace(/24\/7/g, 'veinticuatro horas, siete días')
+            .replace(/AI/g, 'Inteligencia Artificial')
+            .replace(/CEO/g, 'Director Ejecutivo')
+            .replace(/API/g, 'A-P-I')
+            .replace(/URL/g, 'U-R-L')
+            .replace(/HTTP/g, 'H-T-T-P')
+            .replace(/HTTPS/g, 'H-T-T-P-S')
+            // Números y porcentajes
+            .replace(/(\d+)%/g, '$1 por ciento')
+            .replace(/(\d+)°C/g, '$1 grados centígrados')
+            // Limpiar espacios extras
+            .replace(/\s+/g, ' ')
+            .trim();
+    }
+
+    // API pública
+    setVoiceEnabled(enabled) {
+        this.isEnabled = enabled;
+        localStorage.setItem('chatbot-voice-enabled', enabled);
+        const button = document.getElementById('voice-toggle-btn');
+        if (button) {
+            button.innerHTML = enabled ? 
+                '<i class="fas fa-volume-up"></i>' : 
+                '<i class="fas fa-volume-mute"></i>';
+        }
+    }
+
+    speakText(text) {
+        this.speak(text);
+    }
+
+    getVoiceInfo() {
+        return {
+            selectedVoice: this.selectedVoice?.name || 'No seleccionada',
+            isEnabled: this.isEnabled,
+            isSpeaking: this.isSpeaking,
+            availableVoices: this.voices.length,
+            config: this.voiceConfig
+        };
+    }
+}
+
+// 🎤 MANEJO DEL TECLADO VIRTUAL (código anterior)
+let initialViewportHeight = window.innerHeight;
+let chatbotContainer = null;
+let chatbotInput = null;
+let isKeyboardActive = false;
+
+function initKeyboardHandler() {
+    chatbotContainer = document.getElementById('chatbot-container');
+    chatbotInput = document.getElementById('chatbot-input');
+    
+    if (!chatbotContainer || !chatbotInput) {
+        setTimeout(initKeyboardHandler, 1000);
+        return;
+    }
+
+    window.addEventListener('resize', handleViewportChange);
+    chatbotInput.addEventListener('focus', handleInputFocus);
+    chatbotInput.addEventListener('blur', handleInputBlur);
+    chatbotInput.addEventListener('touchstart', preventZoom);
+    
+    console.log('🔧 Keyboard handler inicializado');
+}
+
+function handleViewportChange() {
+    const currentHeight = window.innerHeight;
+    const heightDifference = initialViewportHeight - currentHeight;
+    
+    if (heightDifference > 150 && !isKeyboardActive) {
+        activateKeyboardMode();
+    } else if (heightDifference < 100 && isKeyboardActive) {
+        deactivateKeyboardMode();
+    }
+}
+
+function activateKeyboardMode() {
+    if (!chatbotContainer) return;
+    
+    isKeyboardActive = true;
+    chatbotContainer.classList.add('keyboard-active');
+    
+    setTimeout(() => {
+        if (chatbotInput && chatbotInput === document.activeElement) {
+            chatbotInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }, 300);
+    
+    console.log('⌨️ Modo teclado activado');
+}
+
+function deactivateKeyboardMode() {
+    if (!chatbotContainer) return;
+    
+    isKeyboardActive = false;
+    chatbotContainer.classList.remove('keyboard-active');
+    console.log('⌨️ Modo teclado desactivado');
+}
+
+function handleInputFocus(e) {
+    setTimeout(() => {
+        if (window.innerHeight < initialViewportHeight - 100) {
+            activateKeyboardMode();
+        }
+        
+        e.target.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'center',
+            inline: 'nearest'
+        });
+    }, 300);
+}
+
+function handleInputBlur() {
+    setTimeout(() => {
+        if (document.activeElement !== chatbotInput) {
+            deactivateKeyboardMode();
+        }
+    }, 100);
+}
+
+function preventZoom(e) {
+    if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+        const viewport = document.querySelector('meta[name="viewport"]');
+        if (viewport) {
+            viewport.setAttribute('content', 
+                'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
+            );
+            
+            setTimeout(() => {
+                viewport.setAttribute('content', 
+                    'width=device-width, initial-scale=1.0'
+                );
+            }, 500);
+        }
+    }
+}
+
+if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', () => {
+        const currentHeight = window.visualViewport.height;
+        const heightDifference = initialViewportHeight - currentHeight;
+        
+        if (heightDifference > 150 && !isKeyboardActive) {
+            activateKeyboardMode();
+        } else if (heightDifference < 100 && isKeyboardActive) {
+            deactivateKeyboardMode();
+        }
+    });
+}
+
+// 🎤 INICIALIZACIÓN COMPLETA
+function initChatbotVoice() {
+    if (!('speechSynthesis' in window)) {
+        console.warn('⚠️ Web Speech API no soportada en este navegador');
+        return;
+    }
+
+    window.chatbotVoice = new ChatbotVoice();
+    console.log('🎤 Sistema de voz masculina inicializado');
+}
+
+// Auto-inicialización
+setTimeout(() => {
+    initKeyboardHandler();
+    initChatbotVoice();
+}, 2000);
+
+window.addEventListener('load', () => {
+    initialViewportHeight = window.innerHeight;
+    setTimeout(() => {
+        initKeyboardHandler();
+        initChatbotVoice();
+    }, 3000);
+});
+
+// API global para controles manuales
+window.chatbotControls = {
+    voice: () => window.chatbotVoice,
+    toggleVoice: () => window.chatbotVoice?.toggleVoice(),
+    speakText: (text) => window.chatbotVoice?.speak(text),
+    stopSpeaking: () => window.chatbotVoice?.stopSpeaking(),
+    getVoiceInfo: () => window.chatbotVoice?.getVoiceInfo(),
+    keyboard: {
+        activate: activateKeyboardMode,
+        deactivate: deactivateKeyboardMode,
+        isActive: () => isKeyboardActive
+    }
+};
