@@ -966,9 +966,14 @@ body {
     transform: translateY(20px) scale(0.95);
     visibility: hidden;
     transform-origin: bottom right;
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s, bottom 0.3s ease;
     /* OPTIMIZACIÓN MÓVIL: Avisar al navegador que este elemento cambiará */
-    will-change: transform, opacity;
+    will-change: transform, opacity, bottom;
+}
+
+.chatbot-container.keyboard-active {
+    bottom: 10px;
+    transform: translateY(0) scale(1);
 }
 
 .chatbot-container.active {
@@ -1367,6 +1372,13 @@ body {
         max-width: none !important;
         margin: 0 auto;
         transform-origin: bottom center;
+        transition: bottom 0.3s ease, transform 0.3s ease;
+    }
+    
+    .chatbot-container.keyboard-active {
+        bottom: 10px !important;
+        position: fixed !important;
+        z-index: 9999 !important;
     }
     
     .chatbot-form {
