@@ -990,6 +990,8 @@ body {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid var(--border-color);
+    position: relative;
+    z-index: 10;
 }
 
 .chatbot-header h3 {
