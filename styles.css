@@ -1578,3 +1578,33 @@ body {
 #chat-mic-btn i {
     font-size: 18px !important;
 }
+@media screen and (max-width: 480px) {
+    /* ... otros estilos ... */
+
+    .chatbot-header {
+        background-color: #0d47a1;
+        color: white;
+    }
+
+    .chatbot-header h3 {
+        color: white !important;
+    }
+
+    #close-chat-btn {
+        color: white !important;
+        font-size: 22px;
+    }
+
+    .user-message {
+        background-color: var(--primary-color) !important;
+    }
+
+    #chatbot-input:focus {
+        box-shadow: 0 0 0 2px rgba(13, 71, 161, 0.5);
+        border-color: var(--primary-color);
+    }
+
+    .loading-indicator span {
+        background-color: var(--primary-color);
+    }
+}
