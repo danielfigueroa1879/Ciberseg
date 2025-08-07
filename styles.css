@@ -20,7 +20,7 @@
     --border-color: rgba(49, 130, 206, 0.3);
     --text-white: #1a202c;
     --text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    --chatbot-primary: #3182ce;
+    --chatbot-primary: #0d47a1;
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-fast: all 0.2s ease;
     --blur-effect: blur(10px);
@@ -1512,6 +1512,12 @@ body {
     #real-floating-back-btn i {
         font-size: 32px;
     }
+.chatbot-header {
+        background-color: var(--primary-color) !important;
+        color: white;
+    }
+
+   
 }
 
 /* ==========================================================================
