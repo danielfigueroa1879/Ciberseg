@@ -65,6 +65,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             p.innerHTML = messageText;
             p.style.textAlign = 'justify';
+            
+            // 🎤 NUEVA FUNCIONALIDAD: Reproducir voz automáticamente
+            if (window.chatbotVoice && window.chatbotVoice.isEnabled) {
+                setTimeout(() => {
+                    window.chatbotVoice.speak(messageText);
+                }, 800); // Delay para que aparezca el mensaje primero
+            }
         } else {
             p.textContent = text;
         }
@@ -78,8 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Estilos para el botón
             Object.assign(contactButton.style, {
-                backgroundColor: '#E0FD2C',
-                color: '#0f0f0f',
+                backgroundColor: '#3182ce',
+                color: '#fff',
                 border: 'none',
                 padding: '10px 15px',
                 borderRadius: '20px',
@@ -91,11 +98,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Efecto hover
             contactButton.onmouseover = () => {
-                contactButton.style.backgroundColor = '#C7E525';
+                contactButton.style.backgroundColor = '#4299e1';
                 contactButton.style.transform = 'scale(1.05)';
             };
             contactButton.onmouseout = () => {
-                contactButton.style.backgroundColor = '#E0FD2C';
+                contactButton.style.backgroundColor = '#3182ce';
                 contactButton.style.transform = 'scale(1)';
             };
 
@@ -116,6 +123,9 @@ document.addEventListener('DOMContentLoaded', () => {
         chatbotMessages.scrollTop = chatbotMessages.scrollHeight; // Auto-scroll hacia el último mensaje
     }
 
+    // Hacer la función addMessage globalmente accesible para el sistema de voz
+    window.addMessage = addMessage;
+
     /**
      * Obtiene una respuesta de la IA de Gemini usando la clave de API proporcionada.
      * @param {string} userInput - El texto de entrada del usuario.
@@ -129,15 +139,23 @@ document.addEventListener('DOMContentLoaded', () => {
         IMPORTANTE: Debes formatear tus respuestas usando etiquetas HTML. Usa <strong>palabra</strong> para poner texto en negrita y usa <br> para los saltos de línea, especialmente en las listas.
         Cuando listes servicios, usa el formato "1.- <strong>Servicio:</strong> Descripción.<br>".
 
+        INSTRUCCIONES ESPECIALES PARA VOZ:
+        - Habla de manera natural y conversacional
+        - Usa frases cortas y claras para mejor comprensión auditiva
+        - Evita abreviaciones complicadas
+        - Pronuncia "RECYBERSEG" como "Reci-Ber-Seg"
+        - Cuando menciones "IoT", di "Internet de las Cosas"
+        - Para "24/7", di "veinticuatro horas, siete días"
+
         Si el usuario pregunta cómo contactar, hablar con alguien, o solicitar una cotización, responde amablemente indicando que pueden usar el formulario de contacto y, al final de tu mensaje, incluye el texto especial [CONTACT_BUTTON] para que se genere un botón.
         Ejemplo de respuesta de contacto: "¡Por supuesto! Para contactarnos o solicitar una cotización, puedes rellenar nuestro formulario y un especialista se comunicará contigo a la brevedad. También encontrarás nuestros datos de contacto directo en esa sección.<br>[CONTACT_BUTTON]"
 
         Responde a las preguntas de los usuarios sobre nuestros servicios, que incluyen:
         1.- <strong>Auditorías de Seguridad:</strong> Evaluación completa de infraestructura digital.<br>
-        2.- <strong>Monitoreo de Redes:</strong> Supervisión 24/7.<br>
+        2.- <strong>Monitoreo de Redes:</strong> Supervisión veinticuatro horas, siete días.<br>
         3.- <strong>Consultoría en Ciberseguridad:</strong> Asesoramiento experto y personalizado.<br>
         4.- <strong>Implementación de Sistemas de Seguridad:</strong> Configuración de firewalls, etc.<br>
-        5.- <strong>Seguridad IoT:</strong> Protección de dispositivos inteligentes.<br>
+        5.- <strong>Seguridad Internet de las Cosas:</strong> Protección de dispositivos inteligentes.<br>
 
         Nuestra misión es proteger el ecosistema digital de nuestros clientes con soluciones innovadoras.
         Nuestra visión es ser líderes en soluciones tecnológicas de seguridad digital.
@@ -189,11 +207,141 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (error) {
             console.error('Error al contactar la IA:', error);
-            addMessage(`Hubo un problema al conectar con el asistente. Por favor, intenta de nuevo más tarde. (Error: ${error.message})`, 'bot');
+            const errorMessage = `Hubo un problema al conectar con el asistente. Por favor, intenta de nuevo más tarde. (Error: ${error.message})`;
+            addMessage(errorMessage, 'bot');
         } finally {
             // Ocultar el indicador de carga
             loadingIndicator.style.display = 'none';
         }
     }
+
+    // 🎤 SISTEMA DE VOZ INTEGRADO
+    console.log('🎤 Inicializando sistema de voz...');
 });
-// CORRECCIÓN: Se eliminó una llave de cierre '}' extra que causaba un error de sintaxis.
+
+// 🎤 CLASE SISTEMA DE VOZ CHATBOT
+class ChatbotVoice {
+    constructor() {
+        this.synth = window.speechSynthesis;
+        this.voices = [];
+        this.selectedVoice = null;
+        this.isEnabled = localStorage.getItem('chatbot-voice-enabled') !== 'false';
+        this.isSpeaking = false;
+        this.currentUtterance = null;
+        
+        // Configuración de voz optimizada para hombre
+        this.voiceConfig = {
+            rate: 0.85,          // Velocidad natural masculina
+            pitch: 0.7,          // Tono más grave/masculino
+            volume: 0.9,         // Volumen claro
+            lang: 'es-ES'        // Español de España
+        };
+        
+        this.init();
+    }
+
+    async init() {
+        await this.loadVoices();
+        // Esperar a que el chatbot esté disponible
+        const initControls = () => {
+            if (document.querySelector('.chatbot-header')) {
+                this.createVoiceControls();
+                console.log('🎤 Sistema de voz completamente inicializado');
+            } else {
+                setTimeout(initControls, 1000);
+            }
+        };
+        setTimeout(initControls, 2000);
+    }
+
+    async loadVoices() {
+        return new Promise((resolve) => {
+            const loadVoicesNow = () => {
+                this.voices = this.synth.getVoices();
+                this.selectBestMaleVoice();
+                resolve();
+            };
+
+            if (this.voices.length === 0) {
+                this.synth.onvoiceschanged = loadVoicesNow;
+                setTimeout(loadVoicesNow, 1500);
+            } else {
+                loadVoicesNow();
+            }
+        });
+    }
+
+    selectBestMaleVoice() {
+        // Prioridades de voces masculinas (orden de preferencia)
+        const maleVoicePreferences = [
+            'Microsoft Pablo',
+            'Pablo',
+            'Diego',
+            'Jorge',
+            'Carlos',
+            'Google español',
+            'Spanish Spain Male',
+            'es-ES-Standard-B',
+            'es-ES-Wavenet-B',
+            'es-ES-Neural2-B',
+            'Microsoft David',
+            'Google UK English Male',
+            'Alex',
+            'Daniel'
+        ];
+
+        // Buscar la mejor voz masculina
+        for (const preferredName of maleVoicePreferences) {
+            const voice = this.voices.find(v => 
+                v.name.toLowerCase().includes(preferredName.toLowerCase()) || 
+                v.voiceURI.toLowerCase().includes(preferredName.toLowerCase())
+            );
+            if (voice) {
+                this.selectedVoice = voice;
+                console.log(`🎯 Voz masculina seleccionada: ${voice.name} (${voice.lang})`);
+                return;
+            }
+        }
+
+        // Backup: buscar cualquier voz masculina en español
+        const spanishMaleVoice = this.voices.find(voice => {
+            const name = voice.name.toLowerCase();
+            return voice.lang.startsWith('es') && 
+                   (name.includes('male') || name.includes('man') || name.includes('masc'));
+        });
+
+        if (spanishMaleVoice) {
+            this.selectedVoice = spanishMaleVoice;
+            console.log(`🎯 Voz masculina española: ${spanishMaleVoice.name}`);
+        } else {
+            // Último recurso: primera voz en español
+            this.selectedVoice = this.voices.find(v => v.lang.startsWith('es')) || this.voices[0];
+            console.log(`⚠️ Usando voz de respaldo: ${this.selectedVoice?.name || 'default'}`);
+        }
+    }
+
+    createVoiceControls() {
+        const chatbotHeader = document.querySelector('.chatbot-header');
+        if (!chatbotHeader || document.getElementById('voice-toggle-btn')) return;
+
+        // Contenedor para controles de voz
+        const voiceControls = document.createElement('div');
+        voiceControls.style.cssText = 'display: flex; gap: 5px; align-items: center;';
+
+        // Botón de control de voz
+        const voiceButton = document.createElement('button');
+        voiceButton.id = 'voice-toggle-btn';
+        voiceButton.innerHTML = this.isEnabled ? 
+            '<i class="fas fa-volume-up"></i>' : 
+            '<i class="fas fa-volume-mute"></i>';
+        voiceButton.title = this.isEnabled ? 'Desactivar voz' : 'Activar voz';
+        
+        // Botón de parar voz
+        const stopButton = document.createElement('button');
+        stopButton.id = 'voice-stop-btn';
+        stopButton.innerHTML = '<i class="fas fa-stop"></i>';
+        stopButton.title = 'Parar voz';
+        stopButton.style.display = 'none';
+
+        // Estilos para ambos botones
+        [voiceButton, stopButton].forEach(
