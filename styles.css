@@ -1513,7 +1513,7 @@ body {
         font-size: 32px;
     }
 .chatbot-header {
-        background-color: var(--primary-color) !important;
+        background-color: #0d47a1;(--primary-color) !important;
         color: white;
     }
 
