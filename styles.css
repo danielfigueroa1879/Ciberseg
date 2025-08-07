@@ -1548,3 +1548,27 @@ body {
         scroll-behavior: auto;
     }
 }
+#chat-mic-btn {
+    background-color: #22c55e !important;
+    border: none !important;
+    color: white !important;
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 8px rgba(34, 197, 94, 0.3) !important;
+    flex-shrink: 0 !important;
+}
+
+#chat-mic-btn:hover {
+    background-color: #16a34a !important;
+    transform: scale(1.1) !important;
+}
+
+#chat-mic-btn i {
+    font-size: 18px !important;
+}
