@@ -983,7 +983,7 @@ body {
 }
 
 .chatbot-header {
-    primary-color: #D6D4D4; /* GRIS oscuro profesional */
+    background-color: #0d47a1; /* Azul oscuro */
     color: white;
     padding: 15px;
     display: flex;
