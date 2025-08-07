@@ -1421,7 +1421,7 @@ body {
         min-height: 44px;
         font-size: 20px;
     }
-    .chatbot-header { primary-color: #0d47a1;}
+    .chatbot-header { background-color: #0d47a1;}
     .user-message { background-color: var(--primary-color); }
     #chatbot-input:focus { box-shadow: 0 0 0 2px rgba(49, 130, 206, 0.5); }
     .chatbot-form button { color: white; }
