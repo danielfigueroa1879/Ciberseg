@@ -1387,6 +1387,9 @@ body {
         padding: 12px 15px;
         background-color: var(--chatbot-primary);
         position: relative;
+        display: flex;
+     justify-content: space-between;
+     align-items: center;
     }
     
     .chatbot-header h3 {
