@@ -19,12 +19,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log("✅ Elementos del chatbot encontrados");
 
-    // Sistema de voz simple
+    // Sistema de voz con reconocimiento
     let voiceSystem = null;
+    let recognition = null;
     let isVoiceEnabled = localStorage.getItem('chatbot-voice') !== 'false';
+    let isListening = false;
 
-    // Inicializar voz
+    // Inicializar voz y reconocimiento
     function initVoice() {
+        // Text-to-Speech
         if ('speechSynthesis' in window) {
             voiceSystem = {
                 synth: window.speechSynthesis,
@@ -52,7 +55,140 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.log('🗣️ Hablando:', cleanText.substring(0, 50) + '...');
                 }
             };
-            console.log('🎤 Sistema de voz inicializado');
+            console.log('🎤 Text-to-Speech inicializado');
+        }
+
+        // Speech-to-Text (Reconocimiento)
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            
+            // Configuración para escritura en tiempo real
+            recognition.continuous = true;
+            recognition.interimResults = true; // ¡ESTO ES CLAVE!
+            recognition.lang = 'es-ES';
+            recognition.maxAlternatives = 1;
+            
+            // Cuando empiece a escuchar
+            recognition.onstart = () => {
+                isListening = true;
+                console.log('🎙️ Empezando a escuchar...');
+                showListeningState();
+            };
+            
+            // Cuando reciba resultados (en tiempo real)
+            recognition.onresult = (event) => {
+                let finalTranscript = '';
+                let interimTranscript = '';
+                
+                // Procesar todos los resultados
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    const transcript = event.results[i][0].transcript;
+                    
+                    if (event.results[i].isFinal) {
+                        finalTranscript += transcript;
+                    } else {
+                        interimTranscript += transcript;
+                    }
+                }
+                
+                // Mostrar texto en tiempo real en el input
+                if (chatbotInput) {
+                    const currentText = chatbotInput.value;
+                    const newText = finalTranscript + interimTranscript;
+                    
+                    // Solo actualizar si hay cambios
+                    if (currentText !== newText) {
+                        chatbotInput.value = newText;
+                        console.log('📝 Escribiendo:', newText);
+                    }
+                    
+                    // Si hay texto final, enviarlo automáticamente
+                    if (finalTranscript.trim()) {
+                        console.log('✅ Texto final reconocido:', finalTranscript);
+                        setTimeout(() => {
+                            stopListening();
+                            // Simular envío del formulario
+                            const submitEvent = new Event('submit', { bubbles: true, cancelable: true });
+                            chatbotForm.dispatchEvent(submitEvent);
+                        }, 500);
+                    }
+                }
+            };
+            
+            // Cuando termine
+            recognition.onend = () => {
+                isListening = false;
+                console.log('🎙️ Reconocimiento terminado');
+                hideListeningState();
+            };
+            
+            // Si hay error
+            recognition.onerror = (event) => {
+                isListening = false;
+                console.error('❌ Error reconocimiento:', event.error);
+                hideListeningState();
+            };
+            
+            console.log('🎙️ Speech-to-Text inicializado');
+        } else {
+            console.warn('⚠️ Reconocimiento de voz no disponible');
+        }
+    }
+
+    // Funciones de control de reconocimiento
+    function startListening() {
+        if (!recognition || isListening) return;
+        
+        try {
+            // Limpiar input antes de empezar
+            if (chatbotInput) chatbotInput.value = '';
+            
+            recognition.start();
+            console.log('🎤 Iniciando reconocimiento...');
+        } catch (error) {
+            console.error('Error al iniciar reconocimiento:', error);
+        }
+    }
+    
+    function stopListening() {
+        if (!recognition || !isListening) return;
+        
+        try {
+            recognition.stop();
+            console.log('🛑 Deteniendo reconocimiento...');
+        } catch (error) {
+            console.error('Error al detener reconocimiento:', error);
+        }
+    }
+    
+    function showListeningState() {
+        const micBtn = document.getElementById('mic-btn');
+        if (micBtn) {
+            micBtn.innerHTML = '🔴';
+            micBtn.style.animation = 'pulse 1s infinite';
+            micBtn.title = 'Escuchando... (Suelta para parar)';
+        }
+        
+        // Cambiar placeholder del input
+        if (chatbotInput) {
+            chatbotInput.placeholder = '🎙️ Hablando... se está escribiendo automáticamente';
+            chatbotInput.style.borderColor = '#ff4444';
+        }
+    }
+    
+    function hideListeningState() {
+        const micBtn = document.getElementById('mic-btn');
+        if (micBtn) {
+            micBtn.innerHTML = '🎤';
+            micBtn.style.animation = 'none';
+            micBtn.title = 'Mantén presionado para hablar';
+        }
+        
+        // Restaurar placeholder del input
+        if (chatbotInput) {
+            chatbotInput.placeholder = 'Escribe tu pregunta...';
+            chatbotInput.style.borderColor = '';
         }
     }
 
@@ -204,22 +340,53 @@ document.addEventListener('DOMContentLoaded', () => {
         const header = document.querySelector('.chatbot-header');
         if (!header || document.getElementById('voice-btn')) return;
 
+        // Contenedor para los controles
+        const controlsContainer = document.createElement('div');
+        controlsContainer.style.cssText = 'display: flex; gap: 5px; align-items: center;';
+
+        // Botón de voz (hablar)
         const voiceBtn = document.createElement('button');
         voiceBtn.id = 'voice-btn';
         voiceBtn.innerHTML = isVoiceEnabled ? '🔊' : '🔇';
         voiceBtn.title = isVoiceEnabled ? 'Desactivar voz' : 'Activar voz';
-        voiceBtn.style.cssText = `
-            background: none;
-            border: none;
-            color: white;
-            font-size: 18px;
-            cursor: pointer;
-            padding: 8px;
-            border-radius: 50%;
-            margin-left: 10px;
-            transition: all 0.3s ease;
-        `;
+        
+        // Botón de micrófono (escuchar)
+        const micBtn = document.createElement('button');
+        micBtn.id = 'mic-btn';
+        micBtn.innerHTML = '🎤';
+        micBtn.title = 'Mantén presionado para hablar';
 
+        // Estilos para ambos botones
+        [voiceBtn, micBtn].forEach(btn => {
+            btn.style.cssText = `
+                background: none;
+                border: none;
+                color: white;
+                font-size: 18px;
+                cursor: pointer;
+                padding: 8px;
+                border-radius: 50%;
+                transition: all 0.3s ease;
+                min-width: 36px;
+                min-height: 36px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            `;
+            
+            // Efectos hover
+            btn.addEventListener('mouseenter', () => {
+                btn.style.backgroundColor = 'rgba(255,255,255,0.2)';
+                btn.style.transform = 'scale(1.1)';
+            });
+            
+            btn.addEventListener('mouseleave', () => {
+                btn.style.backgroundColor = 'transparent';
+                btn.style.transform = 'scale(1)';
+            });
+        });
+
+        // Evento del botón de voz
         voiceBtn.addEventListener('click', () => {
             isVoiceEnabled = !isVoiceEnabled;
             localStorage.setItem('chatbot-voice', isVoiceEnabled);
@@ -233,18 +400,37 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(`🔊 Voz ${isVoiceEnabled ? 'activada' : 'desactivada'}`);
         });
 
-        voiceBtn.addEventListener('mouseenter', () => {
-            voiceBtn.style.backgroundColor = 'rgba(255,255,255,0.2)';
-            voiceBtn.style.transform = 'scale(1.1)';
+        // Eventos del botón de micrófono (mantener presionado)
+        micBtn.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            startListening();
+        });
+        
+        micBtn.addEventListener('mouseup', (e) => {
+            e.preventDefault();
+            stopListening();
+        });
+        
+        micBtn.addEventListener('mouseleave', (e) => {
+            if (isListening) stopListening();
         });
 
-        voiceBtn.addEventListener('mouseleave', () => {
-            voiceBtn.style.backgroundColor = 'transparent';
-            voiceBtn.style.transform = 'scale(1)';
+        // Eventos táctiles para móvil
+        micBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            startListening();
+        });
+        
+        micBtn.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            stopListening();
         });
 
-        header.appendChild(voiceBtn);
-        console.log('🎤 Botón de voz agregado');
+        controlsContainer.appendChild(voiceBtn);
+        controlsContainer.appendChild(micBtn);
+        header.appendChild(controlsContainer);
+        
+        console.log('🎤 Controles de voz y micrófono agregados');
     }
 
     // Manejo del teclado virtual
@@ -288,7 +474,10 @@ document.addEventListener('DOMContentLoaded', () => {
         toggle: () => chatbotContainer.classList.toggle('active'),
         close: () => chatbotContainer.classList.remove('active'),
         speak: (text) => voiceSystem && voiceSystem.speak(text),
-        toggleVoice: () => document.getElementById('voice-btn')?.click()
+        toggleVoice: () => document.getElementById('voice-btn')?.click(),
+        startListening: () => startListening(),
+        stopListening: () => stopListening(),
+        isListening: () => isListening
     };
 
     console.log('🎉 Chatbot listo para usar');
