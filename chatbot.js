@@ -642,21 +642,6 @@ Responde de forma ENERGÉTICA y PROFESIONAL siempre.`;
         }
 
 
-        // === EVENTOS PARA AUTO-LECTURA ===
-        autoReadBtn.addEventListener('click', () => {
-            isAutoReadEnabled = !isAutoReadEnabled;
-            localStorage.setItem('chatbot-voice-enabled', isAutoReadEnabled);
-            autoReadBtn.innerHTML = isAutoReadEnabled ? '🔊' : '🔇';
-            autoReadBtn.title = isAutoReadEnabled ? 'Desactivar lectura automática' : 'Activar lectura automática';
-            
-            if (!isAutoReadEnabled) speechSynth.cancel();
-            
-            autoReadBtn.style.backgroundColor = isAutoReadEnabled ? 
-                'rgba(0,255,0,0.3)' : 'rgba(255,0,0,0.3)';
-            setTimeout(() => autoReadBtn.style.backgroundColor = 'transparent', 1000);
-            
-            console.log(`🔊 Auto-lectura ${isAutoReadEnabled ? 'activada' : 'desactivada'}`);
-        });
 
         console.log('🎤 Sistema de controles de voz creado');
     }
