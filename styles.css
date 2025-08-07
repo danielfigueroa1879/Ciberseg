@@ -84,7 +84,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(255, 255, 255, 0.7);
     backdrop-filter: var(--blur-effect);
     -webkit-backdrop-filter: var(--blur-effect);
     z-index: 1000;
@@ -92,7 +92,7 @@ body {
     will-change: transform, opacity;
     transform: translateZ(0);
     contain: layout style paint;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid rgba(49, 130, 206, 0.1);
 }
 
 .navbar {
