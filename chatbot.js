@@ -503,8 +503,13 @@ Responde de forma ENERGÉTICA y PROFESIONAL siempre.`;
 
         // === CONTROLES EN EL HEADER ===
         const controlsContainer = document.createElement('div');
-        controlsContainer.id = 'voice-controls';
-        controlsContainer.style.cssText = 'display: flex; gap: 5px; align-items: center;';
+    controlsContainer.id = 'voice-controls';
+    controlsContainer.style.cssText = `
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-left: auto;  /* Empuja los controles y el cierre hacia la derecha */
+    `;
 
         // Botón toggle auto-lectura
         const autoReadBtn = document.createElement('button');
