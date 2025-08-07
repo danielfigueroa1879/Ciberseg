@@ -240,30 +240,88 @@ Responde de forma ENERGÉTICA y PROFESIONAL siempre.`;
     }
     
     function showListeningState() {
-        const micBtn = document.getElementById('mic-btn');
-        if (micBtn) {
-            micBtn.innerHTML = '🔴';
-            micBtn.style.animation = 'pulse 1s infinite';
-            micBtn.title = 'Escuchando... (Suelta para parar)';
+        const bigMicBtn = document.getElementById('big-mic-btn');
+        const micBtnHeader = document.getElementById('mic-btn-header');
+        const instructionText = document.getElementById('mic-instruction');
+        const statusIndicator = document.getElementById('voice-status');
+        
+        // Actualizar micrófono grande
+        if (bigMicBtn) {
+            bigMicBtn.innerHTML = '🔴';
+            bigMicBtn.style.background = 'linear-gradient(145deg, #ef4444, #f87171)';
+            bigMicBtn.style.borderColor = '#fca5a5';
+            bigMicBtn.style.animation = 'pulse 1s infinite';
+            bigMicBtn.title = 'Escuchando... (Suelta para enviar)';
         }
         
+        // Actualizar micrófono del header
+        if (micBtnHeader) {
+            micBtnHeader.innerHTML = '🔴';
+            micBtnHeader.style.animation = 'pulse 1s infinite';
+        }
+        
+        // Actualizar texto instructivo
+        if (instructionText) {
+            instructionText.textContent = '🎙️ Escuchando... Hablando se escribe automáticamente';
+            instructionText.style.color = '#ef4444';
+            instructionText.style.fontWeight = 'bold';
+        }
+        
+        // Mostrar indicador de estado
+        if (statusIndicator) {
+            statusIndicator.style.opacity = '1';
+            statusIndicator.style.background = '#ef4444';
+            statusIndicator.style.animation = 'pulse 0.8s infinite';
+        }
+        
+        // Actualizar input
         if (chatbotInput) {
-            chatbotInput.placeholder = '🎙️ Hablando... escribiendo automáticamente';
-            chatbotInput.style.borderColor = '#ff4444';
+            chatbotInput.placeholder = '🎙️ Hablando... se está escribiendo automáticamente';
+            chatbotInput.style.borderColor = '#ef4444';
+            chatbotInput.style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.2)';
         }
     }
     
     function hideListeningState() {
-        const micBtn = document.getElementById('mic-btn');
-        if (micBtn) {
-            micBtn.innerHTML = '🎤';
-            micBtn.style.animation = 'none';
-            micBtn.title = 'Mantén presionado para hablar';
+        const bigMicBtn = document.getElementById('big-mic-btn');
+        const micBtnHeader = document.getElementById('mic-btn-header');
+        const instructionText = document.getElementById('mic-instruction');
+        const statusIndicator = document.getElementById('voice-status');
+        
+        // Restaurar micrófono grande
+        if (bigMicBtn) {
+            bigMicBtn.innerHTML = '🎤';
+            bigMicBtn.style.background = 'linear-gradient(145deg, #3182ce, #4299e1)';
+            bigMicBtn.style.borderColor = '#63b3ed';
+            bigMicBtn.style.animation = 'none';
+            bigMicBtn.title = 'MANTÉN PRESIONADO para hablar';
         }
         
+        // Restaurar micrófono del header
+        if (micBtnHeader) {
+            micBtnHeader.innerHTML = '🎤';
+            micBtnHeader.style.animation = 'none';
+        }
+        
+        // Restaurar texto instructivo
+        if (instructionText) {
+            instructionText.textContent = 'Mantén presionado para hablar';
+            instructionText.style.color = 'var(--text-white)';
+            instructionText.style.fontWeight = 'normal';
+        }
+        
+        // Ocultar indicador de estado
+        if (statusIndicator) {
+            statusIndicator.style.opacity = '0';
+            statusIndicator.style.background = '#22c55e';
+            statusIndicator.style.animation = 'none';
+        }
+        
+        // Restaurar input
         if (chatbotInput) {
             chatbotInput.placeholder = 'Escribe tu pregunta...';
             chatbotInput.style.borderColor = '';
+            chatbotInput.style.boxShadow = '';
         }
     }
 
@@ -478,11 +536,14 @@ Responde de forma ENERGÉTICA y PROFESIONAL siempre.`;
         }
     }
 
-    // === CREAR CONTROLES DE VOZ ===
+    // === CREAR CONTROLES DE VOZ MEJORADOS ===
     function createVoiceControls() {
         const header = document.querySelector('.chatbot-header');
+        const chatForm = document.querySelector('.chatbot-form');
+        
         if (!header || document.getElementById('voice-controls')) return;
 
+        // === CONTROLES EN EL HEADER ===
         const controlsContainer = document.createElement('div');
         controlsContainer.id = 'voice-controls';
         controlsContainer.style.cssText = 'display: flex; gap: 5px; align-items: center;';
@@ -493,14 +554,14 @@ Responde de forma ENERGÉTICA y PROFESIONAL siempre.`;
         autoReadBtn.innerHTML = isAutoReadEnabled ? '🔊' : '🔇';
         autoReadBtn.title = isAutoReadEnabled ? 'Desactivar lectura automática' : 'Activar lectura automática';
         
-        // Botón de micrófono
-        const micBtn = document.createElement('button');
-        micBtn.id = 'mic-btn';
-        micBtn.innerHTML = '🎤';
-        micBtn.title = 'Mantén presionado para hablar';
+        // Botón de micrófono pequeño (header)
+        const micBtnHeader = document.createElement('button');
+        micBtnHeader.id = 'mic-btn-header';
+        micBtnHeader.innerHTML = '🎤';
+        micBtnHeader.title = 'Activar micrófono grande';
 
-        // Estilos
-        [autoReadBtn, micBtn].forEach(btn => {
+        // Estilos para botones del header
+        [autoReadBtn, micBtnHeader].forEach(btn => {
             btn.style.cssText = `
                 background: none;
                 border: none;
@@ -528,7 +589,84 @@ Responde de forma ENERGÉTICA y PROFESIONAL siempre.`;
             });
         });
 
-        // Eventos
+        controlsContainer.appendChild(autoReadBtn);
+        controlsContainer.appendChild(micBtnHeader);
+        header.appendChild(controlsContainer);
+
+        // === MICRÓFONO GRANDE EN EL FORMULARIO ===
+        if (chatForm && !document.getElementById('big-mic-btn')) {
+            // Contenedor para el micrófono grande
+            const micContainer = document.createElement('div');
+            micContainer.style.cssText = `
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 10px;
+                border-top: 1px solid var(--border-color);
+                background-color: var(--bg-card);
+            `;
+
+            // Micrófono grande
+            const bigMicBtn = document.createElement('button');
+            bigMicBtn.id = 'big-mic-btn';
+            bigMicBtn.innerHTML = '🎤';
+            bigMicBtn.title = 'MANTÉN PRESIONADO para hablar';
+            bigMicBtn.style.cssText = `
+                background: linear-gradient(145deg, #3182ce, #4299e1);
+                border: 3px solid #63b3ed;
+                color: white;
+                font-size: 32px;
+                cursor: pointer;
+                padding: 20px;
+                border-radius: 50%;
+                transition: all 0.3s ease;
+                min-width: 80px;
+                min-height: 80px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 4px 15px rgba(49, 130, 206, 0.3);
+                position: relative;
+                overflow: hidden;
+            `;
+
+            // Texto instructivo
+            const instructionText = document.createElement('div');
+            instructionText.id = 'mic-instruction';
+            instructionText.textContent = 'Mantén presionado para hablar';
+            instructionText.style.cssText = `
+                color: var(--text-white);
+                font-size: 12px;
+                text-align: center;
+                margin-top: 8px;
+                opacity: 0.7;
+            `;
+
+            // Indicador de estado
+            const statusIndicator = document.createElement('div');
+            statusIndicator.id = 'voice-status';
+            statusIndicator.style.cssText = `
+                position: absolute;
+                top: -5px;
+                right: -5px;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: #22c55e;
+                border: 3px solid white;
+                opacity: 0;
+                transition: all 0.3s ease;
+            `;
+
+            bigMicBtn.appendChild(statusIndicator);
+            micContainer.appendChild(bigMicBtn);
+            micContainer.appendChild(instructionText);
+
+            // Insertar antes del formulario
+            chatForm.parentNode.insertBefore(micContainer, chatForm);
+        }
+
+        // === EVENTOS PARA AUTO-LECTURA ===
         autoReadBtn.addEventListener('click', () => {
             isAutoReadEnabled = !isAutoReadEnabled;
             localStorage.setItem('chatbot-voice-enabled', isAutoReadEnabled);
@@ -540,28 +678,77 @@ Responde de forma ENERGÉTICA y PROFESIONAL siempre.`;
             autoReadBtn.style.backgroundColor = isAutoReadEnabled ? 
                 'rgba(0,255,0,0.3)' : 'rgba(255,0,0,0.3)';
             setTimeout(() => autoReadBtn.style.backgroundColor = 'transparent', 1000);
+            
+            console.log(`🔊 Auto-lectura ${isAutoReadEnabled ? 'activada' : 'desactivada'}`);
         });
 
-        // Eventos del micrófono
-        ['mousedown', 'touchstart'].forEach(event => {
-            micBtn.addEventListener(event, (e) => {
+        // === EVENTOS PARA MICRÓFONO HEADER ===
+        micBtnHeader.addEventListener('click', () => {
+            const bigMic = document.getElementById('big-mic-btn');
+            if (bigMic) {
+                bigMic.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // Efecto de pulso para llamar la atención
+                bigMic.style.animation = 'pulse 1s ease-in-out 3';
+                setTimeout(() => bigMic.style.animation = 'none', 3000);
+            }
+        });
+
+        // === EVENTOS PARA MICRÓFONO GRANDE ===
+        const bigMicBtn = document.getElementById('big-mic-btn');
+        const instructionText = document.getElementById('mic-instruction');
+        const statusIndicator = document.getElementById('voice-status');
+
+        if (bigMicBtn && instructionText && statusIndicator) {
+            // Eventos de mouse
+            bigMicBtn.addEventListener('mousedown', (e) => {
                 e.preventDefault();
                 startListening();
+                bigMicBtn.style.transform = 'scale(0.95)';
             });
-        });
-        
-        ['mouseup', 'mouseleave', 'touchend'].forEach(event => {
-            micBtn.addEventListener(event, (e) => {
-                e.preventDefault();
-                if (isListening) stopListening();
-            });
-        });
 
-        controlsContainer.appendChild(autoReadBtn);
-        controlsContainer.appendChild(micBtn);
-        header.appendChild(controlsContainer);
-        
-        console.log('🎤 Controles de voz avanzados creados');
+            bigMicBtn.addEventListener('mouseup', (e) => {
+                e.preventDefault();
+                stopListening();
+                bigMicBtn.style.transform = 'scale(1)';
+            });
+
+            bigMicBtn.addEventListener('mouseleave', (e) => {
+                if (isListening) {
+                    stopListening();
+                    bigMicBtn.style.transform = 'scale(1)';
+                }
+            });
+
+            // Eventos táctiles para móvil
+            bigMicBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                startListening();
+                bigMicBtn.style.transform = 'scale(0.95)';
+            });
+
+            bigMicBtn.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                stopListening();
+                bigMicBtn.style.transform = 'scale(1)';
+            });
+
+            // Efecto hover
+            bigMicBtn.addEventListener('mouseenter', () => {
+                if (!isListening) {
+                    bigMicBtn.style.transform = 'scale(1.05)';
+                    bigMicBtn.style.boxShadow = '0 6px 20px rgba(49, 130, 206, 0.4)';
+                }
+            });
+
+            bigMicBtn.addEventListener('mouseleave', () => {
+                if (!isListening) {
+                    bigMicBtn.style.transform = 'scale(1)';
+                    bigMicBtn.style.boxShadow = '0 4px 15px rgba(49, 130, 206, 0.3)';
+                }
+            });
+        }
+
+        console.log('🎤 Sistema de micrófono grande y controles creados');
     }
 
     // === EVENT LISTENERS PRINCIPALES ===
