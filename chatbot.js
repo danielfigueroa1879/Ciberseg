@@ -41,6 +41,60 @@ document.addEventListener('DOMContentLoaded', () => {
             chatbotInput.value = ''; // Limpiar el campo de entrada
             getAIResponse(userInput); // Llamar a la función que usa la API
         }
+    }
+
+    // 🎤 NUEVO: Inicializar reconocimiento de voz
+    initSpeechRecognition() {
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            this.recognition = new SpeechRecognition();
+            
+            // Configuración optimizada para velocidad
+            this.recognition.continuous = false;
+            this.recognition.interimResults = false;
+            this.recognition.lang = 'es-ES';
+            this.recognition.maxAlternatives = 1;
+            
+            // Eventos del reconocimiento
+            this.recognition.onstart = () => {
+                this.isListening = true;
+                this.showListeningState();
+                console.log('🎙️ Escuchando...');
+            };
+            
+            this.recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                console.log('🎯 Reconocido:', transcript);
+                
+                // Insertar texto en el input y enviarlo automáticamente
+                const chatbotInput = document.getElementById('chatbot-input');
+                if (chatbotInput) {
+                    chatbotInput.value = transcript;
+                    // Simular envío del formulario
+                    const form = document.getElementById('chatbot-form');
+                    if (form) {
+                        const event = new Event('submit', { bubbles: true, cancelable: true });
+                        form.dispatchEvent(event);
+                    }
+                }
+            };
+            
+            this.recognition.onend = () => {
+                this.isListening = false;
+                this.hideListeningState();
+                console.log('🎙️ Reconocimiento terminado');
+            };
+            
+            this.recognition.onerror = (event) => {
+                this.isListening = false;
+                this.hideListeningState();
+                console.error('❌ Error reconocimiento:', event.error);
+            };
+            
+            console.log('🎙️ Reconocimiento de voz inicializado');
+        } else {
+            console.warn('⚠️ Reconocimiento de voz no soportado');
+        }
     });
 
     // --- Funciones Principales ---
@@ -66,11 +120,11 @@ document.addEventListener('DOMContentLoaded', () => {
             p.innerHTML = messageText;
             p.style.textAlign = 'justify';
             
-            // 🎤 NUEVA FUNCIONALIDAD: Reproducir voz automáticamente
+            // 🎤 NUEVA FUNCIONALIDAD: Reproducir voz MÁS RÁPIDA automáticamente
             if (window.chatbotVoice && window.chatbotVoice.isEnabled) {
                 setTimeout(() => {
                     window.chatbotVoice.speak(messageText);
-                }, 800); // Delay para que aparezca el mensaje primero
+                }, 400); // Delay MÁS CORTO para respuesta más rápida
             }
         } else {
             p.textContent = text;
@@ -134,35 +188,44 @@ document.addEventListener('DOMContentLoaded', () => {
         loadingIndicator.style.display = 'flex';
         chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
 
-        // Contexto e instrucción para el modelo de IA, indicando el uso de HTML y el botón.
-        const prompt = `Eres un asistente virtual para RECYBERSEG, una empresa chilena de ciberseguridad. Tu nombre es 'Cyber Asistente'.
+        // Contexto e instrucción para el modelo de IA, con RESPUESTAS MÁS ENERGÉTICAS
+        const prompt = `Eres un asistente virtual DINÁMICO para RECYBERSEG, una empresa chilena de ciberseguridad. Tu nombre es 'Cyber Asistente'.
+        
+        PERSONALIDAD ENERGÉTICA:
+        - Responde con ENERGÍA y ENTUSIASMO
+        - Sé RÁPIDO y DIRECTO en tus respuestas
+        - Usa un tono PROFESIONAL pero DINÁMICO
+        - Mantén las respuestas CONCISAS pero COMPLETAS
+        - Muestra CONFIANZA en cada respuesta
+        
         IMPORTANTE: Debes formatear tus respuestas usando etiquetas HTML. Usa <strong>palabra</strong> para poner texto en negrita y usa <br> para los saltos de línea, especialmente en las listas.
         Cuando listes servicios, usa el formato "1.- <strong>Servicio:</strong> Descripción.<br>".
 
-        INSTRUCCIONES ESPECIALES PARA VOZ:
-        - Habla de manera natural y conversacional
-        - Usa frases cortas y claras para mejor comprensión auditiva
-        - Evita abreviaciones complicadas
+        INSTRUCCIONES ESPECIALES PARA VOZ RÁPIDA:
+        - Habla de manera ENERGÉTICA y ENTUSIASTA
+        - Usa frases DINÁMICAS y DIRECTAS
+        - Evita palabras innecesarias para SER MÁS RÁPIDO
         - Pronuncia "RECYBERSEG" como "Reci-Ber-Seg"
-        - Cuando menciones "IoT", di "Internet de las Cosas"
-        - Para "24/7", di "veinticuatro horas, siete días"
+        - Para "IoT", di "Internet de las Cosas"
+        - Para "24/7", di "veinticuatro siete"
+        - Usa palabras como "¡Perfecto!", "¡Excelente!", "¡Genial!"
 
-        Si el usuario pregunta cómo contactar, hablar con alguien, o solicitar una cotización, responde amablemente indicando que pueden usar el formulario de contacto y, al final de tu mensaje, incluye el texto especial [CONTACT_BUTTON] para que se genere un botón.
-        Ejemplo de respuesta de contacto: "¡Por supuesto! Para contactarnos o solicitar una cotización, puedes rellenar nuestro formulario y un especialista se comunicará contigo a la brevedad. También encontrarás nuestros datos de contacto directo en esa sección.<br>[CONTACT_BUTTON]"
+        Si el usuario pregunta cómo contactar, hablar con alguien, o solicitar una cotización, responde con ENERGÍA indicando que pueden usar el formulario de contacto y, al final de tu mensaje, incluye el texto especial [CONTACT_BUTTON] para que se genere un botón.
+        Ejemplo de respuesta energética: "¡Perfecto! Para contactarnos RÁPIDAMENTE, usa nuestro formulario y un especialista te contactará DE INMEDIATO. ¡También tienes nuestros datos directos disponibles!<br>[CONTACT_BUTTON]"
 
-        Responde a las preguntas de los usuarios sobre nuestros servicios, que incluyen:
-        1.- <strong>Auditorías de Seguridad:</strong> Evaluación completa de infraestructura digital.<br>
-        2.- <strong>Monitoreo de Redes:</strong> Supervisión veinticuatro horas, siete días.<br>
-        3.- <strong>Consultoría en Ciberseguridad:</strong> Asesoramiento experto y personalizado.<br>
-        4.- <strong>Implementación de Sistemas de Seguridad:</strong> Configuración de firewalls, etc.<br>
-        5.- <strong>Seguridad Internet de las Cosas:</strong> Protección de dispositivos inteligentes.<br>
+        Responde a las preguntas sobre nuestros servicios TOP:
+        1.- <strong>Auditorías de Seguridad:</strong> ¡Evaluación COMPLETA de tu infraestructura!<br>
+        2.- <strong>Monitoreo de Redes:</strong> ¡Supervisión CONSTANTE veinticuatro siete!<br>
+        3.- <strong>Consultoría en Ciberseguridad:</strong> ¡Asesoramiento EXPERTO personalizado!<br>
+        4.- <strong>Implementación de Sistemas:</strong> ¡Configuración PROFESIONAL de firewalls!<br>
+        5.- <strong>Seguridad Internet de las Cosas:</strong> ¡Protección TOTAL de dispositivos inteligentes!<br>
 
-        Nuestra misión es proteger el ecosistema digital de nuestros clientes con soluciones innovadoras.
-        Nuestra visión es ser líderes en soluciones tecnológicas de seguridad digital.
+        Nuestra MISIÓN: ¡Proteger tu ecosistema digital con soluciones INNOVADORAS!
+        Nuestra VISIÓN: ¡Ser LÍDERES en tecnología de seguridad digital!
 
-        Sé amable, profesional y conciso. Si no sabes la respuesta, di que consultarás con un especialista. No inventes información. Responde en español.
+        Sé PROFESIONAL, ENERGÉTICO y DIRECTO. Si no sabes algo, di que consultarás INMEDIATAMENTE con un especialista. NUNCA inventes información. Responde en español con ENERGÍA.
 
-        Aquí está la pregunta del usuario: "${userInput}"`;
+        Pregunta del usuario: "${userInput}"`;
 
         // Clave de API proporcionada por el usuario
         const apiKey = "AIzaSyAq7n6WM4WuPKR0CZzIUgAUdI53fm4CpoA";
@@ -223,18 +286,20 @@ document.addEventListener('DOMContentLoaded', () => {
 class ChatbotVoice {
     constructor() {
         this.synth = window.speechSynthesis;
+        this.recognition = null;
         this.voices = [];
         this.selectedVoice = null;
         this.isEnabled = localStorage.getItem('chatbot-voice-enabled') !== 'false';
         this.isSpeaking = false;
+        this.isListening = false;
         this.currentUtterance = null;
         
-        // Configuración de voz optimizada para hombre
+        // Configuración de voz optimizada para velocidad y energía
         this.voiceConfig = {
-            rate: 0.85,          // Velocidad natural masculina
-            pitch: 0.7,          // Tono más grave/masculino
-            volume: 0.9,         // Volumen claro
-            lang: 'es-ES'        // Español de España
+            rate: 1.3,           // MÁS RÁPIDO - velocidad energética
+            pitch: 0.8,          // Tono masculino pero con energía
+            volume: 1.0,         // Volumen máximo para claridad
+            lang: 'es-ES'        // Español
         };
         
         this.init();
@@ -242,11 +307,12 @@ class ChatbotVoice {
 
     async init() {
         await this.loadVoices();
+        this.initSpeechRecognition();
         // Esperar a que el chatbot esté disponible
         const initControls = () => {
             if (document.querySelector('.chatbot-header')) {
                 this.createVoiceControls();
-                console.log('🎤 Sistema de voz completamente inicializado');
+                console.log('🎤 Sistema de voz rápido y reconocimiento inicializados');
             } else {
                 setTimeout(initControls, 1000);
             }
@@ -343,8 +409,14 @@ class ChatbotVoice {
         stopButton.title = 'Parar voz';
         stopButton.style.display = 'none';
 
-        // Estilos para ambos botones
-        [voiceButton, stopButton].forEach(btn => {
+        // 🎙️ NUEVO: Botón de micrófono para hablar
+        const micButton = document.createElement('button');
+        micButton.id = 'voice-mic-btn';
+        micButton.innerHTML = '<i class="fas fa-microphone"></i>';
+        micButton.title = 'Hablar al chatbot (mantén presionado)';
+
+        // Estilos para todos los botones
+        [voiceButton, stopButton, micButton].forEach(btn => {
             btn.style.cssText = `
                 background: none;
                 border: none;
@@ -375,12 +447,72 @@ class ChatbotVoice {
         // Eventos
         voiceButton.addEventListener('click', () => this.toggleVoice(voiceButton));
         stopButton.addEventListener('click', () => this.stopSpeaking(stopButton));
+        
+        // 🎙️ NUEVO: Eventos del micrófono
+        micButton.addEventListener('mousedown', () => this.startListening());
+        micButton.addEventListener('mouseup', () => this.stopListening());
+        micButton.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            this.startListening();
+        });
+        micButton.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            this.stopListening();
+        });
 
         voiceControls.appendChild(voiceButton);
         voiceControls.appendChild(stopButton);
+        voiceControls.appendChild(micButton);
         chatbotHeader.appendChild(voiceControls);
 
-        console.log('🎤 Controles de voz agregados al header');
+        console.log('🎤 Controles de voz y micrófono agregados al header');
+    }
+
+    // 🎙️ NUEVO: Iniciar escucha
+    startListening() {
+        if (!this.recognition || this.isListening) return;
+        
+        // Parar cualquier reproducción de voz
+        if (this.isSpeaking) {
+            this.stopSpeaking();
+        }
+        
+        try {
+            this.recognition.start();
+        } catch (error) {
+            console.error('Error al iniciar reconocimiento:', error);
+        }
+    }
+
+    // 🎙️ NUEVO: Parar escucha
+    stopListening() {
+        if (!this.recognition || !this.isListening) return;
+        
+        try {
+            this.recognition.stop();
+        } catch (error) {
+            console.error('Error al parar reconocimiento:', error);
+        }
+    }
+
+    // 🎙️ NUEVO: Mostrar estado de escucha
+    showListeningState() {
+        const micBtn = document.getElementById('voice-mic-btn');
+        if (micBtn) {
+            micBtn.innerHTML = '<i class="fas fa-microphone-slash"></i>';
+            micBtn.style.backgroundColor = 'rgba(255,0,0,0.3)';
+            micBtn.style.animation = 'pulse 1s infinite';
+        }
+    }
+
+    // 🎙️ NUEVO: Ocultar estado de escucha
+    hideListeningState() {
+        const micBtn = document.getElementById('voice-mic-btn');
+        if (micBtn) {
+            micBtn.innerHTML = '<i class="fas fa-microphone"></i>';
+            micBtn.style.backgroundColor = 'transparent';
+            micBtn.style.animation = 'none';
+        }
     }
 
     toggleVoice(button) {
@@ -431,7 +563,7 @@ class ChatbotVoice {
         this.currentUtterance.onstart = () => {
             this.isSpeaking = true;
             this.showStopButton();
-            console.log('🗣️ Reproduciendo con voz masculina:', cleanText.substring(0, 50) + '...');
+            console.log('🗣️ Reproduciendo RÁPIDO con energía:', cleanText.substring(0, 50) + '...');
         };
 
         this.currentUtterance.onend = () => {
@@ -471,18 +603,22 @@ class ChatbotVoice {
     showStopButton() {
         const stopBtn = document.getElementById('voice-stop-btn');
         const voiceBtn = document.getElementById('voice-toggle-btn');
+        const micBtn = document.getElementById('voice-mic-btn');
         if (stopBtn && voiceBtn) {
             stopBtn.style.display = 'flex';
             voiceBtn.style.opacity = '0.5';
+            if (micBtn) micBtn.style.opacity = '0.3';
         }
     }
 
     hideStopButton() {
         const stopBtn = document.getElementById('voice-stop-btn');
         const voiceBtn = document.getElementById('voice-toggle-btn');
+        const micBtn = document.getElementById('voice-mic-btn');
         if (stopBtn && voiceBtn) {
             stopBtn.style.display = 'none';
             voiceBtn.style.opacity = '1';
+            if (micBtn) micBtn.style.opacity = '1';
         }
     }
 
@@ -676,12 +812,14 @@ window.addEventListener('load', () => {
     }, 3000);
 });
 
-// API global para controles manuales
+// API global para controles manuales MÁS RÁPIDOS
 window.chatbotControls = {
     voice: () => window.chatbotVoice,
     toggleVoice: () => window.chatbotVoice?.toggleVoice(),
     speakText: (text) => window.chatbotVoice?.speak(text),
     stopSpeaking: () => window.chatbotVoice?.stopSpeaking(),
+    startListening: () => window.chatbotVoice?.startListening(),
+    stopListening: () => window.chatbotVoice?.stopListening(),
     getVoiceInfo: () => window.chatbotVoice?.getVoiceInfo(),
     keyboard: {
         activate: activateKeyboardMode,
