@@ -542,78 +542,105 @@ Responde de forma ENERGÉTICA y PROFESIONAL siempre.`;
         controlsContainer.appendChild(autoReadBtn);
         header.appendChild(controlsContainer);
     }
+      // === MICRÓFONO AL LADO IZQUIERDO DEL INPUT ===
+        if (chatForm && !document.getElementById('chat-mic-btn')) {
+            // Encontrar el input
+            const inputElement = chatForm.querySelector('#chatbot-input');
+            
+            if (inputElement) {
+                // Crear botón de micrófono
+                const micBtn = document.createElement('button');
+                micBtn.id = 'chat-mic-btn';
+                micBtn.type = 'button'; // Importante: no submit
+                micBtn.innerHTML = '<i class="fas fa-microphone"></i>';
+                micBtn.title = 'Mantén presionado para hablar';
+                micBtn.style.cssText = `
+                    background: #22c55e;
+                    border: none;
+                    color: white;
+                    font-size: 16px;
+                    cursor: pointer;
+                    padding: 12px;
+                    border-radius: 50%;
+                    transition: all 0.3s ease;
+                    margin-right: 8px;
+                    min-width: 44px;
+                    min-height: 44px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-shrink: 0;
+                    touch-action: manipulation;
+                    -webkit-tap-highlight-color: transparent;
+                    order: -1;
+                `;
 
-    // === 2. Crear micrófono a la izquierda del input ===
-    if (chatForm && !document.getElementById('chat-mic-btn')) {
-        const micBtn = document.createElement('button');
-        micBtn.id = 'chat-mic-btn';
-        micBtn.type = 'button';
-        micBtn.innerHTML = '<i class="fas fa-microphone"></i>';
-        micBtn.title = 'Mantén presionado para hablar';
+                // Insertar el micrófono al inicio del formulario (lado izquierdo)
+                chatForm.insertBefore(micBtn, inputElement);
 
-        // Estilos en línea (reforzados)
-        micBtn.style.cssText = `
-            background-color: #22c55e;
-            border: none;
-            color: white;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(34, 197, 94, 0.3);
-            flex-shrink: 0;
-            touch-action: manipulation;
-            -webkit-tap-highlight-color: transparent;
-            order: -1;
-        `;
+                // Ajustar el estilo del formulario para que el micrófono esté a la izquierda
+                chatForm.style.display = 'flex';
+                chatForm.style.alignItems = 'center';
+                chatForm.style.gap = '8px';
 
-        // Insertar el micrófono ANTES del input
-        chatForm.insertBefore(micBtn, inputElement);
+                // === EVENTOS DEL MICRÓFONO VERDE ===
+                
+                // Eventos de mouse
+                micBtn.addEventListener('mousedown', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    startListening();
+                    micBtn.style.transform = 'scale(0.95)';
+                });
 
-        // Asegurar que el contenedor sea flex
-        chatForm.style.display = 'flex';
-        chatForm.style.alignItems = 'center';
-        chatForm.style.gap = '8px';
+                micBtn.addEventListener('mouseup', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    stopListening();
+                    micBtn.style.transform = 'scale(1)';
+                });
 
-        // Eventos del micrófono
-        micBtn.addEventListener('mousedown', (e) => {
-            e.preventDefault();
-            startListening();
-            micBtn.style.transform = 'scale(0.95)';
-        });
+                micBtn.addEventListener('mouseleave', (e) => {
+                    if (isListening) {
+                        stopListening();
+                        micBtn.style.transform = 'scale(1)';
+                    }
+                });
 
-        micBtn.addEventListener('mouseup', (e) => {
-            e.preventDefault();
-            stopListening();
-            micBtn.style.transform = 'scale(1)';
-        });
+                // Eventos táctiles para móvil
+                micBtn.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    startListening();
+                    micBtn.style.transform = 'scale(0.95)';
+                });
 
-        micBtn.addEventListener('mouseleave', () => {
-            if (isListening) {
-                stopListening();
-                micBtn.style.transform = 'scale(1)';
+                micBtn.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    stopListening();
+                    micBtn.style.transform = 'scale(1)';
+                });
+
+                // Efecto hover
+                micBtn.addEventListener('mouseenter', () => {
+                    if (!isListening) {
+                        micBtn.style.backgroundColor = '#16a34a';
+                        micBtn.style.transform = 'scale(1.05)';
+                    }
+                });
+
+                micBtn.addEventListener('mouseleave', () => {
+                    if (!isListening) {
+                        micBtn.style.backgroundColor = '#22c55e';
+                        micBtn.style.transform = 'scale(1)';
+                    }
+                });
+
+                console.log('🎤 Micrófono verde agregado al lado izquierdo del input');
             }
-        });
+        }
 
-        micBtn.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            startListening();
-            micBtn.style.transform = 'scale(0.95)';
-        });
-
-        micBtn.addEventListener('touchend', (e) => {
-            e.preventDefault();
-            stopListening();
-            micBtn.style.transform = 'scale(1)';
-        });
-
-        console.log('✅ Micrófono agregado con éxito a la izquierda del input');
-    }
-}
 
         // === EVENTOS PARA AUTO-LECTURA ===
         autoReadBtn.addEventListener('click', () => {
