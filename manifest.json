@@ -1,0 +1,23 @@
+{
+  "name": "Recyberseg",
+  "short_name": "Recyberseg",
+  "description": "Líderes en Ciberseguridad con IA Avanzada y Diseño Web.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#E0F2F7",
+  "theme_color": "#21618C",
+  "icons": [
+    {
+      "src": "fotos/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "fotos/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
