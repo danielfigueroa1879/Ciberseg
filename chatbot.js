@@ -1,6 +1,90 @@
-document.addEventListener('DOMContentLoaded',function(){console.log("🚀 Chatbot RECYBERSEG iniciando con lógica avanzada...");const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;const speechSynth=window.speechSynthesis;let recognition=null;let isListening=false;let availableVoices=[];let isAutoReadEnabled=true;let isVoiceEnabled=localStorage.getItem('chatbot-voice-enabled')!=='false';const chatToggleButton=document.getElementById('chat-toggle-button');const chatbotContainer=document.getElementById('chatbot-container');const closeChatBtn=document.getElementById('close-chat-btn');const chatbotForm=document.getElementById('chatbot-form');const chatbotInput=document.getElementById('chatbot-input');const chatbotMessages=document.getElementById('chatbot-messages');const loadingIndicator=document.getElementById('chatbot-loading');if(!chatToggleButton||!chatbotContainer||!closeChatBtn||!chatbotForm||!chatbotInput||!chatbotMessages||!loadingIndicator){console.error("❌ Elementos críticos del chatbot no encontrados");return;}console.log("✅ Elementos del chatbot verificados correctamente");const recybersegRules=[{keywords:['hola','buenos días','buenas tardes','buenas noches','saludos','hi'],response:'¡Hola! Soy <strong>Cyber Asistente</strong> de RECYBERSEG. ¡Estoy aquí para ayudarte con toda la información sobre nuestros servicios de ciberseguridad! ¿En qué puedo asistirte hoy?',buttons:['Servicios','Auditorías','Monitoreo','IoT','Contacto']},{keywords:['servicios','qué hacen','ofrecen','productos'],response:'🛡️ <strong>Nuestros Servicios TOP:</strong><br><br>1.- <strong>Auditorías de Seguridad:</strong> ¡Evaluación COMPLETA de tu infraestructura!<br>2.- <strong>Monitoreo de Redes:</strong> ¡Supervisión CONSTANTE 24/7!<br>3.- <strong>Consultoría en Ciberseguridad:</strong> ¡Asesoramiento EXPERTO personalizado!<br>4.- <strong>Implementación de Sistemas:</strong> ¡Configuración PROFESIONAL de firewalls!<br>5.- <strong>Seguridad IoT:</strong> ¡Protección TOTAL de dispositivos inteligentes!',buttons:['Auditorías','Monitoreo 24/7','Consultoría','IoT','Cotizar']},{keywords:['auditorías','auditoria','evaluación','análisis de seguridad'],response:'🔍 <strong>Auditorías de Seguridad RECYBERSEG:</strong><br><br>✅ <strong>Evaluación completa</strong> de infraestructura digital<br>✅ <strong>Análisis de vulnerabilidades</strong> en tiempo real<br>✅ <strong>Reportes detallados</strong> con recomendaciones<br>✅ <strong>Pruebas de penetración</strong> profesionales<br>✅ <strong>Certificaciones de seguridad</strong><br><br>¡Protegemos tu empresa desde la base!',buttons:['Precio Auditoría','Tiempo estimado','Contactar','Otros servicios']},{keywords:['monitoreo','24/7','supervisión','vigilancia','redes'],response:'🔒 <strong>Monitoreo de Redes 24/7:</strong><br><br>🚨 <strong>Supervisión CONSTANTE</strong> de tu red corporativa<br>⚡ <strong>Detección inmediata</strong> de amenazas<br>📊 <strong>Reportes en tiempo real</strong><br>🛡️ <strong>Respuesta automática</strong> a incidentes<br>📱 <strong>Alertas instantáneas</strong><br><br>¡Tu red NUNCA duerme, nosotros TAMPOCO!',buttons:['Precio Monitoreo','Demo gratis','Contactar','Más info']},{keywords:['iot','internet de las cosas','dispositivos inteligentes','smart'],response:'🌐 <strong>Seguridad IoT RECYBERSEG:</strong><br><br>📱 <strong>Protección TOTAL</strong> de dispositivos inteligentes<br>🔐 <strong>Cifrado avanzado</strong> de comunicaciones<br>🛡️ <strong>Monitoreo especializado</strong> IoT<br>⚙️ <strong>Configuración segura</strong> de dispositivos<br>🚨 <strong>Detección de anomalías</strong><br><br>¡El futuro es IoT, la seguridad es RECYBERSEG!',buttons:['Evaluar IoT','Precio','Consultoría','Contactar']},{keywords:['consultoría','asesoramiento','consultor','ayuda experta'],response:'👨‍💻 <strong>Consultoría en Ciberseguridad:</strong><br><br>🎯 <strong>Asesoramiento EXPERTO</strong> personalizado<br>📋 <strong>Análisis de riesgos</strong> específicos<br>🔧 <strong>Diseño de políticas</strong> de seguridad<br>📚 <strong>Capacitación</strong> de equipos<br>🏆 <strong>Mejores prácticas</strong> del mercado<br><br>¡Tu éxito en ciberseguridad es NUESTRA especialidad!',buttons:['Agendar consulta','Precio','Especialistas','Contactar']},{keywords:['precios','cotización','costo','cuánto cuesta','precio'],response:'💰 <strong>¡Cotización PERSONALIZADA!</strong><br><br>Cada empresa es ÚNICA, por eso nuestros precios se adaptan a:<br><br>📊 <strong>Tamaño de tu empresa</strong><br>🔧 <strong>Servicios específicos</strong> requeridos<br>⏰ <strong>Nivel de urgencia</strong><br>🎯 <strong>Objetivos de seguridad</strong><br><br>¡Solicita tu cotización GRATUITA y sin compromiso!',buttons:['Solicitar cotización','Contactar','Más servicios']},{keywords:['contacto','contactar','hablar','comunicar','teléfono','email'],response:'📞 <strong>¡Contacta con RECYBERSEG!</strong><br><br>🏢 <strong>Ubicación:</strong> La Serena, Chile<br>📧 <strong>Email:</strong> danielfigueroa1879@gmail.com<br>📱 <strong>Teléfono:</strong> +56 9 5997 8963<br>💬 <strong>WhatsApp:</strong> ¡Disponible!<br><br>¡Un especialista se comunicará contigo DE INMEDIATO![CONTACT_BUTTON]',buttons:['WhatsApp','Llamar','Email','Formulario']},{keywords:['misión','objetivo','propósito'],response:'🎯 <strong>Nuestra MISIÓN:</strong><br><br>Proteger y fortalecer el ecosistema digital de nuestros clientes mediante soluciones <strong>INNOVADORAS, confiables y personalizadas</strong> en ciberseguridad.<br><br>Garantizamos la <strong>integridad, disponibilidad y confidencialidad</strong> de tus datos, impulsando un entorno más seguro para enfrentar los desafíos del mundo digital.',buttons:['Visión','Servicios','Contactar']},{keywords:['visión','futuro','metas'],response:'🚀 <strong>Nuestra VISIÓN:</strong><br><br>Ser reconocidos como <strong>LÍDERES en soluciones tecnológicas</strong> de seguridad digital, destacándonos por nuestra innovación, profesionalismo y capacidad de adaptación.<br><br>Aspiramos a construir un <strong>mundo digital más seguro</strong>, donde la tecnología y la confianza vayan de la mano.',buttons:['Misión','Servicios','Contactar']}];const systemPrompt=`Eres 'Cyber Asistente', el asistente virtual ENERGÉTICO de RECYBERSEG, empresa chilena líder en ciberseguridad.
+// Chatbot RECYBERSEG - Con Lógica Avanzada y Voz Bidireccional
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("🚀 Chatbot RECYBERSEG iniciando con lógica avanzada...");
+
+    // === CONFIGURACIÓN PRINCIPAL ===
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const speechSynth = window.speechSynthesis;
+    let recognition = null;
+    let isListening = false;
+    let availableVoices = [];
+    let isAutoReadEnabled = true;
+    let isVoiceEnabled = localStorage.getItem('chatbot-voice-enabled') !== 'false';
+
+    // Elementos del DOM
+    const chatToggleButton = document.getElementById('chat-toggle-button');
+    const chatbotContainer = document.getElementById('chatbot-container');
+    const closeChatBtn = document.getElementById('close-chat-btn');
+    const chatbotForm = document.getElementById('chatbot-form');
+    const chatbotInput = document.getElementById('chatbot-input');
+    const chatbotMessages = document.getElementById('chatbot-messages');
+    const loadingIndicator = document.getElementById('chatbot-loading');
+
+    // Verificar elementos críticos
+    if (!chatToggleButton || !chatbotContainer || !closeChatBtn || !chatbotForm || !chatbotInput || !chatbotMessages || !loadingIndicator) {
+        console.error("❌ Elementos críticos del chatbot no encontrados");
+        return;
+    }
+
+    console.log("✅ Elementos del chatbot verificados correctamente");
+
+    // === BASE DE CONOCIMIENTO RECYBERSEG ===
+    const recybersegRules = [
+        {
+            keywords: ['hola', 'buenos días', 'buenas tardes', 'buenas noches', 'saludos', 'hi'],
+            response: '¡Hola! Soy <strong>Cyber Asistente</strong> de RECYBERSEG. ¡Estoy aquí para ayudarte con toda la información sobre nuestros servicios de ciberseguridad! ¿En qué puedo asistirte hoy?',
+            buttons: ['Servicios', 'Auditorías', 'Monitoreo', 'IoT', 'Contacto']
+        },
+        {
+            keywords: ['servicios', 'qué hacen', 'ofrecen', 'productos'],
+            response: '🛡️ <strong>Nuestros Servicios TOP:</strong><br><br>1.- <strong>Auditorías de Seguridad:</strong> ¡Evaluación COMPLETA de tu infraestructura!<br>2.- <strong>Monitoreo de Redes:</strong> ¡Supervisión CONSTANTE 24/7!<br>3.- <strong>Consultoría en Ciberseguridad:</strong> ¡Asesoramiento EXPERTO personalizado!<br>4.- <strong>Implementación de Sistemas:</strong> ¡Configuración PROFESIONAL de firewalls!<br>5.- <strong>Seguridad IoT:</strong> ¡Protección TOTAL de dispositivos inteligentes!',
+            buttons: ['Auditorías', 'Monitoreo 24/7', 'Consultoría', 'IoT', 'Cotizar']
+        },
+        {
+            keywords: ['auditorías', 'auditoria', 'evaluación', 'análisis de seguridad'],
+            response: '🔍 <strong>Auditorías de Seguridad RECYBERSEG:</strong><br><br>✅ <strong>Evaluación completa</strong> de infraestructura digital<br>✅ <strong>Análisis de vulnerabilidades</strong> en tiempo real<br>✅ <strong>Reportes detallados</strong> con recomendaciones<br>✅ <strong>Pruebas de penetración</strong> profesionales<br>✅ <strong>Certificaciones de seguridad</strong><br><br>¡Protegemos tu empresa desde la base!',
+            buttons: ['Precio Auditoría', 'Tiempo estimado', 'Contactar', 'Otros servicios']
+        },
+        {
+            keywords: ['monitoreo', '24/7', 'supervisión', 'vigilancia', 'redes'],
+            response: '🔒 <strong>Monitoreo de Redes 24/7:</strong><br><br>🚨 <strong>Supervisión CONSTANTE</strong> de tu red corporativa<br>⚡ <strong>Detección inmediata</strong> de amenazas<br>📊 <strong>Reportes en tiempo real</strong><br>🛡️ <strong>Respuesta automática</strong> a incidentes<br>📱 <strong>Alertas instantáneas</strong><br><br>¡Tu red NUNCA duerme, nosotros TAMPOCO!',
+            buttons: ['Precio Monitoreo', 'Demo gratis', 'Contactar', 'Más info']
+        },
+        {
+            keywords: ['iot', 'internet de las cosas', 'dispositivos inteligentes', 'smart'],
+            response: '🌐 <strong>Seguridad IoT RECYBERSEG:</strong><br><br>📱 <strong>Protección TOTAL</strong> de dispositivos inteligentes<br>🔐 <strong>Cifrado avanzado</strong> de comunicaciones<br>🛡️ <strong>Monitoreo especializado</strong> IoT<br>⚙️ <strong>Configuración segura</strong> de dispositivos<br>🚨 <strong>Detección de anomalías</strong><br><br>¡El futuro es IoT, la seguridad es RECYBERSEG!',
+            buttons: ['Evaluar IoT', 'Precio', 'Consultoría', 'Contactar']
+        },
+        {
+            keywords: ['consultoría', 'asesoramiento', 'consultor', 'ayuda experta'],
+            response: '👨‍💻 <strong>Consultoría en Ciberseguridad:</strong><br><br>🎯 <strong>Asesoramiento EXPERTO</strong> personalizado<br>📋 <strong>Análisis de riesgos</strong> específicos<br>🔧 <strong>Diseño de políticas</strong> de seguridad<br>📚 <strong>Capacitación</strong> de equipos<br>🏆 <strong>Mejores prácticas</strong> del mercado<br><br>¡Tu éxito en ciberseguridad es NUESTRA especialidad!',
+            buttons: ['Agendar consulta', 'Precio', 'Especialistas', 'Contactar']
+        },
+        {
+            keywords: ['precios', 'cotización', 'costo', 'cuánto cuesta', 'precio'],
+            response: '💰 <strong>¡Cotización PERSONALIZADA!</strong><br><br>Cada empresa es ÚNICA, por eso nuestros precios se adaptan a:<br><br>📊 <strong>Tamaño de tu empresa</strong><br>🔧 <strong>Servicios específicos</strong> requeridos<br>⏰ <strong>Nivel de urgencia</strong><br>🎯 <strong>Objetivos de seguridad</strong><br><br>¡Solicita tu cotización GRATUITA y sin compromiso!',
+            buttons: ['Solicitar cotización', 'Contactar', 'Más servicios']
+        },
+        {
+            keywords: ['contacto', 'contactar', 'hablar', 'comunicar', 'teléfono', 'email'],
+            response: '📞 <strong>¡Contacta con RECYBERSEG!</strong><br><br>🏢 <strong>Ubicación:</strong> La Serena, Chile<br>📧 <strong>Email:</strong> danielfigueroa1879@gmail.com<br>📱 <strong>Teléfono:</strong> +56 9 5997 8963<br>💬 <strong>WhatsApp:</strong> ¡Disponible!<br><br>¡Un especialista se comunicará contigo DE INMEDIATO![CONTACT_BUTTON]',
+            buttons: ['WhatsApp', 'Llamar', 'Email', 'Formulario']
+        },
+        {
+            keywords: ['misión', 'objetivo', 'propósito'],
+            response: '🎯 <strong>Nuestra MISIÓN:</strong><br><br>Proteger y fortalecer el ecosistema digital de nuestros clientes mediante soluciones <strong>INNOVADORAS, confiables y personalizadas</strong> en ciberseguridad.<br><br>Garantizamos la <strong>integridad, disponibilidad y confidencialidad</strong> de tus datos, impulsando un entorno más seguro para enfrentar los desafíos del mundo digital.',
+            buttons: ['Visión', 'Servicios', 'Contactar']
+        },
+        {
+            keywords: ['visión', 'futuro', 'metas'],
+            response: '🚀 <strong>Nuestra VISIÓN:</strong><br><br>Ser reconocidos como <strong>LÍDERES en soluciones tecnológicas</strong> de seguridad digital, destacándonos por nuestra innovación, profesionalismo y capacidad de adaptación.<br><br>Aspiramos a construir un <strong>mundo digital más seguro</strong>, donde la tecnología y la confianza vayan de la mano.',
+            buttons: ['Misión', 'Servicios', 'Contactar']
+        }
+    ];
+
+    const systemPrompt = `Eres 'Cyber Asistente', el asistente virtual ENERGÉTICO de RECYBERSEG, empresa chilena líder en ciberseguridad.
 
 PERSONALIDAD:
 - Responde con ENERGÍA y ENTUSIASMO profesional
 - Sé RÁPIDO, DIRECTO y DINÁMICO
-- Usa palabras como
+- Usa palabras como 
