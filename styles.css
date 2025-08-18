@@ -1579,3 +1579,49 @@ body {
 #chat-mic-btn i {
     font-size: 18px !important;
 }
+
+
+#chat-mic-btn.recording {
+    background-color: #ef4444 !important; /* Rojo */
+    animation: pulse-red 1.5s infinite;
+}
+
+@keyframes pulse-red {
+    0% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+    }
+}
+
+#voice-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#auto-read-btn {
+    background: none;
+    border: 2px solid white;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#auto-read-btn.active {
+    background-color: white;
+    color: var(--chatbot-primary);
+}
+.chatbot-container.keyboard-active {
+    bottom: 10px !important;
+    position: fixed !important;
+    z-index: 9999 !important;
+}
