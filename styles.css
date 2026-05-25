@@ -1148,7 +1148,7 @@ body {
 /* --- INICIO DE OPTIMIZACIONES PARA MÓVIL --- */
 @media screen and (max-width: 768px) {
     html {
-        scroll-behavior: auto; /* Scroll suave es mejor gestionado por el navegador móvil */
+        scroll-behavior: smooth;
     }
     
     .container {
