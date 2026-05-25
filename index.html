@@ -347,22 +347,9 @@
     <script src="menu-script.js" defer></script>
     <script src="chatbot.js" defer></script>
     
-    <!-- OPTIMIZACIÓN: Cargar Firebase y contador después de que todo lo demás haya cargado -->
-    <script>
-        window.addEventListener('load', function() {
-            function loadScript(src, callback) {
-                const script = document.createElement('script');
-                script.src = src;
-                script.defer = true;
-                if (callback) script.onload = callback;
-                document.head.appendChild(script);
-            }
-            loadScript('https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js', function() {
-                loadScript('https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js', function() {
-                    loadScript('firebase-counter.js');
-                });
-            });
-        });
+    <!-- OPTIMIZACIÓN: Cargar Firebase como módulo ES después de que todo lo demás haya cargado -->
+    <script type="module">
+        window.addEventListener('load', () => import('./firebase-counter.js'));
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {

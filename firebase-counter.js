@@ -1,1 +1,31 @@
-const firebaseConfig={apiKey:"AIzaSyClZpIPRn5ADVNHeosThfjWusTi6vhemJw",authDomain:"recyberseg.firebaseapp.com",databaseURL:"https://recyberseg-default-rtdb.firebaseio.com",projectId:"recyberseg",storageBucket:"recyberseg.appspot.com",messagingSenderId:"426720276050",appId:"1:426720276050:web:e48319ef893e06d41b398b"};firebase.initializeApp(firebaseConfig);const database=firebase.database();const visitsRef=database.ref('page_visits');const visitorCountElement=document.getElementById('visitor-count');visitsRef.transaction(function(currentValue){if(currentValue===null){return 1;}else{return currentValue+1;}},function(error,committed,snapshot){if(error){console.error('La transacción de Firebase falló: ',error);if(visitorCountElement){visitorCountElement.innerText='Error';}}else if(!committed){console.log('La transacción no se completó (otro usuario actualizó), Firebase lo reintentará.');}else{console.log('¡Contador de visitas actualizado en Firebase!');if(visitorCountElement){visitorCountElement.innerText=snapshot.val().toLocaleString();}}});
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+import { getDatabase, ref, runTransaction } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js';
+
+const firebaseConfig = {
+    apiKey: "AIzaSyClZpIPRn5ADVNHeosThfjWusTi6vhemJw",
+    authDomain: "recyberseg.firebaseapp.com",
+    databaseURL: "https://recyberseg-default-rtdb.firebaseio.com",
+    projectId: "recyberseg",
+    storageBucket: "recyberseg.appspot.com",
+    messagingSenderId: "426720276050",
+    appId: "1:426720276050:web:e48319ef893e06d41b398b"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const visitsRef = ref(db, 'page_visits');
+const visitorCountElement = document.getElementById('visitor-count');
+
+try {
+    const result = await runTransaction(visitsRef, (currentValue) => {
+        return (currentValue || 0) + 1;
+    });
+    if (result.committed && visitorCountElement) {
+        visitorCountElement.innerText = result.snapshot.val().toLocaleString();
+    }
+} catch (error) {
+    console.error('La transacción de Firebase falló: ', error);
+    if (visitorCountElement) {
+        visitorCountElement.innerText = 'Error';
+    }
+}
