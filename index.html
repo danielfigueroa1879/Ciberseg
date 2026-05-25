@@ -18,9 +18,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>    
+    <link rel="preconnect" href="https://recyberseg-default-rtdb.firebaseio.com" crossorigin>
     <!-- DNS Prefetch para recursos que se usarán más tarde -->
-    <link rel="dns-prefetch" href="//recyberseg-default-rtdb.firebaseio.com">
+    <link rel="dns-prefetch" href="//www.gstatic.com">
     <link rel="dns-prefetch" href="//wa.me">  
     <!-- OPTIMIZACIÓN: Carga asíncrona de CSS para no bloquear el renderizado -->
     <link rel="stylesheet" href="styles.css">  
@@ -29,6 +29,11 @@
     <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;700&display=swap" rel="stylesheet"></noscript>
     <!-- OPTIMIZACIÓN: Carga asíncrona de Font Awesome -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <!-- Override font-display para Font Awesome (evita texto invisible mientras carga) -->
+    <style>
+        @font-face { font-family: "Font Awesome 6 Free"; font-display: swap; }
+        @font-face { font-family: "Font Awesome 6 Brands"; font-display: swap; }
+    </style>
     <!-- Precarga del archivo JavaScript principal -->
     <link rel="preload" href="menu-script.js" as="script">
     <link rel="manifest" href="manifest.json">
