@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let recognition = null;
     let isListening = false;
     let availableVoices = [];
-    let isAutoReadEnabled = true;
+    let isAutoReadEnabled = false;
     let isVoiceEnabled = localStorage.getItem('chatbot-voice-enabled') !== 'false';
 
     // Elementos del DOM
