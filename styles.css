@@ -350,7 +350,7 @@ body {
 
 .service-price {
     display: inline-block;
-    background-color: #1d4ed8;
+    background-color: #2b6cb0;
     color: white;
     padding: 8px 20px;
     border-radius: 20px;
@@ -362,7 +362,7 @@ body {
 
 .iot-section {
     padding: 80px 20px;
-    background-color: #2563eb;
+    background-color: #2b6cb0;
     color: var(--text-white);
     text-align: center;
     transform: translateZ(0);
@@ -487,7 +487,7 @@ body {
 }
 
 .cta-button {
-    background-color: #1d4ed8;
+    background-color: #2b6cb0;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -708,7 +708,7 @@ body {
 }
 
 .newsletter-form button[type="submit"] {
-    background-color: #1d4ed8;
+    background-color: #2b6cb0;
     color: white;
     border: none;
     padding: 12px 25px;
@@ -743,7 +743,7 @@ body {
    4. Footer
    ========================================================================== */
 .footer {
-    background-color: #2563eb;
+    background-color: #2b6cb0;
     color: #ffffff;
     padding: 60px 20px 20px;
     transform: translateZ(0);
